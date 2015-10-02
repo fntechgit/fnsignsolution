@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="fntech_signage" Class="schedDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=198.178.124.58;Initial Catalog=fntech_signage;Persist Security Info=True;User ID=sa" SettingsObjectName="schedInterface.Properties.Settings" SettingsPropertyName="fntech_signageConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.events" Member="events">
+    <Type Name="event">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="event_start" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="event_end" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="api_key" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="url" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="interval" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="last_update" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.sessions" Member="sessions">
+    <Type Name="session">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="event_key" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="session_start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="session_end" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="type" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="seats" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="attendees" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="venue_id" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="venue" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="speakers" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.locations" Member="locations">
+    <Type Name="location">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="sched_id" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.events_to_update" Method="events_to_update">
+    <ElementType Name="events_to_updateResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="event_start" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="event_end" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="api_key" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="url" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="interval" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="last_update" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+</Database>

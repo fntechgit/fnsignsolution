@@ -1,0 +1,8 @@
+E:\projects\fnsign\schedInterface\bin\Debug\schedInterface.dll
+E:\projects\fnsign\schedInterface\bin\Debug\schedInterface.pdb
+E:\projects\fnsign\schedInterface\bin\Debug\RestSharp.dll
+E:\projects\fnsign\schedInterface\bin\Debug\RestSharp.xml
+E:\projects\fnsign\schedInterface\obj\Debug\schedInterface.dll
+E:\projects\fnsign\schedInterface\obj\Debug\schedInterface.pdb
+E:\projects\fnsign\schedInterface\bin\Debug\schedInterface.dll.config
+E:\projects\fnsign\schedInterface\obj\Debug\schedInterface.csprojResolveAssemblyReference.cache

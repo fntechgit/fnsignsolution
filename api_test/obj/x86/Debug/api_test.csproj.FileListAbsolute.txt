@@ -1,0 +1,10 @@
+E:\projects\fnsign\api_test\bin\Debug\api_test.exe
+E:\projects\fnsign\api_test\bin\Debug\api_test.pdb
+E:\projects\fnsign\api_test\bin\Debug\schedInterface.dll
+E:\projects\fnsign\api_test\bin\Debug\RestSharp.dll
+E:\projects\fnsign\api_test\bin\Debug\schedInterface.pdb
+E:\projects\fnsign\api_test\bin\Debug\RestSharp.xml
+E:\projects\fnsign\api_test\obj\x86\Debug\api_test.csprojResolveAssemblyReference.cache
+E:\projects\fnsign\api_test\obj\x86\Debug\api_test.exe
+E:\projects\fnsign\api_test\obj\x86\Debug\api_test.pdb
+E:\projects\fnsign\api_test\bin\Debug\api_test.exe.config

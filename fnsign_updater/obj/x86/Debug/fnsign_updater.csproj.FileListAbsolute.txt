@@ -1,0 +1,10 @@
+E:\projects\fnsign\fnsign_updater\obj\x86\Debug\fnsign_updater.csprojResolveAssemblyReference.cache
+E:\projects\fnsign\fnsign_updater\bin\Debug\fnsign_updater.exe.config
+E:\projects\fnsign\fnsign_updater\bin\Debug\fnsign_updater.exe
+E:\projects\fnsign\fnsign_updater\bin\Debug\fnsign_updater.pdb
+E:\projects\fnsign\fnsign_updater\bin\Debug\schedInterface.dll
+E:\projects\fnsign\fnsign_updater\bin\Debug\RestSharp.dll
+E:\projects\fnsign\fnsign_updater\bin\Debug\schedInterface.pdb
+E:\projects\fnsign\fnsign_updater\bin\Debug\RestSharp.xml
+E:\projects\fnsign\fnsign_updater\obj\x86\Debug\fnsign_updater.exe
+E:\projects\fnsign\fnsign_updater\obj\x86\Debug\fnsign_updater.pdb
