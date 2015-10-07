@@ -2,3 +2,7 @@ E:\projects\fnsign\fnsignManager\bin\fnsignManager.dll
 E:\projects\fnsign\fnsignManager\bin\fnsignManager.pdb
 E:\projects\fnsign\fnsignManager\obj\Debug\fnsignManager.dll
 E:\projects\fnsign\fnsignManager\obj\Debug\fnsignManager.pdb
+E:\projects\fnsign\fnsignManager\bin\schedInterface.dll
+E:\projects\fnsign\fnsignManager\bin\RestSharp.dll
+E:\projects\fnsign\fnsignManager\bin\schedInterface.pdb
+E:\projects\fnsign\fnsignManager\bin\RestSharp.xml
