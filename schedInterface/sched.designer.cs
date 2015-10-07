@@ -45,9 +45,6 @@ namespace schedInterface
     partial void Insertresolution(resolution instance);
     partial void Updateresolution(resolution instance);
     partial void Deleteresolution(resolution instance);
-    partial void Insertterminal(terminal instance);
-    partial void Updateterminal(terminal instance);
-    partial void Deleteterminal(terminal instance);
     partial void Inserttemplate(template instance);
     partial void Updatetemplate(template instance);
     partial void Deletetemplate(template instance);
@@ -63,6 +60,9 @@ namespace schedInterface
     partial void Insertuser(user instance);
     partial void Updateuser(user instance);
     partial void Deleteuser(user instance);
+    partial void Insertterminal(terminal instance);
+    partial void Updateterminal(terminal instance);
+    partial void Deleteterminal(terminal instance);
     #endregion
 		
 		public schedDataContext() : 
@@ -135,14 +135,6 @@ namespace schedInterface
 			}
 		}
 		
-		public System.Data.Linq.Table<terminal> terminals
-		{
-			get
-			{
-				return this.GetTable<terminal>();
-			}
-		}
-		
 		public System.Data.Linq.Table<template> templates
 		{
 			get
@@ -183,11 +175,33 @@ namespace schedInterface
 			}
 		}
 		
+		public System.Data.Linq.Table<terminal> terminals
+		{
+			get
+			{
+				return this.GetTable<terminal>();
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.events_to_update")]
 		public ISingleResult<events_to_updateResult> events_to_update()
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
 			return ((ISingleResult<events_to_updateResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.permissions_get_by_user")]
+		public ISingleResult<permissions_get_by_userResult> permissions_get_by_user([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> user_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), user_id);
+			return ((ISingleResult<permissions_get_by_userResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.events_get_authorized")]
+		public ISingleResult<events_get_authorizedResult> events_get_authorized([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> user_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), user_id);
+			return ((ISingleResult<events_get_authorizedResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -1244,164 +1258,6 @@ namespace schedInterface
 					this._height = value;
 					this.SendPropertyChanged("height");
 					this.OnheightChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.terminals")]
-	public partial class terminal : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private string _title;
-		
-		private System.Nullable<int> _location_id;
-		
-		private System.Nullable<int> _template_id;
-		
-		private bool _online;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OntitleChanging(string value);
-    partial void OntitleChanged();
-    partial void Onlocation_idChanging(System.Nullable<int> value);
-    partial void Onlocation_idChanged();
-    partial void Ontemplate_idChanging(System.Nullable<int> value);
-    partial void Ontemplate_idChanged();
-    partial void OnonlineChanging(bool value);
-    partial void OnonlineChanged();
-    #endregion
-		
-		public terminal()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(255)")]
-		public string title
-		{
-			get
-			{
-				return this._title;
-			}
-			set
-			{
-				if ((this._title != value))
-				{
-					this.OntitleChanging(value);
-					this.SendPropertyChanging();
-					this._title = value;
-					this.SendPropertyChanged("title");
-					this.OntitleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_location_id", DbType="Int")]
-		public System.Nullable<int> location_id
-		{
-			get
-			{
-				return this._location_id;
-			}
-			set
-			{
-				if ((this._location_id != value))
-				{
-					this.Onlocation_idChanging(value);
-					this.SendPropertyChanging();
-					this._location_id = value;
-					this.SendPropertyChanged("location_id");
-					this.Onlocation_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_id", DbType="Int")]
-		public System.Nullable<int> template_id
-		{
-			get
-			{
-				return this._template_id;
-			}
-			set
-			{
-				if ((this._template_id != value))
-				{
-					this.Ontemplate_idChanging(value);
-					this.SendPropertyChanging();
-					this._template_id = value;
-					this.SendPropertyChanged("template_id");
-					this.Ontemplate_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_online", DbType="Bit NOT NULL")]
-		public bool online
-		{
-			get
-			{
-				return this._online;
-			}
-			set
-			{
-				if ((this._online != value))
-				{
-					this.OnonlineChanging(value);
-					this.SendPropertyChanging();
-					this._online = value;
-					this.SendPropertyChanged("online");
-					this.OnonlineChanged();
 				}
 			}
 		}
@@ -2553,6 +2409,188 @@ namespace schedInterface
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.terminals")]
+	public partial class terminal : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _title;
+		
+		private System.Nullable<int> _location_id;
+		
+		private System.Nullable<int> _template_id;
+		
+		private bool _online;
+		
+		private int _event_id;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OntitleChanging(string value);
+    partial void OntitleChanged();
+    partial void Onlocation_idChanging(System.Nullable<int> value);
+    partial void Onlocation_idChanged();
+    partial void Ontemplate_idChanging(System.Nullable<int> value);
+    partial void Ontemplate_idChanged();
+    partial void OnonlineChanging(bool value);
+    partial void OnonlineChanged();
+    partial void Onevent_idChanging(int value);
+    partial void Onevent_idChanged();
+    #endregion
+		
+		public terminal()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(255)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this.OntitleChanging(value);
+					this.SendPropertyChanging();
+					this._title = value;
+					this.SendPropertyChanged("title");
+					this.OntitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_location_id", DbType="Int")]
+		public System.Nullable<int> location_id
+		{
+			get
+			{
+				return this._location_id;
+			}
+			set
+			{
+				if ((this._location_id != value))
+				{
+					this.Onlocation_idChanging(value);
+					this.SendPropertyChanging();
+					this._location_id = value;
+					this.SendPropertyChanged("location_id");
+					this.Onlocation_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_id", DbType="Int")]
+		public System.Nullable<int> template_id
+		{
+			get
+			{
+				return this._template_id;
+			}
+			set
+			{
+				if ((this._template_id != value))
+				{
+					this.Ontemplate_idChanging(value);
+					this.SendPropertyChanging();
+					this._template_id = value;
+					this.SendPropertyChanged("template_id");
+					this.Ontemplate_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_online", DbType="Bit NOT NULL")]
+		public bool online
+		{
+			get
+			{
+				return this._online;
+			}
+			set
+			{
+				if ((this._online != value))
+				{
+					this.OnonlineChanging(value);
+					this.SendPropertyChanging();
+					this._online = value;
+					this.SendPropertyChanged("online");
+					this.OnonlineChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int NOT NULL")]
+		public int event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this.Onevent_idChanging(value);
+					this.SendPropertyChanging();
+					this._event_id = value;
+					this.SendPropertyChanged("event_id");
+					this.Onevent_idChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	public partial class events_to_updateResult
 	{
 		
@@ -2573,6 +2611,328 @@ namespace schedInterface
 		private System.DateTime _last_update;
 		
 		public events_to_updateResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(255)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_start", DbType="Date")]
+		public System.Nullable<System.DateTime> event_start
+		{
+			get
+			{
+				return this._event_start;
+			}
+			set
+			{
+				if ((this._event_start != value))
+				{
+					this._event_start = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_end", DbType="Date")]
+		public System.Nullable<System.DateTime> event_end
+		{
+			get
+			{
+				return this._event_end;
+			}
+			set
+			{
+				if ((this._event_end != value))
+				{
+					this._event_end = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_api_key", DbType="VarChar(MAX)")]
+		public string api_key
+		{
+			get
+			{
+				return this._api_key;
+			}
+			set
+			{
+				if ((this._api_key != value))
+				{
+					this._api_key = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_url", DbType="VarChar(MAX)")]
+		public string url
+		{
+			get
+			{
+				return this._url;
+			}
+			set
+			{
+				if ((this._url != value))
+				{
+					this._url = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_interval", DbType="Int NOT NULL")]
+		public int interval
+		{
+			get
+			{
+				return this._interval;
+			}
+			set
+			{
+				if ((this._interval != value))
+				{
+					this._interval = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_last_update", DbType="DateTime NOT NULL")]
+		public System.DateTime last_update
+		{
+			get
+			{
+				return this._last_update;
+			}
+			set
+			{
+				if ((this._last_update != value))
+				{
+					this._last_update = value;
+				}
+			}
+		}
+	}
+	
+	public partial class permissions_get_by_userResult
+	{
+		
+		private int _id;
+		
+		private int _event_id;
+		
+		private int _user_id;
+		
+		private int _permission_id;
+		
+		private System.DateTime _assigned_date;
+		
+		private int _assigned_by;
+		
+		private string _title;
+		
+		private string _security_level;
+		
+		private string _full_name;
+		
+		public permissions_get_by_userResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int NOT NULL")]
+		public int event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this._event_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_id", DbType="Int NOT NULL")]
+		public int user_id
+		{
+			get
+			{
+				return this._user_id;
+			}
+			set
+			{
+				if ((this._user_id != value))
+				{
+					this._user_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_permission_id", DbType="Int NOT NULL")]
+		public int permission_id
+		{
+			get
+			{
+				return this._permission_id;
+			}
+			set
+			{
+				if ((this._permission_id != value))
+				{
+					this._permission_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_assigned_date", DbType="DateTime NOT NULL")]
+		public System.DateTime assigned_date
+		{
+			get
+			{
+				return this._assigned_date;
+			}
+			set
+			{
+				if ((this._assigned_date != value))
+				{
+					this._assigned_date = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_assigned_by", DbType="Int NOT NULL")]
+		public int assigned_by
+		{
+			get
+			{
+				return this._assigned_by;
+			}
+			set
+			{
+				if ((this._assigned_by != value))
+				{
+					this._assigned_by = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(255)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_security_level", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string security_level
+		{
+			get
+			{
+				return this._security_level;
+			}
+			set
+			{
+				if ((this._security_level != value))
+				{
+					this._security_level = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_full_name", DbType="VarChar(101)")]
+		public string full_name
+		{
+			get
+			{
+				return this._full_name;
+			}
+			set
+			{
+				if ((this._full_name != value))
+				{
+					this._full_name = value;
+				}
+			}
+		}
+	}
+	
+	public partial class events_get_authorizedResult
+	{
+		
+		private int _id;
+		
+		private string _title;
+		
+		private System.Nullable<System.DateTime> _event_start;
+		
+		private System.Nullable<System.DateTime> _event_end;
+		
+		private string _api_key;
+		
+		private string _url;
+		
+		private int _interval;
+		
+		private System.DateTime _last_update;
+		
+		public events_get_authorizedResult()
 		{
 		}
 		

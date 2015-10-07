@@ -1,0 +1,4 @@
+E:\projects\fnsign\fnsignManager\bin\fnsignManager.dll
+E:\projects\fnsign\fnsignManager\bin\fnsignManager.pdb
+E:\projects\fnsign\fnsignManager\obj\Debug\fnsignManager.dll
+E:\projects\fnsign\fnsignManager\obj\Debug\fnsignManager.pdb

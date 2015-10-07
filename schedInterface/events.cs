@@ -69,6 +69,82 @@ namespace schedInterface
 
             return ev;
         }
+
+        public Event add(Event ev)
+        {
+            @event e = new @event();
+
+            e.api_key = ev.api_key;
+            e.event_end = ev.event_end;
+            e.event_start = ev.event_start;
+            e.interval = ev.interval;
+            e.last_update = DateTime.Now;
+            e.title = ev.title;
+            e.url = ev.url;
+            
+            db.events.InsertOnSubmit(e);
+
+            db.SubmitChanges();
+
+            ev.id = e.id;
+
+            return ev;
+        }
+
+        public Event single(Int32 id)
+        {
+            var result = from evs in db.events
+                where evs.id == id
+                select evs;
+
+            Event ev = new Event();
+
+            foreach (var item in result)
+            {
+                ev.api_key = item.api_key;
+                ev.event_end = item.event_end;
+                ev.event_start = item.event_start;
+                ev.id = item.id;
+                ev.interval = item.interval;
+                ev.last_update = item.last_update;
+                ev.title = item.title;
+                ev.url = item.url;
+            }
+
+            return ev;
+        }
+
+        /// <summary>
+        /// Selects All Events in the Database
+        /// </summary>
+        /// <returns>Enumerable List of Event Models</returns>
+        public List<Event> select_list()
+        {
+            List<Event> _events = new List<Event>();
+
+            var result = from eve in db.events
+                         orderby eve.title
+                         select eve;
+
+            foreach (var ev in result)
+            {
+                Event e = new Event();
+
+                e.id = ev.id;
+                e.interval = ev.interval;
+                e.title = ev.title;
+                e.last_update = ev.last_update;
+                e.event_start = ev.event_start;
+                e.event_end = ev.event_end;
+                e.interval = ev.interval;
+                e.url = ev.url;
+                e.api_key = ev.api_key;
+
+                _events.Add(e);
+            }
+
+            return _events;
+        }
     }
 
     public class Event

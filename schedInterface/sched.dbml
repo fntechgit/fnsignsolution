@@ -57,15 +57,6 @@
       <Column Name="height" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.terminals" Member="terminals">
-    <Type Name="terminal">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="location_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="template_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="online" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
   <Table Name="dbo.templates" Member="templates">
     <Type Name="template">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -125,8 +116,45 @@
       <Column Name="security" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
+  <Table Name="dbo.terminals" Member="terminals">
+    <Type Name="terminal">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="location_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="template_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="online" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
   <Function Name="dbo.events_to_update" Method="events_to_update">
     <ElementType Name="events_to_updateResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="event_start" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="event_end" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="api_key" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="url" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="interval" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="last_update" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.permissions_get_by_user" Method="permissions_get_by_user">
+    <Parameter Name="user_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="permissions_get_by_userResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="permission_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="assigned_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="assigned_by" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="security_level" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="full_name" Type="System.String" DbType="VarChar(101)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.events_get_authorized" Method="events_get_authorized">
+    <Parameter Name="user_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="events_get_authorizedResult">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
       <Column Name="event_start" Type="System.DateTime" DbType="Date" CanBeNull="true" />
