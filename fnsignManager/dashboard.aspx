@@ -25,87 +25,28 @@
 		                    </a>
 		                </li>
                         <li class="nav-parent">
-                            <a>
-                                <i class="fa fa-photo" aria-hidden="true"></i>
-                                <span>Media</span>
+                            <a href="/templates">
+                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                <span>Templates</span>
                             </a>
-                            <ul class="nav nav-children">
-                                <li>
-		                            <a href="/media">
-		                                <span class="pull-right label label-primary"><%= total_media %></span>
-		                                <i class="fa fa-photo" aria-hidden="true"></i>
-		                                <span>All</span>
-		                            </a>
-		                        </li>
-                                <li>
-		                            <a href="/media/unapproved">
-		                                <span class="pull-right label label-primary"><%= unapproved_media %></span>
-		                                <i class="fa fa-question-circle" aria-hidden="true"></i>
-		                                <span>Unapproved</span>
-		                            </a>
-		                        </li>
-                                <li>
-		                            <a href="/media/approved">
-		                                <i class="fa fa-check-circle" aria-hidden="true"></i>
-		                                <span>Approved</span>
-		                            </a>
-		                        </li>
-                                <li>
-		                            <a href="/media#instagram">
-		                                <span class="pull-right label label-primary"><%= instagram_media %></span>
-		                                <i class="fa fa-instagram" aria-hidden="true"></i>
-		                                <span>Instagram</span>
-		                            </a>
-		                        </li>
-                                <li>
-		                            <a href="/media#twitter">
-		                                <span class="pull-right label label-primary"><%= twitter_media %></span>
-		                                <i class="fa fa-twitter" aria-hidden="true"></i>
-		                                <span>Twitter</span>
-		                            </a>
-		                        </li>
-                            </ul>
                         </li>
 		                
                         <li class="nav-parent">
-                            <a>
-                                <i class="fa fa-dropbox" aria-hidden="true"></i>
-                                <span>Dropbox</span>
+                            <a href="/sessions">
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <span>Sessions</span>
                             </a>
-                            <ul class="nav nav-children">
-                                <li>
-		                            <a href="/dropbox">
-		                                <span class="pull-right label label-primary"><%= facebook_media %></span>
-		                                <i class="fa fa-dropbox" aria-hidden="true"></i>
-		                                <span>Dropbox</span>
-		                            </a>
-		                        </li>
-                                <li>
-                                    <a href="/dropbox/unapproved">
-                                        <i class="fa fa-question-circle" aria-hidden="true"></i>
-                                        <span>Unapproved</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/dropbox/approved">
-                                        <i class="fa fa-check-circle" aria-hidden="true"></i>
-                                        <span>Approved</span>
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
-
-                        
-                        <li id="user_link" runat="server" Visible="false">
-		                    <a href="/users">
-		                        <i class="fa fa-users" aria-hidden="true"></i>
-		                        <span>Users</span>
+                        <li id="preference_link" runat="server" Visible="false">
+		                    <a href="/locations">
+		                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+		                        <span>Locations</span>
 		                    </a>
 		                </li>
-                        <li id="preference_link" runat="server" Visible="false">
-		                    <a href="/preferences">
-		                        <i class="fa fa-gears" aria-hidden="true"></i>
-		                        <span>Preferences</span>
+                        <li id="display_link" runat="server" Visible="false">
+		                    <a href="/assignments">
+		                        <i class="fa fa-desktop" aria-hidden="true"></i>
+		                        <span>Assignments</span>
 		                    </a>
 		                </li>
                         <li id="event_link" runat="server" Visible="false">
@@ -114,10 +55,10 @@
 		                        <span>Events</span>
 		                    </a>
 		                </li>
-                        <li id="display_link" runat="server" Visible="false">
-		                    <a href="/displays">
-		                        <i class="fa fa-desktop" aria-hidden="true"></i>
-		                        <span>Displays</span>
+                        <li id="user_link" runat="server" Visible="false">
+		                    <a href="/users">
+		                        <i class="fa fa-users" aria-hidden="true"></i>
+		                        <span>Users</span>
 		                    </a>
 		                </li>
 		            </ul>
