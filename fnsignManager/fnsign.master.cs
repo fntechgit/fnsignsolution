@@ -16,7 +16,7 @@ namespace fnsignManager
         public string company_name = string.Empty;
         public string user_email = string.Empty;
 
-        private permissions _permissions = new permissions();
+        private schedInterface.permissions _permissions = new schedInterface.permissions();
         private sessions _sessions = new sessions();
         private locations _locations = new locations();
 

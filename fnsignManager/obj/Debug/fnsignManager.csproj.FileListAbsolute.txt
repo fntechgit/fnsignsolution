@@ -6,3 +6,4 @@ E:\projects\fnsign\fnsignManager\bin\schedInterface.dll
 E:\projects\fnsign\fnsignManager\bin\RestSharp.dll
 E:\projects\fnsign\fnsignManager\bin\schedInterface.pdb
 E:\projects\fnsign\fnsignManager\bin\RestSharp.xml
+E:\projects\fnsign\fnsignManager\obj\Debug\fnsignManager.csprojResolveAssemblyReference.cache
