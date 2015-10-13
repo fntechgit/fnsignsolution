@@ -22,7 +22,7 @@ namespace fnsignManager
 
         private schedInterface.permissions _permissions = new schedInterface.permissions();
         private schedInterface.users _users = new schedInterface.users();
-        private schedInterface.events _events = new events();
+        private schedInterface.events _events = new schedInterface.events();
 
         protected void Page_Load(object sender, EventArgs e)
         {

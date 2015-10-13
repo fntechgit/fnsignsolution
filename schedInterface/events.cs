@@ -36,6 +36,17 @@ namespace schedInterface
             return _events;
         }
 
+        public Boolean delete(Int32 id)
+        {
+            @event ev = db.events.Single(x => x.id == id);
+
+            db.events.DeleteOnSubmit(ev);
+
+            db.SubmitChanges();
+
+            return true;
+        }
+
         public List<Event> need_updating()
         {
             List<Event> _events = new List<Event>();

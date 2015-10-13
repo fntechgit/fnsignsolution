@@ -1,8 +1,8 @@
-﻿<%@ Page Title="FNSIGN > Permissions" Language="C#" MasterPageFile="~/fnsign.master" AutoEventWireup="true" CodeBehind="permissions.aspx.cs" Inherits="fnsignManager.permissions" %>
+﻿<%@ Page Title="FNSIGN > Manage Events" Language="C#" MasterPageFile="~/fnsign.master" AutoEventWireup="true" CodeBehind="events.aspx.cs" Inherits="fnsignManager.events" %>
 
-<%@ Import Namespace="schedInterface" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="navigation_sidebar" runat="server">
     <!-- start: sidebar goes into the  -->
 	<aside id="sidebar-left" class="sidebar-left">
@@ -51,13 +51,13 @@
 		                        <span>Assignments</span>
 		                    </a>
 		                </li>
-                        <li id="event_link" runat="server" Visible="false">
+                        <li id="event_link" runat="server" Visible="false" class="nav-active">
 		                    <a href="/events">
 		                        <i class="fa fa-calendar" aria-hidden="true"></i>
 		                        <span>Events</span>
 		                    </a>
 		                </li>
-                        <li id="user_link" runat="server" Visible="false" class="nav-active">
+                        <li id="user_link" runat="server" Visible="false">
 		                    <a href="/users">
 		                        <i class="fa fa-users" aria-hidden="true"></i>
 		                        <span>Users</span>
@@ -72,10 +72,11 @@
 	</aside>
 	<!-- end: sidebar -->
 </asp:Content>
+
 <asp:Content ID="Content3" ContentPlaceHolderID="content_main" runat="server">
     <section role="main" class="content-body">
 		<header class="page-header">
-			<h2>Permissions</h2>
+			<h2>Manage Events</h2>
 					
 			<div class="right-wrapper pull-right">
 				<ol class="breadcrumbs">
@@ -84,11 +85,7 @@
 							<i class="fa fa-tachometer"></i>
 						</a>
 					</li>
-					<li><a href="/users"><i class="fa fa-users"></i> <span>Users</span></a></li>
-                    <li><asp:HyperLink runat="server" ID="edit_user_link">
-                            <i class="fa fa-user"></i> <span><%= user_name %></span>
-                        </asp:HyperLink></li>
-                    <li><i class="fa fa-key"></i> <span><%= user_name %> Permissions</span></li>
+					<li><i class="fa fa-calendar"></i> <span>Events</span></li>
 				</ol>
 					
 				<a class="sidebar-right-toggle" data-open="sidebar-right"><i class="fa fa-chevron-left"></i></a>
@@ -98,7 +95,7 @@
 		<!-- start: page -->
 			<section class="panel">
 			    
-                <asp:HyperLink runat="server" ID="add_permission_link" CssClass="mb-xs mt-xs mr-xs btn btn-success"><i class="fa fa-plus-circle"></i> Add Permission</asp:HyperLink>
+                <a href="/events/add" class="mb-xs mt-xs mr-xs btn btn-success"><i class="fa fa-plus-circle"></i> Add New Event</a>
 
 				<header class="panel-heading">
 					<div class="panel-actions">
@@ -106,17 +103,19 @@
 						<a href="#" class="fa fa-times"></a>
 					</div>
 						
-					<h2 class="panel-title">Event Permissions for <%= user_name %></h2>
+					<h2 class="panel-title">Events</h2>
 				</header>
 				<div class="panel-body">
 					<table class="table table-no-more table-bordered table-striped mb-none">
 						<thead>
 							<tr>
-								<th>Event</th>
-								<th class="hidden-xs hidden-sm">Event Date</th>
-								<th class="hidden-xs hidden-sm">Assigned Date</th>
-                                <th class="hidden-xs hidden-sm">Assigned By</th>
-                                <th class="text-right">Level</th>
+								<th>Title</th>
+								<th class="hidden-xs hidden-sm">URL</th>
+								<th class="hidden-xs hidden-sm">API Key</th>
+                                <th class="hidden-xs hidden-sm">Last Update</th>
+								<th class="hidden-xs hidden-sm">Interval</th>
+								<th class="text-right">Start</th>
+								<th class="text-right">End</th>
                                 <th>Actions</th>
 							</tr>
 						</thead>
@@ -129,5 +128,6 @@
 		<!-- end: page -->
 	</section>
 </asp:Content>
+
 <asp:Content ID="Content4" ContentPlaceHolderID="footer_scripts" runat="server">
 </asp:Content>
