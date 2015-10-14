@@ -47,6 +47,29 @@ namespace schedInterface
 
             return l;
         }
+
+        public List<Location> by_event(Int32 id)
+        {
+            List<Location> _locations = new List<Location>();
+
+            var result = from lc in db.locations
+                where lc.event_id == id
+                orderby lc.title
+                select lc;
+
+            foreach (var item in result)
+            {
+                Location l = new Location();
+
+                l.id = item.id;
+                l.title = item.title;
+                l.sched_id = item.sched_id;
+
+                _locations.Add(l);
+            }
+
+            return _locations;
+        }
     }
 
     public class Location

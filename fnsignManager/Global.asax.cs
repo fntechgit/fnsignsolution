@@ -43,6 +43,9 @@ namespace fnsignManager
             // ####################### SESSIONS SECTION ########################### //
             routes.MapPageRoute("sessions-route", "sessions", "~/sessions.aspx");
 
+            // ####################### LOCATIONS ROUTE ##########################//
+            routes.MapPageRoute("locations-route", "locations", "~/locations.aspx");
+
             // this has to be last!!!!
             //routes.MapPageRoute("page-by-url-route", "{url}", "~/page.aspx");
         }

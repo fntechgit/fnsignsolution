@@ -1614,6 +1614,7 @@
     <Content Include="js\jquery.flip.js" />
     <Content Include="js\jquery.fnpix.dropbox.js" />
     <Content Include="js\jquery.fnpix.media.js" />
+    <Content Include="locations.aspx" />
     <Content Include="login.aspx" />
     <Content Include="logout.aspx" />
     <Content Include="permissions.aspx" />
@@ -1693,6 +1694,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="locations.aspx.cs">
+      <DependentUpon>locations.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="locations.aspx.designer.cs">
+      <DependentUpon>locations.aspx</DependentUpon>
     </Compile>
     <Compile Include="login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
