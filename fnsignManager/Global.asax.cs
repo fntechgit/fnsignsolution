@@ -40,6 +40,9 @@ namespace fnsignManager
             routes.MapPageRoute("events-edit-rotue", "events/edit/{id}", "~/add_event.aspx");
             routes.MapPageRoute("events-delete-route", "events/delete/{id}", "~/delete_event.aspx");
 
+            // ####################### SESSIONS SECTION ########################### //
+            routes.MapPageRoute("sessions-route", "sessions", "~/sessions.aspx");
+
             // this has to be last!!!!
             //routes.MapPageRoute("page-by-url-route", "{url}", "~/page.aspx");
         }

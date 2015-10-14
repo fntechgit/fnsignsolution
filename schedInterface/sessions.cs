@@ -12,6 +12,36 @@ namespace schedInterface
         private schedDataContext db = new schedDataContext();
         private locations _locations = new locations();
 
+        public List<Session> by_event(Int32 id)
+        {
+            List<Session> _sessions = new List<Session>();
+
+            var result = from sess in db.sessions
+                where sess.event_id == id
+                orderby sess.title
+                select sess;
+
+            foreach (var item in result)
+            {
+                Session s = new Session();
+
+                s.description = item.description;
+                s.end = Convert.ToDateTime(item.session_end);
+                s.event_type = item.type;
+                s.goers = item.attendees.ToString();
+                s.id = item.id.ToString();
+                s.internal_id = item.id;
+                s.name = item.title;
+                s.speakers = item.speakers;
+                s.start = Convert.ToDateTime(item.session_start);
+                s.venue = item.venue;
+                
+                _sessions.Add(s);
+            }
+
+            return _sessions;
+        } 
+
         public List<Session> all(string conference_url, string api_key)
         {
             var client = new RestClient(conference_url + "/api");
@@ -109,6 +139,8 @@ namespace schedInterface
         public string active { get; set; }
         public string name { get; set; }
         public string event_start { get; set; }
+        public DateTime start { get; set; }
+        public DateTime end { get; set; }
         public string event_end { get; set; }
         public string event_type { get; set; }
         public string description { get; set; }
