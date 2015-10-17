@@ -6,3 +6,9 @@ E:\projects\fnsign\schedInterface\obj\Debug\schedInterface.dll
 E:\projects\fnsign\schedInterface\obj\Debug\schedInterface.pdb
 E:\projects\fnsign\schedInterface\bin\Debug\schedInterface.dll.config
 E:\projects\fnsign\schedInterface\obj\Debug\schedInterface.csprojResolveAssemblyReference.cache
+E:\projects\fnsign\schedInterface\bin\Debug\Hammock.ClientProfile.dll
+E:\projects\fnsign\schedInterface\bin\Debug\Newtonsoft.Json.dll
+E:\projects\fnsign\schedInterface\bin\Debug\TweetSharp.dll
+E:\projects\fnsign\schedInterface\bin\Debug\Hammock.ClientProfile.pdb
+E:\projects\fnsign\schedInterface\bin\Debug\Newtonsoft.Json.xml
+E:\projects\fnsign\schedInterface\bin\Debug\TweetSharp.pdb

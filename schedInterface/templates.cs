@@ -40,6 +40,36 @@ namespace schedInterface
             return _templates;
         }
 
+        public List<Template> all_by_event(Int32 id)
+        {
+            List<Template> _templates = new List<Template>();
+
+            foreach (var item in db.templates_by_event(id))
+            {
+                Template t = new Template();
+
+                t.id = item.id;
+                t.bgcolor = item.bgcolor;
+                t.bgimage = item.bgimage;
+                t.overlay = item.overlay;
+                t.overlay_font = item.overlay_font;
+                t.overlay_font_color = item.overlay_font_color;
+                t.overlay_title = item.overlay_title;
+                t.title = item.title;
+                t.t_hashtag = item.t_hashtag;
+                t.t_username = item.t_username;
+
+                if (!string.IsNullOrEmpty(t.t_hashtag))
+                {
+                    t.hashtags = t.t_hashtag.Split(',').ToList();
+                }
+                
+                _templates.Add(t);
+            }
+
+            return _templates;
+        }
+
         public Template add(Template t)
         {
             template tt = new template();
@@ -55,6 +85,8 @@ namespace schedInterface
             tt.resolution = t.resolution;
             tt.rotate_ads = t.rotate_ads;
             tt.title = t.title;
+            tt.t_hashtag = t.t_hashtag;
+            tt.t_username = t.t_username;
             
             db.templates.InsertOnSubmit(tt);
 
@@ -80,6 +112,8 @@ namespace schedInterface
             tt.resolution = t.resolution;
             tt.rotate_ads = t.rotate_ads;
             tt.title = t.title;
+            tt.t_hashtag = t.t_hashtag;
+            tt.t_username = t.t_username;
 
             db.SubmitChanges();
 
@@ -108,6 +142,8 @@ namespace schedInterface
                 t.resolution = item.resolution;
                 t.rotate_ads = item.rotate_ads;
                 t.title = item.title;
+                t.t_hashtag = item.t_hashtag;
+                t.t_username = item.t_username;
             }
 
             return t;
@@ -124,9 +160,13 @@ namespace schedInterface
         public string bgcolor { get; set; }
         public string bgimage { get; set; }
         public Int32? overlay { get; set; }
+        public string overlay_title { get; set; }
         public string overlay_font { get; set; }
         public string overlay_font_color { get; set; }
         public Boolean rotate_ads { get; set; }
         public Int32 ad_interval { get; set; }
+        public string t_username { get; set; }
+        public string t_hashtag { get; set; }
+        public List<string> hashtags { get; set; }
     }
 }

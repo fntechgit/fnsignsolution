@@ -52,6 +52,8 @@ namespace fnsignManager
                     listenSlider.Value = ev.interval.ToString();
                     url.Text = ev.url;
                     api_key.Text = ev.api_key;
+                    username.Text = ev.t_username;
+                    hashtags.Text = ev.t_hashtag;
                 }
             }
 
@@ -110,6 +112,8 @@ namespace fnsignManager
             ev.interval = Convert.ToInt32(listenSlider.Value);
             ev.api_key = api_key.Text;
             ev.url = url.Text;
+            ev.t_username = username.Text;
+            ev.t_hashtag = hashtags.Text;
 
             if (!string.IsNullOrEmpty(start_date.Text.ToString()) && !string.IsNullOrEmpty(start_time.Text.ToString()))
             {
@@ -123,7 +127,7 @@ namespace fnsignManager
 
             if (is_update)
             {
-                ev = _events.update(ev);
+                ev = _events.appupdate(ev);
             }
             else
             {

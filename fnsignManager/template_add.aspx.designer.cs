@@ -121,6 +121,24 @@ namespace fnsignManager {
         protected global::System.Web.UI.WebControls.TextBox overlay_font_color;
         
         /// <summary>
+        /// username control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox username;
+        
+        /// <summary>
+        /// hashtags control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox hashtags;
+        
+        /// <summary>
         /// pnl_current_image control.
         /// </summary>
         /// <remarks>

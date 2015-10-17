@@ -7,3 +7,9 @@ E:\projects\fnsign\fnsignManager\bin\RestSharp.dll
 E:\projects\fnsign\fnsignManager\bin\schedInterface.pdb
 E:\projects\fnsign\fnsignManager\bin\RestSharp.xml
 E:\projects\fnsign\fnsignManager\obj\Debug\fnsignManager.csprojResolveAssemblyReference.cache
+E:\projects\fnsign\fnsignManager\bin\TweetSharp.dll
+E:\projects\fnsign\fnsignManager\bin\Hammock.ClientProfile.dll
+E:\projects\fnsign\fnsignManager\bin\Newtonsoft.Json.dll
+E:\projects\fnsign\fnsignManager\bin\TweetSharp.pdb
+E:\projects\fnsign\fnsignManager\bin\Hammock.ClientProfile.pdb
+E:\projects\fnsign\fnsignManager\bin\Newtonsoft.Json.xml

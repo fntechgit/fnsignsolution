@@ -1619,6 +1619,7 @@
     <Content Include="logout.aspx" />
     <Content Include="permissions.aspx" />
     <Content Include="sessions.aspx" />
+    <Content Include="templates.aspx" />
     <Content Include="template_add.aspx" />
     <Content Include="users.aspx" />
     <Content Include="Web.config" />
@@ -1731,6 +1732,13 @@
     </Compile>
     <Compile Include="sessions.aspx.designer.cs">
       <DependentUpon>sessions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="templates.aspx.cs">
+      <DependentUpon>templates.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="templates.aspx.designer.cs">
+      <DependentUpon>templates.aspx</DependentUpon>
     </Compile>
     <Compile Include="template_add.aspx.cs">
       <DependentUpon>template_add.aspx</DependentUpon>

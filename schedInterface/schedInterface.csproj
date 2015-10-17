@@ -31,6 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Hammock.ClientProfile">
+      <HintPath>..\packages\TweetSharp.2.3.1\lib\4.0\Hammock.ClientProfile.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\TweetSharp.2.3.1\lib\4.0\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="RestSharp">
       <HintPath>..\packages\RestSharp.105.2.3\lib\net4\RestSharp.dll</HintPath>
     </Reference>
@@ -43,12 +49,16 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="TweetSharp">
+      <HintPath>..\packages\TweetSharp.2.3.1\lib\4.0\TweetSharp.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="auth.cs" />
     <Compile Include="events.cs" />
     <Compile Include="locations.cs" />
     <Compile Include="log.cs" />
+    <Compile Include="media.cs" />
     <Compile Include="overlays.cs" />
     <Compile Include="permissions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -64,8 +74,10 @@
       <DependentUpon>sched.dbml</DependentUpon>
     </Compile>
     <Compile Include="sessions.cs" />
+    <Compile Include="settings.cs" />
     <Compile Include="templates.cs" />
     <Compile Include="terminals.cs" />
+    <Compile Include="twitter.cs" />
     <Compile Include="users.cs" />
   </ItemGroup>
   <ItemGroup>

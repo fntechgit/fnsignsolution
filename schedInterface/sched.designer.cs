@@ -30,9 +30,6 @@ namespace schedInterface
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void Insertevent(@event instance);
-    partial void Updateevent(@event instance);
-    partial void Deleteevent(@event instance);
     partial void Insertsession(session instance);
     partial void Updatesession(session instance);
     partial void Deletesession(session instance);
@@ -45,9 +42,6 @@ namespace schedInterface
     partial void Insertresolution(resolution instance);
     partial void Updateresolution(resolution instance);
     partial void Deleteresolution(resolution instance);
-    partial void Inserttemplate(template instance);
-    partial void Updatetemplate(template instance);
-    partial void Deletetemplate(template instance);
     partial void Insertlog(log instance);
     partial void Updatelog(log instance);
     partial void Deletelog(log instance);
@@ -63,6 +57,15 @@ namespace schedInterface
     partial void Insertterminal(terminal instance);
     partial void Updateterminal(terminal instance);
     partial void Deleteterminal(terminal instance);
+    partial void Insertevent(@event instance);
+    partial void Updateevent(@event instance);
+    partial void Deleteevent(@event instance);
+    partial void Inserttemplate(template instance);
+    partial void Updatetemplate(template instance);
+    partial void Deletetemplate(template instance);
+    partial void Insertmedia(media instance);
+    partial void Updatemedia(media instance);
+    partial void Deletemedia(media instance);
     #endregion
 		
 		public schedDataContext() : 
@@ -95,14 +98,6 @@ namespace schedInterface
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<@event> events
-		{
-			get
-			{
-				return this.GetTable<@event>();
-			}
-		}
-		
 		public System.Data.Linq.Table<session> sessions
 		{
 			get
@@ -132,14 +127,6 @@ namespace schedInterface
 			get
 			{
 				return this.GetTable<resolution>();
-			}
-		}
-		
-		public System.Data.Linq.Table<template> templates
-		{
-			get
-			{
-				return this.GetTable<template>();
 			}
 		}
 		
@@ -183,11 +170,28 @@ namespace schedInterface
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.events_to_update")]
-		public ISingleResult<events_to_updateResult> events_to_update()
+		public System.Data.Linq.Table<@event> events
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-			return ((ISingleResult<events_to_updateResult>)(result.ReturnValue));
+			get
+			{
+				return this.GetTable<@event>();
+			}
+		}
+		
+		public System.Data.Linq.Table<template> templates
+		{
+			get
+			{
+				return this.GetTable<template>();
+			}
+		}
+		
+		public System.Data.Linq.Table<media> medias
+		{
+			get
+			{
+				return this.GetTable<media>();
+			}
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.permissions_get_by_user")]
@@ -203,235 +207,19 @@ namespace schedInterface
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), user_id);
 			return ((ISingleResult<events_get_authorizedResult>)(result.ReturnValue));
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.events")]
-	public partial class @event : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private string _title;
-		
-		private System.Nullable<System.DateTime> _event_start;
-		
-		private System.Nullable<System.DateTime> _event_end;
-		
-		private string _api_key;
-		
-		private string _url;
-		
-		private int _interval;
-		
-		private System.DateTime _last_update;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OntitleChanging(string value);
-    partial void OntitleChanged();
-    partial void Onevent_startChanging(System.Nullable<System.DateTime> value);
-    partial void Onevent_startChanged();
-    partial void Onevent_endChanging(System.Nullable<System.DateTime> value);
-    partial void Onevent_endChanged();
-    partial void Onapi_keyChanging(string value);
-    partial void Onapi_keyChanged();
-    partial void OnurlChanging(string value);
-    partial void OnurlChanged();
-    partial void OnintervalChanging(int value);
-    partial void OnintervalChanged();
-    partial void Onlast_updateChanging(System.DateTime value);
-    partial void Onlast_updateChanged();
-    #endregion
-		
-		public @event()
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.events_to_update")]
+		public ISingleResult<events_to_updateResult> events_to_update()
 		{
-			OnCreated();
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<events_to_updateResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.templates_by_event")]
+		public ISingleResult<templates_by_eventResult> templates_by_event([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> id)
 		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(255)")]
-		public string title
-		{
-			get
-			{
-				return this._title;
-			}
-			set
-			{
-				if ((this._title != value))
-				{
-					this.OntitleChanging(value);
-					this.SendPropertyChanging();
-					this._title = value;
-					this.SendPropertyChanged("title");
-					this.OntitleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_start", DbType="Date")]
-		public System.Nullable<System.DateTime> event_start
-		{
-			get
-			{
-				return this._event_start;
-			}
-			set
-			{
-				if ((this._event_start != value))
-				{
-					this.Onevent_startChanging(value);
-					this.SendPropertyChanging();
-					this._event_start = value;
-					this.SendPropertyChanged("event_start");
-					this.Onevent_startChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_end", DbType="Date")]
-		public System.Nullable<System.DateTime> event_end
-		{
-			get
-			{
-				return this._event_end;
-			}
-			set
-			{
-				if ((this._event_end != value))
-				{
-					this.Onevent_endChanging(value);
-					this.SendPropertyChanging();
-					this._event_end = value;
-					this.SendPropertyChanged("event_end");
-					this.Onevent_endChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_api_key", DbType="VarChar(MAX)")]
-		public string api_key
-		{
-			get
-			{
-				return this._api_key;
-			}
-			set
-			{
-				if ((this._api_key != value))
-				{
-					this.Onapi_keyChanging(value);
-					this.SendPropertyChanging();
-					this._api_key = value;
-					this.SendPropertyChanged("api_key");
-					this.Onapi_keyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_url", DbType="VarChar(MAX)")]
-		public string url
-		{
-			get
-			{
-				return this._url;
-			}
-			set
-			{
-				if ((this._url != value))
-				{
-					this.OnurlChanging(value);
-					this.SendPropertyChanging();
-					this._url = value;
-					this.SendPropertyChanged("url");
-					this.OnurlChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_interval", DbType="Int NOT NULL")]
-		public int interval
-		{
-			get
-			{
-				return this._interval;
-			}
-			set
-			{
-				if ((this._interval != value))
-				{
-					this.OnintervalChanging(value);
-					this.SendPropertyChanging();
-					this._interval = value;
-					this.SendPropertyChanged("interval");
-					this.OnintervalChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_last_update", DbType="DateTime NOT NULL")]
-		public System.DateTime last_update
-		{
-			get
-			{
-				return this._last_update;
-			}
-			set
-			{
-				if ((this._last_update != value))
-				{
-					this.Onlast_updateChanging(value);
-					this.SendPropertyChanging();
-					this._last_update = value;
-					this.SendPropertyChanged("last_update");
-					this.Onlast_updateChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id);
+			return ((ISingleResult<templates_by_eventResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -1258,332 +1046,6 @@ namespace schedInterface
 					this._height = value;
 					this.SendPropertyChanged("height");
 					this.OnheightChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.templates")]
-	public partial class template : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private string _title;
-		
-		private int _event_id;
-		
-		private int _orientation;
-		
-		private int _resolution;
-		
-		private string _bgcolor;
-		
-		private string _bgimage;
-		
-		private System.Nullable<int> _overlay;
-		
-		private string _overlay_font;
-		
-		private string _overlay_font_color;
-		
-		private bool _rotate_ads;
-		
-		private int _ad_interval;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OntitleChanging(string value);
-    partial void OntitleChanged();
-    partial void Onevent_idChanging(int value);
-    partial void Onevent_idChanged();
-    partial void OnorientationChanging(int value);
-    partial void OnorientationChanged();
-    partial void OnresolutionChanging(int value);
-    partial void OnresolutionChanged();
-    partial void OnbgcolorChanging(string value);
-    partial void OnbgcolorChanged();
-    partial void OnbgimageChanging(string value);
-    partial void OnbgimageChanged();
-    partial void OnoverlayChanging(System.Nullable<int> value);
-    partial void OnoverlayChanged();
-    partial void Onoverlay_fontChanging(string value);
-    partial void Onoverlay_fontChanged();
-    partial void Onoverlay_font_colorChanging(string value);
-    partial void Onoverlay_font_colorChanged();
-    partial void Onrotate_adsChanging(bool value);
-    partial void Onrotate_adsChanged();
-    partial void Onad_intervalChanging(int value);
-    partial void Onad_intervalChanged();
-    #endregion
-		
-		public template()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(255)")]
-		public string title
-		{
-			get
-			{
-				return this._title;
-			}
-			set
-			{
-				if ((this._title != value))
-				{
-					this.OntitleChanging(value);
-					this.SendPropertyChanging();
-					this._title = value;
-					this.SendPropertyChanged("title");
-					this.OntitleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int NOT NULL")]
-		public int event_id
-		{
-			get
-			{
-				return this._event_id;
-			}
-			set
-			{
-				if ((this._event_id != value))
-				{
-					this.Onevent_idChanging(value);
-					this.SendPropertyChanging();
-					this._event_id = value;
-					this.SendPropertyChanged("event_id");
-					this.Onevent_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_orientation", DbType="Int NOT NULL")]
-		public int orientation
-		{
-			get
-			{
-				return this._orientation;
-			}
-			set
-			{
-				if ((this._orientation != value))
-				{
-					this.OnorientationChanging(value);
-					this.SendPropertyChanging();
-					this._orientation = value;
-					this.SendPropertyChanged("orientation");
-					this.OnorientationChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_resolution", DbType="Int NOT NULL")]
-		public int resolution
-		{
-			get
-			{
-				return this._resolution;
-			}
-			set
-			{
-				if ((this._resolution != value))
-				{
-					this.OnresolutionChanging(value);
-					this.SendPropertyChanging();
-					this._resolution = value;
-					this.SendPropertyChanged("resolution");
-					this.OnresolutionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bgcolor", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string bgcolor
-		{
-			get
-			{
-				return this._bgcolor;
-			}
-			set
-			{
-				if ((this._bgcolor != value))
-				{
-					this.OnbgcolorChanging(value);
-					this.SendPropertyChanging();
-					this._bgcolor = value;
-					this.SendPropertyChanged("bgcolor");
-					this.OnbgcolorChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bgimage", DbType="VarChar(MAX)")]
-		public string bgimage
-		{
-			get
-			{
-				return this._bgimage;
-			}
-			set
-			{
-				if ((this._bgimage != value))
-				{
-					this.OnbgimageChanging(value);
-					this.SendPropertyChanging();
-					this._bgimage = value;
-					this.SendPropertyChanged("bgimage");
-					this.OnbgimageChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_overlay", DbType="Int")]
-		public System.Nullable<int> overlay
-		{
-			get
-			{
-				return this._overlay;
-			}
-			set
-			{
-				if ((this._overlay != value))
-				{
-					this.OnoverlayChanging(value);
-					this.SendPropertyChanging();
-					this._overlay = value;
-					this.SendPropertyChanged("overlay");
-					this.OnoverlayChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_overlay_font", DbType="VarChar(255)")]
-		public string overlay_font
-		{
-			get
-			{
-				return this._overlay_font;
-			}
-			set
-			{
-				if ((this._overlay_font != value))
-				{
-					this.Onoverlay_fontChanging(value);
-					this.SendPropertyChanging();
-					this._overlay_font = value;
-					this.SendPropertyChanged("overlay_font");
-					this.Onoverlay_fontChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_overlay_font_color", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string overlay_font_color
-		{
-			get
-			{
-				return this._overlay_font_color;
-			}
-			set
-			{
-				if ((this._overlay_font_color != value))
-				{
-					this.Onoverlay_font_colorChanging(value);
-					this.SendPropertyChanging();
-					this._overlay_font_color = value;
-					this.SendPropertyChanged("overlay_font_color");
-					this.Onoverlay_font_colorChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rotate_ads", DbType="Bit NOT NULL")]
-		public bool rotate_ads
-		{
-			get
-			{
-				return this._rotate_ads;
-			}
-			set
-			{
-				if ((this._rotate_ads != value))
-				{
-					this.Onrotate_adsChanging(value);
-					this.SendPropertyChanging();
-					this._rotate_ads = value;
-					this.SendPropertyChanged("rotate_ads");
-					this.Onrotate_adsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ad_interval", DbType="Int NOT NULL")]
-		public int ad_interval
-		{
-			get
-			{
-				return this._ad_interval;
-			}
-			set
-			{
-				if ((this._ad_interval != value))
-				{
-					this.Onad_intervalChanging(value);
-					this.SendPropertyChanging();
-					this._ad_interval = value;
-					this.SendPropertyChanged("ad_interval");
-					this.Onad_intervalChanged();
 				}
 			}
 		}
@@ -2591,8 +2053,11 @@ namespace schedInterface
 		}
 	}
 	
-	public partial class events_to_updateResult
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.events")]
+	public partial class @event : INotifyPropertyChanging, INotifyPropertyChanged
 	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _id;
 		
@@ -2610,11 +2075,42 @@ namespace schedInterface
 		
 		private System.DateTime _last_update;
 		
-		public events_to_updateResult()
+		private string _t_username;
+		
+		private string _t_hashtag;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OntitleChanging(string value);
+    partial void OntitleChanged();
+    partial void Onevent_startChanging(System.Nullable<System.DateTime> value);
+    partial void Onevent_startChanged();
+    partial void Onevent_endChanging(System.Nullable<System.DateTime> value);
+    partial void Onevent_endChanged();
+    partial void Onapi_keyChanging(string value);
+    partial void Onapi_keyChanged();
+    partial void OnurlChanging(string value);
+    partial void OnurlChanged();
+    partial void OnintervalChanging(int value);
+    partial void OnintervalChanged();
+    partial void Onlast_updateChanging(System.DateTime value);
+    partial void Onlast_updateChanged();
+    partial void Ont_usernameChanging(string value);
+    partial void Ont_usernameChanged();
+    partial void Ont_hashtagChanging(string value);
+    partial void Ont_hashtagChanged();
+    #endregion
+		
+		public @event()
 		{
+			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int id
 		{
 			get
@@ -2625,7 +2121,11 @@ namespace schedInterface
 			{
 				if ((this._id != value))
 				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
 					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
 				}
 			}
 		}
@@ -2641,7 +2141,11 @@ namespace schedInterface
 			{
 				if ((this._title != value))
 				{
+					this.OntitleChanging(value);
+					this.SendPropertyChanging();
 					this._title = value;
+					this.SendPropertyChanged("title");
+					this.OntitleChanged();
 				}
 			}
 		}
@@ -2657,7 +2161,11 @@ namespace schedInterface
 			{
 				if ((this._event_start != value))
 				{
+					this.Onevent_startChanging(value);
+					this.SendPropertyChanging();
 					this._event_start = value;
+					this.SendPropertyChanged("event_start");
+					this.Onevent_startChanged();
 				}
 			}
 		}
@@ -2673,7 +2181,11 @@ namespace schedInterface
 			{
 				if ((this._event_end != value))
 				{
+					this.Onevent_endChanging(value);
+					this.SendPropertyChanging();
 					this._event_end = value;
+					this.SendPropertyChanged("event_end");
+					this.Onevent_endChanged();
 				}
 			}
 		}
@@ -2689,7 +2201,11 @@ namespace schedInterface
 			{
 				if ((this._api_key != value))
 				{
+					this.Onapi_keyChanging(value);
+					this.SendPropertyChanging();
 					this._api_key = value;
+					this.SendPropertyChanged("api_key");
+					this.Onapi_keyChanged();
 				}
 			}
 		}
@@ -2705,7 +2221,11 @@ namespace schedInterface
 			{
 				if ((this._url != value))
 				{
+					this.OnurlChanging(value);
+					this.SendPropertyChanging();
 					this._url = value;
+					this.SendPropertyChanged("url");
+					this.OnurlChanged();
 				}
 			}
 		}
@@ -2721,7 +2241,11 @@ namespace schedInterface
 			{
 				if ((this._interval != value))
 				{
+					this.OnintervalChanging(value);
+					this.SendPropertyChanging();
 					this._interval = value;
+					this.SendPropertyChanged("interval");
+					this.OnintervalChanged();
 				}
 			}
 		}
@@ -2737,8 +2261,1060 @@ namespace schedInterface
 			{
 				if ((this._last_update != value))
 				{
+					this.Onlast_updateChanging(value);
+					this.SendPropertyChanging();
 					this._last_update = value;
+					this.SendPropertyChanged("last_update");
+					this.Onlast_updateChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_t_username", DbType="VarChar(255)")]
+		public string t_username
+		{
+			get
+			{
+				return this._t_username;
+			}
+			set
+			{
+				if ((this._t_username != value))
+				{
+					this.Ont_usernameChanging(value);
+					this.SendPropertyChanging();
+					this._t_username = value;
+					this.SendPropertyChanged("t_username");
+					this.Ont_usernameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_t_hashtag", DbType="VarChar(MAX)")]
+		public string t_hashtag
+		{
+			get
+			{
+				return this._t_hashtag;
+			}
+			set
+			{
+				if ((this._t_hashtag != value))
+				{
+					this.Ont_hashtagChanging(value);
+					this.SendPropertyChanging();
+					this._t_hashtag = value;
+					this.SendPropertyChanged("t_hashtag");
+					this.Ont_hashtagChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.templates")]
+	public partial class template : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _title;
+		
+		private int _event_id;
+		
+		private int _orientation;
+		
+		private int _resolution;
+		
+		private string _bgcolor;
+		
+		private string _bgimage;
+		
+		private System.Nullable<int> _overlay;
+		
+		private string _overlay_font;
+		
+		private string _overlay_font_color;
+		
+		private bool _rotate_ads;
+		
+		private int _ad_interval;
+		
+		private string _t_username;
+		
+		private string _t_hashtag;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OntitleChanging(string value);
+    partial void OntitleChanged();
+    partial void Onevent_idChanging(int value);
+    partial void Onevent_idChanged();
+    partial void OnorientationChanging(int value);
+    partial void OnorientationChanged();
+    partial void OnresolutionChanging(int value);
+    partial void OnresolutionChanged();
+    partial void OnbgcolorChanging(string value);
+    partial void OnbgcolorChanged();
+    partial void OnbgimageChanging(string value);
+    partial void OnbgimageChanged();
+    partial void OnoverlayChanging(System.Nullable<int> value);
+    partial void OnoverlayChanged();
+    partial void Onoverlay_fontChanging(string value);
+    partial void Onoverlay_fontChanged();
+    partial void Onoverlay_font_colorChanging(string value);
+    partial void Onoverlay_font_colorChanged();
+    partial void Onrotate_adsChanging(bool value);
+    partial void Onrotate_adsChanged();
+    partial void Onad_intervalChanging(int value);
+    partial void Onad_intervalChanged();
+    partial void Ont_usernameChanging(string value);
+    partial void Ont_usernameChanged();
+    partial void Ont_hashtagChanging(string value);
+    partial void Ont_hashtagChanged();
+    #endregion
+		
+		public template()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(255)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this.OntitleChanging(value);
+					this.SendPropertyChanging();
+					this._title = value;
+					this.SendPropertyChanged("title");
+					this.OntitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int NOT NULL")]
+		public int event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this.Onevent_idChanging(value);
+					this.SendPropertyChanging();
+					this._event_id = value;
+					this.SendPropertyChanged("event_id");
+					this.Onevent_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_orientation", DbType="Int NOT NULL")]
+		public int orientation
+		{
+			get
+			{
+				return this._orientation;
+			}
+			set
+			{
+				if ((this._orientation != value))
+				{
+					this.OnorientationChanging(value);
+					this.SendPropertyChanging();
+					this._orientation = value;
+					this.SendPropertyChanged("orientation");
+					this.OnorientationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_resolution", DbType="Int NOT NULL")]
+		public int resolution
+		{
+			get
+			{
+				return this._resolution;
+			}
+			set
+			{
+				if ((this._resolution != value))
+				{
+					this.OnresolutionChanging(value);
+					this.SendPropertyChanging();
+					this._resolution = value;
+					this.SendPropertyChanged("resolution");
+					this.OnresolutionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bgcolor", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string bgcolor
+		{
+			get
+			{
+				return this._bgcolor;
+			}
+			set
+			{
+				if ((this._bgcolor != value))
+				{
+					this.OnbgcolorChanging(value);
+					this.SendPropertyChanging();
+					this._bgcolor = value;
+					this.SendPropertyChanged("bgcolor");
+					this.OnbgcolorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bgimage", DbType="VarChar(MAX)")]
+		public string bgimage
+		{
+			get
+			{
+				return this._bgimage;
+			}
+			set
+			{
+				if ((this._bgimage != value))
+				{
+					this.OnbgimageChanging(value);
+					this.SendPropertyChanging();
+					this._bgimage = value;
+					this.SendPropertyChanged("bgimage");
+					this.OnbgimageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_overlay", DbType="Int")]
+		public System.Nullable<int> overlay
+		{
+			get
+			{
+				return this._overlay;
+			}
+			set
+			{
+				if ((this._overlay != value))
+				{
+					this.OnoverlayChanging(value);
+					this.SendPropertyChanging();
+					this._overlay = value;
+					this.SendPropertyChanged("overlay");
+					this.OnoverlayChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_overlay_font", DbType="VarChar(255)")]
+		public string overlay_font
+		{
+			get
+			{
+				return this._overlay_font;
+			}
+			set
+			{
+				if ((this._overlay_font != value))
+				{
+					this.Onoverlay_fontChanging(value);
+					this.SendPropertyChanging();
+					this._overlay_font = value;
+					this.SendPropertyChanged("overlay_font");
+					this.Onoverlay_fontChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_overlay_font_color", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string overlay_font_color
+		{
+			get
+			{
+				return this._overlay_font_color;
+			}
+			set
+			{
+				if ((this._overlay_font_color != value))
+				{
+					this.Onoverlay_font_colorChanging(value);
+					this.SendPropertyChanging();
+					this._overlay_font_color = value;
+					this.SendPropertyChanged("overlay_font_color");
+					this.Onoverlay_font_colorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rotate_ads", DbType="Bit NOT NULL")]
+		public bool rotate_ads
+		{
+			get
+			{
+				return this._rotate_ads;
+			}
+			set
+			{
+				if ((this._rotate_ads != value))
+				{
+					this.Onrotate_adsChanging(value);
+					this.SendPropertyChanging();
+					this._rotate_ads = value;
+					this.SendPropertyChanged("rotate_ads");
+					this.Onrotate_adsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ad_interval", DbType="Int NOT NULL")]
+		public int ad_interval
+		{
+			get
+			{
+				return this._ad_interval;
+			}
+			set
+			{
+				if ((this._ad_interval != value))
+				{
+					this.Onad_intervalChanging(value);
+					this.SendPropertyChanging();
+					this._ad_interval = value;
+					this.SendPropertyChanged("ad_interval");
+					this.Onad_intervalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_t_username", DbType="VarChar(255)")]
+		public string t_username
+		{
+			get
+			{
+				return this._t_username;
+			}
+			set
+			{
+				if ((this._t_username != value))
+				{
+					this.Ont_usernameChanging(value);
+					this.SendPropertyChanging();
+					this._t_username = value;
+					this.SendPropertyChanged("t_username");
+					this.Ont_usernameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_t_hashtag", DbType="VarChar(MAX)")]
+		public string t_hashtag
+		{
+			get
+			{
+				return this._t_hashtag;
+			}
+			set
+			{
+				if ((this._t_hashtag != value))
+				{
+					this.Ont_hashtagChanging(value);
+					this.SendPropertyChanging();
+					this._t_hashtag = value;
+					this.SendPropertyChanged("t_hashtag");
+					this.Ont_hashtagChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.media")]
+	public partial class media : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _service;
+		
+		private string _username;
+		
+		private string _full_name;
+		
+		private string _description;
+		
+		private System.Nullable<System.DateTime> _createdate;
+		
+		private string _profilepic;
+		
+		private string _link;
+		
+		private int _likes;
+		
+		private string _latitude;
+		
+		private string _longitude;
+		
+		private bool _approved;
+		
+		private System.Nullable<int> _approved_by;
+		
+		private System.Nullable<System.DateTime> _approved_date;
+		
+		private System.DateTime _added_to_db_date;
+		
+		private string _location_name;
+		
+		private string _source_id;
+		
+		private System.Nullable<int> _width;
+		
+		private System.Nullable<int> _height;
+		
+		private bool _is_video;
+		
+		private string _source;
+		
+		private string _tags;
+		
+		private int _event_id;
+		
+		private System.Nullable<int> _template_id;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnserviceChanging(string value);
+    partial void OnserviceChanged();
+    partial void OnusernameChanging(string value);
+    partial void OnusernameChanged();
+    partial void Onfull_nameChanging(string value);
+    partial void Onfull_nameChanged();
+    partial void OndescriptionChanging(string value);
+    partial void OndescriptionChanged();
+    partial void OncreatedateChanging(System.Nullable<System.DateTime> value);
+    partial void OncreatedateChanged();
+    partial void OnprofilepicChanging(string value);
+    partial void OnprofilepicChanged();
+    partial void OnlinkChanging(string value);
+    partial void OnlinkChanged();
+    partial void OnlikesChanging(int value);
+    partial void OnlikesChanged();
+    partial void OnlatitudeChanging(string value);
+    partial void OnlatitudeChanged();
+    partial void OnlongitudeChanging(string value);
+    partial void OnlongitudeChanged();
+    partial void OnapprovedChanging(bool value);
+    partial void OnapprovedChanged();
+    partial void Onapproved_byChanging(System.Nullable<int> value);
+    partial void Onapproved_byChanged();
+    partial void Onapproved_dateChanging(System.Nullable<System.DateTime> value);
+    partial void Onapproved_dateChanged();
+    partial void Onadded_to_db_dateChanging(System.DateTime value);
+    partial void Onadded_to_db_dateChanged();
+    partial void Onlocation_nameChanging(string value);
+    partial void Onlocation_nameChanged();
+    partial void Onsource_idChanging(string value);
+    partial void Onsource_idChanged();
+    partial void OnwidthChanging(System.Nullable<int> value);
+    partial void OnwidthChanged();
+    partial void OnheightChanging(System.Nullable<int> value);
+    partial void OnheightChanged();
+    partial void Onis_videoChanging(bool value);
+    partial void Onis_videoChanged();
+    partial void OnsourceChanging(string value);
+    partial void OnsourceChanged();
+    partial void OntagsChanging(string value);
+    partial void OntagsChanged();
+    partial void Onevent_idChanging(int value);
+    partial void Onevent_idChanged();
+    partial void Ontemplate_idChanging(System.Nullable<int> value);
+    partial void Ontemplate_idChanged();
+    #endregion
+		
+		public media()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_service", DbType="VarChar(50)")]
+		public string service
+		{
+			get
+			{
+				return this._service;
+			}
+			set
+			{
+				if ((this._service != value))
+				{
+					this.OnserviceChanging(value);
+					this.SendPropertyChanging();
+					this._service = value;
+					this.SendPropertyChanged("service");
+					this.OnserviceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_username", DbType="VarChar(100)")]
+		public string username
+		{
+			get
+			{
+				return this._username;
+			}
+			set
+			{
+				if ((this._username != value))
+				{
+					this.OnusernameChanging(value);
+					this.SendPropertyChanging();
+					this._username = value;
+					this.SendPropertyChanged("username");
+					this.OnusernameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_full_name", DbType="VarChar(MAX)")]
+		public string full_name
+		{
+			get
+			{
+				return this._full_name;
+			}
+			set
+			{
+				if ((this._full_name != value))
+				{
+					this.Onfull_nameChanging(value);
+					this.SendPropertyChanging();
+					this._full_name = value;
+					this.SendPropertyChanged("full_name");
+					this.Onfull_nameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="VarChar(MAX)")]
+		public string description
+		{
+			get
+			{
+				return this._description;
+			}
+			set
+			{
+				if ((this._description != value))
+				{
+					this.OndescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._description = value;
+					this.SendPropertyChanged("description");
+					this.OndescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_createdate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> createdate
+		{
+			get
+			{
+				return this._createdate;
+			}
+			set
+			{
+				if ((this._createdate != value))
+				{
+					this.OncreatedateChanging(value);
+					this.SendPropertyChanging();
+					this._createdate = value;
+					this.SendPropertyChanged("createdate");
+					this.OncreatedateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_profilepic", DbType="VarChar(MAX)")]
+		public string profilepic
+		{
+			get
+			{
+				return this._profilepic;
+			}
+			set
+			{
+				if ((this._profilepic != value))
+				{
+					this.OnprofilepicChanging(value);
+					this.SendPropertyChanging();
+					this._profilepic = value;
+					this.SendPropertyChanged("profilepic");
+					this.OnprofilepicChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_link", DbType="VarChar(MAX)")]
+		public string link
+		{
+			get
+			{
+				return this._link;
+			}
+			set
+			{
+				if ((this._link != value))
+				{
+					this.OnlinkChanging(value);
+					this.SendPropertyChanging();
+					this._link = value;
+					this.SendPropertyChanged("link");
+					this.OnlinkChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_likes", DbType="Int NOT NULL")]
+		public int likes
+		{
+			get
+			{
+				return this._likes;
+			}
+			set
+			{
+				if ((this._likes != value))
+				{
+					this.OnlikesChanging(value);
+					this.SendPropertyChanging();
+					this._likes = value;
+					this.SendPropertyChanged("likes");
+					this.OnlikesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_latitude", DbType="VarChar(50)")]
+		public string latitude
+		{
+			get
+			{
+				return this._latitude;
+			}
+			set
+			{
+				if ((this._latitude != value))
+				{
+					this.OnlatitudeChanging(value);
+					this.SendPropertyChanging();
+					this._latitude = value;
+					this.SendPropertyChanged("latitude");
+					this.OnlatitudeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_longitude", DbType="VarChar(50)")]
+		public string longitude
+		{
+			get
+			{
+				return this._longitude;
+			}
+			set
+			{
+				if ((this._longitude != value))
+				{
+					this.OnlongitudeChanging(value);
+					this.SendPropertyChanging();
+					this._longitude = value;
+					this.SendPropertyChanged("longitude");
+					this.OnlongitudeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_approved", DbType="Bit NOT NULL")]
+		public bool approved
+		{
+			get
+			{
+				return this._approved;
+			}
+			set
+			{
+				if ((this._approved != value))
+				{
+					this.OnapprovedChanging(value);
+					this.SendPropertyChanging();
+					this._approved = value;
+					this.SendPropertyChanged("approved");
+					this.OnapprovedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_approved_by", DbType="Int")]
+		public System.Nullable<int> approved_by
+		{
+			get
+			{
+				return this._approved_by;
+			}
+			set
+			{
+				if ((this._approved_by != value))
+				{
+					this.Onapproved_byChanging(value);
+					this.SendPropertyChanging();
+					this._approved_by = value;
+					this.SendPropertyChanged("approved_by");
+					this.Onapproved_byChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_approved_date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> approved_date
+		{
+			get
+			{
+				return this._approved_date;
+			}
+			set
+			{
+				if ((this._approved_date != value))
+				{
+					this.Onapproved_dateChanging(value);
+					this.SendPropertyChanging();
+					this._approved_date = value;
+					this.SendPropertyChanged("approved_date");
+					this.Onapproved_dateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_added_to_db_date", DbType="DateTime NOT NULL")]
+		public System.DateTime added_to_db_date
+		{
+			get
+			{
+				return this._added_to_db_date;
+			}
+			set
+			{
+				if ((this._added_to_db_date != value))
+				{
+					this.Onadded_to_db_dateChanging(value);
+					this.SendPropertyChanging();
+					this._added_to_db_date = value;
+					this.SendPropertyChanged("added_to_db_date");
+					this.Onadded_to_db_dateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_location_name", DbType="VarChar(MAX)")]
+		public string location_name
+		{
+			get
+			{
+				return this._location_name;
+			}
+			set
+			{
+				if ((this._location_name != value))
+				{
+					this.Onlocation_nameChanging(value);
+					this.SendPropertyChanging();
+					this._location_name = value;
+					this.SendPropertyChanged("location_name");
+					this.Onlocation_nameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_source_id", DbType="VarChar(100)")]
+		public string source_id
+		{
+			get
+			{
+				return this._source_id;
+			}
+			set
+			{
+				if ((this._source_id != value))
+				{
+					this.Onsource_idChanging(value);
+					this.SendPropertyChanging();
+					this._source_id = value;
+					this.SendPropertyChanged("source_id");
+					this.Onsource_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_width", DbType="Int")]
+		public System.Nullable<int> width
+		{
+			get
+			{
+				return this._width;
+			}
+			set
+			{
+				if ((this._width != value))
+				{
+					this.OnwidthChanging(value);
+					this.SendPropertyChanging();
+					this._width = value;
+					this.SendPropertyChanged("width");
+					this.OnwidthChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_height", DbType="Int")]
+		public System.Nullable<int> height
+		{
+			get
+			{
+				return this._height;
+			}
+			set
+			{
+				if ((this._height != value))
+				{
+					this.OnheightChanging(value);
+					this.SendPropertyChanging();
+					this._height = value;
+					this.SendPropertyChanged("height");
+					this.OnheightChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_is_video", DbType="Bit NOT NULL")]
+		public bool is_video
+		{
+			get
+			{
+				return this._is_video;
+			}
+			set
+			{
+				if ((this._is_video != value))
+				{
+					this.Onis_videoChanging(value);
+					this.SendPropertyChanging();
+					this._is_video = value;
+					this.SendPropertyChanged("is_video");
+					this.Onis_videoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_source", DbType="VarChar(MAX)")]
+		public string source
+		{
+			get
+			{
+				return this._source;
+			}
+			set
+			{
+				if ((this._source != value))
+				{
+					this.OnsourceChanging(value);
+					this.SendPropertyChanging();
+					this._source = value;
+					this.SendPropertyChanged("source");
+					this.OnsourceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tags", DbType="VarChar(MAX)")]
+		public string tags
+		{
+			get
+			{
+				return this._tags;
+			}
+			set
+			{
+				if ((this._tags != value))
+				{
+					this.OntagsChanging(value);
+					this.SendPropertyChanging();
+					this._tags = value;
+					this.SendPropertyChanged("tags");
+					this.OntagsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int NOT NULL")]
+		public int event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this.Onevent_idChanging(value);
+					this.SendPropertyChanging();
+					this._event_id = value;
+					this.SendPropertyChanged("event_id");
+					this.Onevent_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_id", DbType="Int")]
+		public System.Nullable<int> template_id
+		{
+			get
+			{
+				return this._template_id;
+			}
+			set
+			{
+				if ((this._template_id != value))
+				{
+					this.Ontemplate_idChanging(value);
+					this.SendPropertyChanging();
+					this._template_id = value;
+					this.SendPropertyChanged("template_id");
+					this.Ontemplate_idChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -3060,6 +3636,472 @@ namespace schedInterface
 				if ((this._last_update != value))
 				{
 					this._last_update = value;
+				}
+			}
+		}
+	}
+	
+	public partial class events_to_updateResult
+	{
+		
+		private int _id;
+		
+		private string _title;
+		
+		private System.Nullable<System.DateTime> _event_start;
+		
+		private System.Nullable<System.DateTime> _event_end;
+		
+		private string _api_key;
+		
+		private string _url;
+		
+		private int _interval;
+		
+		private System.DateTime _last_update;
+		
+		private string _t_username;
+		
+		private string _t_hashtag;
+		
+		public events_to_updateResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(255)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_start", DbType="Date")]
+		public System.Nullable<System.DateTime> event_start
+		{
+			get
+			{
+				return this._event_start;
+			}
+			set
+			{
+				if ((this._event_start != value))
+				{
+					this._event_start = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_end", DbType="Date")]
+		public System.Nullable<System.DateTime> event_end
+		{
+			get
+			{
+				return this._event_end;
+			}
+			set
+			{
+				if ((this._event_end != value))
+				{
+					this._event_end = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_api_key", DbType="VarChar(MAX)")]
+		public string api_key
+		{
+			get
+			{
+				return this._api_key;
+			}
+			set
+			{
+				if ((this._api_key != value))
+				{
+					this._api_key = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_url", DbType="VarChar(MAX)")]
+		public string url
+		{
+			get
+			{
+				return this._url;
+			}
+			set
+			{
+				if ((this._url != value))
+				{
+					this._url = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_interval", DbType="Int NOT NULL")]
+		public int interval
+		{
+			get
+			{
+				return this._interval;
+			}
+			set
+			{
+				if ((this._interval != value))
+				{
+					this._interval = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_last_update", DbType="DateTime NOT NULL")]
+		public System.DateTime last_update
+		{
+			get
+			{
+				return this._last_update;
+			}
+			set
+			{
+				if ((this._last_update != value))
+				{
+					this._last_update = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_t_username", DbType="VarChar(255)")]
+		public string t_username
+		{
+			get
+			{
+				return this._t_username;
+			}
+			set
+			{
+				if ((this._t_username != value))
+				{
+					this._t_username = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_t_hashtag", DbType="VarChar(MAX)")]
+		public string t_hashtag
+		{
+			get
+			{
+				return this._t_hashtag;
+			}
+			set
+			{
+				if ((this._t_hashtag != value))
+				{
+					this._t_hashtag = value;
+				}
+			}
+		}
+	}
+	
+	public partial class templates_by_eventResult
+	{
+		
+		private int _id;
+		
+		private string _title;
+		
+		private int _event_id;
+		
+		private int _orientation;
+		
+		private int _resolution;
+		
+		private string _bgcolor;
+		
+		private string _bgimage;
+		
+		private System.Nullable<int> _overlay;
+		
+		private string _overlay_font;
+		
+		private string _overlay_font_color;
+		
+		private bool _rotate_ads;
+		
+		private int _ad_interval;
+		
+		private string _t_username;
+		
+		private string _t_hashtag;
+		
+		private string _overlay_title;
+		
+		public templates_by_eventResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(255)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int NOT NULL")]
+		public int event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this._event_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_orientation", DbType="Int NOT NULL")]
+		public int orientation
+		{
+			get
+			{
+				return this._orientation;
+			}
+			set
+			{
+				if ((this._orientation != value))
+				{
+					this._orientation = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_resolution", DbType="Int NOT NULL")]
+		public int resolution
+		{
+			get
+			{
+				return this._resolution;
+			}
+			set
+			{
+				if ((this._resolution != value))
+				{
+					this._resolution = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bgcolor", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string bgcolor
+		{
+			get
+			{
+				return this._bgcolor;
+			}
+			set
+			{
+				if ((this._bgcolor != value))
+				{
+					this._bgcolor = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bgimage", DbType="VarChar(MAX)")]
+		public string bgimage
+		{
+			get
+			{
+				return this._bgimage;
+			}
+			set
+			{
+				if ((this._bgimage != value))
+				{
+					this._bgimage = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_overlay", DbType="Int")]
+		public System.Nullable<int> overlay
+		{
+			get
+			{
+				return this._overlay;
+			}
+			set
+			{
+				if ((this._overlay != value))
+				{
+					this._overlay = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_overlay_font", DbType="VarChar(255)")]
+		public string overlay_font
+		{
+			get
+			{
+				return this._overlay_font;
+			}
+			set
+			{
+				if ((this._overlay_font != value))
+				{
+					this._overlay_font = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_overlay_font_color", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string overlay_font_color
+		{
+			get
+			{
+				return this._overlay_font_color;
+			}
+			set
+			{
+				if ((this._overlay_font_color != value))
+				{
+					this._overlay_font_color = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rotate_ads", DbType="Bit NOT NULL")]
+		public bool rotate_ads
+		{
+			get
+			{
+				return this._rotate_ads;
+			}
+			set
+			{
+				if ((this._rotate_ads != value))
+				{
+					this._rotate_ads = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ad_interval", DbType="Int NOT NULL")]
+		public int ad_interval
+		{
+			get
+			{
+				return this._ad_interval;
+			}
+			set
+			{
+				if ((this._ad_interval != value))
+				{
+					this._ad_interval = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_t_username", DbType="VarChar(255)")]
+		public string t_username
+		{
+			get
+			{
+				return this._t_username;
+			}
+			set
+			{
+				if ((this._t_username != value))
+				{
+					this._t_username = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_t_hashtag", DbType="VarChar(MAX)")]
+		public string t_hashtag
+		{
+			get
+			{
+				return this._t_hashtag;
+			}
+			set
+			{
+				if ((this._t_hashtag != value))
+				{
+					this._t_hashtag = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_overlay_title", DbType="VarChar(255)")]
+		public string overlay_title
+		{
+			get
+			{
+				return this._overlay_title;
+			}
+			set
+			{
+				if ((this._overlay_title != value))
+				{
+					this._overlay_title = value;
 				}
 			}
 		}

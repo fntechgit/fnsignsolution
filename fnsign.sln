@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fnsign_updater", "fnsign_up
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fnsignManager", "fnsignManager\fnsignManager.csproj", "{66A11794-6EB7-4062-BA79-D352C37CDB78}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fnsignDisplay", "fnsignDisplay\fnsignDisplay.csproj", "{715EE89E-18C1-4954-8CF0-6701F95757A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,16 @@ Global
 		{66A11794-6EB7-4062-BA79-D352C37CDB78}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{66A11794-6EB7-4062-BA79-D352C37CDB78}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{66A11794-6EB7-4062-BA79-D352C37CDB78}.Release|x86.ActiveCfg = Release|Any CPU
+		{715EE89E-18C1-4954-8CF0-6701F95757A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{715EE89E-18C1-4954-8CF0-6701F95757A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{715EE89E-18C1-4954-8CF0-6701F95757A0}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{715EE89E-18C1-4954-8CF0-6701F95757A0}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{715EE89E-18C1-4954-8CF0-6701F95757A0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{715EE89E-18C1-4954-8CF0-6701F95757A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{715EE89E-18C1-4954-8CF0-6701F95757A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{715EE89E-18C1-4954-8CF0-6701F95757A0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{715EE89E-18C1-4954-8CF0-6701F95757A0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{715EE89E-18C1-4954-8CF0-6701F95757A0}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

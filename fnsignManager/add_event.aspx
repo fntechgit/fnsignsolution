@@ -218,6 +218,20 @@
 											</div>
                                             
                                             <div class="form-group">
+												<label class="col-md-3 control-label" for="search_text">Twitter Username</label>
+												<div class="col-md-6">
+												    <asp:TextBox runat="server" ID="username" CssClass="form-control" ClientIDMode="Static" />
+												</div>
+											</div>
+                                            
+                                            <div class="form-group">
+												<label class="col-md-3 control-label" for="search_text">Twitter Hashtags</label>
+												<div class="col-md-6">
+												    <asp:TextBox runat="server" ID="hashtags" CssClass="form-control" data-role="tagsinput" ClientIDMode="Static" />
+												</div>
+											</div>
+                                            
+                                            <div class="form-group">
 												<label class="col-md-3 control-label">Update Interval (minutes)</label>
 												<div class="col-md-6">
 													<div class="m-md slider-primary" data-plugin-slider data-plugin-options='{ "value": 30, "range": "min" : 5, "max": 60 }' data-plugin-slider-output="#listenSlider">

@@ -1,17 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="fntech_signage" Class="schedDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=198.178.124.58;Initial Catalog=fntech_signage;Persist Security Info=True;User ID=sa" SettingsObjectName="schedInterface.Properties.Settings" SettingsPropertyName="fntech_signageConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.events" Member="events">
-    <Type Name="event">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="event_start" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="event_end" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="api_key" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="url" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="interval" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="last_update" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
   <Table Name="dbo.sessions" Member="sessions">
     <Type Name="session">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -55,22 +43,6 @@
       <Column Name="title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="width" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="height" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.templates" Member="templates">
-    <Type Name="template">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="orientation" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="resolution" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="bgcolor" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="bgimage" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="overlay" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="overlay_font" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="overlay_font_color" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="rotate_ads" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="ad_interval" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.[log]" Member="logs">
@@ -126,9 +98,9 @@
       <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
-  <Function Name="dbo.events_to_update" Method="events_to_update">
-    <ElementType Name="events_to_updateResult">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+  <Table Name="dbo.events" Member="events">
+    <Type Name="event">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
       <Column Name="event_start" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="event_end" Type="System.DateTime" DbType="Date" CanBeNull="true" />
@@ -136,8 +108,56 @@
       <Column Name="url" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="interval" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="last_update" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
+      <Column Name="t_username" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="t_hashtag" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.templates" Member="templates">
+    <Type Name="template">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="orientation" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="resolution" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="bgcolor" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="bgimage" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="overlay" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="overlay_font" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="overlay_font_color" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="rotate_ads" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ad_interval" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="t_username" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="t_hashtag" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.media" Member="medias">
+    <Type Name="media">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="service" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="username" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="full_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="createdate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="profilepic" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="link" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="likes" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="latitude" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="longitude" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="approved" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="approved_by" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="approved_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="added_to_db_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="location_name" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="source_id" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="width" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="height" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="is_video" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="source" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="tags" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="template_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
   <Function Name="dbo.permissions_get_by_user" Method="permissions_get_by_user">
     <Parameter Name="user_id" Type="System.Int32" DbType="Int" />
     <ElementType Name="permissions_get_by_userResult">
@@ -163,6 +183,40 @@
       <Column Name="url" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="interval" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="last_update" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.events_to_update" Method="events_to_update">
+    <ElementType Name="events_to_updateResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="event_start" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="event_end" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="api_key" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="url" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="interval" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="last_update" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="t_username" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="t_hashtag" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.templates_by_event" Method="templates_by_event">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="templates_by_eventResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="orientation" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="resolution" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="bgcolor" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="bgimage" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="overlay" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="overlay_font" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="overlay_font_color" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="rotate_ads" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ad_interval" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="t_username" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="t_hashtag" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="overlay_title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>

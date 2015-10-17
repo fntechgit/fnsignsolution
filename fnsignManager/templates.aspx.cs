@@ -16,9 +16,9 @@ namespace fnsignManager
         {
             permissions();
 
-            foreach (Template t in _templates.by_event(Convert.ToInt32(Session["event_id"].ToString())))
+            foreach (Template t in _templates.all_by_event(Convert.ToInt32(Session["event_id"].ToString())))
             {
-                ph_tags.Controls.Add(new LiteralControl("<tr><td data-title=\"Title\">" + t.title.ToUpper() + "</td><td data-title=\"Venue\" class=\"hidden-xs hidden-sm\">" + t.venue + "</td><td data-title=\"Attendees\" class=\"hidden-xs hidden-sm\">" + t.goers + "</td><td data-title=\"Speakers\" class=\"hidden-xs hidden-sm\">" + t.speakers + "</td><td data-title=\"Type\">" + t.event_type + "</td><td data-title=\"Start\" class=\"text-right\">" + start + "</td><td data-title=\"End\" class=\"text-right\">" + end + "</td></tr>"));
+                ph_tags.Controls.Add(new LiteralControl("<tr><td data-title=\"Title\">" + t.title.ToUpper() + "</td><td data-title=\"Bgcolor\" class=\"hidden-xs hidden-sm\">" + t.bgcolor + "</td><td data-title=\"Font\" class=\"hidden-xs hidden-sm\">" + t.overlay_font + "</td><td data-title=\"Font Color\" class=\"hidden-xs hidden-sm\">" + t.overlay_font_color + "</td><td data-title=\"Overlay\">" + t.overlay_title + "</td><td data-title=\"Actions\"><a href=\"/templates/edit/" + t.id + "\"><i class=\"fa fa-edit\"></i></a> <a href=\"/templates/delete/" + t.id + "\"><i class=\"fa fa-trash-o\"></i></a></td></tr>"));
             }
         }
 

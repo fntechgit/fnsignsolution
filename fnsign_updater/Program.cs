@@ -13,6 +13,8 @@ namespace fnsign_updater
         static void Main(string[] args)
         {
             events _events = new events();
+            twitter _twitter = new twitter();
+            templates _templates = new templates();
 
             Console.WriteLine("######### BEGIN FNSIGN UPDATER v.1.0 #########");
 
@@ -45,6 +47,59 @@ namespace fnsign_updater
                 {
                     // now we loop through the sessions and insert or update them
                     _sessions.add(s, e.id);
+                }
+
+                Console.WriteLine("");
+
+                Console.WriteLine("Finding Tweets for Global Event Tag...");
+
+                Console.WriteLine("");
+
+                if (!string.IsNullOrEmpty(e.t_username))
+                {
+                    Console.WriteLine("Finding Tweets for @" + e.t_username);
+                    Console.WriteLine("");
+
+                    _twitter.fetch(e.t_username, 50, true, e.id, 0);
+                }
+
+                if (e.hashtags.Any())
+                {
+                    foreach (string h in e.hashtags)
+                    {
+                        Console.WriteLine("Finding Tweets for #" + h);
+                        Console.WriteLine("");
+
+                        _twitter.fetch(h, 50, e.id, 0);
+                    }
+                }
+
+                Console.WriteLine("Now let's check for the templates associated with " + e.title);
+                Console.WriteLine("");
+
+                foreach (Template t in _templates.by_event(e.id))
+                {
+                    if (!string.IsNullOrEmpty(t.t_username))
+                    {
+                        Console.WriteLine("Fetching Twitter records for @" + t.t_username);
+                        Console.WriteLine("");
+
+                        _twitter.fetch(t.t_username, 50, true, e.id, t.id);
+                    }
+
+                    if (t.hashtags.Any())
+                    {
+                        Console.WriteLine("Fetching Records for Hashtags...");
+                        Console.WriteLine("");
+
+                        foreach (string h in t.hashtags)
+                        {
+                            Console.WriteLine("Fetching tweets for #" + h);
+                            Console.WriteLine("");
+
+                            _twitter.fetch(h, 50, e.id, t.id);
+                        }
+                    }
                 }
 
                 Console.WriteLine("");

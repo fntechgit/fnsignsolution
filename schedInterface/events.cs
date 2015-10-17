@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Timers;
 
 namespace schedInterface
 {
@@ -29,6 +30,8 @@ namespace schedInterface
                 ev.title = item.title;
                 ev.url = item.url;
                 ev.last_update = item.last_update;
+                ev.t_hashtag = item.t_hashtag;
+                ev.t_username = item.t_username;
                 
                 _events.Add(ev);
             }
@@ -63,6 +66,13 @@ namespace schedInterface
                 e.last_update = item.last_update;
                 e.title = item.title;
                 e.url = item.url;
+                e.t_hashtag = item.t_hashtag;
+                e.t_username = item.t_username;
+
+                if (!string.IsNullOrEmpty(e.t_hashtag))
+                {
+                    e.hashtags = e.t_hashtag.Split(',').ToList();
+                }
 
                 _events.Add(e);
             }
@@ -81,6 +91,24 @@ namespace schedInterface
             return ev;
         }
 
+        public Event appupdate(Event ev)
+        {
+            @event e = db.events.Single(x => x.id == ev.id);
+
+            e.api_key = ev.api_key;
+            e.event_end = ev.event_end;
+            e.event_start = ev.event_start;
+            e.interval = ev.interval;
+            e.title = ev.title;
+            e.url = ev.url;
+            e.t_hashtag = ev.t_hashtag;
+            e.t_username = ev.t_username;
+
+            db.SubmitChanges();
+
+            return ev;
+        }
+
         public Event add(Event ev)
         {
             @event e = new @event();
@@ -92,6 +120,8 @@ namespace schedInterface
             e.last_update = DateTime.Now;
             e.title = ev.title;
             e.url = ev.url;
+            e.t_hashtag = ev.t_hashtag;
+            e.t_username = ev.t_username;
             
             db.events.InsertOnSubmit(e);
 
@@ -120,6 +150,13 @@ namespace schedInterface
                 ev.last_update = item.last_update;
                 ev.title = item.title;
                 ev.url = item.url;
+                ev.t_hashtag = item.t_hashtag;
+                ev.t_username = item.t_username;
+
+                if (!string.IsNullOrEmpty(ev.t_hashtag))
+                {
+                    ev.hashtags = ev.t_hashtag.Split(',').ToList();
+                }
             }
 
             return ev;
@@ -168,6 +205,9 @@ namespace schedInterface
         public string url { get; set; }
         public Int32 interval { get; set; }
         public DateTime last_update { get; set; }
+        public string t_username { get; set; }
+        public string t_hashtag { get; set; }
+        public List<string> hashtags { get; set; }
     }
 
 }

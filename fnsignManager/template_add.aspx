@@ -174,6 +174,20 @@
 													</div>
 												</div>
 											</div>
+                                            
+                                            <div class="form-group">
+												<label class="col-md-3 control-label" for="search_text">Twitter Username</label>
+												<div class="col-md-6">
+												    <asp:TextBox runat="server" ID="username" CssClass="form-control" ClientIDMode="Static" />
+												</div>
+											</div>
+                                            
+                                            <div class="form-group">
+												<label class="col-md-3 control-label" for="search_text">Twitter Hashtags</label>
+												<div class="col-md-6">
+												    <asp:TextBox runat="server" ID="hashtags" CssClass="form-control" data-role="tagsinput" ClientIDMode="Static" />
+												</div>
+											</div>
                                           
                                             
                                             <asp:Panel runat="server" ID="pnl_current_image" Visible="false">

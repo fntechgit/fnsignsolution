@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using RestSharp;
 using System.Web.Script.Serialization;
 
@@ -65,6 +66,10 @@ namespace schedInterface
                 where sess.event_key == s.event_key && sess.event_id==event_id
                 select sess;
 
+            Regex rgx = new Regex(@"[0-9 :-]");
+
+
+
             if (result.Any())
             {
                 // this is an update procedure
@@ -78,8 +83,15 @@ namespace schedInterface
                     se.event_key = s.event_key;
                     se.modified = DateTime.Now;
                     se.seats = !string.IsNullOrEmpty(s.seats) ? Convert.ToInt32(s.seats) : 0;
-                    se.session_end = Convert.ToDateTime(s.event_end);
-                    se.session_start = Convert.ToDateTime(s.event_start);
+
+                    DateTime session_end;
+
+                    se.session_end = DateTime.TryParse(s.event_end, out session_end) ? (DateTime?) session_end : null;
+
+                    DateTime session_start;
+
+                    se.session_start = DateTime.TryParse(s.event_start, out session_start) ? (DateTime?) session_start : null;
+
                     se.speakers = s.speakers;
                     se.title = s.name;
                     se.type = !string.IsNullOrEmpty(s.event_type) ? s.event_type.Replace("[", "").Replace("]", "") : string.Empty;
@@ -102,8 +114,15 @@ namespace schedInterface
                 se.event_key = s.event_key;
                 se.modified = DateTime.Now;
                 se.seats = !string.IsNullOrEmpty(s.seats) ? Convert.ToInt32(s.seats) : 0;
-                se.session_end = Convert.ToDateTime(s.event_end);
-                se.session_start = Convert.ToDateTime(s.event_start);
+
+                DateTime session_end;
+
+                se.session_end = DateTime.TryParse(s.event_end, out session_end) ? (DateTime?)session_end : null;
+
+                DateTime session_start;
+
+                se.session_start = DateTime.TryParse(s.event_start, out session_start) ? (DateTime?)session_start : null;
+
                 se.speakers = s.speakers;
                 se.title = s.name;
 

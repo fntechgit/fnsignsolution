@@ -61,6 +61,8 @@ namespace fnsignManager
                     overlay_font.Text = t.overlay_font;
                     overlay_font_color.Text = "#" + t.overlay_font_color;
                     current_image.ImageUrl = "/uploads/" + t.bgimage;
+                    username.Text = t.t_username;
+                    hashtags.Text = t.t_hashtag;
 
                     pnl_current_image.Visible = true;
                 }
@@ -90,6 +92,8 @@ namespace fnsignManager
             t.resolution = 1000;
             t.rotate_ads = false;
             t.title = title.Text;
+            t.t_hashtag = hashtags.Text;
+            t.t_username = username.Text;
 
             if (image.HasFile)
             {
