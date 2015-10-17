@@ -125,65 +125,17 @@
 											</div>
                                             
                                             <div class="form-group">
-												<label class="col-md-3 control-label" for="search_text">Last Name</label>
+												<label class="col-md-3 control-label">Background Color</label>
 												<div class="col-md-6">
-												    <asp:TextBox runat="server" ID="last_name" CssClass="form-control" ClientIDMode="Static" />
-												</div>
-											</div>
-                                            
-                                            <div class="form-group" id="security_level" runat="server">
-												<label class="col-md-3 control-label">Master Security Level</label>
-												<div class="col-md-6">
-												    <asp:DropDownList runat="server" ID="security" data-plugin-multiselect>
-                                                        <asp:ListItem Value="1000">Content Editor</asp:ListItem>
-                                                        <asp:ListItem Value="1001">Event Administrator</asp:ListItem>
-                                                        <asp:ListItem Value="1002">System Administrator</asp:ListItem>
-                                                    </asp:DropDownList>
-												</div>
-											</div>
-                                            
-                                            <div class="form-group">
-												<label class="col-md-3 control-label" for="search_text">Company</label>
-												<div class="col-md-6">
-												    <asp:TextBox runat="server" ID="company" CssClass="form-control" ClientIDMode="Static" />
-												</div>
-											</div>
-                                            
-                                            <div class="form-group">
-												<label class="col-md-3 control-label" for="search_text">Email</label>
-												<div class="col-md-6">
-												    <asp:TextBox runat="server" ID="email" CssClass="form-control" ClientIDMode="Static" />
-												</div>
-											</div>
-                                            
-                                            <div class="form-group">
-												<label class="col-md-3 control-label" for="search_text">Password</label>
-												<div class="col-md-6">
-												    <asp:TextBox runat="server" ID="password" CssClass="form-control" ClientIDMode="Static" />
-												</div>
-											</div>
-                                            
-                                            <div class="form-group">
-												<label class="control-label col-md-3">Active</label>
-												<div class="col-md-9">
-													<div class="switch switch-sm switch-primary">
-													    <asp:CheckBox runat="server" ID="active" ClientIDMode="Static" />
+													<div class="input-group color" data-plugin-colorpicker>
+														<span class="input-group-addon"><i></i></span>
+													    <asp:TextBox runat="server" ID="bgcolor" CssClass="form-control" Text="#000000" />
 													</div>
 												</div>
 											</div>
                                             
                                             <div class="form-group">
-												<label class="col-md-3 control-label">Notify (minutes)</label>
-												<div class="col-md-6">
-													<div class="m-md slider-primary" data-plugin-slider data-plugin-options='{ "value": 60, "range": "min", "max": 480 }' data-plugin-slider-output="#listenSlider">
-                                                        <asp:HiddenField runat="server" ID="listenSlider" ClientIDMode="Static" Value="60" />
-													</div>
-													<p class="output">Notify <code>(minutes)</code>: <b>60</b></p>
-												</div>
-											</div>
-                                            
-                                            <div class="form-group">
-												<label class="col-md-3 control-label">User Avatar</label>
+												<label class="col-md-3 control-label">Background Image</label>
 												<div class="col-md-6">
 													<div class="fileupload fileupload-new" data-provides="fileupload">
 														<asp:FileUpload runat="server" ID="image" ClientIDMode="Static" />
@@ -191,11 +143,44 @@
 												</div>
 											</div>
                                             
+                                            <div class="form-group" id="security_level" runat="server">
+												<label class="col-md-3 control-label">Overlay Pattern</label>
+												<div class="col-md-6">
+												    <asp:DropDownList runat="server" ID="overlay_pattern">
+                                                    </asp:DropDownList>
+												</div>
+											</div>
+                                            
+                                            <div class="form-group">
+												<label class="col-md-3 control-label" for="search_text">Overlay Font</label>
+												<div class="col-md-6">
+												    <asp:DropDownList runat="server" ID="overlay_font">
+                                                        <asp:ListItem Value="Arial">Arial</asp:ListItem>
+                                                        <asp:ListItem Value="Arial Black">Arial Black</asp:ListItem>
+                                                        <asp:ListItem Value="Helvetica">Helvetica</asp:ListItem>
+                                                        <asp:ListItem Value="Verdana">Verdana</asp:ListItem>
+                                                        <asp:ListItem Value="sans-serif">Sans Serif</asp:ListItem>
+                                                        <asp:ListItem Value="Georgia">Georgia</asp:ListItem>
+                                                    </asp:DropDownList>
+												</div>
+											</div>
+                                            
+                                            <div class="form-group">
+												<label class="col-md-3 control-label">Font Color</label>
+												<div class="col-md-6">
+													<div class="input-group color" data-plugin-colorpicker>
+														<span class="input-group-addon"><i></i></span>
+													    <asp:TextBox runat="server" ID="overlay_font_color" CssClass="form-control" Text="#000000" />
+													</div>
+												</div>
+											</div>
+                                          
+                                            
                                             <asp:Panel runat="server" ID="pnl_current_image" Visible="false">
                                                 <div class="form-group">
 												<label class="control-label col-md-3"></label>
 												<div class="col-md-9">
-													<asp:Image runat="server" ID="current_image"/>
+													<asp:Image runat="server" ID="current_image" style="width:100%;"/>
 												</div>
 											</div>
                                             </asp:Panel>
@@ -204,7 +189,6 @@
 												<label class="control-label col-md-3"></label>
 												<div class="col-md-9">
 													<asp:Button runat="server" ID="btn_process" CssClass="mb-xs mt-xs mr-xs btn btn-primary" Text="Submit" OnClick="update" />
-                                                    <asp:HyperLink runat="server" ID="btn_add_permission" CssClass="mb-xs mt-xs mr-xs btn btn-primary" Visible="false">Add Permission</asp:HyperLink>
 												</div>
 											</div>
                                             

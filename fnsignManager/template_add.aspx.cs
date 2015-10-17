@@ -22,6 +22,9 @@ namespace fnsignManager
 
         private schedInterface.users _users = new schedInterface.users();
 
+        private schedInterface.templates _templates = new schedInterface.templates();
+        private schedInterface.overlays _overlays = new schedInterface.overlays();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             permissions();
@@ -38,50 +41,55 @@ namespace fnsignManager
 
             if (!Page.IsPostBack)
             {
+                overlay_pattern.DataSource = _overlays.active();
+                overlay_pattern.DataValueField = "id";
+                overlay_pattern.DataTextField = "title";
+                overlay_pattern.DataBind();
+
+                ListItem i = new ListItem("Select Overlay", "0");
+
+                overlay_pattern.Items.Insert(0, i);
+
                 if (Page.RouteData.Values["id"] != null)
                 {
                     // this is an update
-                    User u = _users.get_by_id(Convert.ToInt32(Page.RouteData.Values["id"] as string));
+                    Template t = _templates.single(Convert.ToInt32(Page.RouteData.Values["id"] as string));
 
-                    first_name.Text = u.first_name;
-                    last_name.Text = u.last_name;
-                    company.Text = u.company;
-                    email.Text = u.email;
-                    password.Text = u.password;
-                    current_image.ImageUrl = "/uploads/" + u.picture;
-                    listenSlider.Value = u.notify_every_minutes.ToString();
-                    active.Checked = u.active;
-                    security.SelectedValue = u.security.ToString();
+                    title.Text = t.title;
+                    bgcolor.Text = "#" + t.bgcolor;
+                    overlay_pattern.SelectedValue = t.overlay.ToString();
+                    overlay_font.Text = t.overlay_font;
+                    overlay_font_color.Text = "#" + t.overlay_font_color;
+                    current_image.ImageUrl = "/uploads/" + t.bgimage;
 
                     pnl_current_image.Visible = true;
-
-                    btn_add_permission.NavigateUrl = "/permissions/add/" + u.id;
-                    btn_add_permission.Visible = true;
                 }
             }
         }
 
         protected void update(object sender, EventArgs e)
         {
-            User u = new User();
+            Template t = new Template();
 
             Boolean is_update = false;
 
             if (Page.RouteData.Values["id"] != null)
             {
-                u = _users.get_by_id(Convert.ToInt32(Page.RouteData.Values["id"] as string));
+                t = _templates.single(Convert.ToInt32(Page.RouteData.Values["id"] as string));
 
                 is_update = true;
             }
 
-            u.first_name = first_name.Text.ToString();
-            u.last_name = last_name.Text.ToString();
-            u.email = email.Text.ToString();
-            u.password = password.Text.ToString();
-            u.company = company.Text.ToString();
-            u.active = active.Checked;
-            u.notify_every_minutes = Convert.ToInt32(listenSlider.Value.ToString());
-            u.security = Convert.ToInt32(security.SelectedValue.ToString());
+            t.ad_interval = 0;
+            t.bgcolor = bgcolor.Text.Replace("#", "");
+            t.event_id = Convert.ToInt32(Session["event_id"].ToString());
+            t.orientation = 1;
+            t.overlay = Convert.ToInt32(overlay_pattern.SelectedValue);
+            t.overlay_font = overlay_font.SelectedValue;
+            t.overlay_font_color = overlay_font_color.Text.Replace("#", "");
+            t.resolution = 1000;
+            t.rotate_ads = false;
+            t.title = title.Text;
 
             if (image.HasFile)
             {
@@ -91,27 +99,27 @@ namespace fnsignManager
 
                 image.SaveAs(path + unique + extension);
 
-                u.picture = unique + extension;
+                t.bgimage = unique + extension;
             }
             else
             {
                 if (!is_update)
                 {
-                    u.picture = "user.jpg";
+                    t.bgimage = null;
                 }
             }
 
             if (is_update)
             {
-                _users.update(u);
+                t = _templates.update(t);
             }
             else
             {
-                u = _users.add(u);
+                t = _templates.add(t);
             }
 
             pnl_success.Visible = true;
-            current_image.ImageUrl = "/uploads/" + u.picture;
+            current_image.ImageUrl = "/uploads/" + t.bgimage;
             pnl_current_image.Visible = true;
         }
 

@@ -67,13 +67,22 @@ namespace fnsignManager {
         protected global::System.Web.UI.WebControls.TextBox title;
         
         /// <summary>
-        /// last_name control.
+        /// bgcolor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox last_name;
+        protected global::System.Web.UI.WebControls.TextBox bgcolor;
+        
+        /// <summary>
+        /// image control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload image;
         
         /// <summary>
         /// security_level control.
@@ -85,67 +94,31 @@ namespace fnsignManager {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl security_level;
         
         /// <summary>
-        /// security control.
+        /// overlay_pattern control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList security;
+        protected global::System.Web.UI.WebControls.DropDownList overlay_pattern;
         
         /// <summary>
-        /// company control.
+        /// overlay_font control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox company;
+        protected global::System.Web.UI.WebControls.DropDownList overlay_font;
         
         /// <summary>
-        /// email control.
+        /// overlay_font_color control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox email;
-        
-        /// <summary>
-        /// password control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox password;
-        
-        /// <summary>
-        /// active control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox active;
-        
-        /// <summary>
-        /// listenSlider control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField listenSlider;
-        
-        /// <summary>
-        /// image control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload image;
+        protected global::System.Web.UI.WebControls.TextBox overlay_font_color;
         
         /// <summary>
         /// pnl_current_image control.
@@ -173,14 +146,5 @@ namespace fnsignManager {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_process;
-        
-        /// <summary>
-        /// btn_add_permission control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink btn_add_permission;
     }
 }

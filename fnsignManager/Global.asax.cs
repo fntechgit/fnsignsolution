@@ -46,6 +46,10 @@ namespace fnsignManager
             // ####################### LOCATIONS ROUTE ##########################//
             routes.MapPageRoute("locations-route", "locations", "~/locations.aspx");
 
+            // ####################### TEMPLATES ROUTE ############################ //
+            routes.MapPageRoute("templates-add-route", "templates/add", "~/template_add.aspx");
+            routes.MapPageRoute("templates-update-route", "templates/edit/{id}", "~/template_add.aspx");
+
             // this has to be last!!!!
             //routes.MapPageRoute("page-by-url-route", "{url}", "~/page.aspx");
         }

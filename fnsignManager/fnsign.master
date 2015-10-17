@@ -201,6 +201,7 @@
 		<script src="/assets/vendor/magnific-popup/magnific-popup.js"></script>
 		<script src="/assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
         <script src="/assets/vendor/bootstrap-multiselect/bootstrap-multiselect.js"></script>
+        <script src="/assets/vendor/bootstrap-colorpicker/js/bootstrap-colorpicker.js"></script>
 
         <asp:ContentPlaceHolder runat="server" ID="footer_scripts"></asp:ContentPlaceHolder>
         
