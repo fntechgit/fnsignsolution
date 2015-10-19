@@ -150,6 +150,46 @@ namespace schedInterface
             
             return s;
         }
+
+        public Session current(Int32 event_id, string location)
+        {
+            Session s = new Session();
+
+            foreach (var item in db.session_get_current(event_id, location))
+            {
+                s.description = item.description;
+                s.end = Convert.ToDateTime(item.session_end);
+                s.event_type = item.type;
+                s.goers = item.attendees.ToString();
+                s.internal_id = item.id;
+                s.name = item.title;
+                s.speakers = item.speakers;
+                s.start = Convert.ToDateTime(item.session_start);
+                s.venue = item.venue;
+            }
+
+            return s;
+        }
+
+        public Session next(Int32 event_id, string location, DateTime prev_end)
+        {
+            Session s = new Session();
+
+            foreach (var item in db.session_get_next(event_id, location, prev_end))
+            {
+                s.description = item.description;
+                s.end = Convert.ToDateTime(item.session_end);
+                s.event_type = item.type;
+                s.goers = item.attendees.ToString();
+                s.internal_id = item.id;
+                s.name = item.title;
+                s.speakers = item.speakers;
+                s.start = Convert.ToDateTime(item.session_start);
+                s.venue = item.venue;
+            }
+
+            return s;
+        }
     }
 
     public class Session

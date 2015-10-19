@@ -234,4 +234,49 @@
       <Column Name="template_title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.session_get_current" Method="session_get_current">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="location_id" Type="System.String" DbType="VarChar(255)" />
+    <ElementType Name="session_get_currentResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_key" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="session_start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="session_end" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="type" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="seats" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="attendees" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="venue_id" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="venue" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="speakers" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.session_get_next" Method="session_get_next">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="location_id" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="prev_end" Type="System.DateTime" DbType="DateTime" />
+    <ElementType Name="session_get_nextResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_key" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="session_start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="session_end" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="type" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="seats" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="attendees" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="venue_id" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="venue" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="speakers" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="login.aspx.cs" Inherits="fnsignDisplay.login" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="details.aspx.cs" Inherits="fnsignDisplay.details" %>
 
 <!doctype html>
 <html class="fixed">
@@ -7,7 +7,7 @@
     <!-- Basic -->
 		<meta charset="UTF-8">
         
-        <title>FNSIGN Display System Login</title>
+        <title>FNSIGN Display System Details Selection</title>
 		<meta name="keywords" content="FNTECH, FNPIX, Event Management, Events" />
 		<meta name="description" content="FNPIX Management System">
 		<meta name="author" content="fntech.com">
@@ -47,7 +47,7 @@
 
 				<div class="panel panel-sign">
 					<div class="panel-title-sign mt-xl text-right">
-						<h2 class="title text-uppercase text-bold m-none"><i class="fa fa-user mr-xs"></i> Sign In</h2>
+						<h2 class="title text-uppercase text-bold m-none"><i class="fa fa-user mr-xs"></i> Select Details</h2>
 					</div>
 					<div class="panel-body">
 					    
@@ -64,46 +64,46 @@
                                     <strong>No Events Assigned</strong> You do not have any events assigned to your account.  Please contact your Event Administrator at FNTech for permission.
                                 </div>
                             </asp:Panel>
+                            
+                            <div class="form-group mb-lg">
+								<label>Title</label>
+								<div class="input-group">
+								    <asp:TextBox runat="server" ID="title" CssClass="form-control input-lg" />
+								</div>
+							</div>
 
 							<div class="form-group mb-lg">
-								<label>Email</label>
-								<div class="input-group input-group-icon">
-								    <asp:TextBox runat="server" ID="email" CssClass="form-control input-lg" />
-									<span class="input-group-addon">
-										<span class="icon icon-lg">
-											<i class="fa fa-user"></i>
-										</span>
-									</span>
+								<label>Select Event</label>
+								<div class="input-group">
+								    <asp:DropDownList runat="server" ID="ddl_event" CssClass="form-control" OnSelectedIndexChanged="get_locations" AutoPostBack="true" />
 								</div>
 							</div>
 
 							<div class="form-group mb-lg">
 								<div class="clearfix">
-									<label class="pull-left">Password</label>
-									<a href="/forgot-password" class="pull-right">Lost Password?</a>
+									<label class="pull-left">Location</label>
 								</div>
-								<div class="input-group input-group-icon">
-								    <asp:TextBox runat="server" ID="pwd" CssClass="form-control input-lg" TextMode="Password" />
-									<span class="input-group-addon">
-										<span class="icon icon-lg">
-											<i class="fa fa-lock"></i>
-										</span>
-									</span>
+								<div class="input-group">
+								    <asp:DropDownList runat="server" ID="ddl_location" CssClass="form-control" />
 								</div>
 							</div>
 
 							<div class="row">
-								<div class="col-sm-8">
-									<div class="checkbox-custom checkbox-default">
-										<input id="RememberMe" name="rememberme" type="checkbox"/>
-										<label for="RememberMe">Remember Me</label>
-									</div>
-								</div>
-								<div class="col-sm-4 text-right">
-								    <asp:Button runat="server" ID="btn_login_small" Text="Sign In" CssClass="btn btn-primary hidden-xs" OnClick="signin" />
-									<asp:Button runat="server" ID="btn_login_large" Text="Sign In" CssClass="btn btn-primary btn-block btn-lg visible-xs mt-lg" OnClick="signin" />
+								<div class="col-sm-12">
+								    <asp:Button runat="server" ID="btn_login_small" Text="Create Terminal" CssClass="btn btn-primary hidden-xs" OnClick="display" />
+									<asp:Button runat="server" ID="btn_login_large" Text="Create Terminal" CssClass="btn btn-primary btn-block btn-lg visible-xs mt-lg" OnClick="display" />
 								</div>
 							</div>
+                            
+                            <h2>OR SELECT EXISTING TERMINAL</h2>    
+                            
+                            <div class="form-group mb-lg">
+								<label>Select Existing</label>
+								<div class="input-group">
+								    <asp:DropDownList runat="server" ID="ddl_terminals" CssClass="form-control" OnSelectedIndexChanged="set_terminal" AutoPostBack="true" />
+								</div>
+							</div>
+
 					</div>
 				</div>
 

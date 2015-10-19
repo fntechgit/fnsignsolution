@@ -48,6 +48,20 @@ namespace schedInterface
             return l;
         }
 
+        public Location single(Int32 id)
+        {
+            Location l = new Location();
+
+            location lo = db.locations.Single(x => x.id == id);
+
+            l.id = id;
+            l.event_id = Convert.ToInt32(lo.event_id);
+            l.sched_id = lo.sched_id;
+            l.title = lo.title;
+
+            return l;
+        }
+
         public List<Location> by_event(Int32 id)
         {
             List<Location> _locations = new List<Location>();
