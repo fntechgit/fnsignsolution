@@ -79,7 +79,7 @@
 		                <div class="right-wrapper pull-right">
 		                    <ol class="breadcrumbs">
 		                        <li>
-		                            <a href="index.html">
+		                            <a href="/">
 		                                <i class="fa fa-tachometer"></i>
 		                            </a>
 		                        </li>
@@ -100,19 +100,18 @@
 		                                    <div class="widget-summary">
 		                                        <div class="widget-summary-col widget-summary-col-icon">
 		                                            <div class="summary-icon bg-primary">
-		                                                <i class="fa fa-photo"></i>
+		                                                <i class="fa fa-star"></i>
 		                                            </div>
 		                                        </div>
 		                                        <div class="widget-summary-col">
 		                                            <div class="summary">
-		                                                <h4 class="title">All Media</h4>
+		                                                <h4 class="title">Sessions</h4>
 		                                                <div class="info">
-		                                                    <strong class="amount"><%= total_media %></strong>
-                                                            <span class="text-primary">(<%= unapproved_media %> unapproved)</span>
+		                                                    <strong class="amount"><%= all_sessions %></strong>
 		                                                </div>
 		                                            </div>
 		                                            <div class="summary-footer">
-		                                                <a href="/media" class="text-muted text-uppercase">(view all)</a>
+		                                                <a href="/sessions" class="text-muted text-uppercase">(view all)</a>
 		                                            </div>
 		                                        </div>
 		                                    </div>
@@ -125,18 +124,18 @@
 		                                    <div class="widget-summary">
 		                                        <div class="widget-summary-col widget-summary-col-icon">
 		                                            <div class="summary-icon bg-secondary">
-		                                                <i class="fa fa-instagram"></i>
+		                                                <i class="fa fa-map-marker"></i>
 		                                            </div>
 		                                        </div>
 		                                        <div class="widget-summary-col">
 		                                            <div class="summary">
-		                                                <h4 class="title">Instagram</h4>
+		                                                <h4 class="title">Locations</h4>
 		                                                <div class="info">
-		                                                    <strong class="amount"><%= instagram_media %></strong>
+		                                                    <strong class="amount"><%= locations %></strong>
 		                                                </div>
 		                                            </div>
 		                                            <div class="summary-footer">
-		                                                <a href="/media#instagram" class="text-muted text-uppercase">(view all)</a>
+		                                                <a href="/locations" class="text-muted text-uppercase">(view all)</a>
 		                                            </div>
 		                                        </div>
 		                                    </div>
@@ -154,13 +153,10 @@
 		                                        </div>
 		                                        <div class="widget-summary-col">
 		                                            <div class="summary">
-		                                                <h4 class="title">Twitter</h4>
+		                                                <h4 class="title">Tweets</h4>
 		                                                <div class="info">
-		                                                    <strong class="amount"><%= twitter_media %></strong>
+		                                                    <strong class="amount"><%= tweets %></strong>
 		                                                </div>
-		                                            </div>
-		                                            <div class="summary-footer">
-		                                                <a href="/media#twitter" class="text-muted text-uppercase">(view all)</a>
 		                                            </div>
 		                                        </div>
 		                                    </div>
@@ -173,18 +169,18 @@
 		                                    <div class="widget-summary">
 		                                        <div class="widget-summary-col widget-summary-col-icon">
 		                                            <div class="summary-icon bg-quartenary">
-		                                                <i class="fa fa-dropbox"></i>
+		                                                <i class="fa fa-desktop"></i>
 		                                            </div>
 		                                        </div>
 		                                        <div class="widget-summary-col">
 		                                            <div class="summary">
-		                                                <h4 class="title">Dropbox</h4>
+		                                                <h4 class="title">Assignments</h4>
 		                                                <div class="info">
-		                                                    <strong class="amount"><%= facebook_media %></strong>
+		                                                    <strong class="amount"><%= terminals %></strong>
 		                                                </div>
 		                                            </div>
 		                                            <div class="summary-footer">
-		                                                <a href="/dropbox" class="text-muted text-uppercase">(view all)</a>
+		                                                <a href="/assignments" class="text-muted text-uppercase">(view all)</a>
 		                                            </div>
 		                                        </div>
 		                                    </div>
@@ -195,40 +191,6 @@
 		                </div>
 		            </div>
 
-		            <div class="row">
-		                <div class="col-lg-12 col-md-24">
-		                    <section class="panel">
-		                        <header class="panel-heading panel-heading-transparent">
-		                            <div class="panel-actions">
-		                                <a href="#" class="fa fa-caret-down"></a>
-		                                <a href="#" class="fa fa-times"></a>
-		                            </div>
-
-		                            <h2 class="panel-title">Recent Imports</h2>
-		                        </header>
-		                        <div class="panel-body">
-		                            <div class="table-responsive">
-		                                <table class="table table-striped mb-none">
-		                                    <thead>
-		                                        <tr>
-		                                            <th>#</th>
-		                                            <th>Date Time</th>
-		                                            <th>Status</th>
-		                                            <th>Instagram</th>
-                                                    <th>Twitter</th>
-                                                    <th>Facebook</th>
-                                                    <th>Total</th>
-		                                        </tr>
-		                                    </thead>
-		                                    <tbody>
-		                                        <asp:PlaceHolder runat="server" ID="ph_imports" />
-		                                    </tbody>
-		                                </table>
-		                            </div>
-		                        </div>
-		                    </section>
-		                </div>
-		            </div>
 		            <!-- end: page -->
 		        </section>
 </asp:Content>

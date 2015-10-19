@@ -28,15 +28,6 @@
       <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.overlays" Member="overlays">
-    <Type Name="overlay">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="html" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="preview" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
   <Table Name="dbo.resolutions" Member="resolutions">
     <Type Name="resolution">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -156,6 +147,17 @@
       <Column Name="tags" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="template_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.overlays" Member="overlays">
+    <Type Name="overlay">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="preview" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="header" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="body" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="footer" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
     </Type>
   </Table>
   <Function Name="dbo.permissions_get_by_user" Method="permissions_get_by_user">

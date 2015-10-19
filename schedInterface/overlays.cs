@@ -23,10 +23,12 @@ namespace schedInterface
                 Overlay o = new Overlay();
 
                 o.active = item.active;
-                o.html = item.html;
                 o.id = item.id;
                 o.preview = item.preview;
                 o.title = item.title;
+                o.header = item.header;
+                o.footer = item.footer;
+                o.body = item.body;
 
                 _overlays.Add(o);
             }
@@ -44,7 +46,9 @@ namespace schedInterface
             overlay ov = new overlay();
 
             ov.active = o.active;
-            ov.html = o.html;
+            ov.header = o.header;
+            ov.footer = o.footer;
+            ov.body = o.body;
             ov.preview = o.preview;
             ov.title = o.title;
 
@@ -62,7 +66,9 @@ namespace schedInterface
             overlay ov = db.overlays.Single(x => x.id == o.id);
 
             ov.active = o.active;
-            ov.html = o.html;
+            ov.header = o.header;
+            ov.footer = o.footer;
+            ov.body = o.body;
             ov.preview = o.preview;
             ov.title = o.title;
 
@@ -78,7 +84,9 @@ namespace schedInterface
             Overlay o = new Overlay();
 
             o.active = ov.active;
-            o.html = ov.html;
+            ov.header = o.header;
+            ov.footer = o.footer;
+            ov.body = o.body;
             o.id = id;
             o.preview = ov.preview;
             o.title = ov.title;
@@ -91,7 +99,9 @@ namespace schedInterface
     {
         public Int32 id { get; set; }
         public string title { get; set; }
-        public string html { get; set; }
+        public string body { get; set; }
+        public string header { get; set; }
+        public string footer { get; set; }
         public string preview { get; set; }
         public Boolean active { get; set; }
     }

@@ -36,9 +36,6 @@ namespace schedInterface
     partial void Insertlocation(location instance);
     partial void Updatelocation(location instance);
     partial void Deletelocation(location instance);
-    partial void Insertoverlay(overlay instance);
-    partial void Updateoverlay(overlay instance);
-    partial void Deleteoverlay(overlay instance);
     partial void Insertresolution(resolution instance);
     partial void Updateresolution(resolution instance);
     partial void Deleteresolution(resolution instance);
@@ -66,6 +63,9 @@ namespace schedInterface
     partial void Insertmedia(media instance);
     partial void Updatemedia(media instance);
     partial void Deletemedia(media instance);
+    partial void Insertoverlay(overlay instance);
+    partial void Updateoverlay(overlay instance);
+    partial void Deleteoverlay(overlay instance);
     #endregion
 		
 		public schedDataContext() : 
@@ -111,14 +111,6 @@ namespace schedInterface
 			get
 			{
 				return this.GetTable<location>();
-			}
-		}
-		
-		public System.Data.Linq.Table<overlay> overlays
-		{
-			get
-			{
-				return this.GetTable<overlay>();
 			}
 		}
 		
@@ -191,6 +183,14 @@ namespace schedInterface
 			get
 			{
 				return this.GetTable<media>();
+			}
+		}
+		
+		public System.Data.Linq.Table<overlay> overlays
+		{
+			get
+			{
+				return this.GetTable<overlay>();
 			}
 		}
 		
@@ -761,164 +761,6 @@ namespace schedInterface
 					this._event_id = value;
 					this.SendPropertyChanged("event_id");
 					this.Onevent_idChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.overlays")]
-	public partial class overlay : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private string _title;
-		
-		private string _html;
-		
-		private string _preview;
-		
-		private bool _active;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OntitleChanging(string value);
-    partial void OntitleChanged();
-    partial void OnhtmlChanging(string value);
-    partial void OnhtmlChanged();
-    partial void OnpreviewChanging(string value);
-    partial void OnpreviewChanged();
-    partial void OnactiveChanging(bool value);
-    partial void OnactiveChanged();
-    #endregion
-		
-		public overlay()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(255)")]
-		public string title
-		{
-			get
-			{
-				return this._title;
-			}
-			set
-			{
-				if ((this._title != value))
-				{
-					this.OntitleChanging(value);
-					this.SendPropertyChanging();
-					this._title = value;
-					this.SendPropertyChanged("title");
-					this.OntitleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_html", DbType="VarChar(MAX)")]
-		public string html
-		{
-			get
-			{
-				return this._html;
-			}
-			set
-			{
-				if ((this._html != value))
-				{
-					this.OnhtmlChanging(value);
-					this.SendPropertyChanging();
-					this._html = value;
-					this.SendPropertyChanged("html");
-					this.OnhtmlChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_preview", DbType="VarChar(MAX)")]
-		public string preview
-		{
-			get
-			{
-				return this._preview;
-			}
-			set
-			{
-				if ((this._preview != value))
-				{
-					this.OnpreviewChanging(value);
-					this.SendPropertyChanging();
-					this._preview = value;
-					this.SendPropertyChanged("preview");
-					this.OnpreviewChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active", DbType="Bit NOT NULL")]
-		public bool active
-		{
-			get
-			{
-				return this._active;
-			}
-			set
-			{
-				if ((this._active != value))
-				{
-					this.OnactiveChanging(value);
-					this.SendPropertyChanging();
-					this._active = value;
-					this.SendPropertyChanged("active");
-					this.OnactiveChanged();
 				}
 			}
 		}
@@ -3301,6 +3143,212 @@ namespace schedInterface
 					this._template_id = value;
 					this.SendPropertyChanged("template_id");
 					this.Ontemplate_idChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.overlays")]
+	public partial class overlay : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _title;
+		
+		private string _preview;
+		
+		private bool _active;
+		
+		private string _header;
+		
+		private string _body;
+		
+		private string _footer;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OntitleChanging(string value);
+    partial void OntitleChanged();
+    partial void OnpreviewChanging(string value);
+    partial void OnpreviewChanged();
+    partial void OnactiveChanging(bool value);
+    partial void OnactiveChanged();
+    partial void OnheaderChanging(string value);
+    partial void OnheaderChanged();
+    partial void OnbodyChanging(string value);
+    partial void OnbodyChanged();
+    partial void OnfooterChanging(string value);
+    partial void OnfooterChanged();
+    #endregion
+		
+		public overlay()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(255)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this.OntitleChanging(value);
+					this.SendPropertyChanging();
+					this._title = value;
+					this.SendPropertyChanged("title");
+					this.OntitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_preview", DbType="VarChar(MAX)")]
+		public string preview
+		{
+			get
+			{
+				return this._preview;
+			}
+			set
+			{
+				if ((this._preview != value))
+				{
+					this.OnpreviewChanging(value);
+					this.SendPropertyChanging();
+					this._preview = value;
+					this.SendPropertyChanged("preview");
+					this.OnpreviewChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active", DbType="Bit NOT NULL")]
+		public bool active
+		{
+			get
+			{
+				return this._active;
+			}
+			set
+			{
+				if ((this._active != value))
+				{
+					this.OnactiveChanging(value);
+					this.SendPropertyChanging();
+					this._active = value;
+					this.SendPropertyChanged("active");
+					this.OnactiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_header", DbType="VarChar(MAX)")]
+		public string header
+		{
+			get
+			{
+				return this._header;
+			}
+			set
+			{
+				if ((this._header != value))
+				{
+					this.OnheaderChanging(value);
+					this.SendPropertyChanging();
+					this._header = value;
+					this.SendPropertyChanged("header");
+					this.OnheaderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_body", DbType="VarChar(MAX)")]
+		public string body
+		{
+			get
+			{
+				return this._body;
+			}
+			set
+			{
+				if ((this._body != value))
+				{
+					this.OnbodyChanging(value);
+					this.SendPropertyChanging();
+					this._body = value;
+					this.SendPropertyChanged("body");
+					this.OnbodyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_footer", DbType="VarChar(MAX)")]
+		public string footer
+		{
+			get
+			{
+				return this._footer;
+			}
+			set
+			{
+				if ((this._footer != value))
+				{
+					this.OnfooterChanging(value);
+					this.SendPropertyChanging();
+					this._footer = value;
+					this.SendPropertyChanged("footer");
+					this.OnfooterChanged();
 				}
 			}
 		}
