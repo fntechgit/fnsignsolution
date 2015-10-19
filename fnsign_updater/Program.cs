@@ -63,7 +63,7 @@ namespace fnsign_updater
                     _twitter.fetch(e.t_username, 50, true, e.id, 0);
                 }
 
-                if (e.hashtags.Any())
+                if (e.hashtags != null)
                 {
                     foreach (string h in e.hashtags)
                     {
@@ -77,7 +77,7 @@ namespace fnsign_updater
                 Console.WriteLine("Now let's check for the templates associated with " + e.title);
                 Console.WriteLine("");
 
-                foreach (Template t in _templates.by_event(e.id))
+                foreach (Template t in _templates.all_by_event(e.id))
                 {
                     if (!string.IsNullOrEmpty(t.t_username))
                     {
