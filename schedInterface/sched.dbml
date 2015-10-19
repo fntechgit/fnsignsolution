@@ -219,4 +219,17 @@
       <Column Name="overlay_title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.terminal_assignments_by_event" Method="terminal_assignments_by_event">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="terminal_assignments_by_eventResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="location_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="template_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="online" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="location_title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="template_title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>

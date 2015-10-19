@@ -35,6 +35,36 @@ namespace schedInterface
             return _terminals;
         }
 
+        public List<Terminal> all_by_event(Int32 id)
+        {
+            List<Terminal> _terminals = new List<Terminal>();
+
+            foreach (var item in db.terminal_assignments_by_event(id))
+            {
+                Terminal t = new Terminal();
+
+                t.event_id = id;
+                t.id = item.id;
+                t.location_id = item.location_id;
+                t.location_title = item.location_title;
+                t.online = item.online;
+                t.template_id = item.template_id;
+
+                t.template_title = t.template_id > 0 ? item.template_title : @"Unassigned";
+
+                t.title = item.title;
+
+                _terminals.Add(t);
+            }
+
+            return _terminals;
+        }
+
+        public Terminal single(Int32 event_id, Int32 id)
+        {
+            return all_by_event(event_id).Single(x => x.id == id);
+        }
+
         public Terminal add(Terminal t)
         {
             terminal te = new terminal();
@@ -68,6 +98,17 @@ namespace schedInterface
 
             return t;
         }
+
+        public Boolean delete(Int32 id)
+        {
+            terminal t = db.terminals.Single(x => x.id == id);
+
+            db.terminals.DeleteOnSubmit(t);
+
+            db.SubmitChanges();
+
+            return true;
+        }
     }
 
     public class Terminal
@@ -75,7 +116,9 @@ namespace schedInterface
         public Int32 id { get; set; }
         public string title { get; set; }
         public Int32? location_id { get; set; }
+        public string location_title { get; set; }
         public Int32? template_id { get; set; }
+        public string template_title { get; set; }
         public Boolean online { get; set; }
         public Int32 event_id { get; set; }
     }

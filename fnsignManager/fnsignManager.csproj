@@ -1604,10 +1604,13 @@
     <Content Include="assets\vendor\summernote\summernote.css" />
     <Content Include="assets\vendor\summernote\summernote.js" />
     <Content Include="assets\volcom.png" />
+    <Content Include="assignments.aspx" />
     <Content Include="dashboard.aspx" />
+    <Content Include="delete_assignment.aspx" />
     <Content Include="delete_event.aspx" />
     <Content Include="delete_permission.aspx" />
     <Content Include="delete_user.aspx" />
+    <Content Include="edit_assignment.aspx" />
     <Content Include="events.aspx" />
     <Content Include="Global.asax" />
     <Content Include="js\jquery.cycle2.js" />
@@ -1652,12 +1655,26 @@
     <Compile Include="add_user.aspx.designer.cs">
       <DependentUpon>add_user.aspx</DependentUpon>
     </Compile>
+    <Compile Include="assignments.aspx.cs">
+      <DependentUpon>assignments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="assignments.aspx.designer.cs">
+      <DependentUpon>assignments.aspx</DependentUpon>
+    </Compile>
     <Compile Include="dashboard.aspx.cs">
       <DependentUpon>dashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="dashboard.aspx.designer.cs">
       <DependentUpon>dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="delete_assignment.aspx.cs">
+      <DependentUpon>delete_assignment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="delete_assignment.aspx.designer.cs">
+      <DependentUpon>delete_assignment.aspx</DependentUpon>
     </Compile>
     <Compile Include="delete_event.aspx.cs">
       <DependentUpon>delete_event.aspx</DependentUpon>
@@ -1679,6 +1696,13 @@
     </Compile>
     <Compile Include="delete_user.aspx.designer.cs">
       <DependentUpon>delete_user.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="edit_assignment.aspx.cs">
+      <DependentUpon>edit_assignment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="edit_assignment.aspx.designer.cs">
+      <DependentUpon>edit_assignment.aspx</DependentUpon>
     </Compile>
     <Compile Include="events.aspx.cs">
       <DependentUpon>events.aspx</DependentUpon>

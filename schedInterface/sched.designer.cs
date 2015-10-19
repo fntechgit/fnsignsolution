@@ -221,6 +221,13 @@ namespace schedInterface
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id);
 			return ((ISingleResult<templates_by_eventResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.terminal_assignments_by_event")]
+		public ISingleResult<terminal_assignments_by_eventResult> terminal_assignments_by_event([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id);
+			return ((ISingleResult<terminal_assignments_by_eventResult>)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.sessions")]
@@ -4102,6 +4109,158 @@ namespace schedInterface
 				if ((this._overlay_title != value))
 				{
 					this._overlay_title = value;
+				}
+			}
+		}
+	}
+	
+	public partial class terminal_assignments_by_eventResult
+	{
+		
+		private int _id;
+		
+		private string _title;
+		
+		private System.Nullable<int> _location_id;
+		
+		private System.Nullable<int> _template_id;
+		
+		private bool _online;
+		
+		private int _event_id;
+		
+		private string _location_title;
+		
+		private string _template_title;
+		
+		public terminal_assignments_by_eventResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(255)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_location_id", DbType="Int")]
+		public System.Nullable<int> location_id
+		{
+			get
+			{
+				return this._location_id;
+			}
+			set
+			{
+				if ((this._location_id != value))
+				{
+					this._location_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_id", DbType="Int")]
+		public System.Nullable<int> template_id
+		{
+			get
+			{
+				return this._template_id;
+			}
+			set
+			{
+				if ((this._template_id != value))
+				{
+					this._template_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_online", DbType="Bit NOT NULL")]
+		public bool online
+		{
+			get
+			{
+				return this._online;
+			}
+			set
+			{
+				if ((this._online != value))
+				{
+					this._online = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int NOT NULL")]
+		public int event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this._event_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_location_title", DbType="VarChar(MAX)")]
+		public string location_title
+		{
+			get
+			{
+				return this._location_title;
+			}
+			set
+			{
+				if ((this._location_title != value))
+				{
+					this._location_title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_title", DbType="VarChar(255)")]
+		public string template_title
+		{
+			get
+			{
+				return this._template_title;
+			}
+			set
+			{
+				if ((this._template_title != value))
+				{
+					this._template_title = value;
 				}
 			}
 		}
