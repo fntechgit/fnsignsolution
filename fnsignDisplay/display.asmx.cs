@@ -22,6 +22,7 @@ namespace fnsignDisplay
         private schedInterface.templates _templates = new templates();
         private schedInterface.overlays _overlays = new schedInterface.overlays();
         private schedInterface.settings _settings = new settings();
+        schedInterface.mediaManager _media = new mediaManager();
 
         [WebMethod(Description = "Get Current Session", EnableSession = true)]
         public Session current(string location)
@@ -54,6 +55,12 @@ namespace fnsignDisplay
             Template temp = _templates.single(Convert.ToInt32(t.template_id));
 
             return _settings.site_url() + "/uploads/" + temp.bgimage;
+        }
+
+        [WebMethod(Description = "Get Random Media", EnableSession = true)]
+        public Media random()
+        {
+            return _media.random_by_event(Convert.ToInt32(Context.Session["event_id"]));
         }
 
     }

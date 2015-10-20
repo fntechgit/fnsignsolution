@@ -19,6 +19,8 @@
             next();
 
             background();
+
+            tweet();
         }
     });
 
@@ -56,6 +58,31 @@ function background() {
 
             $('#thebody').css('background-image', 'url("' + data.d + '")');
 
+        }
+    });
+}
+
+function tweet() {
+    $.ajax({
+        type: "POST",
+        url: "/display.asmx/random",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data, status) {
+
+            $("#twitpic").attr('src', data.d.profilepic);
+            $("#fullname").text(data.d.full_name);
+            $("#username").text(data.d.username);
+            $("#tweet").text(data.d.description);
+
+            if (data.d.source != null) {
+
+                console.log(data.d.source);
+
+                $("#twitimg").html('<img src="' + data.d.source + '" />');
+            } else {
+                $("#twitimg").text('');
+            }
         }
     });
 }

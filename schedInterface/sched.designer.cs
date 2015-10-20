@@ -242,6 +242,13 @@ namespace schedInterface
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), event_id, location_id, prev_end);
 			return ((ISingleResult<session_get_nextResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.media_random_by_event")]
+		public ISingleResult<media_random_by_eventResult> media_random_by_event([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id);
+			return ((ISingleResult<media_random_by_eventResult>)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.sessions")]
@@ -4915,6 +4922,446 @@ namespace schedInterface
 				if ((this._event_id != value))
 				{
 					this._event_id = value;
+				}
+			}
+		}
+	}
+	
+	public partial class media_random_by_eventResult
+	{
+		
+		private int _id;
+		
+		private string _service;
+		
+		private string _username;
+		
+		private string _full_name;
+		
+		private string _description;
+		
+		private System.Nullable<System.DateTime> _createdate;
+		
+		private string _profilepic;
+		
+		private string _link;
+		
+		private int _likes;
+		
+		private string _latitude;
+		
+		private string _longitude;
+		
+		private bool _approved;
+		
+		private System.Nullable<int> _approved_by;
+		
+		private System.Nullable<System.DateTime> _approved_date;
+		
+		private System.DateTime _added_to_db_date;
+		
+		private string _location_name;
+		
+		private string _source_id;
+		
+		private System.Nullable<int> _width;
+		
+		private System.Nullable<int> _height;
+		
+		private bool _is_video;
+		
+		private string _source;
+		
+		private string _tags;
+		
+		private int _event_id;
+		
+		private System.Nullable<int> _template_id;
+		
+		public media_random_by_eventResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_service", DbType="VarChar(50)")]
+		public string service
+		{
+			get
+			{
+				return this._service;
+			}
+			set
+			{
+				if ((this._service != value))
+				{
+					this._service = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_username", DbType="VarChar(100)")]
+		public string username
+		{
+			get
+			{
+				return this._username;
+			}
+			set
+			{
+				if ((this._username != value))
+				{
+					this._username = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_full_name", DbType="VarChar(MAX)")]
+		public string full_name
+		{
+			get
+			{
+				return this._full_name;
+			}
+			set
+			{
+				if ((this._full_name != value))
+				{
+					this._full_name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="VarChar(MAX)")]
+		public string description
+		{
+			get
+			{
+				return this._description;
+			}
+			set
+			{
+				if ((this._description != value))
+				{
+					this._description = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_createdate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> createdate
+		{
+			get
+			{
+				return this._createdate;
+			}
+			set
+			{
+				if ((this._createdate != value))
+				{
+					this._createdate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_profilepic", DbType="VarChar(MAX)")]
+		public string profilepic
+		{
+			get
+			{
+				return this._profilepic;
+			}
+			set
+			{
+				if ((this._profilepic != value))
+				{
+					this._profilepic = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_link", DbType="VarChar(MAX)")]
+		public string link
+		{
+			get
+			{
+				return this._link;
+			}
+			set
+			{
+				if ((this._link != value))
+				{
+					this._link = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_likes", DbType="Int NOT NULL")]
+		public int likes
+		{
+			get
+			{
+				return this._likes;
+			}
+			set
+			{
+				if ((this._likes != value))
+				{
+					this._likes = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_latitude", DbType="VarChar(50)")]
+		public string latitude
+		{
+			get
+			{
+				return this._latitude;
+			}
+			set
+			{
+				if ((this._latitude != value))
+				{
+					this._latitude = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_longitude", DbType="VarChar(50)")]
+		public string longitude
+		{
+			get
+			{
+				return this._longitude;
+			}
+			set
+			{
+				if ((this._longitude != value))
+				{
+					this._longitude = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_approved", DbType="Bit NOT NULL")]
+		public bool approved
+		{
+			get
+			{
+				return this._approved;
+			}
+			set
+			{
+				if ((this._approved != value))
+				{
+					this._approved = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_approved_by", DbType="Int")]
+		public System.Nullable<int> approved_by
+		{
+			get
+			{
+				return this._approved_by;
+			}
+			set
+			{
+				if ((this._approved_by != value))
+				{
+					this._approved_by = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_approved_date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> approved_date
+		{
+			get
+			{
+				return this._approved_date;
+			}
+			set
+			{
+				if ((this._approved_date != value))
+				{
+					this._approved_date = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_added_to_db_date", DbType="DateTime NOT NULL")]
+		public System.DateTime added_to_db_date
+		{
+			get
+			{
+				return this._added_to_db_date;
+			}
+			set
+			{
+				if ((this._added_to_db_date != value))
+				{
+					this._added_to_db_date = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_location_name", DbType="VarChar(MAX)")]
+		public string location_name
+		{
+			get
+			{
+				return this._location_name;
+			}
+			set
+			{
+				if ((this._location_name != value))
+				{
+					this._location_name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_source_id", DbType="VarChar(100)")]
+		public string source_id
+		{
+			get
+			{
+				return this._source_id;
+			}
+			set
+			{
+				if ((this._source_id != value))
+				{
+					this._source_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_width", DbType="Int")]
+		public System.Nullable<int> width
+		{
+			get
+			{
+				return this._width;
+			}
+			set
+			{
+				if ((this._width != value))
+				{
+					this._width = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_height", DbType="Int")]
+		public System.Nullable<int> height
+		{
+			get
+			{
+				return this._height;
+			}
+			set
+			{
+				if ((this._height != value))
+				{
+					this._height = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_is_video", DbType="Bit NOT NULL")]
+		public bool is_video
+		{
+			get
+			{
+				return this._is_video;
+			}
+			set
+			{
+				if ((this._is_video != value))
+				{
+					this._is_video = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_source", DbType="VarChar(MAX)")]
+		public string source
+		{
+			get
+			{
+				return this._source;
+			}
+			set
+			{
+				if ((this._source != value))
+				{
+					this._source = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_tags", DbType="VarChar(MAX)")]
+		public string tags
+		{
+			get
+			{
+				return this._tags;
+			}
+			set
+			{
+				if ((this._tags != value))
+				{
+					this._tags = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int NOT NULL")]
+		public int event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this._event_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_id", DbType="Int")]
+		public System.Nullable<int> template_id
+		{
+			get
+			{
+				return this._template_id;
+			}
+			set
+			{
+				if ((this._template_id != value))
+				{
+					this._template_id = value;
 				}
 			}
 		}

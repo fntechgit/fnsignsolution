@@ -2,7 +2,7 @@
 
     terminal_id = $("#terminal_id").val();
 
-    window.location.href = '/display/' + terminal_id;
+    window.location.href = '/displays/' + terminal_id;
 
 }
 

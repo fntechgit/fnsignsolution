@@ -35,6 +35,8 @@ namespace fnsignDisplay
                 Terminal t = _terminals.single(Convert.ToInt32(Session["event_id"]),
                     Convert.ToInt32(Page.RouteData.Values["id"]));
 
+                terminal_id.Value = t.id.ToString();
+
                 if (t.template_id > 0)
                 {
                     Template te = _templates.single(Convert.ToInt32(t.template_id));

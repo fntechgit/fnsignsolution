@@ -124,6 +124,23 @@ namespace schedInterface
             return _entries;
         }
 
+        public Media random_by_event(Int32 id)
+        {
+            Media m = new Media();
+
+            foreach (var item in db.media_random_by_event(id))
+            {
+                m.description = item.description;
+                m.full_name = item.full_name;
+                m.profilepic = item.profilepic.Replace("_normal", "");
+                m.source = item.source;
+                m.tags = item.tags;
+                m.username = item.username;
+            }
+
+            return m;
+        }
+
         public List<Media> get_all(Int32 event_id)
         {
             List<Media> _entries = new List<Media>();

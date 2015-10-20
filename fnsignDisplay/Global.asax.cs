@@ -26,6 +26,7 @@ namespace fnsignDisplay
 
             // ####################### DISPLAYS SECTION ################################# //
             routes.MapPageRoute("no-twitter-1920-route", "no-twitter-1920/{id}", "~/overlays/overlay_1920V_no_twitter.aspx");
+            routes.MapPageRoute("twitter-1920-route", "twitter-1920/{id}", "~/overlays/overlay_1920V_twitter.aspx");
         }
 
         protected void Session_Start(object sender, EventArgs e)
