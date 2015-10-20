@@ -22,7 +22,10 @@ namespace fnsignDisplay
             // ######################## LOGIN SECTION ################################### //
             routes.MapPageRoute("login-route", "login", "~/login.aspx");
             routes.MapPageRoute("details-route", "details", "~/details.aspx");
-            routes.MapPageRoute("display-route", "display/{id}", "~/display.aspx");
+            routes.MapPageRoute("display-route", "displays/{id}", "~/display.aspx");
+
+            // ####################### DISPLAYS SECTION ################################# //
+            routes.MapPageRoute("no-twitter-1920-route", "no-twitter-1920/{id}", "~/overlays/overlay_1920V_no_twitter.aspx");
         }
 
         protected void Session_Start(object sender, EventArgs e)

@@ -29,6 +29,16 @@ namespace schedInterface
             return @"Zljk61eXQnsTnGu6PMIeRupmMdKYm8dzykEx3YbB79Zu5";
         }
 
+        public string site_url()
+        {
+            return @"http://fnsign.ovri.de";
+        }
+
+        public string display_url()
+        {
+            return @"http://fndisplay.ovri.de";
+        }
+
         #endregion
     }
 }

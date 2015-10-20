@@ -84,9 +84,9 @@ namespace schedInterface
             Overlay o = new Overlay();
 
             o.active = ov.active;
-            ov.header = o.header;
-            ov.footer = o.footer;
-            ov.body = o.body;
+            o.header = ov.header;
+            o.footer = ov.footer;
+            o.body = ov.body;
             o.id = id;
             o.preview = ov.preview;
             o.title = ov.title;

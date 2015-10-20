@@ -6,9 +6,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using schedInterface;
 
-namespace fnsignDisplay
+namespace fnsignDisplay.overlays
 {
-    public partial class display : System.Web.UI.Page
+    public partial class overlay_1920V_no_twitter : System.Web.UI.Page
     {
         private schedInterface.terminals _terminals = new terminals();
         private schedInterface.templates _templates = new templates();
@@ -26,30 +26,44 @@ namespace fnsignDisplay
         public string start_time;
         public string end_time;
         public string next_session;
+        public string fnsignUrl;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["event_id"] != null)
             {
+                fnsignUrl = _settings.site_url();
+
 
                 Terminal t = _terminals.single(Convert.ToInt32(Session["event_id"]),
                     Convert.ToInt32(Page.RouteData.Values["id"]));
 
                 if (t.template_id > 0)
                 {
-                    Template te = _templates.single(Convert.ToInt32(t.template_id));
+                    // fill the content
+                    Location l = _locations.single(Convert.ToInt32(t.location_id));
 
-                    Overlay o = _overlays.single(Convert.ToInt32(te.overlay));
+                    Template temp = _templates.single(Convert.ToInt32(t.template_id));
 
-                    Response.Redirect(_settings.display_url() + "/" + o.header + "/" + t.id);
+                    bgimage = temp.bgimage;
+
+                    event_id.Value = t.event_id.ToString();
+                    location_sched.Value = l.sched_id;
+                    terminal_id.Value = Page.RouteData.Values["id"].ToString();
+
+                    Session current = _sessions.current(Convert.ToInt32(Session["event_id"]), l.sched_id);
+
+                    Session next = _sessions.next(Convert.ToInt32(Session["event_id"]), l.sched_id, current.end);
+
+                    session_title = current.name;
+                    session_type = current.event_type;
+                    start_time = current.start.ToShortTimeString();
+                    next_session = next.event_start + ": " + next.name;
                 }
                 else
                 {
                     // display the waiting signal
-                    pnl_no_template.Visible = true;
-
-                    footer.Controls.Add(
-                        new LiteralControl("<script type=\"text/javascript\" src=\"/js/notemplate.js\"></script>"));
+                    Response.Redirect("/not-assigned/" + t.id);
                 }
             }
             else

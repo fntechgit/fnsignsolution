@@ -62,7 +62,7 @@ namespace fnsignDisplay
             Int32 terminal_id = Convert.ToInt32(ddl_terminals.SelectedValue);
             Session["event_id"] = ddl_event.SelectedValue;
 
-            Response.Redirect("/display/" + terminal_id);
+            Response.Redirect("/displays/" + terminal_id);
         }
 
         protected void display(object sender, EventArgs e)
@@ -78,7 +78,7 @@ namespace fnsignDisplay
 
             Session["event_id"] = t.event_id.ToString();
 
-            Response.Redirect("/display/" + t.id);
+            Response.Redirect("/displays/" + t.id);
         }
     }
 }

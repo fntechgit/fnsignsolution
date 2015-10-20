@@ -157,6 +157,8 @@
 												    <asp:DropDownList runat="server" ID="overlay_font">
                                                         <asp:ListItem Value="Arial">Arial</asp:ListItem>
                                                         <asp:ListItem Value="Arial Black">Arial Black</asp:ListItem>
+                                                        <asp:ListItem Value="Gotham">Gotham</asp:ListItem>
+                                                        <asp:ListItem Value="&quot;Source Code Pro&quot;">Source Code Pro</asp:ListItem>
                                                         <asp:ListItem Value="Helvetica">Helvetica</asp:ListItem>
                                                         <asp:ListItem Value="Verdana">Verdana</asp:ListItem>
                                                         <asp:ListItem Value="sans-serif">Sans Serif</asp:ListItem>

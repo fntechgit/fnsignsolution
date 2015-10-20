@@ -18,6 +18,10 @@ namespace fnsignDisplay
     public class displaySvc : System.Web.Services.WebService
     {
         private schedInterface.sessions _sessions = new sessions();
+        private schedInterface.terminals _terminals = new terminals();
+        private schedInterface.templates _templates = new templates();
+        private schedInterface.overlays _overlays = new schedInterface.overlays();
+        private schedInterface.settings _settings = new settings();
 
         [WebMethod(Description = "Get Current Session", EnableSession = true)]
         public Session current(string location)
@@ -40,6 +44,16 @@ namespace fnsignDisplay
             Session current = this.current(location);
 
             return _sessions.next(event_id, location, current.end);
+        }
+
+        [WebMethod(Description = "Check for New Template", EnableSession = true)]
+        public string template(Int32 terminal)
+        {
+            Terminal t = _terminals.single(Convert.ToInt32(Context.Session["event_id"]), terminal);
+
+            Template temp = _templates.single(Convert.ToInt32(t.template_id));
+
+            return _settings.site_url() + "/uploads/" + temp.bgimage;
         }
 
     }

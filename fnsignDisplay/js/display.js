@@ -2,22 +2,23 @@
 
     // refresh the data
 
-    location = $("#location_sched").val();
+    location_id = $("#location_sched").val();
 
     $.ajax({
         type: "POST",
         url: "/display.asmx/current",
-        data: "{'location': '" + location + "'}",
+        data: "{'location': '" + location_id + "'}",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, status) {
 
-            $("#session_type").text(data.d.session_type);
+            $("#session_type").text(data.d.event_type);
             $("#session_title").text(data.d.name);
-            $("#session_time").text(data.d.session_start + ' to ' + data.d.session_end);
+            $("#start_time").text(data.d.event_start);
 
             next();
 
+            background();
         }
     });
 
@@ -25,20 +26,38 @@
 
 function next() {
 
-    location = $("#location_sched").val();
+    location_id = $("#location_sched").val();
 
     $.ajax({
         type: "POST",
         url: "/display.asmx/next",
-        data: "{'location': '" + location + "'}",
+        data: "{'location': '" + location_id + "'}",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, status) {
 
-            $("#next_session").text('NEXT: ' + data.d.name);
+            $("#next_session").text(data.d.event_start + ': ' + data.d.name);
 
         }
     });
 }
 
-setInterval(refreshData, 6000);
+function background() {
+
+    terminal_id = $("#terminal_id").val();
+
+    $.ajax({
+        type: "POST",
+        url: "/display.asmx/template",
+        data: "{'terminal': " + terminal_id + "}",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data, status) {
+
+            $('#thebody').css('background-image', 'url("' + data.d + '")');
+
+        }
+    });
+}
+
+setInterval(refreshData, 10000);
