@@ -109,6 +109,55 @@ namespace schedInterface
 
             return true;
         }
+
+        public List<Terminal> offline_terminals()
+        {
+            List<Terminal> _terminals = new List<Terminal>();
+
+            var result = from terms in db.terminals
+                where terms.last_online < DateTime.Now.AddMinutes(-10)
+                             select terms;
+
+            foreach (var item in result)
+            {
+                Terminal t = new Terminal();
+
+                t.event_id = item.event_id;
+                t.id = item.id;
+                t.last_online = item.last_online;
+                t.location_id = item.location_id;
+                t.online = item.online;
+                t.template_id = item.template_id;
+                t.title = item.title;
+
+                _terminals.Add(t);
+            }
+
+            return _terminals;
+        }
+
+        public Boolean offline(Int32 id)
+        {
+            terminal t = db.terminals.Single(x => x.id == id);
+
+            t.online = false;
+
+            db.SubmitChanges();
+
+            return true;
+        }
+
+        public Boolean online(Int32 id)
+        {
+            terminal t = db.terminals.Single(x => x.id == id);
+
+            t.online = true;
+            t.last_online = DateTime.Now;
+
+            db.SubmitChanges();
+
+            return true;
+        }
     }
 
     public class Terminal
@@ -121,5 +170,6 @@ namespace schedInterface
         public string template_title { get; set; }
         public Boolean online { get; set; }
         public Int32 event_id { get; set; }
+        public DateTime last_online { get; set; }
     }
 }

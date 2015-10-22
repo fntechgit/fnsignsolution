@@ -79,16 +79,6 @@
       <Column Name="security" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
-  <Table Name="dbo.terminals" Member="terminals">
-    <Type Name="terminal">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="location_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="template_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="online" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
   <Table Name="dbo.events" Member="events">
     <Type Name="event">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -158,6 +148,17 @@
       <Column Name="header" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="body" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="footer" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.terminals" Member="terminals">
+    <Type Name="terminal">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="location_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="template_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="online" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="last_online" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Function Name="dbo.permissions_get_by_user" Method="permissions_get_by_user">

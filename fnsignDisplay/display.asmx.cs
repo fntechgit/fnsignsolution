@@ -54,6 +54,8 @@ namespace fnsignDisplay
 
             Template temp = _templates.single(Convert.ToInt32(t.template_id));
 
+            _terminals.online(terminal);
+
             return _settings.site_url() + "/uploads/" + temp.bgimage;
         }
 

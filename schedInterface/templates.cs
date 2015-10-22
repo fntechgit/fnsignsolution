@@ -40,6 +40,17 @@ namespace schedInterface
             return _templates;
         }
 
+        public Boolean delete(Int32 id)
+        {
+            template t = db.templates.Single(x => x.id == id);
+
+            db.templates.DeleteOnSubmit(t);
+
+            db.SubmitChanges();
+
+            return true;
+        }
+
         public List<Template> all_by_event(Int32 id)
         {
             List<Template> _templates = new List<Template>();

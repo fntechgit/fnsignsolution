@@ -13,12 +13,12 @@
 
 			body { width: 1080px; height: 1920px; background-color: #000000; font-family: "Gotham Narrow Book", Gotham; font-size: 36px;color: #000000;background-image: url('<%= fnsignUrl %>/uploads/<%= bgimage %>');background-repeat: no-repeat;padding: 0;margin: 0;overflow: hidden; }	
 			.wrapper { width: 1080px; height: 1920px;padding: 40px;  }
-			.session-type {font-family: "Gotham Narrow Book", Gotham; margin-top: 340px; font-size: 50px; margin-bottom:0px;color: #000000;width: 100%; }
+			.session-type {font-family: "Gotham Narrow Book", Gotham; margin-top: 340px; font-size: 50px; margin-bottom:0px;color: #ffffff;width: 100%; }
 			.session-title {font-family: "Gotham Narrow Book", Gotham; font-size: 36px;font-weight:bold;margin-bottom: 40px;margin-top:0px;color: #82262f; }
-			.start-time { margin-top: 55px;font-family: "Gotham Narrow Book", Gotham;color: #000000;font-size: 80px;float: left;width: 387px; }
+			.start-time { margin-top: 55px;font-family: "Gotham Narrow Book", Gotham;color: #ffffff;font-size: 80px;float: left;width: 387px; }
 			.current-time { float: left;margin-top: 85px;color: #82262f;font-size: 48px;font-family: "Gotham Narrow Book", Gotham; }
 			.next-header { margin-top: 50px;color: #82262f;font-family: "Gotham Narrow Book", Gotham;font-size: 35px; }
-			.next-session { margin-top: 0px;color: #000000;font-family: "Gotham Narrow Book", Gotham;font-size: 36px; }
+			.next-session { margin-top: 0px;color: #ffffff;font-family: "Gotham Narrow Book", Gotham;font-size: 36px; }
 			.left { float:left; }
 			.right { float:right; }
 			.next { margin-top: 55px;font-size: 24px; }

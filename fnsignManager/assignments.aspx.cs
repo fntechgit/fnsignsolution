@@ -16,11 +16,11 @@ namespace fnsignManager
         {
             permissions();
 
-            string online = "Online";
+            string online = "<img src=\"/uploads/online.png\" />";
 
             foreach (Terminal t in _terminals.all_by_event(Convert.ToInt32(Session["event_id"].ToString())))
             {
-                online = t.online ? "Online" : "Offline";
+                online = t.online ? "<img src=\"/uploads/online.png\" />" : "<img src=\"/uploads/offline.png\" />";
 
                 ph_tags.Controls.Add(new LiteralControl("<tr><td data-title=\"Title\">" + t.title.ToUpper() + "</td><td data-title=\"Online\" class=\"hidden-xs hidden-sm\">" + online + "</td><td data-title=\"Location\" class=\"hidden-xs hidden-sm\">" + t.location_title + "</td><td data-title=\"Template\" class=\"hidden-xs hidden-sm\">" + t.template_title + "</td><td data-title=\"Actions\"><a href=\"/assignments/edit/" + t.id + "\"><i class=\"fa fa-edit\"></i></a> <a href=\"/assignments/delete/" + t.id + "\"><i class=\"fa fa-trash-o\"></i></a></td></tr>"));
             }

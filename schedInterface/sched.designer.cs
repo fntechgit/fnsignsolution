@@ -51,9 +51,6 @@ namespace schedInterface
     partial void Insertuser(user instance);
     partial void Updateuser(user instance);
     partial void Deleteuser(user instance);
-    partial void Insertterminal(terminal instance);
-    partial void Updateterminal(terminal instance);
-    partial void Deleteterminal(terminal instance);
     partial void Insertevent(@event instance);
     partial void Updateevent(@event instance);
     partial void Deleteevent(@event instance);
@@ -66,6 +63,9 @@ namespace schedInterface
     partial void Insertoverlay(overlay instance);
     partial void Updateoverlay(overlay instance);
     partial void Deleteoverlay(overlay instance);
+    partial void Insertterminal(terminal instance);
+    partial void Updateterminal(terminal instance);
+    partial void Deleteterminal(terminal instance);
     #endregion
 		
 		public schedDataContext() : 
@@ -154,14 +154,6 @@ namespace schedInterface
 			}
 		}
 		
-		public System.Data.Linq.Table<terminal> terminals
-		{
-			get
-			{
-				return this.GetTable<terminal>();
-			}
-		}
-		
 		public System.Data.Linq.Table<@event> events
 		{
 			get
@@ -191,6 +183,14 @@ namespace schedInterface
 			get
 			{
 				return this.GetTable<overlay>();
+			}
+		}
+		
+		public System.Data.Linq.Table<terminal> terminals
+		{
+			get
+			{
+				return this.GetTable<terminal>();
 			}
 		}
 		
@@ -1741,188 +1741,6 @@ namespace schedInterface
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.terminals")]
-	public partial class terminal : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private string _title;
-		
-		private System.Nullable<int> _location_id;
-		
-		private System.Nullable<int> _template_id;
-		
-		private bool _online;
-		
-		private int _event_id;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OntitleChanging(string value);
-    partial void OntitleChanged();
-    partial void Onlocation_idChanging(System.Nullable<int> value);
-    partial void Onlocation_idChanged();
-    partial void Ontemplate_idChanging(System.Nullable<int> value);
-    partial void Ontemplate_idChanged();
-    partial void OnonlineChanging(bool value);
-    partial void OnonlineChanged();
-    partial void Onevent_idChanging(int value);
-    partial void Onevent_idChanged();
-    #endregion
-		
-		public terminal()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(255)")]
-		public string title
-		{
-			get
-			{
-				return this._title;
-			}
-			set
-			{
-				if ((this._title != value))
-				{
-					this.OntitleChanging(value);
-					this.SendPropertyChanging();
-					this._title = value;
-					this.SendPropertyChanged("title");
-					this.OntitleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_location_id", DbType="Int")]
-		public System.Nullable<int> location_id
-		{
-			get
-			{
-				return this._location_id;
-			}
-			set
-			{
-				if ((this._location_id != value))
-				{
-					this.Onlocation_idChanging(value);
-					this.SendPropertyChanging();
-					this._location_id = value;
-					this.SendPropertyChanged("location_id");
-					this.Onlocation_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_id", DbType="Int")]
-		public System.Nullable<int> template_id
-		{
-			get
-			{
-				return this._template_id;
-			}
-			set
-			{
-				if ((this._template_id != value))
-				{
-					this.Ontemplate_idChanging(value);
-					this.SendPropertyChanging();
-					this._template_id = value;
-					this.SendPropertyChanged("template_id");
-					this.Ontemplate_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_online", DbType="Bit NOT NULL")]
-		public bool online
-		{
-			get
-			{
-				return this._online;
-			}
-			set
-			{
-				if ((this._online != value))
-				{
-					this.OnonlineChanging(value);
-					this.SendPropertyChanging();
-					this._online = value;
-					this.SendPropertyChanged("online");
-					this.OnonlineChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int NOT NULL")]
-		public int event_id
-		{
-			get
-			{
-				return this._event_id;
-			}
-			set
-			{
-				if ((this._event_id != value))
-				{
-					this.Onevent_idChanging(value);
-					this.SendPropertyChanging();
-					this._event_id = value;
-					this.SendPropertyChanged("event_id");
-					this.Onevent_idChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.events")]
 	public partial class @event : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -3370,6 +3188,212 @@ namespace schedInterface
 					this._footer = value;
 					this.SendPropertyChanged("footer");
 					this.OnfooterChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.terminals")]
+	public partial class terminal : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _title;
+		
+		private System.Nullable<int> _location_id;
+		
+		private System.Nullable<int> _template_id;
+		
+		private bool _online;
+		
+		private int _event_id;
+		
+		private System.DateTime _last_online;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OntitleChanging(string value);
+    partial void OntitleChanged();
+    partial void Onlocation_idChanging(System.Nullable<int> value);
+    partial void Onlocation_idChanged();
+    partial void Ontemplate_idChanging(System.Nullable<int> value);
+    partial void Ontemplate_idChanged();
+    partial void OnonlineChanging(bool value);
+    partial void OnonlineChanged();
+    partial void Onevent_idChanging(int value);
+    partial void Onevent_idChanged();
+    partial void Onlast_onlineChanging(System.DateTime value);
+    partial void Onlast_onlineChanged();
+    #endregion
+		
+		public terminal()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(255)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this.OntitleChanging(value);
+					this.SendPropertyChanging();
+					this._title = value;
+					this.SendPropertyChanged("title");
+					this.OntitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_location_id", DbType="Int")]
+		public System.Nullable<int> location_id
+		{
+			get
+			{
+				return this._location_id;
+			}
+			set
+			{
+				if ((this._location_id != value))
+				{
+					this.Onlocation_idChanging(value);
+					this.SendPropertyChanging();
+					this._location_id = value;
+					this.SendPropertyChanged("location_id");
+					this.Onlocation_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_id", DbType="Int")]
+		public System.Nullable<int> template_id
+		{
+			get
+			{
+				return this._template_id;
+			}
+			set
+			{
+				if ((this._template_id != value))
+				{
+					this.Ontemplate_idChanging(value);
+					this.SendPropertyChanging();
+					this._template_id = value;
+					this.SendPropertyChanged("template_id");
+					this.Ontemplate_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_online", DbType="Bit NOT NULL")]
+		public bool online
+		{
+			get
+			{
+				return this._online;
+			}
+			set
+			{
+				if ((this._online != value))
+				{
+					this.OnonlineChanging(value);
+					this.SendPropertyChanging();
+					this._online = value;
+					this.SendPropertyChanged("online");
+					this.OnonlineChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int NOT NULL")]
+		public int event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this.Onevent_idChanging(value);
+					this.SendPropertyChanging();
+					this._event_id = value;
+					this.SendPropertyChanged("event_id");
+					this.Onevent_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_last_online", DbType="DateTime NOT NULL")]
+		public System.DateTime last_online
+		{
+			get
+			{
+				return this._last_online;
+			}
+			set
+			{
+				if ((this._last_online != value))
+				{
+					this.Onlast_onlineChanging(value);
+					this.SendPropertyChanging();
+					this._last_online = value;
+					this.SendPropertyChanged("last_online");
+					this.Onlast_onlineChanged();
 				}
 			}
 		}

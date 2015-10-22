@@ -1609,6 +1609,7 @@
     <Content Include="delete_assignment.aspx" />
     <Content Include="delete_event.aspx" />
     <Content Include="delete_permission.aspx" />
+    <Content Include="delete_template.aspx" />
     <Content Include="delete_user.aspx" />
     <Content Include="edit_assignment.aspx" />
     <Content Include="events.aspx" />
@@ -1689,6 +1690,13 @@
     </Compile>
     <Compile Include="delete_permission.aspx.designer.cs">
       <DependentUpon>delete_permission.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="delete_template.aspx.cs">
+      <DependentUpon>delete_template.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="delete_template.aspx.designer.cs">
+      <DependentUpon>delete_template.aspx</DependentUpon>
     </Compile>
     <Compile Include="delete_user.aspx.cs">
       <DependentUpon>delete_user.aspx</DependentUpon>

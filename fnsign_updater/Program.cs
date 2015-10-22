@@ -15,6 +15,7 @@ namespace fnsign_updater
             events _events = new events();
             twitter _twitter = new twitter();
             templates _templates = new templates();
+            terminals _terminals = new terminals();
 
             Console.WriteLine("######### BEGIN FNSIGN UPDATER v.1.0 #########");
 
@@ -87,7 +88,7 @@ namespace fnsign_updater
                         _twitter.fetch(t.t_username, 50, true, e.id, t.id);
                     }
 
-                    if (t.hashtags.Any())
+                    if (t.hashtags != null)
                     {
                         Console.WriteLine("Fetching Records for Hashtags...");
                         Console.WriteLine("");
@@ -114,6 +115,30 @@ namespace fnsign_updater
                 Console.WriteLine("");
 
                 // here we need to update the last update time
+            }
+
+            Console.WriteLine("Check for Offline Terminals...");
+            Console.WriteLine("");
+
+            List<Terminal> terms = _terminals.offline_terminals();
+
+            if (terms.Count() > 0)
+            {
+                Console.WriteLine(terms.Count() + " Offline, updating their status...");
+                Console.WriteLine("");
+
+                foreach (Terminal t in terms)
+                {
+                    Console.WriteLine("Taking " + t.title + " Offline");
+                    Console.WriteLine("");
+
+                    _terminals.offline(t.id);
+                }
+            }
+            else
+            {
+                Console.WriteLine("All Terminals are Online...");
+                Console.WriteLine("");
             }
 
             Console.WriteLine("######### FNSIGN v.1.0 UPDATER COMPLETE #########");
