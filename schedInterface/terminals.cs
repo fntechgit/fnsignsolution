@@ -74,6 +74,7 @@ namespace schedInterface
             te.online = true;
             te.template_id = t.template_id;
             te.title = t.title;
+            te.last_online = DateTime.Now;
             
             db.terminals.InsertOnSubmit(te);
 

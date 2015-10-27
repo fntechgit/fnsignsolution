@@ -66,6 +66,9 @@ namespace schedInterface
     partial void Insertterminal(terminal instance);
     partial void Updateterminal(terminal instance);
     partial void Deleteterminal(terminal instance);
+    partial void Insertmessage(message instance);
+    partial void Updatemessage(message instance);
+    partial void Deletemessage(message instance);
     #endregion
 		
 		public schedDataContext() : 
@@ -194,6 +197,14 @@ namespace schedInterface
 			}
 		}
 		
+		public System.Data.Linq.Table<message> messages
+		{
+			get
+			{
+				return this.GetTable<message>();
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.permissions_get_by_user")]
 		public ISingleResult<permissions_get_by_userResult> permissions_get_by_user([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> user_id)
 		{
@@ -248,6 +259,41 @@ namespace schedInterface
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id);
 			return ((ISingleResult<media_random_by_eventResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.messages_by_event")]
+		public ISingleResult<messages_by_eventResult> messages_by_event([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> event_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), event_id);
+			return ((ISingleResult<messages_by_eventResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.messages_by_terminal")]
+		public ISingleResult<messages_by_terminalResult> messages_by_terminal()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<messages_by_terminalResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.messages_by_template")]
+		public ISingleResult<messages_by_templateResult> messages_by_template()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<messages_by_templateResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.messages_get_random")]
+		public ISingleResult<messages_get_randomResult> messages_get_random([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> event_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> template_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> terminal_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), event_id, template_id, terminal_id);
+			return ((ISingleResult<messages_get_randomResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.clean_design_summit")]
+		public int clean_design_summit()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((int)(result.ReturnValue));
 		}
 	}
 	
@@ -3419,6 +3465,284 @@ namespace schedInterface
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.messages")]
+	public partial class message : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private System.Nullable<int> _event_id;
+		
+		private System.Nullable<int> _template_id;
+		
+		private System.Nullable<int> _terminal_id;
+		
+		private System.Nullable<System.DateTime> _start;
+		
+		private System.Nullable<System.DateTime> _stop;
+		
+		private bool _entire;
+		
+		private string _title;
+		
+		private string _message1;
+		
+		private string _pic;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void Onevent_idChanging(System.Nullable<int> value);
+    partial void Onevent_idChanged();
+    partial void Ontemplate_idChanging(System.Nullable<int> value);
+    partial void Ontemplate_idChanged();
+    partial void Onterminal_idChanging(System.Nullable<int> value);
+    partial void Onterminal_idChanged();
+    partial void OnstartChanging(System.Nullable<System.DateTime> value);
+    partial void OnstartChanged();
+    partial void OnstopChanging(System.Nullable<System.DateTime> value);
+    partial void OnstopChanged();
+    partial void OnentireChanging(bool value);
+    partial void OnentireChanged();
+    partial void OntitleChanging(string value);
+    partial void OntitleChanged();
+    partial void Onmessage1Changing(string value);
+    partial void Onmessage1Changed();
+    partial void OnpicChanging(string value);
+    partial void OnpicChanged();
+    #endregion
+		
+		public message()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int")]
+		public System.Nullable<int> event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this.Onevent_idChanging(value);
+					this.SendPropertyChanging();
+					this._event_id = value;
+					this.SendPropertyChanged("event_id");
+					this.Onevent_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_id", DbType="Int")]
+		public System.Nullable<int> template_id
+		{
+			get
+			{
+				return this._template_id;
+			}
+			set
+			{
+				if ((this._template_id != value))
+				{
+					this.Ontemplate_idChanging(value);
+					this.SendPropertyChanging();
+					this._template_id = value;
+					this.SendPropertyChanged("template_id");
+					this.Ontemplate_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_terminal_id", DbType="Int")]
+		public System.Nullable<int> terminal_id
+		{
+			get
+			{
+				return this._terminal_id;
+			}
+			set
+			{
+				if ((this._terminal_id != value))
+				{
+					this.Onterminal_idChanging(value);
+					this.SendPropertyChanging();
+					this._terminal_id = value;
+					this.SendPropertyChanged("terminal_id");
+					this.Onterminal_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_start", DbType="DateTime")]
+		public System.Nullable<System.DateTime> start
+		{
+			get
+			{
+				return this._start;
+			}
+			set
+			{
+				if ((this._start != value))
+				{
+					this.OnstartChanging(value);
+					this.SendPropertyChanging();
+					this._start = value;
+					this.SendPropertyChanged("start");
+					this.OnstartChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_stop", DbType="DateTime")]
+		public System.Nullable<System.DateTime> stop
+		{
+			get
+			{
+				return this._stop;
+			}
+			set
+			{
+				if ((this._stop != value))
+				{
+					this.OnstopChanging(value);
+					this.SendPropertyChanging();
+					this._stop = value;
+					this.SendPropertyChanged("stop");
+					this.OnstopChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_entire", DbType="Bit NOT NULL")]
+		public bool entire
+		{
+			get
+			{
+				return this._entire;
+			}
+			set
+			{
+				if ((this._entire != value))
+				{
+					this.OnentireChanging(value);
+					this.SendPropertyChanging();
+					this._entire = value;
+					this.SendPropertyChanged("entire");
+					this.OnentireChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(500)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this.OntitleChanging(value);
+					this.SendPropertyChanging();
+					this._title = value;
+					this.SendPropertyChanged("title");
+					this.OntitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="message", Storage="_message1", DbType="VarChar(MAX)")]
+		public string message1
+		{
+			get
+			{
+				return this._message1;
+			}
+			set
+			{
+				if ((this._message1 != value))
+				{
+					this.Onmessage1Changing(value);
+					this.SendPropertyChanging();
+					this._message1 = value;
+					this.SendPropertyChanged("message1");
+					this.Onmessage1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pic", DbType="VarChar(MAX)")]
+		public string pic
+		{
+			get
+			{
+				return this._pic;
+			}
+			set
+			{
+				if ((this._pic != value))
+				{
+					this.OnpicChanging(value);
+					this.SendPropertyChanging();
+					this._pic = value;
+					this.SendPropertyChanged("pic");
+					this.OnpicChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	public partial class permissions_get_by_userResult
 	{
 		
@@ -5386,6 +5710,794 @@ namespace schedInterface
 				if ((this._template_id != value))
 				{
 					this._template_id = value;
+				}
+			}
+		}
+	}
+	
+	public partial class messages_by_eventResult
+	{
+		
+		private int _id;
+		
+		private System.Nullable<int> _event_id;
+		
+		private System.Nullable<int> _template_id;
+		
+		private System.Nullable<int> _terminal_id;
+		
+		private System.Nullable<System.DateTime> _start;
+		
+		private System.Nullable<System.DateTime> _stop;
+		
+		private bool _entire;
+		
+		private string _title;
+		
+		private string _message;
+		
+		private string _pic;
+		
+		public messages_by_eventResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int")]
+		public System.Nullable<int> event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this._event_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_id", DbType="Int")]
+		public System.Nullable<int> template_id
+		{
+			get
+			{
+				return this._template_id;
+			}
+			set
+			{
+				if ((this._template_id != value))
+				{
+					this._template_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_terminal_id", DbType="Int")]
+		public System.Nullable<int> terminal_id
+		{
+			get
+			{
+				return this._terminal_id;
+			}
+			set
+			{
+				if ((this._terminal_id != value))
+				{
+					this._terminal_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_start", DbType="DateTime")]
+		public System.Nullable<System.DateTime> start
+		{
+			get
+			{
+				return this._start;
+			}
+			set
+			{
+				if ((this._start != value))
+				{
+					this._start = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_stop", DbType="DateTime")]
+		public System.Nullable<System.DateTime> stop
+		{
+			get
+			{
+				return this._stop;
+			}
+			set
+			{
+				if ((this._stop != value))
+				{
+					this._stop = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_entire", DbType="Bit NOT NULL")]
+		public bool entire
+		{
+			get
+			{
+				return this._entire;
+			}
+			set
+			{
+				if ((this._entire != value))
+				{
+					this._entire = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(500)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_message", DbType="VarChar(MAX)")]
+		public string message
+		{
+			get
+			{
+				return this._message;
+			}
+			set
+			{
+				if ((this._message != value))
+				{
+					this._message = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pic", DbType="VarChar(MAX)")]
+		public string pic
+		{
+			get
+			{
+				return this._pic;
+			}
+			set
+			{
+				if ((this._pic != value))
+				{
+					this._pic = value;
+				}
+			}
+		}
+	}
+	
+	public partial class messages_by_terminalResult
+	{
+		
+		private int _id;
+		
+		private System.Nullable<int> _event_id;
+		
+		private System.Nullable<int> _template_id;
+		
+		private System.Nullable<int> _terminal_id;
+		
+		private System.Nullable<System.DateTime> _start;
+		
+		private System.Nullable<System.DateTime> _stop;
+		
+		private bool _entire;
+		
+		private string _title;
+		
+		private string _message;
+		
+		private string _pic;
+		
+		private string _terminal_title;
+		
+		public messages_by_terminalResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int")]
+		public System.Nullable<int> event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this._event_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_id", DbType="Int")]
+		public System.Nullable<int> template_id
+		{
+			get
+			{
+				return this._template_id;
+			}
+			set
+			{
+				if ((this._template_id != value))
+				{
+					this._template_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_terminal_id", DbType="Int")]
+		public System.Nullable<int> terminal_id
+		{
+			get
+			{
+				return this._terminal_id;
+			}
+			set
+			{
+				if ((this._terminal_id != value))
+				{
+					this._terminal_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_start", DbType="DateTime")]
+		public System.Nullable<System.DateTime> start
+		{
+			get
+			{
+				return this._start;
+			}
+			set
+			{
+				if ((this._start != value))
+				{
+					this._start = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_stop", DbType="DateTime")]
+		public System.Nullable<System.DateTime> stop
+		{
+			get
+			{
+				return this._stop;
+			}
+			set
+			{
+				if ((this._stop != value))
+				{
+					this._stop = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_entire", DbType="Bit NOT NULL")]
+		public bool entire
+		{
+			get
+			{
+				return this._entire;
+			}
+			set
+			{
+				if ((this._entire != value))
+				{
+					this._entire = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(500)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_message", DbType="VarChar(MAX)")]
+		public string message
+		{
+			get
+			{
+				return this._message;
+			}
+			set
+			{
+				if ((this._message != value))
+				{
+					this._message = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pic", DbType="VarChar(MAX)")]
+		public string pic
+		{
+			get
+			{
+				return this._pic;
+			}
+			set
+			{
+				if ((this._pic != value))
+				{
+					this._pic = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_terminal_title", DbType="VarChar(255)")]
+		public string terminal_title
+		{
+			get
+			{
+				return this._terminal_title;
+			}
+			set
+			{
+				if ((this._terminal_title != value))
+				{
+					this._terminal_title = value;
+				}
+			}
+		}
+	}
+	
+	public partial class messages_by_templateResult
+	{
+		
+		private int _id;
+		
+		private System.Nullable<int> _event_id;
+		
+		private System.Nullable<int> _template_id;
+		
+		private System.Nullable<int> _terminal_id;
+		
+		private System.Nullable<System.DateTime> _start;
+		
+		private System.Nullable<System.DateTime> _stop;
+		
+		private bool _entire;
+		
+		private string _title;
+		
+		private string _message;
+		
+		private string _pic;
+		
+		private string _template_title;
+		
+		public messages_by_templateResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int")]
+		public System.Nullable<int> event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this._event_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_id", DbType="Int")]
+		public System.Nullable<int> template_id
+		{
+			get
+			{
+				return this._template_id;
+			}
+			set
+			{
+				if ((this._template_id != value))
+				{
+					this._template_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_terminal_id", DbType="Int")]
+		public System.Nullable<int> terminal_id
+		{
+			get
+			{
+				return this._terminal_id;
+			}
+			set
+			{
+				if ((this._terminal_id != value))
+				{
+					this._terminal_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_start", DbType="DateTime")]
+		public System.Nullable<System.DateTime> start
+		{
+			get
+			{
+				return this._start;
+			}
+			set
+			{
+				if ((this._start != value))
+				{
+					this._start = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_stop", DbType="DateTime")]
+		public System.Nullable<System.DateTime> stop
+		{
+			get
+			{
+				return this._stop;
+			}
+			set
+			{
+				if ((this._stop != value))
+				{
+					this._stop = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_entire", DbType="Bit NOT NULL")]
+		public bool entire
+		{
+			get
+			{
+				return this._entire;
+			}
+			set
+			{
+				if ((this._entire != value))
+				{
+					this._entire = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(500)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_message", DbType="VarChar(MAX)")]
+		public string message
+		{
+			get
+			{
+				return this._message;
+			}
+			set
+			{
+				if ((this._message != value))
+				{
+					this._message = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pic", DbType="VarChar(MAX)")]
+		public string pic
+		{
+			get
+			{
+				return this._pic;
+			}
+			set
+			{
+				if ((this._pic != value))
+				{
+					this._pic = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_title", DbType="VarChar(255)")]
+		public string template_title
+		{
+			get
+			{
+				return this._template_title;
+			}
+			set
+			{
+				if ((this._template_title != value))
+				{
+					this._template_title = value;
+				}
+			}
+		}
+	}
+	
+	public partial class messages_get_randomResult
+	{
+		
+		private int _id;
+		
+		private System.Nullable<int> _event_id;
+		
+		private System.Nullable<int> _template_id;
+		
+		private System.Nullable<int> _terminal_id;
+		
+		private System.Nullable<System.DateTime> _start;
+		
+		private System.Nullable<System.DateTime> _stop;
+		
+		private bool _entire;
+		
+		private string _title;
+		
+		private string _message;
+		
+		private string _pic;
+		
+		public messages_get_randomResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int")]
+		public System.Nullable<int> event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this._event_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_id", DbType="Int")]
+		public System.Nullable<int> template_id
+		{
+			get
+			{
+				return this._template_id;
+			}
+			set
+			{
+				if ((this._template_id != value))
+				{
+					this._template_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_terminal_id", DbType="Int")]
+		public System.Nullable<int> terminal_id
+		{
+			get
+			{
+				return this._terminal_id;
+			}
+			set
+			{
+				if ((this._terminal_id != value))
+				{
+					this._terminal_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_start", DbType="DateTime")]
+		public System.Nullable<System.DateTime> start
+		{
+			get
+			{
+				return this._start;
+			}
+			set
+			{
+				if ((this._start != value))
+				{
+					this._start = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_stop", DbType="DateTime")]
+		public System.Nullable<System.DateTime> stop
+		{
+			get
+			{
+				return this._stop;
+			}
+			set
+			{
+				if ((this._stop != value))
+				{
+					this._stop = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_entire", DbType="Bit NOT NULL")]
+		public bool entire
+		{
+			get
+			{
+				return this._entire;
+			}
+			set
+			{
+				if ((this._entire != value))
+				{
+					this._entire = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(500)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_message", DbType="VarChar(MAX)")]
+		public string message
+		{
+			get
+			{
+				return this._message;
+			}
+			set
+			{
+				if ((this._message != value))
+				{
+					this._message = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pic", DbType="VarChar(MAX)")]
+		public string pic
+		{
+			get
+			{
+				return this._pic;
+			}
+			set
+			{
+				if ((this._pic != value))
+				{
+					this._pic = value;
 				}
 			}
 		}

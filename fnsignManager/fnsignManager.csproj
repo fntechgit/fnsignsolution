@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="add_event.aspx" />
+    <Content Include="add_message.aspx" />
     <Content Include="add_permission.aspx" />
     <Content Include="add_user.aspx" />
     <Content Include="assets\ajax\ajax-treeview-nodes.html" />
@@ -1608,6 +1609,7 @@
     <Content Include="dashboard.aspx" />
     <Content Include="delete_assignment.aspx" />
     <Content Include="delete_event.aspx" />
+    <Content Include="delete_message.aspx" />
     <Content Include="delete_permission.aspx" />
     <Content Include="delete_template.aspx" />
     <Content Include="delete_user.aspx" />
@@ -1621,6 +1623,7 @@
     <Content Include="locations.aspx" />
     <Content Include="login.aspx" />
     <Content Include="logout.aspx" />
+    <Content Include="messages.aspx" />
     <Content Include="permissions.aspx" />
     <Content Include="sessions.aspx" />
     <Content Include="templates.aspx" />
@@ -1641,6 +1644,13 @@
     </Compile>
     <Compile Include="add_event.aspx.designer.cs">
       <DependentUpon>add_event.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="add_message.aspx.cs">
+      <DependentUpon>add_message.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="add_message.aspx.designer.cs">
+      <DependentUpon>add_message.aspx</DependentUpon>
     </Compile>
     <Compile Include="add_permission.aspx.cs">
       <DependentUpon>add_permission.aspx</DependentUpon>
@@ -1683,6 +1693,13 @@
     </Compile>
     <Compile Include="delete_event.aspx.designer.cs">
       <DependentUpon>delete_event.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="delete_message.aspx.cs">
+      <DependentUpon>delete_message.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="delete_message.aspx.designer.cs">
+      <DependentUpon>delete_message.aspx</DependentUpon>
     </Compile>
     <Compile Include="delete_permission.aspx.cs">
       <DependentUpon>delete_permission.aspx</DependentUpon>
@@ -1749,6 +1766,13 @@
     </Compile>
     <Compile Include="logout.aspx.designer.cs">
       <DependentUpon>logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="messages.aspx.cs">
+      <DependentUpon>messages.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="messages.aspx.designer.cs">
+      <DependentUpon>messages.aspx</DependentUpon>
     </Compile>
     <Compile Include="permissions.aspx.cs">
       <DependentUpon>permissions.aspx</DependentUpon>

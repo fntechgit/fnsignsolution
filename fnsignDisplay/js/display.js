@@ -1,4 +1,6 @@
-﻿function refreshData() {
+﻿$.getScript("jquery.cookie.js", function () {});
+
+function refreshData() {
 
     // refresh the data
 
@@ -12,18 +14,100 @@
         dataType: "json",
         success: function (data, status) {
 
-            $("#session_type").text(data.d.event_type);
-            $("#session_title").text(data.d.name);
-            $("#start_time").text(data.d.event_start);
+            if (data.d.event_id == 0) {
 
-            next();
+                //console.log('EventID Lost');
 
-            background();
+                var cookie_id = $.cookie("FNSIGN_EventID");
 
-            tweet();
+                // if Session["event_id"] Is Null check for the cookie
+                $.ajax({
+                    type: "POST",
+                    url: "/display.asmx/loginAgain",
+                    data: "{'event_id': '" + cookie_id + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (data, status) {
+                        refreshData();
+                    }
+                });
+
+            } else {
+
+                $("#session_type").text(data.d.event_type);
+                $("#session_title").text(data.d.name);
+
+                if (data.d.name.length > 25) {
+                    $("#session_title").attr("class", "session-type");
+                } else {
+                    $("#session_title").attr("class", "session-type-big");
+                }
+
+                $("#start_time").text(data.d.event_start);
+
+                next();
+
+                background();
+
+                announcements();
+
+            }
         }
     });
 
+}
+
+function twitter() {
+
+    $(".twitter").show();
+    $(".announcement").hide();
+
+    $(".twitter").animate({ left: "-1080" }, 500, "swing", slideRight);
+}
+
+function announcements() {
+    // check for announcement
+    terminal_id = $("#terminal_id").val();
+    template_id = $("#template_id").val();
+
+    $.ajax({
+        type: "POST",
+        url: "/display.asmx/get_message",
+        data: "{'template_id': " + template_id + ", 'terminal_id': " + terminal_id + "}",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data, status) {
+
+            if (data.d.id > 0) {
+                // render the announcement
+                $("#message_title").text(data.d.title);
+                $("#message").text(data.d.message);
+
+                if (data.d.pic != null) {
+                    $("#message_img").html(data.d.pic);
+                }
+
+                $(".twitter").hide();
+                $(".announcement").show();
+
+            } else {
+                twitter();
+            }
+        }
+    });
+}
+
+function slideRight() {
+
+    tweet();
+
+    $(".twitter").css("left", "1580px");
+
+    setTimeout(enterRight, 1000);
+}
+
+function enterRight() {
+    $(".twitter").animate({ left: "40px" }, 500, "swing");
 }
 
 function next() {

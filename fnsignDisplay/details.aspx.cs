@@ -62,6 +62,13 @@ namespace fnsignDisplay
             Int32 terminal_id = Convert.ToInt32(ddl_terminals.SelectedValue);
             Session["event_id"] = ddl_event.SelectedValue;
 
+            HttpCookie myCookie = new HttpCookie("FNSIGN_EventID");
+            myCookie.Value = ddl_event.SelectedValue;
+            myCookie.Expires = DateTime.Now.AddMonths(1);
+            Response.Cookies.Add(myCookie);
+
+            string test = "test";
+
             Response.Redirect("/displays/" + terminal_id);
         }
 

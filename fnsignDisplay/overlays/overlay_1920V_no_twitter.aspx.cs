@@ -22,7 +22,7 @@ namespace fnsignDisplay.overlays
         public string font_color;
         public string bgimage;
         public string session_type;
-        public string session_title;
+        public string session_title_val;
         public string start_time;
         public string end_time;
         public string next_session;
@@ -53,12 +53,34 @@ namespace fnsignDisplay.overlays
 
                     Session current = _sessions.current(Convert.ToInt32(Session["event_id"]), l.sched_id);
 
-                    Session next = _sessions.next(Convert.ToInt32(Session["event_id"]), l.sched_id, current.end);
+                    if (current.internal_id > 0)
+                    {
+                        // good we have a session now let's get the rest
+                        Session next = _sessions.next(Convert.ToInt32(Session["event_id"]), l.sched_id, current.end);
 
-                    session_title = current.name;
-                    session_type = current.event_type;
-                    start_time = current.start.ToShortTimeString();
-                    next_session = next.event_start + ": " + next.name;
+                        session_title_val = current.name;
+
+                        Int32 title_length = session_title_val.Length;
+
+                        if (title_length > 50)
+                        {
+                            session_title.Attributes.Add("class", "session-type-big");
+                        }
+
+                        session_type = current.event_type;
+                        start_time = current.start.ToShortTimeString();
+                        next_session = next.event_start + ": " + next.name;
+                    }
+                    else
+                    {
+                        session_title_val = "No Current Session";
+                        session_type = "Currently there is no session in this room";
+                        start_time = "No Session";
+
+                        Session next = _sessions.next(Convert.ToInt32(Session["event_id"]), l.sched_id, DateTime.Now);
+
+                        next_session = next.event_start + ": " + next.name;
+                    }
                 }
                 else
                 {

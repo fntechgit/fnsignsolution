@@ -59,6 +59,7 @@
     <Compile Include="locations.cs" />
     <Compile Include="log.cs" />
     <Compile Include="media.cs" />
+    <Compile Include="messages.cs" />
     <Compile Include="overlays.cs" />
     <Compile Include="permissions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,7 +82,9 @@
     <Compile Include="users.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

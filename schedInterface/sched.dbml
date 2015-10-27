@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="fntech_signage" Class="schedDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=198.178.124.58;Initial Catalog=fntech_signage;Persist Security Info=True;User ID=sa" SettingsObjectName="schedInterface.Properties.Settings" SettingsPropertyName="fntech_signageConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=172.16.1.65\FNTECH;Initial Catalog=fntech_signage;Persist Security Info=True;User ID=sa" SettingsObjectName="schedInterface.Properties.Settings" SettingsPropertyName="fntech_signageConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.sessions" Member="sessions">
     <Type Name="session">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -161,6 +161,20 @@
       <Column Name="last_online" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
+  <Table Name="dbo.messages" Member="messages">
+    <Type Name="message">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="template_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="terminal_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="stop" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="entire" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="message" Member="message1" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="pic" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
   <Function Name="dbo.permissions_get_by_user" Method="permissions_get_by_user">
     <Parameter Name="user_id" Type="System.Int32" DbType="Int" />
     <ElementType Name="permissions_get_by_userResult">
@@ -308,5 +322,70 @@
       <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="template_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
+  </Function>
+  <Function Name="dbo.messages_by_event" Method="messages_by_event">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="messages_by_eventResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="template_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="terminal_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="stop" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="entire" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="message" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="pic" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.messages_by_terminal" Method="messages_by_terminal">
+    <ElementType Name="messages_by_terminalResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="template_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="terminal_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="stop" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="entire" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="message" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="pic" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="terminal_title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.messages_by_template" Method="messages_by_template">
+    <ElementType Name="messages_by_templateResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="template_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="terminal_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="stop" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="entire" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="message" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="pic" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="template_title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.messages_get_random" Method="messages_get_random">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="template_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="terminal_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="messages_get_randomResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="template_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="terminal_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="stop" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="entire" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="message" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="pic" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.clean_design_summit" Method="clean_design_summit">
+    <Return Type="System.Int32" />
   </Function>
 </Database>

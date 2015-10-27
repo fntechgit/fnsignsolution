@@ -22,6 +22,7 @@ namespace fnsignDisplay
         private schedInterface.templates _templates = new templates();
         private schedInterface.overlays _overlays = new schedInterface.overlays();
         private schedInterface.settings _settings = new settings();
+        private schedInterface.messages _messages = new messages();
         schedInterface.mediaManager _media = new mediaManager();
 
         [WebMethod(Description = "Get Current Session", EnableSession = true)]
@@ -31,10 +32,33 @@ namespace fnsignDisplay
 
             Session s = _sessions.current(event_id, location);
 
-            s.event_start = s.start.ToShortTimeString();
-            s.event_end = s.end.ToShortTimeString();
+            if (s.internal_id == 0)
+            {
+                s.name = "No Current Session";
+                s.event_type = "Currently there is no session in this room";
+                s.event_start = "No Session";
+                s.event_id = event_id;
+            }
+            else
+            {
+                s.event_start = s.start.ToShortTimeString();
+                s.event_end = s.end.ToShortTimeString();
+            }
+
+            if (Context.Session["event_id"] == null)
+            {
+                s.event_id = 0;
+            }
 
             return s;
+        }
+
+        [WebMethod(Description = "Login From Cookie", EnableSession = true)]
+        public Boolean loginAgain(string event_id)
+        {
+            Context.Session["event_id"] = event_id;
+
+            return true;
         }
 
         [WebMethod(Description = "Get Next Session", EnableSession = true)]
@@ -44,7 +68,14 @@ namespace fnsignDisplay
 
             Session current = this.current(location);
 
-            return _sessions.next(event_id, location, current.end);
+            if (current.internal_id > 0)
+            {
+                return _sessions.next(event_id, location, current.end);
+            }
+            else
+            {
+                return _sessions.next(event_id, location, DateTime.Now);
+            }
         }
 
         [WebMethod(Description = "Check for New Template", EnableSession = true)]
@@ -63,6 +94,14 @@ namespace fnsignDisplay
         public Media random()
         {
             return _media.random_by_event(Convert.ToInt32(Context.Session["event_id"]));
+        }
+
+        [WebMethod(Description = "Check for Announcement", EnableSession = true)]
+        public Message get_message(Int32 template_id, Int32 terminal_id)
+        {
+            Int32 event_id = Convert.ToInt32(Context.Session["event_id"]);
+
+            return _messages.random(event_id, template_id, terminal_id);
         }
 
     }

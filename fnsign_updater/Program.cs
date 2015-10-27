@@ -44,11 +44,36 @@ namespace fnsign_updater
 
                 Console.WriteLine("");
 
+                // look for deletions
+                List<Session> dbsess = _sessions.by_event(e.id);
+
+                foreach (Session d in dbsess)
+                {
+                    List<Session> found = sess.Where(x => x.event_key == d.event_key).ToList();
+
+                    if (found.Count == 0)
+                    {
+                        // remove the session
+                        Console.WriteLine("Session ID: " + d.id + " NOT FOUND");
+
+                        Console.WriteLine("Removing Session: " + d.name + "...");
+
+
+                        _sessions.delete(d.internal_id);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Session ID: " + d.id + " FOUND");
+                    }
+                }
+
                 foreach (Session s in sess)
                 {
                     // now we loop through the sessions and insert or update them
                     _sessions.add(s, e.id);
                 }
+
+                _sessions.clean_summit();
 
                 Console.WriteLine("");
 

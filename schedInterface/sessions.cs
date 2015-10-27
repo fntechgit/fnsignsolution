@@ -31,6 +31,7 @@ namespace schedInterface
                 s.event_type = item.type;
                 s.goers = item.attendees.ToString();
                 s.id = item.id.ToString();
+                s.event_key = item.event_key;
                 s.internal_id = item.id;
                 s.name = item.title;
                 s.speakers = item.speakers;
@@ -41,7 +42,168 @@ namespace schedInterface
             }
 
             return _sessions;
-        } 
+        }
+
+        public Boolean delete(Int32 id)
+        {
+            session s = db.sessions.Single(x => x.id == id);
+
+            db.sessions.DeleteOnSubmit(s);
+
+            db.SubmitChanges();
+
+            return true;
+        }
+
+        public List<Session> by_venue(Int32 event_id, Int32 venue_id)
+        {
+            List<Session> _sessions = new List<Session>();
+
+            var result = from sess in db.sessions
+                         where sess.event_id == event_id && sess.venue_id==venue_id.ToString()
+                         orderby sess.title
+                         select sess;
+
+            foreach (var item in result)
+            {
+                Session s = new Session();
+
+                s.description = item.description;
+                s.end = Convert.ToDateTime(item.session_end);
+                s.event_type = item.type;
+                s.goers = item.attendees.ToString();
+                s.id = item.id.ToString();
+                s.internal_id = item.id;
+                s.name = item.title;
+                s.speakers = item.speakers;
+                s.start = Convert.ToDateTime(item.session_start);
+                s.venue = item.venue;
+
+                _sessions.Add(s);
+            }
+
+            return _sessions;
+        }
+
+        public List<Session> marketplace()
+        {
+            List<Session> _sessions = new List<Session>();
+
+            var result = from sess in db.sessions
+                         where sess.event_id == 1000 && sess.venue_id == "348337" && Convert.ToDateTime(sess.session_start).Date==DateTime.Now.Date
+                         orderby sess.title
+                         select sess;
+
+            foreach (var item in result)
+            {
+                Session s = new Session();
+
+                s.description = item.description;
+                s.end = Convert.ToDateTime(item.session_end);
+                s.event_type = item.type;
+                s.goers = item.attendees.ToString();
+                s.id = item.id.ToString();
+                s.internal_id = item.id;
+                s.name = item.title;
+                s.speakers = item.speakers;
+                s.start = Convert.ToDateTime(item.session_start);
+                s.venue = item.venue;
+
+                _sessions.Add(s);
+            }
+
+            return _sessions;
+        }
+
+        public List<Session> brownbag()
+        {
+            List<Session> _sessions = new List<Session>();
+
+            var result = from sess in db.sessions
+                         where sess.event_id == 1000 && sess.type=="#vBrownBag" && Convert.ToDateTime(sess.session_start).Date == DateTime.Now.Date
+                         orderby sess.session_start, sess.title
+                         select sess;
+
+            foreach (var item in result)
+            {
+                Session s = new Session();
+
+                s.description = item.description;
+                s.end = Convert.ToDateTime(item.session_end);
+                s.event_type = item.type;
+                s.goers = item.attendees.ToString();
+                s.id = item.id.ToString();
+                s.internal_id = item.id;
+                s.name = item.title;
+                s.speakers = item.speakers;
+                s.start = Convert.ToDateTime(item.session_start);
+                s.venue = item.venue;
+
+                _sessions.Add(s);
+            }
+
+            return _sessions;
+        }
+
+        public List<Session> summit()
+        {
+            List<Session> _sessions = new List<Session>();
+
+            var result = from sess in db.sessions
+                         where sess.event_id == 1001 && Convert.ToDateTime(sess.session_start).Date == DateTime.Now.Date
+                         orderby sess.session_start, sess.title
+                         select sess;
+
+            foreach (var item in result)
+            {
+                Session s = new Session();
+
+                s.description = item.description;
+                s.end = Convert.ToDateTime(item.session_end);
+                s.event_type = item.type;
+                s.goers = item.attendees.ToString();
+                s.id = item.id.ToString();
+                s.internal_id = item.id;
+                s.name = item.title;
+                s.speakers = item.speakers;
+                s.start = Convert.ToDateTime(item.session_start);
+                s.venue = item.venue;
+
+                _sessions.Add(s);
+            }
+
+            return _sessions;
+        }
+
+        public List<Session> by_type(Int32 event_id, string type)
+        {
+            List<Session> _sessions = new List<Session>();
+
+            var result = from sess in db.sessions
+                         where sess.event_id == event_id && sess.type==type
+                         orderby sess.title
+                         select sess;
+
+            foreach (var item in result)
+            {
+                Session s = new Session();
+
+                s.description = item.description;
+                s.end = Convert.ToDateTime(item.session_end);
+                s.event_type = item.type;
+                s.goers = item.attendees.ToString();
+                s.id = item.id.ToString();
+                s.internal_id = item.id;
+                s.name = item.title;
+                s.speakers = item.speakers;
+                s.start = Convert.ToDateTime(item.session_start);
+                s.venue = item.venue;
+
+                _sessions.Add(s);
+            }
+
+            return _sessions;
+        }
 
         public List<Session> all(string conference_url, string api_key)
         {
@@ -57,6 +219,13 @@ namespace schedInterface
             var mySessions = new JavaScriptSerializer().Deserialize<List<Session>>(response.Content);
 
             return mySessions;
+        }
+
+        public Boolean clean_summit()
+        {
+            db.clean_design_summit();
+
+            return true;
         }
 
         public Session add(Session s, Int32 event_id)
@@ -166,6 +335,7 @@ namespace schedInterface
                 s.speakers = item.speakers;
                 s.start = Convert.ToDateTime(item.session_start);
                 s.venue = item.venue;
+                s.event_id = Convert.ToInt32(item.event_id);
             }
 
             return s;
@@ -187,6 +357,12 @@ namespace schedInterface
                 s.start = Convert.ToDateTime(item.session_start);
                 s.event_start = s.start.ToShortTimeString();
                 s.venue = item.venue;
+            }
+
+            if (s.internal_id == 0)
+            {
+                s.event_start = "No Session";
+                s.name = "There is no session upcoming in this location";
             }
 
             return s;
@@ -212,5 +388,6 @@ namespace schedInterface
         public string venue_id { get; set; }
         public string speakers { get; set; }
         public Int32 internal_id { get; set; }
+        public Int32 event_id { get; set; }
     }
 }

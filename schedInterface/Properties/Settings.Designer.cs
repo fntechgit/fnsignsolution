@@ -26,8 +26,8 @@ namespace schedInterface.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=198.178.124.58;Initial Catalog=fntech_signage;Persist Security Info=T" +
-            "rue;User ID=sa;Password=Theymightbe73!")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=172.16.1.65\\FNTECH;Initial Catalog=fntech_signage;Persist Security In" +
+            "fo=True;User ID=sa;Password=OhHowHeLovesUs!")]
         public string fntech_signageConnectionString {
             get {
                 return ((string)(this["fntech_signageConnectionString"]));

@@ -57,6 +57,13 @@ namespace fnsignManager
             routes.MapPageRoute("templates-route", "templates", "~/templates.aspx");
             routes.MapPageRoute("templates-delete-route", "templates/delete/{id}", "~/delete_template.aspx");
 
+            // ####################### ANNOUNCEMENTS ROUTE ######################## //
+            routes.MapPageRoute("announcements-route", "announcements", "~/messages.aspx");
+            routes.MapPageRoute("announcements-add-route", "announcements/add", "~/add_message.aspx");
+            routes.MapPageRoute("announcements-edit-route", "announcements/edit/{id}", "~/add_message.aspx");
+            routes.MapPageRoute("announcements-delete-route", "announcements/delete/{id}", "~/delete_message.aspx");
+
+
             // this has to be last!!!!
             //routes.MapPageRoute("page-by-url-route", "{url}", "~/page.aspx");
         }

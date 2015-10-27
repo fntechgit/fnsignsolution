@@ -40,6 +40,15 @@ namespace fnsignDisplay.overlays {
         protected global::System.Web.UI.WebControls.HiddenField event_id;
         
         /// <summary>
+        /// template_id control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField template_id;
+        
+        /// <summary>
         /// location_sched control.
         /// </summary>
         /// <remarks>
@@ -56,5 +65,14 @@ namespace fnsignDisplay.overlays {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField terminal_id;
+        
+        /// <summary>
+        /// session_title control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl session_title;
     }
 }

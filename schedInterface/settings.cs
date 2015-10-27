@@ -31,12 +31,12 @@ namespace schedInterface
 
         public string site_url()
         {
-            return @"http://fnsign.ovri.de";
+            return @"http://fnsign.fntech.com";
         }
 
         public string display_url()
         {
-            return @"http://fndisplay.ovri.de";
+            return @"http://fndisplay.fntech.com";
         }
 
         #endregion

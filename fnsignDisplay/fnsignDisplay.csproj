@@ -61,11 +61,17 @@
     <Content Include="display.asmx" />
     <Content Include="display.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="js\daily.js" />
     <Content Include="js\display.js" />
+    <Content Include="js\jquery.cookie.js" />
     <Content Include="js\notemplate.js" />
     <Content Include="login.aspx" />
     <Content Include="overlays\overlay_1920V_no_twitter.aspx" />
     <Content Include="overlays\overlay_1920V_twitter.aspx" />
+    <Content Include="overlays\overlay_1920_brownbag.aspx" />
+    <Content Include="overlays\overlay_1920_market.aspx" />
+    <Content Include="overlays\overlay_1920_summit.aspx" />
+    <Content Include="overlays\overlay_blank.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -116,6 +122,34 @@
     </Compile>
     <Compile Include="overlays\overlay_1920V_twitter.aspx.designer.cs">
       <DependentUpon>overlay_1920V_twitter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="overlays\overlay_1920_brownbag.aspx.cs">
+      <DependentUpon>overlay_1920_brownbag.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="overlays\overlay_1920_brownbag.aspx.designer.cs">
+      <DependentUpon>overlay_1920_brownbag.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="overlays\overlay_1920_market.aspx.cs">
+      <DependentUpon>overlay_1920_market.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="overlays\overlay_1920_market.aspx.designer.cs">
+      <DependentUpon>overlay_1920_market.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="overlays\overlay_1920_summit.aspx.cs">
+      <DependentUpon>overlay_1920_summit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="overlays\overlay_1920_summit.aspx.designer.cs">
+      <DependentUpon>overlay_1920_summit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="overlays\overlay_blank.aspx.cs">
+      <DependentUpon>overlay_blank.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="overlays\overlay_blank.aspx.designer.cs">
+      <DependentUpon>overlay_blank.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

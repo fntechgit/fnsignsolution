@@ -32,7 +32,12 @@
                                 <span>Templates</span>
                             </a>
                         </li>
-		                
+		                <li>
+		                    <a href="/announcements">
+		                        <i class="fa fa-bullhorn" aria-hidden="true"></i>
+		                        Announcements
+		                    </a> 
+		                </li>
                         <li class="nav-parent" class="nav-active">
                             <a href="/sessions">
                                 <i class="fa fa-star" aria-hidden="true"></i>
