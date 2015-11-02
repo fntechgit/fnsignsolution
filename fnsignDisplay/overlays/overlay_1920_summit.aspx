@@ -9,7 +9,7 @@
 		<script src="http://momentjs.com/downloads/moment.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
         
-        <script src="/js/daily.js" type="text/javascript"></script>
+        <script src="/js/daily.js?ver=10.28.15" type="text/javascript"></script>
         
         <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6546274/756308/css/fonts.css" />
 		

@@ -36,7 +36,7 @@ namespace fnsignDisplay
             {
                 s.name = "No Current Session";
                 s.event_type = "Currently there is no session in this room";
-                s.event_start = "No Session";
+                s.event_start = "Time";
                 s.event_id = event_id;
             }
             else

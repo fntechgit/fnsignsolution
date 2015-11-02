@@ -91,7 +91,7 @@ namespace schedInterface
 
             var result = from sess in db.sessions
                          where sess.event_id == 1000 && sess.venue_id == "348337" && Convert.ToDateTime(sess.session_start).Date==DateTime.Now.Date
-                         orderby sess.title
+                         orderby sess.session_start
                          select sess;
 
             foreach (var item in result)

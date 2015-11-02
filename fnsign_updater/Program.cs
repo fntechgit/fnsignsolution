@@ -70,7 +70,10 @@ namespace fnsign_updater
                 foreach (Session s in sess)
                 {
                     // now we loop through the sessions and insert or update them
-                    _sessions.add(s, e.id);
+                    if (s.event_type != "Japanese Language")
+                    {
+                        _sessions.add(s, e.id);
+                    }
                 }
 
                 _sessions.clean_summit();
