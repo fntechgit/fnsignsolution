@@ -67,6 +67,15 @@ namespace fnsignDisplay.overlays {
         protected global::System.Web.UI.WebControls.HiddenField terminal_id;
         
         /// <summary>
+        /// video_bg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel video_bg;
+        
+        /// <summary>
         /// session_title control.
         /// </summary>
         /// <remarks>

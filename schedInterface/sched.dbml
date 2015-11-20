@@ -93,24 +93,6 @@
       <Column Name="t_hashtag" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.templates" Member="templates">
-    <Type Name="template">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="orientation" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="resolution" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="bgcolor" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="bgimage" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="overlay" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="overlay_font" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="overlay_font_color" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="rotate_ads" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="ad_interval" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="t_username" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="t_hashtag" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.media" Member="medias">
     <Type Name="media">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -173,6 +155,25 @@
       <Column Name="title" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
       <Column Name="message" Member="message1" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="pic" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.templates" Member="templates">
+    <Type Name="template">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="orientation" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="resolution" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="bgcolor" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="bgimage" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="overlay" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="overlay_font" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="overlay_font_color" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="rotate_ads" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ad_interval" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="t_username" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="t_hashtag" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="video" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Function Name="dbo.permissions_get_by_user" Method="permissions_get_by_user">

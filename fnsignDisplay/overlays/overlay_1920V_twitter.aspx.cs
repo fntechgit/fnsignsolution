@@ -28,6 +28,7 @@ namespace fnsignDisplay.overlays
         public string end_time;
         public string next_session;
         public string fnsignUrl;
+        public string video;
 
         public Media m = new Media();
 
@@ -53,9 +54,17 @@ namespace fnsignDisplay.overlays
 
                     Template temp = _templates.single(Convert.ToInt32(t.template_id));
 
-                    template_id.Value = temp.id.ToString();
-
                     bgimage = temp.bgimage;
+                    video = bgimage;
+
+                    if (temp.video)
+                    {
+                        video_bg.Visible = true;
+
+                        bgimage = null;
+                    }
+
+                    template_id.Value = temp.id.ToString();
 
                     event_id.Value = t.event_id.ToString();
                     location_sched.Value = l.sched_id;

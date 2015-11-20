@@ -50,12 +50,6 @@
         <elementListCompartment Id="56ad2a2c-7821-47e7-af97-0926939a7049" absoluteBounds="1.2650000000000001, 1.585, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="7edd60d8-2bf8-40a2-9d26-40db3b302047" absoluteBounds="3.75, 8.875, 2, 3.5016097005208326">
-      <DataClassMoniker Name="/schedDataContext/template" />
-      <nestedChildShapes>
-        <elementListCompartment Id="b4f17615-b2f6-4c22-ad9e-8071dfd44ba9" absoluteBounds="3.765, 9.335, 1.9700000000000002, 2.941609700520833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
     <classShape Id="2508f5bb-f8b2-439b-bd6b-81f96c35de44" absoluteBounds="6.625, 19.25, 2, 5.4246240234375">
       <DataClassMoniker Name="/schedDataContext/media" />
       <nestedChildShapes>
@@ -78,6 +72,12 @@
       <DataClassMoniker Name="/schedDataContext/message" />
       <nestedChildShapes>
         <elementListCompartment Id="3343ea41-48f7-470c-8696-3329f960d9e9" absoluteBounds="3.39, 21.835, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="67507cdb-a2d0-41ac-aab3-80213926b481" absoluteBounds="3.75, 9, 2, 3.6939111328124996">
+      <DataClassMoniker Name="/schedDataContext/template" />
+      <nestedChildShapes>
+        <elementListCompartment Id="31fa8d36-0ed3-44d2-ae8d-b9d6d35f4e09" absoluteBounds="3.765, 9.46, 1.9700000000000002, 3.1339111328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

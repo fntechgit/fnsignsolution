@@ -101,6 +101,11 @@ namespace fnsignManager
                 string extension = Path.GetExtension(image.FileName.ToString());
                 string unique = Guid.NewGuid().ToString();
 
+                if (extension == ".mp4")
+                {
+                    t.video = true;
+                }
+
                 image.SaveAs(path + unique + extension);
 
                 t.bgimage = unique + extension;

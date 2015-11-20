@@ -140,7 +140,7 @@
 											</div>
                                             
                                             <div class="form-group">
-												<label class="col-md-3 control-label">Background Image</label>
+												<label class="col-md-3 control-label">Background Image or Video (Video must be MP4 format)</label>
 												<div class="col-md-6">
 													<div class="fileupload fileupload-new" data-provides="fileupload">
 														<asp:FileUpload runat="server" ID="image" ClientIDMode="Static" />

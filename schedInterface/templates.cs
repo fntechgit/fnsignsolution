@@ -98,6 +98,7 @@ namespace schedInterface
             tt.title = t.title;
             tt.t_hashtag = t.t_hashtag;
             tt.t_username = t.t_username;
+            tt.video = t.video;
             
             db.templates.InsertOnSubmit(tt);
 
@@ -125,6 +126,7 @@ namespace schedInterface
             tt.title = t.title;
             tt.t_hashtag = t.t_hashtag;
             tt.t_username = t.t_username;
+            tt.video = t.video;
 
             db.SubmitChanges();
 
@@ -155,6 +157,7 @@ namespace schedInterface
                 t.title = item.title;
                 t.t_hashtag = item.t_hashtag;
                 t.t_username = item.t_username;
+                t.video = item.video;
             }
 
             return t;
@@ -179,5 +182,6 @@ namespace schedInterface
         public string t_username { get; set; }
         public string t_hashtag { get; set; }
         public List<string> hashtags { get; set; }
+        public Boolean video { get; set; }
     }
 }
