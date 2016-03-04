@@ -176,6 +176,22 @@
       <Column Name="video" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
+  <Table Name="dbo.decks" Member="decks">
+    <Type Name="deck">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.slides" Member="slides">
+    <Type Name="slide">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="deck_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="source" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="display" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
   <Function Name="dbo.permissions_get_by_user" Method="permissions_get_by_user">
     <Parameter Name="user_id" Type="System.Int32" DbType="Int" />
     <ElementType Name="permissions_get_by_userResult">

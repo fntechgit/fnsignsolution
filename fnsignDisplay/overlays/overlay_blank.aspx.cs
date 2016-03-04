@@ -12,6 +12,7 @@ namespace fnsignDisplay.overlays
     {
         public string bgimage;
         public string fnsignUrl;
+        public string video;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -31,6 +32,14 @@ namespace fnsignDisplay.overlays
                     Template temp = _templates.single(Convert.ToInt32(t.template_id));
 
                     bgimage = temp.bgimage;
+                    video = bgimage;
+
+                    if (temp.video)
+                    {
+                        video_bg.Visible = true;
+
+                        bgimage = null;
+                    }
 
                     template_id.Value = temp.id.ToString();
                     terminal_id.Value = t.id.ToString();

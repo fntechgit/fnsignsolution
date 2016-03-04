@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -27,6 +28,7 @@ namespace fnsignDisplay.overlays
         public string end_time;
         public string next_session;
         public string fnsignUrl;
+        public string video;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -45,6 +47,14 @@ namespace fnsignDisplay.overlays
                     Template temp = _templates.single(Convert.ToInt32(t.template_id));
 
                     bgimage = temp.bgimage;
+                    video = bgimage;
+
+                    if (temp.video)
+                    {
+                        video_bg.Visible = true;
+
+                        bgimage = null;
+                    }
 
                     event_id.Value = t.event_id.ToString();
                     location_sched.Value = l.sched_id;

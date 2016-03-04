@@ -7,81 +7,81 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace fnsignDisplay.overlays {
+namespace fnsignManager {
     
     
-    public partial class overlay_1920_market {
+    public partial class decks_add {
         
         /// <summary>
-        /// form1 control.
+        /// preference_link control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl preference_link;
         
         /// <summary>
-        /// event_id control.
+        /// display_link control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField event_id;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl display_link;
         
         /// <summary>
-        /// template_id control.
+        /// event_link control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField template_id;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl event_link;
         
         /// <summary>
-        /// location_sched control.
+        /// user_link control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField location_sched;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl user_link;
         
         /// <summary>
-        /// terminal_id control.
+        /// pnl_success control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField terminal_id;
+        protected global::System.Web.UI.WebControls.Panel pnl_success;
         
         /// <summary>
-        /// current_date control.
+        /// title control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField current_date;
+        protected global::System.Web.UI.WebControls.TextBox title;
         
         /// <summary>
-        /// video_bg control.
+        /// description control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel video_bg;
+        protected global::System.Web.UI.WebControls.TextBox description;
         
         /// <summary>
-        /// ph_sessions control.
+        /// btn_process control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder ph_sessions;
+        protected global::System.Web.UI.WebControls.Button btn_process;
     }
 }

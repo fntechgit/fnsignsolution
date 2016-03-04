@@ -28,6 +28,21 @@
 			
 			#current_date { text-transform: uppercase; }
 			
+			video#bgvid { 
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                min-width: 100%;
+                min-height: 100%;
+                width: auto;
+                height: auto;
+                z-index: -100;
+                -webkit-transform: translateX(-50%) translateY(-50%);
+                transform: translateX(-50%) translateY(-50%);
+                background: url(polina.jpg) no-repeat;
+                background-size: cover; 
+            }
+			
 		</style>
 
 </head>
@@ -38,6 +53,13 @@
         <asp:HiddenField runat="server" ID="location_sched" />
         <asp:HiddenField runat="server" ID="terminal_id" />
         <asp:HiddenField runat="server" ID="current_date" />
+        
+        <asp:Panel runat="server" ID="video_bg" Visible="false">
+    <video autoplay loop id="bgvid">
+        <source src="http://fnsign.fntech.com/uploads/<%= video %>" type="video/mp4">
+    </video>
+    </asp:Panel>
+
         <div class="wrapper">
             <div class="content">
                 <div class="inner">

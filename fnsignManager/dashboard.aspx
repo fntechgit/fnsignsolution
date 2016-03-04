@@ -36,6 +36,12 @@
 		                        Announcements
 		                    </a> 
 		                </li>
+                        <li>
+                            <a href="/decks">
+                                <i class="fa fa-photo" aria-hidden="true"></i>
+                                Decks
+                            </a>
+                        </li>
                         <li class="nav-parent">
                             <a href="/sessions">
                                 <i class="fa fa-star" aria-hidden="true"></i>

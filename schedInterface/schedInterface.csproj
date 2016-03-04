@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="auth.cs" />
+    <Compile Include="decks.cs" />
     <Compile Include="events.cs" />
     <Compile Include="locations.cs" />
     <Compile Include="log.cs" />
@@ -76,6 +77,7 @@
     </Compile>
     <Compile Include="sessions.cs" />
     <Compile Include="settings.cs" />
+    <Compile Include="slides.cs" />
     <Compile Include="templates.cs" />
     <Compile Include="terminals.cs" />
     <Compile Include="twitter.cs" />
