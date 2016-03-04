@@ -34,6 +34,8 @@ namespace fnsignManager
         {
             Slide s = new Slide();
 
+            d = _decks.single(Convert.ToInt32(Page.RouteData.Values["id"]));
+
             s.deck_id = d.id;
 
             if (slideImg.HasFile)
