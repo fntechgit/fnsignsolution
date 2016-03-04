@@ -70,9 +70,9 @@ namespace fnsignManager
             routes.MapPageRoute("decks-delete-route", "decks/delete/{id}", "~/decks_delete.aspx");
 
             // ####################### SLIDES ROUTE ############################## //
-            routes.MapPageRoute("slides-by-deck-route", "/decks/slides/{id}", "~/slides.aspx");
-            routes.MapPageRoute("slides-add-route", "/slides/add/{id}", "~/slides_add.aspx");
-            routes.MapPageRoute("slides-delete-route", "/slides/delete/{id}", "~/slides_delete.aspx");
+            routes.MapPageRoute("slides-by-deck-route", "decks/slides/{id}", "~/slides.aspx");
+            routes.MapPageRoute("slides-add-route", "slides/add/{id}", "~/slides_add.aspx");
+            routes.MapPageRoute("slides-delete-route", "slides/delete/{id}", "~/slides_delete.aspx");
 
             // this has to be last!!!!
             //routes.MapPageRoute("page-by-url-route", "{url}", "~/page.aspx");
