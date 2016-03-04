@@ -113,7 +113,7 @@
                     <asp:Panel runat="server" ID="pnl_success" Visible="false">
                         <div class="alert alert-success">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                            <strong>Success!</strong> You have successfully added a slide
+                            <strong>Success!</strong> You have successfully added a slide : <a href="/decks/slides/<%= d.id %>">Back to <%= d.title %> Slides</a>
                         </div>
                     </asp:Panel>
 

@@ -27,9 +27,11 @@ namespace fnsignManager
         {
             permissions();
 
+            deck_id = Convert.ToInt32(Page.RouteData.Values["id"]);
+
             foreach (Slide s in _slides.by_deck(Convert.ToInt32(Page.RouteData.Values["id"])))
             {
-                ph_tags.Controls.Add(new LiteralControl("<tr><td><img src=\"/uploads/" + s.source + "\" /></td><td><a href=\"/slides/delete/" + s.id + "\"><i class=\"fa fa-trash\"></i></a></td></tr>"));
+                ph_tags.Controls.Add(new LiteralControl("<tr><td><img src=\"/uploads/" + s.source + "\" width=\"95%\" /></td><td><a href=\"/slides/delete/" + s.id + "\"><i class=\"fa fa-trash\"></i></a></td></tr>"));
             }
         }
 
