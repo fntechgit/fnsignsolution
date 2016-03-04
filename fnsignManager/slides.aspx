@@ -121,8 +121,7 @@
 					<table class="table table-no-more table-bordered table-striped mb-none">
 						<thead>
 							<tr>
-								<th>Title</th>
-								<th class="hidden-xs hidden-sm">Description</th>
+								<th>Slide</th>
                                 <th>Actions</th>
 							</tr>
 						</thead>

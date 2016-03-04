@@ -1630,6 +1630,9 @@
     <Content Include="permissions.aspx" />
     <Content Include="services\slides.asmx" />
     <Content Include="sessions.aspx" />
+    <Content Include="slides.aspx" />
+    <Content Include="slides_add.aspx" />
+    <Content Include="slides_delete.aspx" />
     <Content Include="templates.aspx" />
     <Content Include="template_add.aspx" />
     <Content Include="users.aspx" />
@@ -1817,6 +1820,27 @@
     </Compile>
     <Compile Include="sessions.aspx.designer.cs">
       <DependentUpon>sessions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="slides.aspx.cs">
+      <DependentUpon>slides.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="slides.aspx.designer.cs">
+      <DependentUpon>slides.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="slides_add.aspx.cs">
+      <DependentUpon>slides_add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="slides_add.aspx.designer.cs">
+      <DependentUpon>slides_add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="slides_delete.aspx.cs">
+      <DependentUpon>slides_delete.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="slides_delete.aspx.designer.cs">
+      <DependentUpon>slides_delete.aspx</DependentUpon>
     </Compile>
     <Compile Include="templates.aspx.cs">
       <DependentUpon>templates.aspx</DependentUpon>

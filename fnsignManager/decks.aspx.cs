@@ -25,7 +25,7 @@ namespace fnsignManager
 
             foreach (Deck d in _decks.by_event(Convert.ToInt32(Session["event_id"])))
             {
-                ph_tags.Controls.Add(new LiteralControl("<tr><td data-title=\"Title\">" + d.title + "</td><td data-title=\"Description\" class=\"hidden-xs hidden-sm\">" + d.description + "</td><td data-title=\"Actions\"><a href=\"/decks/edit/" + d.id + "\"><i class=\"fa fa-edit\"></i></a> <a href=\"/decks/slides/" + + d.id + "\"><i class=\"fa fa-photo\"></i></a> <a href=\"/decks/delete/" + d.id + "\"><i class=\"fa fa-trash-o\"></i></a></td></tr>"));
+                ph_tags.Controls.Add(new LiteralControl("<tr><td data-title=\"Title\">" + d.title + "</td><td data-title=\"Description\" class=\"hidden-xs hidden-sm\">" + d.description + "</td><td data-title=\"Actions\"><a href=\"/decks/edit/" + d.id + "\"><i class=\"fa fa-edit\"></i></a> <a href=\"/decks/slides/" + d.id + "\"><i class=\"fa fa-photo\"></i></a> <a href=\"/decks/delete/" + d.id + "\"><i class=\"fa fa-trash-o\"></i></a></td></tr>"));
             }
         }
 

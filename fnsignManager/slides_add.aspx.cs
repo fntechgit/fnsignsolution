@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using schedInterface;
+using System.IO;
 
 namespace fnsignManager
 {
-    public partial class slides : System.Web.UI.Page
+    public partial class slides_add : System.Web.UI.Page
     {
-        public Int32 deck_id;
+        public Deck d;
 
         public string total_media = "0";
         public string facebook_media = "0";
@@ -20,16 +20,35 @@ namespace fnsignManager
         public string unapproved_media = "0";
         public string all_media = "0";
 
-        private schedInterface.decks _decks = new schedInterface.decks();
         private schedInterface.slides _slides = new schedInterface.slides();
+        private schedInterface.decks _decks = new schedInterface.decks();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             permissions();
 
-            foreach (Slide s in _slides.by_deck(Convert.ToInt32(Page.RouteData.Values["id"])))
+            d = _decks.single(Convert.ToInt32(Page.RouteData.Values["id"]));
+        }
+
+        protected void update(object sender, EventArgs e)
+        {
+            Slide s = new Slide();
+
+            s.deck_id = d.id;
+
+            if (slideImg.HasFile)
             {
-                ph_tags.Controls.Add(new LiteralControl("<tr><td><img src=\"/uploads/" + s.source + "\" /></td><td><a href=\"/slides/delete/" + s.id + "\"><i class=\"fa fa-trash\"></i></a></td></tr>"));
+                string path = Server.MapPath("~/uploads/");
+                string extension = Path.GetExtension(slideImg.FileName.ToString());
+                string unique = "DECK_" + d.id + "_" + Guid.NewGuid().ToString();
+
+                slideImg.SaveAs(path + unique + extension);
+
+                s.source = unique + extension;
+
+                _slides.create(s);
+
+                pnl_success.Visible = true;
             }
         }
 
