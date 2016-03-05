@@ -29,12 +29,16 @@ namespace fnsignManager
             {
                 add_edit = "Edit";
 
-                Deck d = _decks.single(Convert.ToInt32(Page.RouteData.Values["id"]));
+                if (!Page.IsPostBack)
+                {
 
-                title.Text = d.title;
-                description.Text = d.description;
+                    Deck d = _decks.single(Convert.ToInt32(Page.RouteData.Values["id"]));
 
-                btn_process.Text = "Update";
+                    title.Text = d.title;
+                    description.Text = d.description;
+
+                    btn_process.Text = "Update";
+                }
             }
         }
 

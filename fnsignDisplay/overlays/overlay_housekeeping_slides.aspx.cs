@@ -8,7 +8,7 @@ using schedInterface;
 
 namespace fnsignDisplay.overlays
 {
-    public partial class overlay_1920_market : System.Web.UI.Page
+    public partial class overlay_housekeeping_slides : System.Web.UI.Page
     {
         private schedInterface.terminals _terminals = new terminals();
         private schedInterface.templates _templates = new templates();
@@ -16,6 +16,8 @@ namespace fnsignDisplay.overlays
         private schedInterface.sessions _sessions = new sessions();
         private schedInterface.locations _locations = new locations();
         private schedInterface.settings _settings = new settings();
+        private schedInterface.mediaManager _media = new mediaManager();
+        private schedInterface.slides _slides = new slides();
 
         public string bgcolor;
         public string font;
@@ -29,11 +31,19 @@ namespace fnsignDisplay.overlays
         public string fnsignUrl;
         public string video;
 
+        public Media m = new Media();
+
+        public string twitimg;
+
+        // twitter
+        public string twitpic;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["event_id"] != null)
             {
                 fnsignUrl = _settings.site_url();
+
 
                 Terminal t = _terminals.single(Convert.ToInt32(Session["event_id"]),
                     Convert.ToInt32(Page.RouteData.Values["id"]));
@@ -55,15 +65,15 @@ namespace fnsignDisplay.overlays
                         bgimage = null;
                     }
 
+                    template_id.Value = temp.id.ToString();
+
                     event_id.Value = t.event_id.ToString();
                     location_sched.Value = l.sched_id;
                     terminal_id.Value = Page.RouteData.Values["id"].ToString();
 
-                    current_date.Value = DateTime.Now.Date.ToShortDateString();
-
-                    foreach (Session s in _sessions.by_event_by_location_by_day(t.event_id, l.sched_id))
+                    foreach (Slide s in _slides.by_deck(Convert.ToInt32(t.deck)))
                     {
-                        ph_sessions.Controls.Add(new LiteralControl("<div class=\"row\"><div class=\"left\">" + s.start.ToShortTimeString() + "</div><div class=\"right\">" + s.name + "</div></div>"));
+                        ph_slides.Controls.Add(new LiteralControl("<div class=\"slide\"><img src=\"http://fnsign.fntech.com/uploads/" + s.source + "\" /></div>"));
                     }
                 }
                 else

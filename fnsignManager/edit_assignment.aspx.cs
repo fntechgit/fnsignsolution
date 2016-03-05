@@ -12,6 +12,7 @@ namespace fnsignManager
     {
         private schedInterface.terminals _terminals = new terminals();
         private schedInterface.templates _templates = new schedInterface.templates();
+        private schedInterface.decks _decks = new schedInterface.decks();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -28,6 +29,15 @@ namespace fnsignManager
 
                 ddl_template.Items.Insert(0, i);
 
+                ddl_deck.DataSource = _decks.by_event(Convert.ToInt32(Session["event_id"]));
+                ddl_deck.DataValueField = "id";
+                ddl_deck.DataTextField = "title";
+                ddl_deck.DataBind();
+
+                ListItem i2 = new ListItem("Select Slide Deck", "");
+
+                ddl_deck.Items.Insert(0, i2);
+
                 Terminal t = _terminals.single(Convert.ToInt32(Session["event_id"].ToString()), Convert.ToInt32(Page.RouteData.Values["id"] as string));
 
                 title.Text = t.title;
@@ -40,6 +50,16 @@ namespace fnsignManager
                 {
                     ddl_template.SelectedIndex = 0;
                 }
+
+                if (t.deck != null)
+                {
+                    ddl_deck.SelectedValue = t.deck.ToString();
+                }
+
+                if (t.rotate != null)
+                {
+                    ddl_rotate.SelectedValue = t.rotate.ToString();
+                }
             }
         }
 
@@ -47,14 +67,11 @@ namespace fnsignManager
         {
             Terminal t = _terminals.single(Convert.ToInt32(Session["event_id"].ToString()), Convert.ToInt32(Page.RouteData.Values["id"] as string));
 
-            if (ddl_template.SelectedIndex > 0)
-            {
-                t.template_id = Convert.ToInt32(ddl_template.SelectedValue);
-            }
-            else
-            {
-                t.template_id = null;
-            }
+            t.template_id = ddl_template.SelectedIndex > 0 ? (int?) Convert.ToInt32(ddl_template.SelectedValue) : null;
+
+            t.deck = ddl_deck.SelectedIndex > 0 ? (int?) Convert.ToInt32(ddl_deck.SelectedValue) : null;
+
+            t.rotate = ddl_rotate.SelectedIndex > 0 ? (int?) Convert.ToInt32(ddl_rotate.SelectedValue) : null;
 
             _terminals.update(t);
 

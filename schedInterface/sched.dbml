@@ -132,17 +132,6 @@
       <Column Name="footer" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.terminals" Member="terminals">
-    <Type Name="terminal">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="location_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="template_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="online" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="last_online" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-    </Type>
-  </Table>
   <Table Name="dbo.messages" Member="messages">
     <Type Name="message">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -190,6 +179,19 @@
       <Column Name="deck_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="source" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="display" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.terminals" Member="terminals">
+    <Type Name="terminal">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="location_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="template_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="online" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="last_online" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="deck" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="rotate" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
   <Function Name="dbo.permissions_get_by_user" Method="permissions_get_by_user">
@@ -251,19 +253,6 @@
       <Column Name="t_username" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
       <Column Name="t_hashtag" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="overlay_title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.terminal_assignments_by_event" Method="terminal_assignments_by_event">
-    <Parameter Name="id" Type="System.Int32" DbType="Int" />
-    <ElementType Name="terminal_assignments_by_eventResult">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="location_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="template_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="online" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="location_title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="template_title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
     </ElementType>
   </Function>
   <Function Name="dbo.session_get_current" Method="session_get_current">
@@ -404,5 +393,43 @@
   </Function>
   <Function Name="dbo.clean_design_summit" Method="clean_design_summit">
     <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.terminal_assignments_by_event" Method="terminal_assignments_by_event">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="terminal_assignments_by_eventResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="location_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="template_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="online" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="last_online" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="deck" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="rotate" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="location_title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="template_title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sessions_by_event_location_date" Method="sessions_by_event_location_date">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="location" Type="System.String" DbType="VarChar(255)" />
+    <ElementType Name="sessions_by_event_location_dateResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_key" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="session_start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="session_end" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="type" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="seats" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="attendees" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="venue_id" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="venue" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="speakers" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
   </Function>
 </Database>

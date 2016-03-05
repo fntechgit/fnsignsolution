@@ -72,6 +72,7 @@
     <Content Include="overlays\overlay_1920_market.aspx" />
     <Content Include="overlays\overlay_1920_summit.aspx" />
     <Content Include="overlays\overlay_blank.aspx" />
+    <Content Include="overlays\overlay_housekeeping_slides.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -152,6 +153,13 @@
     </Compile>
     <Compile Include="overlays\overlay_blank.aspx.designer.cs">
       <DependentUpon>overlay_blank.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="overlays\overlay_housekeeping_slides.aspx.cs">
+      <DependentUpon>overlay_housekeeping_slides.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="overlays\overlay_housekeeping_slides.aspx.designer.cs">
+      <DependentUpon>overlay_housekeeping_slides.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

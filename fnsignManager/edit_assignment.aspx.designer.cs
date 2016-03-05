@@ -85,6 +85,33 @@ namespace fnsignManager {
         protected global::System.Web.UI.WebControls.DropDownList ddl_template;
         
         /// <summary>
+        /// deck_wrapper control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl deck_wrapper;
+        
+        /// <summary>
+        /// ddl_deck control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddl_deck;
+        
+        /// <summary>
+        /// ddl_rotate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddl_rotate;
+        
+        /// <summary>
         /// btn_process control.
         /// </summary>
         /// <remarks>

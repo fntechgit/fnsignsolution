@@ -44,6 +44,34 @@ namespace schedInterface
             return _sessions;
         }
 
+        public List<Session> by_event_by_location_by_day(Int32 event_id, string location)
+        {
+            List<Session> _sessions = new List<Session>();
+
+            foreach (var item in db.sessions_by_event_location_date(event_id, location))
+            {
+                Session s = new Session();
+
+                s.active = item.active.ToString();
+                s.description = item.description;
+                s.end = Convert.ToDateTime(item.session_end);
+                s.event_id = event_id;
+                s.event_type = item.type;
+                s.goers = item.attendees.ToString();
+                s.id = item.id.ToString();
+                s.event_key = item.event_key;
+                s.internal_id = item.id;
+                s.name = item.title;
+                s.speakers = item.speakers;
+                s.start = Convert.ToDateTime(item.session_start);
+                s.venue = item.venue;
+
+                _sessions.Add(s);
+            }
+
+            return _sessions;
+        }
+
         public Boolean delete(Int32 id)
         {
             session s = db.sessions.Single(x => x.id == id);

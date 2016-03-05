@@ -137,6 +137,35 @@
 												</div>
 											</div>
                                             
+                                            <div class="form-group" id="deck_wrapper" runat="server">
+                                                <label class="col-md-3 control-label">Slide Deck</label>
+                                                <div class="col-md-6">
+                                                    <asp:DropDownList runat="server" ID="ddl_deck" />
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label class="col-md-3 control-label">Rotate Interval</label>
+                                                <div class="col-md-6">
+                                                    <asp:DropDownList runat="server" ID="ddl_rotate">
+                                                        <asp:ListItem Value="">Select Interval</asp:ListItem>
+                                                        <asp:ListItem Value="0">Replace Template (Slide Deck Only)</asp:ListItem>
+                                                        <asp:ListItem Value="5">5 Minutes</asp:ListItem>
+                                                        <asp:ListItem Value="10">10 Minutes</asp:ListItem>
+                                                        <asp:ListItem Value="15">15 Minutes</asp:ListItem>
+                                                        <asp:ListItem Value="20">20 Minutes</asp:ListItem>
+                                                        <asp:ListItem Value="25">25 Minutes</asp:ListItem>
+                                                        <asp:ListItem Value="30">30 Minutes</asp:ListItem>
+                                                        <asp:ListItem Value="35">35 Minutes</asp:ListItem>
+                                                        <asp:ListItem Value="40">40 Minutes</asp:ListItem>
+                                                        <asp:ListItem Value="45">45 Minutes</asp:ListItem>
+                                                        <asp:ListItem Value="50">50 Minutes</asp:ListItem>
+                                                        <asp:ListItem Value="55">55 Minutes</asp:ListItem>
+                                                        <asp:ListItem Value="60">1 Hour</asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </div>
+                                            </div>
+                                            
                                             <div class="form-group">
 												<label class="control-label col-md-3"></label>
 												<div class="col-md-9">

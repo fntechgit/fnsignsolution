@@ -28,6 +28,8 @@ namespace schedInterface
                 t.online = item.online;
                 t.template_id = item.template_id;
                 t.title = item.title;
+                t.rotate = item.rotate;
+                t.deck = item.deck;
 
                 _terminals.Add(t);
             }
@@ -49,6 +51,8 @@ namespace schedInterface
                 t.location_title = item.location_title;
                 t.online = item.online;
                 t.template_id = item.template_id;
+                t.deck = item.deck;
+                t.rotate = item.rotate;
 
                 t.template_title = t.template_id > 0 ? item.template_title : @"Unassigned";
 
@@ -75,6 +79,8 @@ namespace schedInterface
             te.template_id = t.template_id;
             te.title = t.title;
             te.last_online = DateTime.Now;
+            te.deck = t.deck;
+            te.rotate = t.rotate;
             
             db.terminals.InsertOnSubmit(te);
 
@@ -94,6 +100,8 @@ namespace schedInterface
             te.online = t.online;
             te.template_id = t.template_id;
             te.title = t.title;
+            te.rotate = t.rotate;
+            te.deck = t.deck;
 
             db.SubmitChanges();
 
@@ -172,5 +180,7 @@ namespace schedInterface
         public Boolean online { get; set; }
         public Int32 event_id { get; set; }
         public DateTime last_online { get; set; }
+        public Int32? deck { get; set; }
+        public Int32? rotate { get; set; }
     }
 }
