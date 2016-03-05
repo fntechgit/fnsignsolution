@@ -63,16 +63,19 @@
     <script type="text/javascript">
 
         var leftval = 0;
+        var slide_count = 0;
 
         function rotate() {
 
-            if ($("#slides").css("left") == '-24960') {
+            if (slide_count >= 13) {
 
                 leftval = 0;
+                slide_count = 0;
 
                 $("#slides").animate({ left: leftval }, 500, "swing");
             } else {
                 leftval = leftval - 1920;
+                slide_count++;
 
                 $("#slides").animate({ left: leftval }, 500, "swing");
             }

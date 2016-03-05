@@ -32,6 +32,7 @@ namespace fnsignDisplay
             routes.MapPageRoute("brownbag-route", "brownbag-1920/{id}", "~/overlays/overlay_1920_brownbag.aspx");
             routes.MapPageRoute("design-summit-route", "summit-1920/{id}", "~/overlays/overlay_1920_summit.aspx");
             routes.MapPageRoute("housekeeping-route", "housekeeping/{id}", "~/overlays/overlay_housekeeping_slides.aspx");
+            routes.MapPageRoute("ocp-route", "ocp/{id}", "~/overlays/overlay_ocp.aspx");
         }
 
         protected void Session_Start(object sender, EventArgs e)

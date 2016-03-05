@@ -53,6 +53,12 @@ namespace fnsignDisplay
             return s;
         }
 
+        [WebMethod(Description = "Future Sessions by Date, Location, Event", EnableSession = true)]
+        public List<Session> future()
+        {
+            return _sessions.by_event_by_location_by_day(Convert.ToInt32(Context.Session["event_id"]), Context.Session["location"].ToString());
+        }
+            
         [WebMethod(Description = "Login From Cookie", EnableSession = true)]
         public Boolean loginAgain(string event_id)
         {

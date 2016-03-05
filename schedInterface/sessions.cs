@@ -64,6 +64,7 @@ namespace schedInterface
                 s.name = item.title;
                 s.speakers = item.speakers;
                 s.start = Convert.ToDateTime(item.session_start);
+                s.event_start = s.start.ToShortTimeString();
                 s.venue = item.venue;
 
                 _sessions.Add(s);
