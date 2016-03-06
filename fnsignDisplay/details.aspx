@@ -65,17 +65,17 @@
                                 </div>
                             </asp:Panel>
                             
-                            <div class="form-group mb-lg">
-								<label>Title</label>
-								<div class="input-group">
-								    <asp:TextBox runat="server" ID="title" CssClass="form-control input-lg" />
-								</div>
-							</div>
-
 							<div class="form-group mb-lg">
 								<label>Select Event</label>
 								<div class="input-group">
 								    <asp:DropDownList runat="server" ID="ddl_event" CssClass="form-control" OnSelectedIndexChanged="get_locations" AutoPostBack="true" />
+								</div>
+							</div>
+                            
+                            <div class="form-group mb-lg">
+								<label>Title</label>
+								<div class="input-group">
+								    <asp:TextBox runat="server" ID="title" CssClass="form-control input-lg" />
 								</div>
 							</div>
 

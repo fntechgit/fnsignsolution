@@ -23,6 +23,24 @@ namespace fnsignDisplay
             {
                 pnl_no_events_assigned.Visible = true;
             }
+
+            Session["user_id"] = "1";
+            Session["user_name"] = "FNTECH";
+            Session["company_name"] = "FNTECH";
+            Session["user_access"] = "system";
+
+            List<Event> myevents = _permissions.select_permitted_events(Convert.ToInt32(Session["user_id"].ToString()));
+
+            if (myevents.Count > 0)
+            {
+                Session["event_id"] = myevents[0].id.ToString();
+
+                Response.Redirect("/details");
+            }
+            else
+            {
+                pnl_no_events_assigned.Visible = true;
+            }
         }
 
         protected void signin(object sender, EventArgs e)
