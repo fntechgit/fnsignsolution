@@ -6,7 +6,10 @@
 <head id="Head1" runat="server">
     
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 		<script src="http://momentjs.com/downloads/moment.min.js"></script>
+        <script src="/js/jquery.cookie.js" type="text/javascript"></script>
+        <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.marquee/1.3.1/jquery.marquee.min.js"></script>
         
         <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6546274/756308/css/fonts.css" />
 		
@@ -20,6 +23,9 @@
 			.row { clear: both;height:40px; }
 			.left { float: left;width: 20%;padding-top: 20px;}
 			.right { float: right;width: 80%;padding-top: 20px;}
+			
+			.ticker { position: absolute;left: 0;top:1850px;width: 800px;height: 75px;overflow: hidden; }
+			.ticker div { float: left;font-family: Helvetica, Arial;font-style: normal;font-weight: 600;font-size: 18px;color: #fff; }
 			
 			#current_date { text-transform: uppercase; }
 			
@@ -59,6 +65,11 @@
             <div class="content">
                 <asp:PlaceHolder runat="server" ID="ph_sessions" />
             </div>
+            
+            <div class="ticker">
+                
+            </div>
+
         </div>
     </form>
     
@@ -108,7 +119,47 @@
 
         }
 
+        var $mq = $(".ticker");
+
+        function refreshNews() {
+
+            var template_id = 1023;
+            var terminal_id = $("#terminal_id").val();
+
+            $.ajax({
+                type: "POST",
+                url: "/display.asmx/get_message",
+                data: "{'template_id': " + template_id + ", 'terminal_id': " + terminal_id + "}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data, status) {
+
+                    console.log("Length: " + data.d.length);
+
+                    if (data.d.id < 1) {
+
+                        $mq.hide();
+                        showMarquee();
+
+                    } else {
+
+                        $mq.show();
+                        $mq.marquee('destroy');
+                        $mq.html(data.d.message);
+                        $mq.marquee({ duration: 10000 });
+                    }
+                }
+            });
+        }
+
+        $mq.bind('finished', showMarquee);
+
+        function showMarquee() {
+            refreshNews();
+        }
+
         setInterval(refreshData, 5000);
+        refreshNews();
 
     </script>
 </body>

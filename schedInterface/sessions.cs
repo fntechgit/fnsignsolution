@@ -419,4 +419,37 @@ namespace schedInterface
         public Int32 internal_id { get; set; }
         public Int32 event_id { get; set; }
     }
+
+    public class OpenStack
+    {
+        public Int32? total { get; set; }
+        public Int32 per_page { get; set; }
+        public Int32 current_page { get; set; }
+        public Int32 last_page { get; set; }
+        public OpenStackSession data { get; set; }
+    }
+
+    public class OpenStackSession
+    {
+        public Int32 id { get; set; }
+        public string title { get; set; }
+        public string description { get; set; }
+        public Int32 start_date { get; set; }
+        public Int32 end_date { get; set; }
+        public Int32? location_id { get; set; }
+        public Int32 summit_id { get; set; }
+        public Int32 type_id { get; set; }
+        public string class_name { get; set; }
+        public Int32? track_id { get; set; }
+        public Int32? moderator_speaker_id { get; set; }
+        public string level { get; set; }
+        public Boolean allow_feedback { get; set; }
+        public Int32? avg_feedback_rate { get; set; }
+        public Boolean is_published { get; set; }
+        public Int32? head_count { get; set; }
+        public string rsvp_link { get; set; }
+        public Int32[] summit_types { get; set; }
+        public string[] tags { get; set; }
+        public Int32[] speakers { get; set; }
+    }
 }
