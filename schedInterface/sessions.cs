@@ -245,6 +245,8 @@ namespace schedInterface
 
             IRestResponse response = client.Execute(request);
 
+
+
             var mySessions = new JavaScriptSerializer().Deserialize<List<Session>>(response.Content);
 
             return mySessions;
