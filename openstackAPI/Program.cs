@@ -58,54 +58,54 @@ namespace openstackAPI
                             Console.WriteLine(" Added...");
                         }
 
-                        // get locations and push them
-                        List<OpenStackLocation> locs = _olocations.get_by_event(Convert.ToInt32(e.openstack_id));
+                        //// get locations and push them
+                        //List<OpenStackLocation> locs = _olocations.get_by_event(Convert.ToInt32(e.openstack_id));
 
-                        Console.WriteLine(locs.Count + " Locations Found....");
+                        //Console.WriteLine(locs.Count + " Locations Found....");
 
-                        foreach (OpenStackLocation l in locs)
-                        {
-                            Location lo = new Location();
+                        //foreach (OpenStackLocation l in locs)
+                        //{
+                        //    Location lo = new Location();
 
-                            Console.WriteLine("Processing " + l.name);
+                        //    Console.WriteLine("Processing " + l.name);
 
-                            lo.title = l.name;
-                            lo.sched_id = l.id.ToString();
-                            lo.event_id = e.id;
+                        //    lo.title = l.name;
+                        //    lo.sched_id = l.id.ToString();
+                        //    lo.event_id = e.id;
 
-                            _locations.add(lo);
-                        }
+                        //    _locations.add(lo);
+                        //}
 
-                        // now get the speakers
-                        Console.WriteLine("Getting Speakers...");
-                        OpenSpeaker openspeaker = new OpenSpeaker();
+                        //// now get the speakers
+                        //Console.WriteLine("Getting Speakers...");
+                        //OpenSpeaker openspeaker = new OpenSpeaker();
 
-                        openspeaker = _speakers.refresh(Convert.ToInt32(e.openstack_id), "1");
+                        //openspeaker = _speakers.refresh(Convert.ToInt32(e.openstack_id), "1");
 
-                        foreach (Speaker speak in openspeaker.data)
-                        {
-                            speak.event_id = e.id;
+                        //foreach (Speaker speak in openspeaker.data)
+                        //{
+                        //    speak.event_id = e.id;
 
-                            _speakers.add(speak);
-                            Console.WriteLine("Speaker: " + speak.first_name + " " + speak.last_name + " Processed...");
-                        }
+                        //    _speakers.add(speak);
+                        //    Console.WriteLine("Speaker: " + speak.first_name + " " + speak.last_name + " Processed...");
+                        //}
 
-                        Int32 cursp = 1;
+                        //Int32 cursp = 1;
 
-                        while (cursp <= openspeaker.last_page)
-                        {
-                            cursp++;
+                        //while (cursp <= openspeaker.last_page)
+                        //{
+                        //    cursp++;
 
-                            openspeaker = _speakers.refresh(Convert.ToInt32(e.openstack_id), cursp.ToString());
+                        //    openspeaker = _speakers.refresh(Convert.ToInt32(e.openstack_id), cursp.ToString());
 
-                            foreach (Speaker speak in openspeaker.data)
-                            {
-                                speak.event_id = e.id;
+                        //    foreach (Speaker speak in openspeaker.data)
+                        //    {
+                        //        speak.event_id = e.id;
 
-                                _speakers.add(speak);
-                                Console.WriteLine("Speaker: " + speak.first_name + " " + speak.last_name + " Processed...");
-                            }
-                        }
+                        //        _speakers.add(speak);
+                        //        Console.WriteLine("Speaker: " + speak.first_name + " " + speak.last_name + " Processed...");
+                        //    }
+                        //}
 
                         // now get the sessions
                         Console.WriteLine("Getting Sessions....");

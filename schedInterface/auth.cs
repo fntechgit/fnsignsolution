@@ -8,6 +8,9 @@ namespace schedInterface
 {
     public class auth
     {
+
+        private osettings _settings = new osettings();
+
         public string login(string conference_url, string api_key)
         {
             var client = new RestClient(conference_url + "/api");
@@ -27,9 +30,13 @@ namespace schedInterface
         {
             var client = new RestClient("https://openstackid.org/oauth2");
 
-            var request = new RestRequest("auth");
+            var request = new RestRequest("token");
 
-            request.AddParameter("client_id", client_id);
+
+
+            request.AddHeader("authorization",
+                "Basic Base64-Encoded(" + _settings.client_id() + ":" + _settings.client_secret() + ")");
+            request.AddParameter("grant_type", "client_credentials");
             request.AddParameter("scope", "summit");
 
             IRestResponse response = client.Execute(request);

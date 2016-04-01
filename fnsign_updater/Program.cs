@@ -38,45 +38,49 @@ namespace fnsign_updater
                 Console.WriteLine("Finding Sessions for " + e.title);
                 Console.WriteLine("");
 
-                List<Session> sess = _sessions.all(e.url, e.api_key);
-
-                Console.WriteLine(sess.Count.ToString() + " Sessions Found...");
-
-                Console.WriteLine("");
-
-                // look for deletions
-                List<Session> dbsess = _sessions.by_event(e.id);
-
-                foreach (Session d in dbsess)
+                if (!string.IsNullOrEmpty(e.url))
                 {
-                    List<Session> found = sess.Where(x => x.event_key == d.event_key).ToList();
 
-                    if (found.Count == 0)
+                    List<Session> sess = _sessions.all(e.url, e.api_key);
+
+                    Console.WriteLine(sess.Count.ToString() + " Sessions Found...");
+
+                    Console.WriteLine("");
+
+                    // look for deletions
+                    List<Session> dbsess = _sessions.by_event(e.id);
+
+                    foreach (Session d in dbsess)
                     {
-                        // remove the session
-                        Console.WriteLine("Session ID: " + d.id + " NOT FOUND");
+                        List<Session> found = sess.Where(x => x.event_key == d.event_key).ToList();
 
-                        Console.WriteLine("Removing Session: " + d.name + "...");
+                        if (found.Count == 0)
+                        {
+                            // remove the session
+                            Console.WriteLine("Session ID: " + d.id + " NOT FOUND");
+
+                            Console.WriteLine("Removing Session: " + d.name + "...");
 
 
-                        _sessions.delete(d.internal_id);
+                            _sessions.delete(d.internal_id);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Session ID: " + d.id + " FOUND");
+                        }
                     }
-                    else
+
+                    foreach (Session s in sess)
                     {
-                        Console.WriteLine("Session ID: " + d.id + " FOUND");
+                        // now we loop through the sessions and insert or update them
+                        if (s.event_type != "Japanese Language")
+                        {
+                            _sessions.add(s, e.id);
+                        }
                     }
+
+                    _sessions.clean_summit();
                 }
-
-                foreach (Session s in sess)
-                {
-                    // now we loop through the sessions and insert or update them
-                    if (s.event_type != "Japanese Language")
-                    {
-                        _sessions.add(s, e.id);
-                    }
-                }
-
-                _sessions.clean_summit();
 
                 Console.WriteLine("");
 

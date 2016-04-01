@@ -287,20 +287,42 @@ namespace schedInterface
 
                     DateTime session_end;
 
-                    se.session_end = DateTime.TryParse(s.event_end, out session_end) ? (DateTime?) session_end : null;
-
-                    if (se.session_end != null)
+                    if (s.end > DateTime.Now.AddYears(-100))
                     {
-                        se.session_end = Convert.ToDateTime(se.session_end) < DateTime.Now ? null : se.session_end;
+                        se.session_end = s.end;
+                    }
+                    else
+                    {
+
+                        se.session_end = DateTime.TryParse(s.event_end, out session_end)
+                            ? (DateTime?) session_end
+                            : null;
+
+                        if (se.session_end != null)
+                        {
+                            se.session_end = Convert.ToDateTime(se.session_end) < DateTime.Now ? null : se.session_end;
+                        }
+
                     }
 
                     DateTime session_start;
 
-                    se.session_start = DateTime.TryParse(s.event_start, out session_start) ? (DateTime?) session_start : null;
-
-                    if (se.session_start != null)
+                    if (s.start > DateTime.Now.AddYears(-100))
                     {
-                        se.session_start = Convert.ToDateTime(se.session_start) < DateTime.Now ? null : se.session_start;
+                        se.session_start = s.start;
+                    }
+                    else
+                    {
+                        se.session_start = DateTime.TryParse(s.event_start, out session_start)
+                            ? (DateTime?) session_start
+                            : null;
+
+                        if (se.session_start != null)
+                        {
+                            se.session_start = Convert.ToDateTime(se.session_start) < DateTime.Now
+                                ? null
+                                : se.session_start;
+                        }
                     }
 
                     se.speakers = s.speakers;
@@ -328,11 +350,28 @@ namespace schedInterface
 
                 DateTime session_end;
 
-                se.session_end = DateTime.TryParse(s.event_end, out session_end) ? (DateTime?)session_end : null;
+                if (s.end > DateTime.Now.AddYears(-100))
+                {
+                    se.session_end = s.end;
+                }
+                else
+                {
+
+                    se.session_end = DateTime.TryParse(s.event_end, out session_end) ? (DateTime?) session_end : null;
+                }
 
                 DateTime session_start;
 
-                se.session_start = DateTime.TryParse(s.event_start, out session_start) ? (DateTime?)session_start : null;
+                if (s.start > DateTime.Now.AddYears(-100))
+                {
+                    se.session_start = s.start;
+                }
+                else
+                {
+                    se.session_start = DateTime.TryParse(s.event_start, out session_start)
+                        ? (DateTime?) session_start
+                        : null;
+                }
 
                 se.speakers = s.speakers;
                 se.title = s.name;
@@ -447,7 +486,7 @@ namespace schedInterface
 
             var client = new RestClient("https://testresource-server.openstack.org/api/v1/");
 
-            var request = new RestRequest("summits/" + id + "/events");
+            var request = new RestRequest("summits/" + id + "/events/published");
 
             request.AddParameter("access_token", "PAH7KdDOiWgZVWuQqYGpr3LCPHv-fj8RsO%7EeozlVBMeEDd8xezJHMx.4VH64T0MFTVV3k2KN");
             request.AddParameter("token_type", "Bearer");
@@ -470,7 +509,7 @@ namespace schedInterface
 
             se.event_id = event_id;
             se.event_key = s.id.ToString();
-            se.event_type = "OpenStack";
+            se.event_type = s.class_name;
             se.internal_id = s.id;
             se.name = s.title;
             se.start = s.start_date != null ? (DateTime) Convert.ToDateTime(_functions.ConvertUnixTimeStamp(s.start_date.ToString())) : DateTime.Now.AddYears(-50);
@@ -479,17 +518,21 @@ namespace schedInterface
 
             List<string> speakers = new List<string>();
 
-            foreach (int sp in s.speakers)
+            try
             {
-                speakers.Add(_speakers.name_by_open_id(sp, event_id));
-            }
-
-            foreach (string speak in speakers)
-            {
-                if (speak != "Unknown")
+                if (s.speakers.Any())
                 {
-                    se.speakers += speak + " ";
+                    foreach (int sp in s.speakers)
+                    {
+                        speakers.Add(_speakers.name_by_open_id(sp, event_id));
+                    }
+
+                    se.speakers = string.Join(", ", speakers);
                 }
+            }
+            catch (ArgumentNullException ex)
+            {
+                se.speakers = "NOT SET";
             }
 
             return se;
@@ -526,7 +569,7 @@ namespace schedInterface
         //public string rsvp_link { get; set; }
         //public Int32[] summit_types { get; set; }
         //public string[] tags { get; set; }
-        public Int32[] speakers { get; set; }
+        public List<Int32> speakers { get; set; }
     }
 
     #endregion
