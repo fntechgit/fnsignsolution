@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Timers;
+using System.Web.Script.Serialization;
+using RestSharp;
 
 namespace schedInterface
 {
@@ -32,6 +35,7 @@ namespace schedInterface
                 ev.last_update = item.last_update;
                 ev.t_hashtag = item.t_hashtag;
                 ev.t_username = item.t_username;
+                ev.openstack_id = item.openstack_id;
                 
                 _events.Add(ev);
             }
@@ -103,6 +107,7 @@ namespace schedInterface
             e.url = ev.url;
             e.t_hashtag = ev.t_hashtag;
             e.t_username = ev.t_username;
+            e.openstack_id = ev.openstack_id;
 
             db.SubmitChanges();
 
@@ -122,6 +127,7 @@ namespace schedInterface
             e.url = ev.url;
             e.t_hashtag = ev.t_hashtag;
             e.t_username = ev.t_username;
+            e.openstack_id = ev.openstack_id;
             
             db.events.InsertOnSubmit(e);
 
@@ -152,6 +158,7 @@ namespace schedInterface
                 ev.url = item.url;
                 ev.t_hashtag = item.t_hashtag;
                 ev.t_username = item.t_username;
+                ev.openstack_id = item.openstack_id;
 
                 if (!string.IsNullOrEmpty(ev.t_hashtag))
                 {
@@ -187,11 +194,17 @@ namespace schedInterface
                 e.interval = ev.interval;
                 e.url = ev.url;
                 e.api_key = ev.api_key;
+                e.openstack_id = ev.openstack_id;
 
                 _events.Add(e);
             }
 
             return _events;
+        }
+
+        public Event find_by_openstack_id(Int32 id)
+        {
+            return all().Where(x => x.openstack_id == id).Single();
         }
     }
 
@@ -208,6 +221,52 @@ namespace schedInterface
         public string t_username { get; set; }
         public string t_hashtag { get; set; }
         public List<string> hashtags { get; set; }
+        public Int32? openstack_id { get; set; }
     }
+
+    #region openstackAPI
+
+    public class openstackEvents
+    {
+        public List<OpenStackEvent> push_events()
+        {
+            var client = new RestClient("https://testresource-server.openstack.org/api/v1/");
+
+            var request = new RestRequest("summits");
+
+            request.AddParameter("access_token", "PAH7KdDOiWgZVWuQqYGpr3LCPHv-fj8RsO%7EeozlVBMeEDd8xezJHMx.4VH64T0MFTVV3k2KN");
+            request.AddParameter("token_type", "Bearer");
+
+            IRestResponse response = client.Execute(request);
+
+            var mySessions = new JavaScriptSerializer().Deserialize<List<OpenStackEvent>>(response.Content);
+
+            return mySessions;
+        }
+    }
+
+    public class OpenStackEvent
+    {
+        public Int32 id { get; set; }
+        public string name { get; set; }
+        public Int32? start_date { get; set; }
+        public Int32? end_date { get; set; }
+        public Int32? start_showing_venues_date { get; set; }
+        public Boolean active { get; set; }
+        public TimeZone time_zone { get; set; }
+        public string logo { get; set; }
+    }
+
+    public class TimeZone
+    {
+        public string country_code { get; set; }
+        public Decimal? latitude { get; set; }
+        public Decimal? longitude { get; set; }
+        public string comments { get; set; }
+        public string name { get; set; }
+        public Int32? offset { get; set; }
+    }
+
+    #endregion
 
 }

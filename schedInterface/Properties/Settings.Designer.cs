@@ -33,5 +33,16 @@ namespace schedInterface.Properties {
                 return ((string)(this["fntech_signageConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=198.178.124.58;Initial Catalog=fntech_signage;Persist Security Info=T" +
+            "rue;User ID=sa;Password=Theymightbe73!")]
+        public string fntech_signageConnectionString1 {
+            get {
+                return ((string)(this["fntech_signageConnectionString1"]));
+            }
+        }
     }
 }

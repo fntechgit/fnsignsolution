@@ -79,20 +79,6 @@
       <Column Name="security" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
-  <Table Name="dbo.events" Member="events">
-    <Type Name="event">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="event_start" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="event_end" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="api_key" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="url" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="interval" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="last_update" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="t_username" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="t_hashtag" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.media" Member="medias">
     <Type Name="media">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -192,6 +178,36 @@
       <Column Name="last_online" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="deck" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="rotate" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.events" Member="events">
+    <Type Name="event">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="event_start" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="event_end" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="api_key" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="url" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="interval" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="last_update" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="t_username" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="t_hashtag" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="openstack_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.speakers" Member="speakers">
+    <Type Name="speaker">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="first_name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="last_name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="bio" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="irc" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="twitter" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="member_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="pic" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="openstack_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Function Name="dbo.permissions_get_by_user" Method="permissions_get_by_user">

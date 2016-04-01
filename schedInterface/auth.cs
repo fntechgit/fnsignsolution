@@ -22,5 +22,19 @@ namespace schedInterface
 
             return response.Content;
         }
+
+        public string get_token(string client_id, string secret)
+        {
+            var client = new RestClient("https://openstackid.org/oauth2");
+
+            var request = new RestRequest("auth");
+
+            request.AddParameter("client_id", client_id);
+            request.AddParameter("scope", "summit");
+
+            IRestResponse response = client.Execute(request);
+
+            return response.Content;
+        }
     }
 }

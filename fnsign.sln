@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fnsignManager", "fnsignMana
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fnsignDisplay", "fnsignDisplay\fnsignDisplay.csproj", "{715EE89E-18C1-4954-8CF0-6701F95757A0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "openstackAPI", "openstackAPI\openstackAPI.csproj", "{DEB8F9B0-711A-4573-81A5-663448B53A55}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,16 @@ Global
 		{715EE89E-18C1-4954-8CF0-6701F95757A0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{715EE89E-18C1-4954-8CF0-6701F95757A0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{715EE89E-18C1-4954-8CF0-6701F95757A0}.Release|x86.ActiveCfg = Release|Any CPU
+		{DEB8F9B0-711A-4573-81A5-663448B53A55}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{DEB8F9B0-711A-4573-81A5-663448B53A55}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{DEB8F9B0-711A-4573-81A5-663448B53A55}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{DEB8F9B0-711A-4573-81A5-663448B53A55}.Debug|x86.ActiveCfg = Debug|x86
+		{DEB8F9B0-711A-4573-81A5-663448B53A55}.Debug|x86.Build.0 = Debug|x86
+		{DEB8F9B0-711A-4573-81A5-663448B53A55}.Release|Any CPU.ActiveCfg = Release|x86
+		{DEB8F9B0-711A-4573-81A5-663448B53A55}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{DEB8F9B0-711A-4573-81A5-663448B53A55}.Release|Mixed Platforms.Build.0 = Release|x86
+		{DEB8F9B0-711A-4573-81A5-663448B53A55}.Release|x86.ActiveCfg = Release|x86
+		{DEB8F9B0-711A-4573-81A5-663448B53A55}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

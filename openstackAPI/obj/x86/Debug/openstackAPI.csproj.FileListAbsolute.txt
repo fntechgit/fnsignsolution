@@ -1,0 +1,16 @@
+E:\projects\fnsign\openstackAPI\obj\x86\Debug\openstackAPI.csprojResolveAssemblyReference.cache
+E:\projects\fnsign\openstackAPI\bin\Debug\openstackAPI.exe.config
+E:\projects\fnsign\openstackAPI\bin\Debug\openstackAPI.exe
+E:\projects\fnsign\openstackAPI\bin\Debug\openstackAPI.pdb
+E:\projects\fnsign\openstackAPI\bin\Debug\schedInterface.dll
+E:\projects\fnsign\openstackAPI\bin\Debug\RestSharp.dll
+E:\projects\fnsign\openstackAPI\bin\Debug\TweetSharp.dll
+E:\projects\fnsign\openstackAPI\bin\Debug\Hammock.ClientProfile.dll
+E:\projects\fnsign\openstackAPI\bin\Debug\Newtonsoft.Json.dll
+E:\projects\fnsign\openstackAPI\bin\Debug\schedInterface.pdb
+E:\projects\fnsign\openstackAPI\bin\Debug\RestSharp.xml
+E:\projects\fnsign\openstackAPI\bin\Debug\TweetSharp.pdb
+E:\projects\fnsign\openstackAPI\bin\Debug\Hammock.ClientProfile.pdb
+E:\projects\fnsign\openstackAPI\bin\Debug\Newtonsoft.Json.xml
+E:\projects\fnsign\openstackAPI\obj\x86\Debug\openstackAPI.exe
+E:\projects\fnsign\openstackAPI\obj\x86\Debug\openstackAPI.pdb

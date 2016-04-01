@@ -51,9 +51,6 @@ namespace schedInterface
     partial void Insertuser(user instance);
     partial void Updateuser(user instance);
     partial void Deleteuser(user instance);
-    partial void Insertevent(@event instance);
-    partial void Updateevent(@event instance);
-    partial void Deleteevent(@event instance);
     partial void Insertmedia(media instance);
     partial void Updatemedia(media instance);
     partial void Deletemedia(media instance);
@@ -75,6 +72,12 @@ namespace schedInterface
     partial void Insertterminal(terminal instance);
     partial void Updateterminal(terminal instance);
     partial void Deleteterminal(terminal instance);
+    partial void Insertevent(@event instance);
+    partial void Updateevent(@event instance);
+    partial void Deleteevent(@event instance);
+    partial void Insertspeaker(speaker instance);
+    partial void Updatespeaker(speaker instance);
+    partial void Deletespeaker(speaker instance);
     #endregion
 		
 		public schedDataContext() : 
@@ -163,14 +166,6 @@ namespace schedInterface
 			}
 		}
 		
-		public System.Data.Linq.Table<@event> events
-		{
-			get
-			{
-				return this.GetTable<@event>();
-			}
-		}
-		
 		public System.Data.Linq.Table<media> medias
 		{
 			get
@@ -224,6 +219,22 @@ namespace schedInterface
 			get
 			{
 				return this.GetTable<terminal>();
+			}
+		}
+		
+		public System.Data.Linq.Table<@event> events
+		{
+			get
+			{
+				return this.GetTable<@event>();
+			}
+		}
+		
+		public System.Data.Linq.Table<speaker> speakers
+		{
+			get
+			{
+				return this.GetTable<speaker>();
 			}
 		}
 		
@@ -1791,284 +1802,6 @@ namespace schedInterface
 					this._security = value;
 					this.SendPropertyChanged("security");
 					this.OnsecurityChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.events")]
-	public partial class @event : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id;
-		
-		private string _title;
-		
-		private System.Nullable<System.DateTime> _event_start;
-		
-		private System.Nullable<System.DateTime> _event_end;
-		
-		private string _api_key;
-		
-		private string _url;
-		
-		private int _interval;
-		
-		private System.DateTime _last_update;
-		
-		private string _t_username;
-		
-		private string _t_hashtag;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(int value);
-    partial void OnidChanged();
-    partial void OntitleChanging(string value);
-    partial void OntitleChanged();
-    partial void Onevent_startChanging(System.Nullable<System.DateTime> value);
-    partial void Onevent_startChanged();
-    partial void Onevent_endChanging(System.Nullable<System.DateTime> value);
-    partial void Onevent_endChanged();
-    partial void Onapi_keyChanging(string value);
-    partial void Onapi_keyChanged();
-    partial void OnurlChanging(string value);
-    partial void OnurlChanged();
-    partial void OnintervalChanging(int value);
-    partial void OnintervalChanged();
-    partial void Onlast_updateChanging(System.DateTime value);
-    partial void Onlast_updateChanged();
-    partial void Ont_usernameChanging(string value);
-    partial void Ont_usernameChanged();
-    partial void Ont_hashtagChanging(string value);
-    partial void Ont_hashtagChanged();
-    #endregion
-		
-		public @event()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(255)")]
-		public string title
-		{
-			get
-			{
-				return this._title;
-			}
-			set
-			{
-				if ((this._title != value))
-				{
-					this.OntitleChanging(value);
-					this.SendPropertyChanging();
-					this._title = value;
-					this.SendPropertyChanged("title");
-					this.OntitleChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_start", DbType="Date")]
-		public System.Nullable<System.DateTime> event_start
-		{
-			get
-			{
-				return this._event_start;
-			}
-			set
-			{
-				if ((this._event_start != value))
-				{
-					this.Onevent_startChanging(value);
-					this.SendPropertyChanging();
-					this._event_start = value;
-					this.SendPropertyChanged("event_start");
-					this.Onevent_startChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_end", DbType="Date")]
-		public System.Nullable<System.DateTime> event_end
-		{
-			get
-			{
-				return this._event_end;
-			}
-			set
-			{
-				if ((this._event_end != value))
-				{
-					this.Onevent_endChanging(value);
-					this.SendPropertyChanging();
-					this._event_end = value;
-					this.SendPropertyChanged("event_end");
-					this.Onevent_endChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_api_key", DbType="VarChar(MAX)")]
-		public string api_key
-		{
-			get
-			{
-				return this._api_key;
-			}
-			set
-			{
-				if ((this._api_key != value))
-				{
-					this.Onapi_keyChanging(value);
-					this.SendPropertyChanging();
-					this._api_key = value;
-					this.SendPropertyChanged("api_key");
-					this.Onapi_keyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_url", DbType="VarChar(MAX)")]
-		public string url
-		{
-			get
-			{
-				return this._url;
-			}
-			set
-			{
-				if ((this._url != value))
-				{
-					this.OnurlChanging(value);
-					this.SendPropertyChanging();
-					this._url = value;
-					this.SendPropertyChanged("url");
-					this.OnurlChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_interval", DbType="Int NOT NULL")]
-		public int interval
-		{
-			get
-			{
-				return this._interval;
-			}
-			set
-			{
-				if ((this._interval != value))
-				{
-					this.OnintervalChanging(value);
-					this.SendPropertyChanging();
-					this._interval = value;
-					this.SendPropertyChanged("interval");
-					this.OnintervalChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_last_update", DbType="DateTime NOT NULL")]
-		public System.DateTime last_update
-		{
-			get
-			{
-				return this._last_update;
-			}
-			set
-			{
-				if ((this._last_update != value))
-				{
-					this.Onlast_updateChanging(value);
-					this.SendPropertyChanging();
-					this._last_update = value;
-					this.SendPropertyChanged("last_update");
-					this.Onlast_updateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_t_username", DbType="VarChar(255)")]
-		public string t_username
-		{
-			get
-			{
-				return this._t_username;
-			}
-			set
-			{
-				if ((this._t_username != value))
-				{
-					this.Ont_usernameChanging(value);
-					this.SendPropertyChanging();
-					this._t_username = value;
-					this.SendPropertyChanged("t_username");
-					this.Ont_usernameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_t_hashtag", DbType="VarChar(MAX)")]
-		public string t_hashtag
-		{
-			get
-			{
-				return this._t_hashtag;
-			}
-			set
-			{
-				if ((this._t_hashtag != value))
-				{
-					this.Ont_hashtagChanging(value);
-					this.SendPropertyChanging();
-					this._t_hashtag = value;
-					this.SendPropertyChanged("t_hashtag");
-					this.Ont_hashtagChanged();
 				}
 			}
 		}
@@ -4087,6 +3820,610 @@ namespace schedInterface
 					this._rotate = value;
 					this.SendPropertyChanged("rotate");
 					this.OnrotateChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.events")]
+	public partial class @event : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _title;
+		
+		private System.Nullable<System.DateTime> _event_start;
+		
+		private System.Nullable<System.DateTime> _event_end;
+		
+		private string _api_key;
+		
+		private string _url;
+		
+		private int _interval;
+		
+		private System.DateTime _last_update;
+		
+		private string _t_username;
+		
+		private string _t_hashtag;
+		
+		private System.Nullable<int> _openstack_id;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OntitleChanging(string value);
+    partial void OntitleChanged();
+    partial void Onevent_startChanging(System.Nullable<System.DateTime> value);
+    partial void Onevent_startChanged();
+    partial void Onevent_endChanging(System.Nullable<System.DateTime> value);
+    partial void Onevent_endChanged();
+    partial void Onapi_keyChanging(string value);
+    partial void Onapi_keyChanged();
+    partial void OnurlChanging(string value);
+    partial void OnurlChanged();
+    partial void OnintervalChanging(int value);
+    partial void OnintervalChanged();
+    partial void Onlast_updateChanging(System.DateTime value);
+    partial void Onlast_updateChanged();
+    partial void Ont_usernameChanging(string value);
+    partial void Ont_usernameChanged();
+    partial void Ont_hashtagChanging(string value);
+    partial void Ont_hashtagChanged();
+    partial void Onopenstack_idChanging(System.Nullable<int> value);
+    partial void Onopenstack_idChanged();
+    #endregion
+		
+		public @event()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(255)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this.OntitleChanging(value);
+					this.SendPropertyChanging();
+					this._title = value;
+					this.SendPropertyChanged("title");
+					this.OntitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_start", DbType="Date")]
+		public System.Nullable<System.DateTime> event_start
+		{
+			get
+			{
+				return this._event_start;
+			}
+			set
+			{
+				if ((this._event_start != value))
+				{
+					this.Onevent_startChanging(value);
+					this.SendPropertyChanging();
+					this._event_start = value;
+					this.SendPropertyChanged("event_start");
+					this.Onevent_startChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_end", DbType="Date")]
+		public System.Nullable<System.DateTime> event_end
+		{
+			get
+			{
+				return this._event_end;
+			}
+			set
+			{
+				if ((this._event_end != value))
+				{
+					this.Onevent_endChanging(value);
+					this.SendPropertyChanging();
+					this._event_end = value;
+					this.SendPropertyChanged("event_end");
+					this.Onevent_endChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_api_key", DbType="VarChar(MAX)")]
+		public string api_key
+		{
+			get
+			{
+				return this._api_key;
+			}
+			set
+			{
+				if ((this._api_key != value))
+				{
+					this.Onapi_keyChanging(value);
+					this.SendPropertyChanging();
+					this._api_key = value;
+					this.SendPropertyChanged("api_key");
+					this.Onapi_keyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_url", DbType="VarChar(MAX)")]
+		public string url
+		{
+			get
+			{
+				return this._url;
+			}
+			set
+			{
+				if ((this._url != value))
+				{
+					this.OnurlChanging(value);
+					this.SendPropertyChanging();
+					this._url = value;
+					this.SendPropertyChanged("url");
+					this.OnurlChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_interval", DbType="Int NOT NULL")]
+		public int interval
+		{
+			get
+			{
+				return this._interval;
+			}
+			set
+			{
+				if ((this._interval != value))
+				{
+					this.OnintervalChanging(value);
+					this.SendPropertyChanging();
+					this._interval = value;
+					this.SendPropertyChanged("interval");
+					this.OnintervalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_last_update", DbType="DateTime NOT NULL")]
+		public System.DateTime last_update
+		{
+			get
+			{
+				return this._last_update;
+			}
+			set
+			{
+				if ((this._last_update != value))
+				{
+					this.Onlast_updateChanging(value);
+					this.SendPropertyChanging();
+					this._last_update = value;
+					this.SendPropertyChanged("last_update");
+					this.Onlast_updateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_t_username", DbType="VarChar(255)")]
+		public string t_username
+		{
+			get
+			{
+				return this._t_username;
+			}
+			set
+			{
+				if ((this._t_username != value))
+				{
+					this.Ont_usernameChanging(value);
+					this.SendPropertyChanging();
+					this._t_username = value;
+					this.SendPropertyChanged("t_username");
+					this.Ont_usernameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_t_hashtag", DbType="VarChar(MAX)")]
+		public string t_hashtag
+		{
+			get
+			{
+				return this._t_hashtag;
+			}
+			set
+			{
+				if ((this._t_hashtag != value))
+				{
+					this.Ont_hashtagChanging(value);
+					this.SendPropertyChanging();
+					this._t_hashtag = value;
+					this.SendPropertyChanged("t_hashtag");
+					this.Ont_hashtagChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_openstack_id", DbType="Int")]
+		public System.Nullable<int> openstack_id
+		{
+			get
+			{
+				return this._openstack_id;
+			}
+			set
+			{
+				if ((this._openstack_id != value))
+				{
+					this.Onopenstack_idChanging(value);
+					this.SendPropertyChanging();
+					this._openstack_id = value;
+					this.SendPropertyChanged("openstack_id");
+					this.Onopenstack_idChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.speakers")]
+	public partial class speaker : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _first_name;
+		
+		private string _last_name;
+		
+		private string _title;
+		
+		private string _bio;
+		
+		private string _irc;
+		
+		private string _twitter;
+		
+		private System.Nullable<int> _member_id;
+		
+		private string _pic;
+		
+		private System.Nullable<int> _openstack_id;
+		
+		private int _event_id;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void Onfirst_nameChanging(string value);
+    partial void Onfirst_nameChanged();
+    partial void Onlast_nameChanging(string value);
+    partial void Onlast_nameChanged();
+    partial void OntitleChanging(string value);
+    partial void OntitleChanged();
+    partial void OnbioChanging(string value);
+    partial void OnbioChanged();
+    partial void OnircChanging(string value);
+    partial void OnircChanged();
+    partial void OntwitterChanging(string value);
+    partial void OntwitterChanged();
+    partial void Onmember_idChanging(System.Nullable<int> value);
+    partial void Onmember_idChanged();
+    partial void OnpicChanging(string value);
+    partial void OnpicChanged();
+    partial void Onopenstack_idChanging(System.Nullable<int> value);
+    partial void Onopenstack_idChanged();
+    partial void Onevent_idChanging(int value);
+    partial void Onevent_idChanged();
+    #endregion
+		
+		public speaker()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_first_name", DbType="VarChar(255)")]
+		public string first_name
+		{
+			get
+			{
+				return this._first_name;
+			}
+			set
+			{
+				if ((this._first_name != value))
+				{
+					this.Onfirst_nameChanging(value);
+					this.SendPropertyChanging();
+					this._first_name = value;
+					this.SendPropertyChanged("first_name");
+					this.Onfirst_nameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_last_name", DbType="VarChar(255)")]
+		public string last_name
+		{
+			get
+			{
+				return this._last_name;
+			}
+			set
+			{
+				if ((this._last_name != value))
+				{
+					this.Onlast_nameChanging(value);
+					this.SendPropertyChanging();
+					this._last_name = value;
+					this.SendPropertyChanged("last_name");
+					this.Onlast_nameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(MAX)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this.OntitleChanging(value);
+					this.SendPropertyChanging();
+					this._title = value;
+					this.SendPropertyChanged("title");
+					this.OntitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bio", DbType="VarChar(MAX)")]
+		public string bio
+		{
+			get
+			{
+				return this._bio;
+			}
+			set
+			{
+				if ((this._bio != value))
+				{
+					this.OnbioChanging(value);
+					this.SendPropertyChanging();
+					this._bio = value;
+					this.SendPropertyChanged("bio");
+					this.OnbioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_irc", DbType="VarChar(MAX)")]
+		public string irc
+		{
+			get
+			{
+				return this._irc;
+			}
+			set
+			{
+				if ((this._irc != value))
+				{
+					this.OnircChanging(value);
+					this.SendPropertyChanging();
+					this._irc = value;
+					this.SendPropertyChanged("irc");
+					this.OnircChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_twitter", DbType="VarChar(MAX)")]
+		public string twitter
+		{
+			get
+			{
+				return this._twitter;
+			}
+			set
+			{
+				if ((this._twitter != value))
+				{
+					this.OntwitterChanging(value);
+					this.SendPropertyChanging();
+					this._twitter = value;
+					this.SendPropertyChanged("twitter");
+					this.OntwitterChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_member_id", DbType="Int")]
+		public System.Nullable<int> member_id
+		{
+			get
+			{
+				return this._member_id;
+			}
+			set
+			{
+				if ((this._member_id != value))
+				{
+					this.Onmember_idChanging(value);
+					this.SendPropertyChanging();
+					this._member_id = value;
+					this.SendPropertyChanged("member_id");
+					this.Onmember_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pic", DbType="VarChar(MAX)")]
+		public string pic
+		{
+			get
+			{
+				return this._pic;
+			}
+			set
+			{
+				if ((this._pic != value))
+				{
+					this.OnpicChanging(value);
+					this.SendPropertyChanging();
+					this._pic = value;
+					this.SendPropertyChanged("pic");
+					this.OnpicChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_openstack_id", DbType="Int")]
+		public System.Nullable<int> openstack_id
+		{
+			get
+			{
+				return this._openstack_id;
+			}
+			set
+			{
+				if ((this._openstack_id != value))
+				{
+					this.Onopenstack_idChanging(value);
+					this.SendPropertyChanging();
+					this._openstack_id = value;
+					this.SendPropertyChanged("openstack_id");
+					this.Onopenstack_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int NOT NULL")]
+		public int event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this.Onevent_idChanging(value);
+					this.SendPropertyChanging();
+					this._event_id = value;
+					this.SendPropertyChanged("event_id");
+					this.Onevent_idChanged();
 				}
 			}
 		}

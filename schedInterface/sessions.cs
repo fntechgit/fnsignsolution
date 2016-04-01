@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Text.RegularExpressions;
 using RestSharp;
@@ -64,7 +65,7 @@ namespace schedInterface
                 s.name = item.title;
                 s.speakers = item.speakers;
                 s.start = Convert.ToDateTime(item.session_start);
-                s.event_start = s.start.ToShortTimeString();
+                s.event_start = Convert.ToDateTime(s.start).ToShortTimeString();
                 s.venue = item.venue;
 
                 _sessions.Add(s);
@@ -288,9 +289,19 @@ namespace schedInterface
 
                     se.session_end = DateTime.TryParse(s.event_end, out session_end) ? (DateTime?) session_end : null;
 
+                    if (se.session_end != null)
+                    {
+                        se.session_end = Convert.ToDateTime(se.session_end) < DateTime.Now ? null : se.session_end;
+                    }
+
                     DateTime session_start;
 
                     se.session_start = DateTime.TryParse(s.event_start, out session_start) ? (DateTime?) session_start : null;
+
+                    if (se.session_start != null)
+                    {
+                        se.session_start = Convert.ToDateTime(se.session_start) < DateTime.Now ? null : se.session_start;
+                    }
 
                     se.speakers = s.speakers;
                     se.title = s.name;
@@ -386,7 +397,7 @@ namespace schedInterface
                 s.name = item.title;
                 s.speakers = item.speakers;
                 s.start = Convert.ToDateTime(item.session_start);
-                s.event_start = s.start.ToShortTimeString();
+                s.event_start = Convert.ToDateTime(s.start).ToShortTimeString();
                 s.venue = item.venue;
             }
 
@@ -422,13 +433,76 @@ namespace schedInterface
         public Int32 event_id { get; set; }
     }
 
+    #region openstackAPI
+
+    public class osessions
+    {
+        private functions _functions = new functions();
+        private locations _locations = new locations();
+        private speakers _speakers = new speakers();
+
+        public OpenStack refresh(Int32 id, string page)
+        {
+            // https://testresource-server.openstack.org/api/v1/summits/6/events&per_page=100&page=1
+
+            var client = new RestClient("https://testresource-server.openstack.org/api/v1/");
+
+            var request = new RestRequest("summits/" + id + "/events");
+
+            request.AddParameter("access_token", "PAH7KdDOiWgZVWuQqYGpr3LCPHv-fj8RsO%7EeozlVBMeEDd8xezJHMx.4VH64T0MFTVV3k2KN");
+            request.AddParameter("token_type", "Bearer");
+            request.AddParameter("per_page", "100");
+            request.AddParameter("page", page);
+
+            IRestResponse response = client.Execute(request);
+
+            var mySessions = new JavaScriptSerializer().Deserialize<OpenStack>(response.Content);
+
+            return mySessions;
+        }
+
+        public Session parse(OpenStackSession s, Int32 event_id)
+        {
+            Session se = new Session();
+
+            se.description = s.description;
+            se.end = s.end_date != null ? (DateTime) Convert.ToDateTime(_functions.ConvertUnixTimeStamp(s.end_date.ToString())) : DateTime.Now.AddYears(-50);
+
+            se.event_id = event_id;
+            se.event_key = s.id.ToString();
+            se.event_type = "OpenStack";
+            se.internal_id = s.id;
+            se.name = s.title;
+            se.start = s.start_date != null ? (DateTime) Convert.ToDateTime(_functions.ConvertUnixTimeStamp(s.start_date.ToString())) : DateTime.Now.AddYears(-50);
+            se.venue_id = s.location_id != null ? s.location_id.ToString() : null;
+            se.venue = s.location_id != null ? _locations.name_by_reference(s.location_id.ToString(), event_id) : "NOT SET";
+
+            List<string> speakers = new List<string>();
+
+            foreach (int sp in s.speakers)
+            {
+                speakers.Add(_speakers.name_by_open_id(sp, event_id));
+            }
+
+            foreach (string speak in speakers)
+            {
+                if (speak != "Unknown")
+                {
+                    se.speakers += speak + " ";
+                }
+            }
+
+            return se;
+        }
+    }
+
     public class OpenStack
     {
         public Int32? total { get; set; }
         public Int32 per_page { get; set; }
         public Int32 current_page { get; set; }
         public Int32 last_page { get; set; }
-        public OpenStackSession data { get; set; }
+        public List<OpenStackSession> data { get; set; }
     }
 
     public class OpenStackSession
@@ -436,22 +510,24 @@ namespace schedInterface
         public Int32 id { get; set; }
         public string title { get; set; }
         public string description { get; set; }
-        public Int32 start_date { get; set; }
-        public Int32 end_date { get; set; }
+        public Int32? start_date { get; set; }
+        public Int32? end_date { get; set; }
         public Int32? location_id { get; set; }
         public Int32 summit_id { get; set; }
-        public Int32 type_id { get; set; }
+        //public Int32 type_id { get; set; }
         public string class_name { get; set; }
-        public Int32? track_id { get; set; }
-        public Int32? moderator_speaker_id { get; set; }
-        public string level { get; set; }
-        public Boolean allow_feedback { get; set; }
-        public Int32? avg_feedback_rate { get; set; }
+        //public Int32? track_id { get; set; }
+        //public Int32? moderator_speaker_id { get; set; }
+        //public string level { get; set; }
+        //public Boolean allow_feedback { get; set; }
+        //public Int32? avg_feedback_rate { get; set; }
         public Boolean is_published { get; set; }
-        public Int32? head_count { get; set; }
-        public string rsvp_link { get; set; }
-        public Int32[] summit_types { get; set; }
-        public string[] tags { get; set; }
+        //public Int32? head_count { get; set; }
+        //public string rsvp_link { get; set; }
+        //public Int32[] summit_types { get; set; }
+        //public string[] tags { get; set; }
         public Int32[] speakers { get; set; }
     }
+
+    #endregion
 }

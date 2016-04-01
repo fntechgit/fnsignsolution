@@ -28,10 +28,10 @@ namespace fnsignManager
 
             foreach (Session t in _sessions.by_event(Convert.ToInt32(Session["event_id"].ToString())))
             {
-                start = t.start == null ? "N/A" : Convert.ToDateTime(t.start).ToShortDateString() + " " + Convert.ToDateTime(t.start).ToShortTimeString();
-                end = t.end == null ? "N/A" : Convert.ToDateTime(t.end).ToShortDateString() + " " + Convert.ToDateTime(t.end).ToShortTimeString();
+                start = t.start < DateTime.Now.AddYears(-50) ? "NOT SET" : Convert.ToDateTime(t.start).ToShortDateString() + " " + Convert.ToDateTime(t.start).ToShortTimeString();
+                end = t.end < DateTime.Now.AddYears(-50) ? "NOT SET" : Convert.ToDateTime(t.end).ToShortDateString() + " " + Convert.ToDateTime(t.end).ToShortTimeString();
 
-                ph_tags.Controls.Add(new LiteralControl("<tr><td data-title=\"Title\">" + t.name.ToUpper() + "</td><td data-title=\"Venue\" class=\"hidden-xs hidden-sm\">" + t.venue + "</td><td data-title=\"Attendees\" class=\"hidden-xs hidden-sm\">" + t.goers + "</td><td data-title=\"Speakers\" class=\"hidden-xs hidden-sm\">" + t.speakers + "</td><td data-title=\"Type\">" + t.event_type + "</td><td data-title=\"Start\" class=\"text-right\">" + start + "</td><td data-title=\"End\" class=\"text-right\">" + end + "</td></tr>"));
+                ph_tags.Controls.Add(new LiteralControl("<tr><td data-title=\"Title\">" + t.name + "</td><td data-title=\"Venue\" class=\"hidden-xs hidden-sm\">" + t.venue + "</td><td data-title=\"Attendees\" class=\"hidden-xs hidden-sm\">" + t.goers + "</td><td data-title=\"Speakers\" class=\"hidden-xs hidden-sm\">" + t.speakers + "</td><td data-title=\"Type\">" + t.event_type + "</td><td data-title=\"Start\" class=\"text-right\">" + start + "</td><td data-title=\"End\" class=\"text-right\">" + end + "</td></tr>"));
             }
         }
 

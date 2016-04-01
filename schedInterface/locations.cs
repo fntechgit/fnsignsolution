@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Web.Script.Serialization;
+using RestSharp;
 
 namespace schedInterface
 {
@@ -84,6 +86,24 @@ namespace schedInterface
 
             return _locations;
         }
+
+        public string name_by_reference(string id, Int32 event_id)
+        {
+            var result = from lc in db.locations
+                where lc.sched_id == id && lc.event_id==event_id
+                select lc;
+
+            string name = "";
+
+            foreach (var item in result)
+            {
+                name = item.title;
+            }
+
+            return name;
+        }
+
+
     }
 
     public class Location
@@ -93,4 +113,44 @@ namespace schedInterface
         public string title { get; set; }
         public Int32 event_id { get; set; }
     }
+
+    #region openstackAPI
+
+    public class olocations
+    {
+        public List<OpenStackLocation> get_by_event(Int32 id)
+        {
+            var client = new RestClient("https://testresource-server.openstack.org/api/v1/");
+
+            var request = new RestRequest("summits/" + id + "/locations");
+
+            request.AddParameter("access_token", "PAH7KdDOiWgZVWuQqYGpr3LCPHv-fj8RsO%7EeozlVBMeEDd8xezJHMx.4VH64T0MFTVV3k2KN");
+            request.AddParameter("token_type", "Bearer");
+
+            IRestResponse response = client.Execute(request);
+
+            var mySessions = new JavaScriptSerializer().Deserialize<List<OpenStackLocation>>(response.Content);
+
+            return mySessions;
+        }
+    }
+
+    public class OpenStackLocation
+    {
+        public Int32 id { get; set; }
+        public string name { get; set; }
+        public string description { get; set; }
+        public string class_name { get; set; }
+        public string location_type { get; set; }
+        public string address_1 { get; set; }
+        public string address_2 { get; set; }
+        public string zip_code { get; set; }
+        public string city { get; set; }
+        public string steate { get; set; }
+        public string country { get; set; }
+        public string lng { get; set; }
+        public string lat { get; set; }
+    }
+
+    #endregion
 }

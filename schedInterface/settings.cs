@@ -41,4 +41,17 @@ namespace schedInterface
 
         #endregion
     }
+
+    public class osettings
+    {
+        public string client_id()
+        {
+            return @"qcDdED2iBqqAb2YbvN3wwQQ9OBk0iJY8.openstack.client";
+        }
+
+        public string client_secret()
+        {
+            return @"__L6lQ9An1hhdp42wBlmwMpPGaZ9YlSEisS6x9hhPK9VfKdd4.m-mwd-0CScTU2J";
+        }
+    }
 }
