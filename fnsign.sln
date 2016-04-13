@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2010
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "schedInterface", "schedInterface\schedInterface.csproj", "{26EB39A9-752A-4511-ADE4-4FC07AA31577}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fnsign_updater", "fnsign_updater\fnsign_updater.csproj", "{E21A6E33-FA82-43DD-AE34-55715ADB8BE6}"

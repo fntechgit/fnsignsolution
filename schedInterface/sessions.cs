@@ -500,21 +500,21 @@ namespace schedInterface
             return mySessions;
         }
 
-        public Session parse(OpenStackSession s, Int32 event_id)
+        public Session parse(OpenStackSession s, Event e, List<EventType> types)
         {
             Session se = new Session();
 
             se.description = s.description;
-            se.end = s.end_date != null ? (DateTime) Convert.ToDateTime(_functions.ConvertUnixTimeStamp(s.end_date.ToString())) : DateTime.Now.AddYears(-50);
+            se.end = s.end_date != null ? (DateTime) Convert.ToDateTime(_functions.ConvertUnixTimeStamp(s.end_date.ToString())).AddSeconds(e.offset) : DateTime.Now.AddYears(-50);
 
-            se.event_id = event_id;
+            se.event_id = e.id;
             se.event_key = s.id.ToString();
-            se.event_type = s.class_name;
+            se.event_type = types.Single(x => x.event_type_id == s.type_id).title;
             se.internal_id = s.id;
             se.name = s.title;
-            se.start = s.start_date != null ? (DateTime) Convert.ToDateTime(_functions.ConvertUnixTimeStamp(s.start_date.ToString())) : DateTime.Now.AddYears(-50);
+            se.start = s.start_date != null ? (DateTime) Convert.ToDateTime(_functions.ConvertUnixTimeStamp(s.start_date.ToString())).AddSeconds(e.offset) : DateTime.Now.AddYears(-50);
             se.venue_id = s.location_id != null ? s.location_id.ToString() : null;
-            se.venue = s.location_id != null ? _locations.name_by_reference(s.location_id.ToString(), event_id) : "NOT SET";
+            se.venue = s.location_id != null ? _locations.name_by_reference(s.location_id.ToString(), e.id) : "NOT SET";
 
             List<string> speakers = new List<string>();
 
@@ -524,7 +524,7 @@ namespace schedInterface
                 {
                     foreach (int sp in s.speakers)
                     {
-                        speakers.Add(_speakers.name_by_open_id(sp, event_id));
+                        speakers.Add(_speakers.name_by_open_id(sp, e.id));
                     }
 
                     se.speakers = string.Join(", ", speakers);
@@ -570,6 +570,7 @@ namespace schedInterface
         //public Int32[] summit_types { get; set; }
         //public string[] tags { get; set; }
         public List<Int32> speakers { get; set; }
+        public Int32 type_id { get; set; }
     }
 
     #endregion

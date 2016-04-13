@@ -180,6 +180,21 @@
       <Column Name="rotate" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.speakers" Member="speakers">
+    <Type Name="speaker">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="first_name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="last_name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="bio" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="irc" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="twitter" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="member_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="pic" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="openstack_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
   <Table Name="dbo.events" Member="events">
     <Type Name="event">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -193,20 +208,14 @@
       <Column Name="t_username" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
       <Column Name="t_hashtag" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="openstack_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="offset" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
-  <Table Name="dbo.speakers" Member="speakers">
-    <Type Name="speaker">
+  <Table Name="dbo.event_types" Member="event_types">
+    <Type Name="event_type">
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="first_name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="last_name" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="bio" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="irc" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="twitter" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="member_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="pic" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="openstack_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="event_type_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </Type>
   </Table>

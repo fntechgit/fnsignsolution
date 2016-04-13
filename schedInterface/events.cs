@@ -108,6 +108,7 @@ namespace schedInterface
             e.t_hashtag = ev.t_hashtag;
             e.t_username = ev.t_username;
             e.openstack_id = ev.openstack_id;
+            e.offset = ev.offset;
 
             db.SubmitChanges();
 
@@ -128,6 +129,7 @@ namespace schedInterface
             e.t_hashtag = ev.t_hashtag;
             e.t_username = ev.t_username;
             e.openstack_id = ev.openstack_id;
+            e.offset = ev.offset;
             
             db.events.InsertOnSubmit(e);
 
@@ -222,6 +224,7 @@ namespace schedInterface
         public string t_hashtag { get; set; }
         public List<string> hashtags { get; set; }
         public Int32? openstack_id { get; set; }
+        public Int32 offset { get; set; }
     }
 
     #region openstackAPI
@@ -243,6 +246,22 @@ namespace schedInterface
 
             return mySessions;
         }
+
+        public List<OpenStackEventType> push_event_types(Int32 id)
+        {
+            var client = new RestClient("https://testresource-server.openstack.org/api/v1/");
+
+            var request = new RestRequest("summits/" + id + "/event-types");
+
+            request.AddParameter("access_token", "PAH7KdDOiWgZVWuQqYGpr3LCPHv-fj8RsO%7EeozlVBMeEDd8xezJHMx.4VH64T0MFTVV3k2KN");
+            request.AddParameter("token_type", "Bearer");
+
+            IRestResponse response = client.Execute(request);
+
+            var mySessions = new JavaScriptSerializer().Deserialize<List<OpenStackEventType>>(response.Content);
+
+            return mySessions;
+        }
     }
 
     public class OpenStackEvent
@@ -255,6 +274,69 @@ namespace schedInterface
         public Boolean active { get; set; }
         public TimeZone time_zone { get; set; }
         public string logo { get; set; }
+
+        
+    }
+
+    public class event_types
+    {
+        private readonly schedDataContext db = new schedDataContext();
+
+        public Boolean addUpdate(EventType t)
+        {
+            var result = from ets in db.event_types
+                where ets.event_type_id == t.event_type_id
+                select ets;
+
+            if (result.Any())
+            {
+                // need to update
+                event_type et = db.event_types.Single(x => x.event_type_id == t.event_type_id);
+
+                et.title = t.title;
+                et.event_id = t.event_id;
+
+                db.SubmitChanges();
+            }
+            else
+            {
+                // need to add
+                event_type et = new event_type();
+
+                et.event_type_id = t.event_type_id;
+                et.title = t.title;
+                et.event_id = t.event_id;
+
+                db.event_types.InsertOnSubmit(et);
+
+                db.SubmitChanges();
+            }
+
+            return true;
+        }
+
+        public List<EventType> by_event(Int32 id)
+        {
+            List<EventType> _types = new List<EventType>();
+
+            var result = from tps in db.event_types
+                where tps.event_id == id
+                select tps;
+
+            foreach (var item in result)
+            {
+                EventType t = new EventType();
+
+                t.event_type_id = item.event_type_id;
+                t.event_id = id;
+                t.title = item.title;
+                t.id = item.id;
+
+                _types.Add(t);
+            }
+
+            return _types;
+        }
     }
 
     public class TimeZone
@@ -265,6 +347,20 @@ namespace schedInterface
         public string comments { get; set; }
         public string name { get; set; }
         public Int32? offset { get; set; }
+    }
+
+    public class EventType
+    {
+        public Int32 id { get; set; }
+        public Int32 event_type_id { get; set;  }
+        public string title { get; set; }
+        public Int32 event_id { get; set; }
+    }
+
+    public class OpenStackEventType
+    {
+        public Int32 id { get; set; }
+        public string name { get; set; }
     }
 
     #endregion

@@ -12,3 +12,17 @@ E:\projects\fnsign\schedInterface\bin\Debug\TweetSharp.dll
 E:\projects\fnsign\schedInterface\bin\Debug\Hammock.ClientProfile.pdb
 E:\projects\fnsign\schedInterface\bin\Debug\Newtonsoft.Json.xml
 E:\projects\fnsign\schedInterface\bin\Debug\TweetSharp.pdb
+D:\projects\fnsign\schedInterface\bin\Debug\schedInterface.dll.config
+D:\projects\fnsign\schedInterface\bin\Debug\schedInterface.dll
+D:\projects\fnsign\schedInterface\bin\Debug\schedInterface.pdb
+D:\projects\fnsign\schedInterface\bin\Debug\Hammock.ClientProfile.dll
+D:\projects\fnsign\schedInterface\bin\Debug\Newtonsoft.Json.dll
+D:\projects\fnsign\schedInterface\bin\Debug\RestSharp.dll
+D:\projects\fnsign\schedInterface\bin\Debug\TweetSharp.dll
+D:\projects\fnsign\schedInterface\bin\Debug\Hammock.ClientProfile.pdb
+D:\projects\fnsign\schedInterface\bin\Debug\Newtonsoft.Json.xml
+D:\projects\fnsign\schedInterface\bin\Debug\RestSharp.xml
+D:\projects\fnsign\schedInterface\bin\Debug\TweetSharp.pdb
+D:\projects\fnsign\schedInterface\obj\Debug\schedInterface.csprojResolveAssemblyReference.cache
+D:\projects\fnsign\schedInterface\obj\Debug\schedInterface.dll
+D:\projects\fnsign\schedInterface\obj\Debug\schedInterface.pdb
