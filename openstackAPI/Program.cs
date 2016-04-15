@@ -24,6 +24,11 @@ namespace openstackAPI
 
             Console.WriteLine("Begin Process...");
 
+            Console.WriteLine("Getting Authorization...");
+
+            Console.WriteLine(_auth.auth_justin(_settings.client_id(), _settings.client_secret()));
+            Console.ReadLine();
+
             List<OpenStackEvent> evs = _events.push_events();
 
             Console.WriteLine("Event Count:" + evs.Count.ToString());

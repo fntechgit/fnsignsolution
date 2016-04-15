@@ -46,12 +46,12 @@ namespace schedInterface
     {
         public string client_id()
         {
-            return @"qcDdED2iBqqAb2YbvN3wwQQ9OBk0iJY8.openstack.client";
+            return "Bd6G58pczm7yHgU5VVpI2qyGH~JY.poV.openstack.client";
         }
 
         public string client_secret()
         {
-            return @"__L6lQ9An1hhdp42wBlmwMpPGaZ9YlSEisS6x9hhPK9VfKdd4.m-mwd-0CScTU2J";
+            return "Ey8lC_y3Zzo9U52fKnbpqzFDmPoP-ap3qZNcqgFpsKoPzvn6nS.nGfas46l4i_eD";
         }
     }
 }
