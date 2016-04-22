@@ -231,13 +231,15 @@ namespace schedInterface
 
     public class openstackEvents
     {
+        private osettings _settings = new osettings();
+
         public List<OpenStackEvent> push_events()
         {
-            var client = new RestClient("https://testresource-server.openstack.org/api/v1/");
+            var client = new RestClient("https://openstackid-resources.openstack.org/api/v1/");
 
             var request = new RestRequest("summits");
 
-            request.AddParameter("access_token", "PAH7KdDOiWgZVWuQqYGpr3LCPHv-fj8RsO%7EeozlVBMeEDd8xezJHMx.4VH64T0MFTVV3k2KN");
+            request.AddParameter("access_token", _settings.auth_key());
             request.AddParameter("token_type", "Bearer");
 
             IRestResponse response = client.Execute(request);
@@ -249,11 +251,11 @@ namespace schedInterface
 
         public List<OpenStackEventType> push_event_types(Int32 id)
         {
-            var client = new RestClient("https://testresource-server.openstack.org/api/v1/");
+            var client = new RestClient("https://openstackid-resources.openstack.org/api/v1/");
 
             var request = new RestRequest("summits/" + id + "/event-types");
 
-            request.AddParameter("access_token", "PAH7KdDOiWgZVWuQqYGpr3LCPHv-fj8RsO%7EeozlVBMeEDd8xezJHMx.4VH64T0MFTVV3k2KN");
+            request.AddParameter("access_token", _settings.auth_key());
             request.AddParameter("token_type", "Bearer");
 
             IRestResponse response = client.Execute(request);

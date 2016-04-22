@@ -219,6 +219,13 @@
       <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
+  <Table Name="dbo.settings" Member="settings">
+    <Type Name="setting">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="value" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
   <Function Name="dbo.permissions_get_by_user" Method="permissions_get_by_user">
     <Parameter Name="user_id" Type="System.Int32" DbType="Int" />
     <ElementType Name="permissions_get_by_userResult">
@@ -456,5 +463,38 @@
       <Column Name="modified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
+  </Function>
+  <Function Name="dbo.sessions_remove" Method="sessions_remove">
+    <Parameter Name="event_key" Type="System.String" DbType="VarChar(255)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.speaker_mod" Method="speaker_mod">
+    <Parameter Name="first_name" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="last_name" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="title" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="bio" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="irc" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="twitter" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="member_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="pic" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="openstack_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.session_mod" Method="session_mod">
+    <Parameter Name="event_key" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="active" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="title" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="session_start" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="session_end" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="type" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="description" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="seats" Type="System.Int32" DbType="Int" />
+    <Parameter Name="attendees" Type="System.Int32" DbType="Int" />
+    <Parameter Name="venue_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="venue" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="speakers" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
   </Function>
 </Database>

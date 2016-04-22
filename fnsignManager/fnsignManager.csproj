@@ -20,6 +20,11 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>4.0</OldToolsVersion>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,6 +45,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net4\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -1633,6 +1642,7 @@
     <Content Include="login.aspx" />
     <Content Include="logout.aspx" />
     <Content Include="messages.aspx" />
+    <Content Include="oauth.aspx" />
     <Content Include="permissions.aspx" />
     <Content Include="services\slides.asmx" />
     <Content Include="sessions.aspx" />
@@ -1807,6 +1817,13 @@
     </Compile>
     <Compile Include="messages.aspx.designer.cs">
       <DependentUpon>messages.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="oauth.aspx.cs">
+      <DependentUpon>oauth.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="oauth.aspx.designer.cs">
+      <DependentUpon>oauth.aspx</DependentUpon>
     </Compile>
     <Compile Include="permissions.aspx.cs">
       <DependentUpon>permissions.aspx</DependentUpon>
@@ -2130,6 +2147,7 @@
     <None Include="assets\vendor\style-switcher\less\skin.less" />
     <None Include="assets\vendor\style-switcher\less\variables.less" />
     <Content Include="fnsign.master" />
+    <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\vendor\flot\examples\gauge\" />

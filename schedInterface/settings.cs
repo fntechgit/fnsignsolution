@@ -44,6 +44,8 @@ namespace schedInterface
 
     public class osettings
     {
+        private schedDataContext db = new schedDataContext();
+
         public string client_id()
         {
             return "Bd6G58pczm7yHgU5VVpI2qyGH~JY.poV.openstack.client";
@@ -52,6 +54,22 @@ namespace schedInterface
         public string client_secret()
         {
             return "Ey8lC_y3Zzo9U52fKnbpqzFDmPoP-ap3qZNcqgFpsKoPzvn6nS.nGfas46l4i_eD";
+        }
+
+        public string auth_key()
+        {
+            var result = from st in db.settings
+                where st.id == 1
+                select st;
+
+            string auth = string.Empty;
+
+            foreach (var item in result)
+            {
+                auth = item.value;
+            }
+
+            return auth;
         }
     }
 }

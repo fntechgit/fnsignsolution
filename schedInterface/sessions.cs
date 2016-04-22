@@ -260,6 +260,18 @@ namespace schedInterface
             return true;
         }
 
+        public Session openstackAdd(Session s, Int32 event_id)
+        {
+            Regex rgx = new Regex(@"[0-9 :-]");
+
+            db.session_mod(s.event_key, true, s.name, s.start, s.end, s.event_type, s.description,
+                !string.IsNullOrEmpty(s.seats) ? Convert.ToInt32(s.seats) : 0,
+                !string.IsNullOrEmpty(s.goers) ? Convert.ToInt32(s.goers) : 0, Convert.ToInt32(s.venue_id), s.venue, s.speakers,
+                s.event_id);
+
+            return s;
+        }
+
         public Session add(Session s, Int32 event_id)
         {
             // check to see if one exists;
@@ -448,6 +460,13 @@ namespace schedInterface
 
             return s;
         }
+
+        public Boolean remove(string id)
+        {
+            db.sessions_remove(id);
+
+            return true;
+        }
     }
 
     public class Session
@@ -479,16 +498,17 @@ namespace schedInterface
         private functions _functions = new functions();
         private locations _locations = new locations();
         private speakers _speakers = new speakers();
+        private osettings _settings = new osettings();
 
         public OpenStack refresh(Int32 id, string page)
         {
             // https://testresource-server.openstack.org/api/v1/summits/6/events&per_page=100&page=1
 
-            var client = new RestClient("https://testresource-server.openstack.org/api/v1/");
+            var client = new RestClient("https://openstackid-resources.openstack.org/api/v1/");
 
             var request = new RestRequest("summits/" + id + "/events/published");
 
-            request.AddParameter("access_token", "PAH7KdDOiWgZVWuQqYGpr3LCPHv-fj8RsO%7EeozlVBMeEDd8xezJHMx.4VH64T0MFTVV3k2KN");
+            request.AddParameter("access_token",_settings.auth_key());
             request.AddParameter("token_type", "Bearer");
             request.AddParameter("per_page", "100");
             request.AddParameter("page", page);

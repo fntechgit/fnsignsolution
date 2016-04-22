@@ -11,14 +11,15 @@ namespace schedInterface
     public class speakers
     {
         private schedDataContext db = new schedDataContext();
+        private osettings _settings = new osettings();
 
         public OpenSpeaker refresh(Int32 id, string page)
         {
-            var client = new RestClient("https://testresource-server.openstack.org/api/v1/");
+            var client = new RestClient("https://openstackid-resources.openstack.org/api/v1/");
 
             var request = new RestRequest("summits/" + id + "/speakers");
 
-            request.AddParameter("access_token", "PAH7KdDOiWgZVWuQqYGpr3LCPHv-fj8RsO%7EeozlVBMeEDd8xezJHMx.4VH64T0MFTVV3k2KN");
+            request.AddParameter("access_token", _settings.auth_key());
             request.AddParameter("token_type", "Bearer");
             request.AddParameter("per_page", "100");
             request.AddParameter("page", page);
@@ -32,49 +33,54 @@ namespace schedInterface
 
         public Speaker add(Speaker s)
         {
-            speaker sp = new speaker();
+            db.speaker_mod(s.first_name, s.last_name, s.title, s.bio, s.irc, s.twitter, s.member_id, s.pic,
+                s.id, s.event_id);
 
-            if (db.speakers.Where(x => x.openstack_id == s.openstack_id).Any())
-            {
-                // need to update
-                sp = db.speakers.Where(x => x.openstack_id == s.openstack_id && x.event_id == s.event_id).Single();
+            s.openstack_id = s.id;
 
-                sp.bio = s.bio;
-                sp.event_id = s.event_id;
-                sp.first_name = s.first_name;
-                sp.irc = s.irc;
-                sp.last_name = s.last_name;
-                sp.member_id = s.member_id;
-                sp.openstack_id = s.id;
-                s.openstack_id = s.id;
-                sp.pic = s.pic;
-                sp.title = s.title;
-                sp.twitter = s.twitter;
-                sp.event_id = s.event_id;
+            //speaker sp = new speaker();
 
-                db.SubmitChanges();
-            }
-            else
-            {
-                sp.bio = s.bio;
-                sp.event_id = s.event_id;
-                sp.first_name = s.first_name;
-                sp.irc = s.irc;
-                sp.last_name = s.last_name;
-                sp.member_id = s.member_id;
-                sp.openstack_id = s.id;
-                s.openstack_id = s.id;
-                sp.pic = s.pic;
-                sp.title = s.title;
-                sp.twitter = s.twitter;
-                sp.event_id = s.event_id;
+            //if (db.speakers.Where(x => x.openstack_id == s.openstack_id).Any())
+            //{
+            //    // need to update
+            //    sp = db.speakers.Where(x => x.openstack_id == s.openstack_id && x.event_id == s.event_id).Single();
 
-                db.speakers.InsertOnSubmit(sp);
+            //    sp.bio = s.bio;
+            //    sp.event_id = s.event_id;
+            //    sp.first_name = s.first_name;
+            //    sp.irc = s.irc;
+            //    sp.last_name = s.last_name;
+            //    sp.member_id = s.member_id;
+            //    sp.openstack_id = s.id;
+            //    s.openstack_id = s.id;
+            //    sp.pic = s.pic;
+            //    sp.title = s.title;
+            //    sp.twitter = s.twitter;
+            //    sp.event_id = s.event_id;
 
-                db.SubmitChanges();
+            //    db.SubmitChanges();
+            //}
+            //else
+            //{
+            //    sp.bio = s.bio;
+            //    sp.event_id = s.event_id;
+            //    sp.first_name = s.first_name;
+            //    sp.irc = s.irc;
+            //    sp.last_name = s.last_name;
+            //    sp.member_id = s.member_id;
+            //    sp.openstack_id = s.id;
+            //    s.openstack_id = s.id;
+            //    sp.pic = s.pic;
+            //    sp.title = s.title;
+            //    sp.twitter = s.twitter;
+            //    sp.event_id = s.event_id;
 
-                s.id = sp.id;
-            }
+            //    db.speakers.InsertOnSubmit(sp);
+
+            //    db.SubmitChanges();
+
+            //    s.id = sp.id;
+            //}
 
             return s;
         }

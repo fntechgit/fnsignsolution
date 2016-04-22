@@ -104,5 +104,11 @@
         <elementListCompartment Id="9eac93d9-98c9-425f-baac-f6d1193db1e2" absoluteBounds="9.765, 4.46, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="762d2520-afd3-4dd8-8f20-4920bf69f896" absoluteBounds="7.75, 4.375, 2, 1.3862939453125">
+      <DataClassMoniker Name="/schedDataContext/setting" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7b1c577c-bd2d-4e11-949e-7a70b46bdba8" absoluteBounds="7.765, 4.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>

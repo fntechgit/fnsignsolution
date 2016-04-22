@@ -6,7 +6,6 @@ using Newtonsoft.Json;
 using RestSharp;
 using RestSharp.Extensions;
 
-
 namespace schedInterface
 {
     public class auth
@@ -33,7 +32,7 @@ namespace schedInterface
         {
             var client = new RestClient("https://openstackid.org/oauth2");
 
-            var request = new RestRequest("token");
+            var request = new RestRequest("auth");
             
             request.AddHeader("authorization",
                 "Basic Base64-Encoded(" +Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(_settings.client_id())) + ":" + Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(_settings.client_secret())) + ")");

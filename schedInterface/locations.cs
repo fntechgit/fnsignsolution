@@ -118,13 +118,15 @@ namespace schedInterface
 
     public class olocations
     {
+        private osettings _settings = new osettings();
+
         public List<OpenStackLocation> get_by_event(Int32 id)
         {
-            var client = new RestClient("https://testresource-server.openstack.org/api/v1/");
+            var client = new RestClient("https://openstackid-resources.openstack.org/api/v1/");
 
             var request = new RestRequest("summits/" + id + "/locations");
 
-            request.AddParameter("access_token", "PAH7KdDOiWgZVWuQqYGpr3LCPHv-fj8RsO%7EeozlVBMeEDd8xezJHMx.4VH64T0MFTVV3k2KN");
+            request.AddParameter("access_token", _settings.auth_key());
             request.AddParameter("token_type", "Bearer");
 
             IRestResponse response = client.Execute(request);

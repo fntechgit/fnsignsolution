@@ -81,6 +81,9 @@ namespace schedInterface
     partial void Insertevent_type(event_type instance);
     partial void Updateevent_type(event_type instance);
     partial void Deleteevent_type(event_type instance);
+    partial void Insertsetting(setting instance);
+    partial void Updatesetting(setting instance);
+    partial void Deletesetting(setting instance);
     #endregion
 		
 		public schedDataContext() : 
@@ -249,6 +252,14 @@ namespace schedInterface
 			}
 		}
 		
+		public System.Data.Linq.Table<setting> settings
+		{
+			get
+			{
+				return this.GetTable<setting>();
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.permissions_get_by_user")]
 		public ISingleResult<permissions_get_by_userResult> permissions_get_by_user([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> user_id)
 		{
@@ -345,6 +356,27 @@ namespace schedInterface
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), event_id, location);
 			return ((ISingleResult<sessions_by_event_location_dateResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sessions_remove")]
+		public int sessions_remove([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string event_key)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), event_key);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.speaker_mod")]
+		public int speaker_mod([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string first_name, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string last_name, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(MAX)")] string title, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(MAX)")] string bio, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(MAX)")] string irc, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(MAX)")] string twitter, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> member_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(MAX)")] string pic, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> openstack_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> event_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), first_name, last_name, title, bio, irc, twitter, member_id, pic, openstack_id, event_id);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.session_mod")]
+		public int session_mod([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string event_key, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] System.Nullable<bool> active, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(MAX)")] string title, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> session_start, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> session_end, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string type, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(MAX)")] string description, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> seats, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> attendees, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> venue_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string venue, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(MAX)")] string speakers, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> event_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), event_key, active, title, session_start, session_end, type, description, seats, attendees, venue_id, venue, speakers, event_id);
+			return ((int)(result.ReturnValue));
 		}
 	}
 	
@@ -4593,6 +4625,116 @@ namespace schedInterface
 					this._event_id = value;
 					this.SendPropertyChanged("event_id");
 					this.Onevent_idChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.settings")]
+	public partial class setting : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _name;
+		
+		private string _value;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    partial void OnvalueChanging(string value);
+    partial void OnvalueChanged();
+    #endregion
+		
+		public setting()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_value", DbType="VarChar(MAX) NOT NULL", CanBeNull=false)]
+		public string value
+		{
+			get
+			{
+				return this._value;
+			}
+			set
+			{
+				if ((this._value != value))
+				{
+					this.OnvalueChanging(value);
+					this.SendPropertyChanging();
+					this._value = value;
+					this.SendPropertyChanged("value");
+					this.OnvalueChanged();
 				}
 			}
 		}
