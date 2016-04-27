@@ -49,7 +49,7 @@ namespace openstackAPI
 
                     if (e.event_start != null)
                     {
-                        if (Convert.ToDateTime(e.event_start) > DateTime.Now)
+                        if (Convert.ToDateTime(e.event_end) > DateTime.Now)
                         {
                             e.offset = ev.time_zone.offset != null ? Convert.ToInt32(ev.time_zone.offset) : 0;
 
@@ -122,42 +122,42 @@ namespace openstackAPI
                                 drawTextProgressBar(lcnt, locs.Count);
                             }
 
-                            //// now get the speakers
-                            //Console.WriteLine("");
-                            //Console.WriteLine("Getting Speakers... (Processing Pages...)");
-                            //Console.WriteLine("");
-                            //OpenSpeaker openspeaker = new OpenSpeaker();
+                            // now get the speakers
+                            Console.WriteLine("");
+                            Console.WriteLine("Getting Speakers... (Processing Pages...)");
+                            Console.WriteLine("");
+                            OpenSpeaker openspeaker = new OpenSpeaker();
 
-                            //openspeaker = _speakers.refresh(Convert.ToInt32(e.openstack_id), "1");
+                            openspeaker = _speakers.refresh(Convert.ToInt32(e.openstack_id), "1");
 
-                            //drawTextProgressBar(0, openspeaker.last_page);
+                            drawTextProgressBar(0, openspeaker.last_page);
 
-                            //foreach (Speaker speak in openspeaker.data)
-                            //{
-                            //    speak.event_id = e.id;
+                            foreach (Speaker speak in openspeaker.data)
+                            {
+                                speak.event_id = e.id;
 
-                            //    _speakers.add(speak);
-                            //}
+                                _speakers.add(speak);
+                            }
 
-                            //Int32 cursp = 0;
+                            Int32 cursp = 0;
 
 
 
-                            //while (cursp <= openspeaker.last_page)
-                            //{
-                            //    cursp++;
+                            while (cursp <= openspeaker.last_page)
+                            {
+                                cursp++;
 
-                            //    drawTextProgressBar(cursp, openspeaker.last_page);
+                                drawTextProgressBar(cursp, openspeaker.last_page);
 
-                            //    openspeaker = _speakers.refresh(Convert.ToInt32(e.openstack_id), cursp.ToString());
+                                openspeaker = _speakers.refresh(Convert.ToInt32(e.openstack_id), cursp.ToString());
 
-                            //    foreach (Speaker speak in openspeaker.data)
-                            //    {
-                            //        speak.event_id = e.id;
+                                foreach (Speaker speak in openspeaker.data)
+                                {
+                                    speak.event_id = e.id;
 
-                            //        _speakers.add(speak);
-                            //    }
-                            //}
+                                    _speakers.add(speak);
+                                }
+                            }
 
                             // now get the sessions
                             Console.WriteLine("");

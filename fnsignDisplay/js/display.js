@@ -1,4 +1,4 @@
-﻿$.getScript("jquery.cookie.js", function () {});
+﻿$.getScript("/js/jquery.cookie.js", function () {});
 
 function refreshData() {
 
@@ -37,7 +37,7 @@ function refreshData() {
                 $("#session_type").text(data.d.event_type);
                 $("#session_title").text(data.d.name);
 
-                if (data.d.name.length > 25) {
+                if (data.d.name.length > 30) {
                     $("#session_title").attr("class", "session-type");
                 } else {
                     $("#session_title").attr("class", "session-type-big");
@@ -49,7 +49,7 @@ function refreshData() {
 
                 background();
 
-                announcements();
+                twitter();
 
             }
         }
@@ -97,6 +97,46 @@ function announcements() {
     });
 }
 
+
+var $mq = $(".ticker");
+
+function refreshNews() {
+
+    var template_id = $("#template_id").val();
+    var terminal_id = $("#terminal_id").val();
+
+    $.ajax({
+        type: "POST",
+        url: "/display.asmx/get_message",
+        data: "{'template_id': " + template_id + ", 'terminal_id': " + terminal_id + "}",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data, status) {
+
+            console.log("Length: " + data.d.length);
+
+            if (data.d.id < 1) {
+
+                $mq.hide();
+                showMarquee();
+
+            } else {
+
+                $mq.show();
+                $mq.marquee('destroy');
+                $mq.html(data.d.message);
+                $mq.marquee({ duration: 10000 });
+            }
+        }
+    });
+}
+
+$mq.bind('finished', showMarquee);
+
+function showMarquee() {
+    refreshNews();
+}
+
 function slideRight() {
 
     tweet();
@@ -121,6 +161,12 @@ function next() {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data, status) {
+
+            if (data.d.name.length > 90) {
+                $("#next_session").attr("class", "next-session-small");
+            } else {
+                $("#next_session").attr("class", "next-session");
+            }
 
             $("#next_session").text(data.d.event_start + ': ' + data.d.name);
 
@@ -171,4 +217,4 @@ function tweet() {
     });
 }
 
-setInterval(refreshData, 10000);
+//setInterval(refreshData, 10000);

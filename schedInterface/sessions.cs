@@ -179,12 +179,12 @@ namespace schedInterface
         {
             List<Session> _sessions = new List<Session>();
 
-            var result = from sess in db.sessions
-                         where sess.event_id == 1001 && Convert.ToDateTime(sess.session_start).Date == DateTime.Now.Date
-                         orderby sess.session_start, sess.title
-                         select sess;
+            //var result = from sess in db.sessions
+            //             where sess.event_id == 1001 && Convert.ToDateTime(sess.session_start).Date == DateTime.Now.Date
+            //             orderby sess.session_start, sess.title
+            //             select sess;
 
-            foreach (var item in result)
+            foreach (var item in db.design_summit_austin())
             {
                 Session s = new Session();
 

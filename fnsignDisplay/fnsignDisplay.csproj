@@ -20,6 +20,11 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>4.0</OldToolsVersion>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -65,7 +70,10 @@
     <Content Include="js\display.js" />
     <Content Include="js\jquery.cookie.js" />
     <Content Include="js\notemplate.js" />
+    <Content Include="js\ticker.js" />
     <Content Include="login.aspx" />
+    <Content Include="overlays\austin.aspx" />
+    <Content Include="overlays\austin3.aspx" />
     <Content Include="overlays\overlay_1920V_no_twitter.aspx" />
     <Content Include="overlays\overlay_1920V_twitter.aspx" />
     <Content Include="overlays\overlay_1920_brownbag.aspx" />
@@ -112,6 +120,20 @@
     </Compile>
     <Compile Include="login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="overlays\austin.aspx.cs">
+      <DependentUpon>austin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="overlays\austin.aspx.designer.cs">
+      <DependentUpon>austin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="overlays\austin3.aspx.cs">
+      <DependentUpon>austin3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="overlays\austin3.aspx.designer.cs">
+      <DependentUpon>austin3.aspx</DependentUpon>
     </Compile>
     <Compile Include="overlays\overlay_1920V_no_twitter.aspx.cs">
       <DependentUpon>overlay_1920V_no_twitter.aspx</DependentUpon>

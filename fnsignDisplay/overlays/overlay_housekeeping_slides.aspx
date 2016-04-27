@@ -13,11 +13,11 @@
 		
 		<style type="text/css">
 
-			body { width: 1920px; height: 1080px; background-color: #000000; font-family: "Gotham Narrow A", "Gotham Narrow B";font-style: normal;font-weight: 400; font-size: 36px;color: #000000;background-image: url('<%= fnsignUrl %>/uploads/<%= bgimage %>');background-repeat: no-repeat;padding: 0;margin: 0;overflow: hidden; }	
-			#wrapper { width: 1920px; height: 1080px;padding: 0;  }
+			body { width: 1080px; height: 1920px; background-color: #000000; font-family: "Gotham Narrow A", "Gotham Narrow B";font-style: normal;font-weight: 400; font-size: 36px;color: #000000;background-image: url('<%= fnsignUrl %>/uploads/<%= bgimage %>');background-repeat: no-repeat;padding: 0;margin: 0;overflow: hidden; }	
+			#wrapper { width: 1080px; height: 1920px;padding: 0;  }
 			#deck {position: absolute;width: 100%;height: 100%; }
-			#slides {position: relative;height: 1080px;width: 26880px;left: 0; }
-			.slide { width: 1920px;height: 1080px;float: left; }
+			#slides {position: relative;height: 1920px;width: 26880px;left: 0; }
+			.slide { width: 1080px;height: 1920px;float: left; }
 			
 			video#bgvid { 
                 position: fixed;
@@ -67,14 +67,14 @@
 
         function rotate() {
 
-            if (slide_count >= 13) {
+            if (slide_count >= 1) {
 
                 leftval = 0;
                 slide_count = 0;
 
                 $("#slides").animate({ left: leftval }, 500, "swing");
             } else {
-                leftval = leftval - 1920;
+                leftval = leftval - 1080;
                 slide_count++;
 
                 $("#slides").animate({ left: leftval }, 500, "swing");
@@ -82,7 +82,7 @@
 
         }
 
-        setInterval(rotate, 10000);
+        setInterval(rotate, 15000);
 
     </script>
 

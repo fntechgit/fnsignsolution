@@ -40,7 +40,6 @@ namespace fnsign_updater
 
                 if (!string.IsNullOrEmpty(e.url))
                 {
-
                     List<Session> sess = _sessions.all(e.url, e.api_key);
 
                     Console.WriteLine(sess.Count.ToString() + " Sessions Found...");

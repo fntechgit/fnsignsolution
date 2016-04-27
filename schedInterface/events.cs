@@ -105,8 +105,6 @@ namespace schedInterface
             e.interval = ev.interval;
             e.title = ev.title;
             e.url = ev.url;
-            e.t_hashtag = ev.t_hashtag;
-            e.t_username = ev.t_username;
             e.openstack_id = ev.openstack_id;
             e.offset = ev.offset;
 
