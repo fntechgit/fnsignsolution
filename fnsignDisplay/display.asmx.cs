@@ -24,13 +24,14 @@ namespace fnsignDisplay
         private schedInterface.settings _settings = new settings();
         private schedInterface.messages _messages = new messages();
         schedInterface.mediaManager _media = new mediaManager();
+        private schedInterface.timewarp _timewarp = new timewarp();
 
         [WebMethod(Description = "Get Current Session", EnableSession = true)]
         public Session current(string location)
         {
             Int32 event_id = Convert.ToInt32(Context.Session["event_id"]);
 
-            Session s = _sessions.current(event_id, location);
+            Session s = _sessions.current(event_id, location, _timewarp.display(event_id));
 
             if (s.internal_id == 0)
             {
@@ -56,7 +57,7 @@ namespace fnsignDisplay
         [WebMethod(Description = "Future Sessions by Date, Location, Event", EnableSession = true)]
         public List<Session> future()
         {
-            return _sessions.by_event_by_location_by_day(Convert.ToInt32(Context.Session["event_id"]), Context.Session["location"].ToString());
+            return _sessions.by_event_by_location_by_day(Convert.ToInt32(Context.Session["event_id"]), Context.Session["location"].ToString(), _timewarp.display(Convert.ToInt32(Context.Session["event_id"] as string)));
         }
             
         [WebMethod(Description = "Login From Cookie", EnableSession = true)]
