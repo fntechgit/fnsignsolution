@@ -16,6 +16,7 @@ namespace fnsignDisplay.overlays
         private schedInterface.sessions _sessions = new sessions();
         private schedInterface.locations _locations = new locations();
         private schedInterface.settings _settings = new settings();
+        private schedInterface.timewarp _timewarp = new timewarp();
 
         public string bgcolor;
         public string font;
@@ -63,7 +64,7 @@ namespace fnsignDisplay.overlays
 
                     current_date.Value = DateTime.Now.Date.ToShortDateString();
 
-                    foreach (Session s in _sessions.by_event_by_location_by_day(t.event_id, l.sched_id))
+                    foreach (Session s in _sessions.by_event_by_location_by_day(t.event_id, l.sched_id, _timewarp.display(t.event_id)))
                     {
                         ph_sessions.Controls.Add(new LiteralControl("<div class=\"row\"><div class=\"left\">" + s.start.ToShortTimeString() + "</div><div class=\"right\">" + s.name + "</div></div>"));
                     }

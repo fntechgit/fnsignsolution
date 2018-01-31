@@ -17,6 +17,7 @@ namespace fnsignDisplay.overlays
         private schedInterface.locations _locations = new locations();
         private schedInterface.settings _settings = new settings();
         private schedInterface.mediaManager _media = new mediaManager();
+        private schedInterface.timewarp _timewarp = new timewarp();
 
 
         public string bgcolor;
@@ -72,7 +73,7 @@ namespace fnsignDisplay.overlays
                     location_sched.Value = l.sched_id;
                     terminal_id.Value = Page.RouteData.Values["id"].ToString();
 
-                    Session current = _sessions.current(Convert.ToInt32(Session["event_id"]), l.sched_id);
+                    Session current = _sessions.current(Convert.ToInt32(Session["event_id"]), l.sched_id, _timewarp.display(Convert.ToInt32(Context.Session["event_id"] as string)));
 
                     if (current.internal_id > 0)
                     {
