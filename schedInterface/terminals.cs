@@ -30,6 +30,10 @@ namespace schedInterface
                 t.title = item.title;
                 t.rotate = item.rotate;
                 t.deck = item.deck;
+                t.group_by_location = item.group_by_location;
+                t.group_by_start = item.group_by_start;
+                t.template_id_announce = item.template_id_announce;
+                t.template_id_end = item.template_id_end;
 
                 _terminals.Add(t);
             }
@@ -53,10 +57,13 @@ namespace schedInterface
                 t.template_id = item.template_id;
                 t.deck = item.deck;
                 t.rotate = item.rotate;
-
                 t.template_title = t.template_id > 0 ? item.template_title : @"Unassigned";
-
                 t.title = item.title;
+                t.template_id_announce = item.template_id_announce;
+                t.template_id_end = item.template_id_end;
+                t.group_by_location = item.group_by_location;
+                t.group_by_start = item.group_by_start;
+                t.all_sessions = item.all_sessions;
 
                 _terminals.Add(t);
             }
@@ -81,6 +88,11 @@ namespace schedInterface
             te.last_online = DateTime.Now;
             te.deck = t.deck;
             te.rotate = t.rotate;
+            te.group_by_location = t.group_by_location;
+            te.group_by_start = t.group_by_start;
+            te.all_sessions = t.all_sessions;
+            te.template_id_announce = t.template_id_announce;
+            te.template_id_end = t.template_id_end;
             
             db.terminals.InsertOnSubmit(te);
 
@@ -102,6 +114,11 @@ namespace schedInterface
             te.title = t.title;
             te.rotate = t.rotate;
             te.deck = t.deck;
+            te.template_id_announce = t.template_id_announce;
+            te.template_id_end = t.template_id_end;
+            te.group_by_location = t.group_by_location;
+            te.group_by_start = t.group_by_start;
+            te.all_sessions = t.all_sessions;
 
             db.SubmitChanges();
 
@@ -182,5 +199,10 @@ namespace schedInterface
         public DateTime last_online { get; set; }
         public Int32? deck { get; set; }
         public Int32? rotate { get; set; }
+        public Int32? template_id_announce { get; set; }
+        public Int32? template_id_end { get; set; }
+        public bool all_sessions { get; set; }
+        public bool group_by_location { get; set; }
+        public bool group_by_start { get; set; }
     }
 }

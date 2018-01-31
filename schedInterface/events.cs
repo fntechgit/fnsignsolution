@@ -6,6 +6,7 @@ using System.Text;
 using System.Timers;
 using System.Web.Script.Serialization;
 using RestSharp;
+using System.Linq.Expressions;
 
 namespace schedInterface
 {
@@ -18,8 +19,8 @@ namespace schedInterface
             List<Event> _events = new List<Event>();
 
             var result = from evts in db.events
-                orderby evts.title
-                select evts;
+                         orderby evts.title
+                         select evts;
 
             foreach (var item in result)
             {
@@ -36,7 +37,16 @@ namespace schedInterface
                 ev.t_hashtag = item.t_hashtag;
                 ev.t_username = item.t_username;
                 ev.openstack_id = item.openstack_id;
-                
+
+                ev.eod_category = item.eod_category;
+                ev.eod_description = item.eod_description;
+                ev.eod_time = item.eod_time;
+                ev.eod_title = item.eod_title;
+                ev.last_timerun = item.last_timerun;
+                ev.timewarp = item.timewarp;
+                ev.timerun = item.timerun;
+                ev.full_session = item.full_session;
+
                 _events.Add(ev);
             }
 
@@ -72,6 +82,16 @@ namespace schedInterface
                 e.url = item.url;
                 e.t_hashtag = item.t_hashtag;
                 e.t_username = item.t_username;
+
+                //e.eod_title = item.eod_title;
+                //e.eod_category = item.eod_category;
+                //e.eod_description = item.eod_description;
+                //e.eod_time = item.eod_time;
+                //e.timewarp = item.timewarp;
+                //e.timerun = item.timerun;
+                //e.overridedisplay = item.overridedisplay;
+                //e.overridetime = item.overridetime;
+                //e.timezone = item.timezone;
 
                 if (!string.IsNullOrEmpty(e.t_hashtag))
                 {
@@ -113,6 +133,35 @@ namespace schedInterface
             return ev;
         }
 
+        public Event fullupdate(Event ev)
+        {
+            @event @event = this.db.events.Single<@event>((Expression<Func<@event, bool>>)(x => x.id == ev.id));
+            @event.api_key = ev.api_key;
+            @event.event_end = ev.event_end;
+            @event.event_start = ev.event_start;
+            @event.interval = ev.interval;
+            @event.title = ev.title;
+            @event.url = ev.url;
+            @event.openstack_id = ev.openstack_id;
+            @event.offset = ev.offset;
+            @event.eod_category = ev.eod_category;
+            @event.eod_description = ev.eod_description;
+            @event.eod_time = ev.eod_time;
+            @event.eod_title = ev.eod_title;
+            @event.t_username = ev.t_username;
+            @event.t_hashtag = ev.t_hashtag;
+            @event.timewarp = ev.timewarp;
+            @event.timerun = ev.timerun;
+            @event.overridedisplay = ev.overridedisplay;
+            @event.overridetime = ev.overridetime;
+            @event.timezone = ev.timezone;
+            @event.last_timerun = ev.last_timerun;
+            @event.full_session = ev.full_session;
+            this.db.SubmitChanges();
+            return ev;
+        }
+
+
         public Event add(Event ev)
         {
             @event e = new @event();
@@ -128,7 +177,17 @@ namespace schedInterface
             e.t_username = ev.t_username;
             e.openstack_id = ev.openstack_id;
             e.offset = ev.offset;
-            
+            e.eod_category = ev.eod_category;
+            e.eod_description = ev.eod_description;
+            e.eod_time = ev.eod_time;
+            e.eod_title = ev.eod_title;
+            e.timewarp = ev.timewarp;
+            e.timerun = ev.timerun;
+            e.overridedisplay = ev.overridedisplay;
+            e.overridetime = ev.overridetime;
+            e.timezone = ev.timezone;
+            e.full_session = ev.full_session;
+
             db.events.InsertOnSubmit(e);
 
             db.SubmitChanges();
@@ -141,8 +200,8 @@ namespace schedInterface
         public Event single(Int32 id)
         {
             var result = from evs in db.events
-                where evs.id == id
-                select evs;
+                         where evs.id == id
+                         select evs;
 
             Event ev = new Event();
 
@@ -159,6 +218,16 @@ namespace schedInterface
                 ev.t_hashtag = item.t_hashtag;
                 ev.t_username = item.t_username;
                 ev.openstack_id = item.openstack_id;
+                ev.eod_description = item.eod_description;
+                ev.eod_category = item.eod_category;
+                ev.eod_time = item.eod_time;
+                ev.eod_title = item.eod_title;
+                ev.overridedisplay = item.overridedisplay;
+                ev.overridetime = item.overridetime;
+                ev.timerun = item.timerun;
+                ev.timewarp = item.timewarp;
+                ev.timezone = item.timezone.Value;
+                ev.full_session = item.full_session;
 
                 if (!string.IsNullOrEmpty(ev.t_hashtag))
                 {
@@ -195,6 +264,16 @@ namespace schedInterface
                 e.url = ev.url;
                 e.api_key = ev.api_key;
                 e.openstack_id = ev.openstack_id;
+                e.eod_description = ev.eod_description;
+                e.eod_category = ev.eod_category;
+                e.eod_time = ev.eod_time;
+                e.eod_title = ev.eod_title;
+                e.timewarp = ev.timewarp;
+                e.timerun = ev.timerun;
+                e.overridedisplay = ev.overridedisplay;
+                e.overridetime = ev.overridetime;
+                e.timezone = ev.timezone.Value;
+                e.full_session = ev.full_session;
 
                 _events.Add(e);
             }
@@ -210,7 +289,7 @@ namespace schedInterface
 
     public class Event
     {
-        public Int32 id { get; set; }    
+        public Int32 id { get; set; }
         public string title { get; set; }
         public DateTime? event_start { get; set; }
         public DateTime? event_end { get; set; }
@@ -223,6 +302,21 @@ namespace schedInterface
         public List<string> hashtags { get; set; }
         public Int32? openstack_id { get; set; }
         public Int32 offset { get; set; }
+
+        public DateTime? last_timerun { get; set; }
+        public Boolean overridedisplay { get; set; }
+        public Boolean overridetime { get; set; }
+        public Boolean timerun { get; set; }
+        public DateTime? timewarp { get; set; }
+
+        public string eod_category { get; set; }
+        public string eod_description { get; set; }
+        public string eod_time { get; set; }
+        public string eod_title { get; set; }
+        public string full_session { get; set; }
+        public Int32 timezone { get; set; }
+
+
     }
 
     #region openstackAPI
@@ -275,7 +369,7 @@ namespace schedInterface
         public TimeZone time_zone { get; set; }
         public string logo { get; set; }
 
-        
+
     }
 
     public class event_types
@@ -285,8 +379,8 @@ namespace schedInterface
         public Boolean addUpdate(EventType t)
         {
             var result = from ets in db.event_types
-                where ets.event_type_id == t.event_type_id
-                select ets;
+                         where ets.event_type_id == t.event_type_id
+                         select ets;
 
             if (result.Any())
             {
@@ -320,8 +414,8 @@ namespace schedInterface
             List<EventType> _types = new List<EventType>();
 
             var result = from tps in db.event_types
-                where tps.event_id == id
-                select tps;
+                         where tps.event_id == id
+                         select tps;
 
             foreach (var item in result)
             {
@@ -352,7 +446,7 @@ namespace schedInterface
     public class EventType
     {
         public Int32 id { get; set; }
-        public Int32 event_type_id { get; set;  }
+        public Int32 event_type_id { get; set; }
         public string title { get; set; }
         public Int32 event_id { get; set; }
     }

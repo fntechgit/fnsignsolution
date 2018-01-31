@@ -22,6 +22,9 @@ namespace schedInterface
             me.template_id = m.template_id;
             me.terminal_id = m.terminal_id;
             me.title = m.title;
+            me.priority = m.priority;
+            me.session_full = m.session_full;
+            me.test = m.test;
 
             db.messages.InsertOnSubmit(me);
 
@@ -31,6 +34,22 @@ namespace schedInterface
 
             return m;
         }
+
+        public Message session_full(int id)
+        {
+            Message message = new Message();
+            foreach (session_fullResult sessionFullResult in (IEnumerable<session_fullResult>)this.db.session_full(new int?(id)))
+            {
+                message.session_full = true;
+                message.event_id = sessionFullResult.event_id;
+                message.entire = true;
+                message.id = sessionFullResult.id;
+                message.message = sessionFullResult.message;
+                message.pic = sessionFullResult.pic;
+            }
+            return message;
+        }
+
 
         public Message update(Message m)
         {
@@ -45,6 +64,9 @@ namespace schedInterface
             me.template_id = m.template_id;
             me.terminal_id = m.terminal_id;
             me.title = m.title;
+            me.priority = m.priority;
+            me.session_full = m.session_full;
+            me.test = m.test;
 
             db.SubmitChanges();
 
@@ -87,6 +109,9 @@ namespace schedInterface
                 m.template_id = item.template_id;
                 m.terminal_id = item.terminal_id;
                 m.title = item.title;
+                m.priority = item.priority;
+                m.session_full = item.session_full;
+                m.test = item.test;
 
                 _messages.Add(m);
             }
@@ -117,6 +142,9 @@ namespace schedInterface
                 m.template_id = item.template_id;
                 m.terminal_id = item.terminal_id;
                 m.title = item.title;
+                m.priority = item.priority;
+                m.session_full = item.session_full;
+                m.test = item.test;
 
                 _messages.Add(m);
             }
@@ -147,11 +175,62 @@ namespace schedInterface
                 m.template_id = item.template_id;
                 m.terminal_id = item.terminal_id;
                 m.title = item.title;
+                m.priority = item.priority;
+                m.session_full = item.session_full;
+                m.test = item.test;
 
                 _messages.Add(m);
             }
 
             return _messages;
+        }
+
+        public Message random(int? event_id, int? template_id, int? terminal_id, bool priority)
+        {
+            Message message = new Message();
+            settings settings = new settings();
+            foreach (messages_get_random_priorityResult randomPriorityResult in (IEnumerable<messages_get_random_priorityResult>)this.db.messages_get_random_priority(event_id, template_id, terminal_id, new bool?(priority)))
+            {
+                message.entire = randomPriorityResult.entire;
+                message.event_id = randomPriorityResult.event_id;
+                message.id = randomPriorityResult.id;
+                message.message = randomPriorityResult.message;
+                if (randomPriorityResult.pic != null)
+                    message.pic = "<img src=\"" + settings.site_url() + "/uploads/" + randomPriorityResult.pic + "\" />";
+                message.start = randomPriorityResult.start;
+                message.stop = randomPriorityResult.stop;
+                message.template_id = randomPriorityResult.template_id;
+                message.terminal_id = randomPriorityResult.terminal_id;
+                message.title = randomPriorityResult.title;
+                message.priority = randomPriorityResult.priority;
+                message.session_full = randomPriorityResult.session_full;
+                message.test = randomPriorityResult.test;
+            }
+            return message;
+        }
+
+        public Message preview(int? event_id, int? template_id, int? terminal_id, bool priority)
+        {
+            Message message = new Message();
+            settings settings = new settings();
+            foreach (messages_get_random_priority_testResult priorityTestResult in (IEnumerable<messages_get_random_priority_testResult>)this.db.messages_get_random_priority_test(event_id, template_id, terminal_id, new bool?(priority)))
+            {
+                message.entire = priorityTestResult.entire;
+                message.event_id = priorityTestResult.event_id;
+                message.id = priorityTestResult.id;
+                message.message = priorityTestResult.message;
+                if (priorityTestResult.pic != null)
+                    message.pic = "<img src=\"" + settings.site_url() + "/uploads/" + priorityTestResult.pic + "\" />";
+                message.start = priorityTestResult.start;
+                message.stop = priorityTestResult.stop;
+                message.template_id = priorityTestResult.template_id;
+                message.terminal_id = priorityTestResult.terminal_id;
+                message.title = priorityTestResult.title;
+                message.priority = priorityTestResult.priority;
+                message.session_full = priorityTestResult.session_full;
+                message.test = priorityTestResult.test;
+            }
+            return message;
         }
 
         public Message single(Int32 id)
@@ -174,6 +253,9 @@ namespace schedInterface
                 m.template_id = item.template_id;
                 m.terminal_id = item.terminal_id;
                 m.title = item.title;
+                m.priority = item.priority;
+                m.session_full = item.session_full;
+                m.test = item.test;
             }
 
             return m;
@@ -202,9 +284,36 @@ namespace schedInterface
                 m.template_id = item.template_id;
                 m.terminal_id = item.terminal_id;
                 m.title = item.title;
+
+                m.priority = item.priority;
+                m.session_full = item.session_full;
+                m.test = item.test;
             }
 
             return m;
+        }
+
+        public List<Message> all_by_event_test(int id)
+        {
+            List<Message> messageList = new List<Message>();
+            foreach (messages_by_event_testResult byEventTestResult in (IEnumerable<messages_by_event_testResult>)this.db.messages_by_event_test(new int?(id)))
+                messageList.Add(new Message()
+                {
+                    entire = byEventTestResult.entire,
+                    event_id = byEventTestResult.event_id,
+                    id = byEventTestResult.id,
+                    message = byEventTestResult.message,
+                    pic = byEventTestResult.pic,
+                    start = byEventTestResult.start,
+                    stop = byEventTestResult.stop,
+                    template_id = byEventTestResult.template_id,
+                    terminal_id = byEventTestResult.terminal_id,
+                    title = byEventTestResult.title,
+                    priority = byEventTestResult.priority,
+                    session_full = byEventTestResult.session_full,
+                    test = byEventTestResult.test
+                });
+            return messageList;
         }
 
         public List<Message> all_by_event(Int32 id)
@@ -225,6 +334,10 @@ namespace schedInterface
                 m.template_id = item.template_id;
                 m.terminal_id = item.terminal_id;
                 m.title = item.title;
+
+                m.priority = item.priority;
+                m.session_full = item.session_full;
+                m.test = item.test;
 
                 _messages.Add(m);
             }
@@ -251,6 +364,9 @@ namespace schedInterface
                 m.terminal_id = item.terminal_id;
                 m.title = item.title;
                 m.template_title = item.template_title;
+                m.priority = item.priority;
+                m.session_full = item.session_full;
+                m.test = item.test;
 
                 _messages.Add(m);
             }
@@ -277,6 +393,9 @@ namespace schedInterface
                 m.terminal_id = item.terminal_id;
                 m.title = item.title;
                 m.terminal_title = item.terminal_title;
+                m.priority = item.priority;
+                m.session_full = item.session_full;
+                m.test = item.test;
 
                 _messages.Add(m);
             }
@@ -299,5 +418,9 @@ namespace schedInterface
         public string pic { get; set; }
         public string template_title { get; set; }
         public string terminal_title { get; set; }
+
+        public bool priority { get; set; }
+        public bool session_full { get; set; }
+        public bool test { get; set; }
     }
 }

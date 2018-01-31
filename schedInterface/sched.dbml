@@ -18,6 +18,9 @@
       <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="modified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="speaker_companies" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="speaker_images" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="full" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.locations" Member="locations">
@@ -77,6 +80,9 @@
       <Column Name="pic" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="pwd" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="security" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="carrier" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="mobile" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="mms" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.media" Member="medias">
@@ -116,6 +122,18 @@
       <Column Name="header" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="body" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="footer" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="width" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="height" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="guide" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="bottom_overlay" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="layout" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="speed" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="group_start" Member="group_by_start" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="group_location" Member="group_by_location" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="all_sessions" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="template_id_announce" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="template_id_end" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="bottom_height" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.messages" Member="messages">
@@ -130,6 +148,9 @@
       <Column Name="title" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
       <Column Name="message" Member="message1" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="pic" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="priority" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="session_full" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="test" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.templates" Member="templates">
@@ -178,6 +199,11 @@
       <Column Name="last_online" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="deck" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="rotate" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="template_id_announce" Type="System.Int32" DbType="Int " CanBeNull="true" />
+      <Column Name="template_id_end" Type="System.Int32" DbType="Int " CanBeNull="true" />
+      <Column Name="all_sessions" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="group_by_location" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="group_by_start" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.speakers" Member="speakers">
@@ -209,6 +235,17 @@
       <Column Name="t_hashtag" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="openstack_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="offset" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="last_timerun" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="overridedisplay" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="overridetime" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="timerun" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="timewarp" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="eod_category" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="eod_description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="eod_time" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="eod_title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="full_session" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="timezone" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.event_types" Member="event_types">
@@ -224,6 +261,44 @@
       <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="name" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="value" Type="System.String" DbType="VarChar(MAX) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.sublocations" Member="sublocations">
+    <Type Name="sublocation">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="parent" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="child" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.events_notify_users" Member="events_notify_users">
+    <Type Name="events_notify_user">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="user_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="after" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.carriers" Member="carriers">
+    <Type Name="carrier">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="sms" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="mms" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.import_history" Member="import_histories">
+    <Type Name="import_history">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="createdate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="imported" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="errored" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="total" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="comments" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="type" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="imported_by" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="filename" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
     </Type>
   </Table>
   <Function Name="dbo.permissions_get_by_user" Method="permissions_get_by_user">
@@ -287,51 +362,6 @@
       <Column Name="overlay_title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
     </ElementType>
   </Function>
-  <Function Name="dbo.session_get_current" Method="session_get_current">
-    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
-    <Parameter Name="location_id" Type="System.String" DbType="VarChar(255)" />
-    <ElementType Name="session_get_currentResult">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="event_key" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="session_start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="session_end" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="type" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="seats" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="attendees" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="venue_id" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="venue" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="speakers" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="modified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.session_get_next" Method="session_get_next">
-    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
-    <Parameter Name="location_id" Type="System.String" DbType="VarChar(255)" />
-    <Parameter Name="prev_end" Type="System.DateTime" DbType="DateTime" />
-    <ElementType Name="session_get_nextResult">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="event_key" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="session_start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="session_end" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="type" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="seats" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="attendees" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="venue_id" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="venue" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="speakers" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="modified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.media_random_by_event" Method="media_random_by_event">
     <Parameter Name="id" Type="System.Int32" DbType="Int" />
     <ElementType Name="media_random_by_eventResult">
@@ -361,108 +391,8 @@
       <Column Name="template_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
   </Function>
-  <Function Name="dbo.messages_by_event" Method="messages_by_event">
-    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
-    <ElementType Name="messages_by_eventResult">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="template_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="terminal_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="stop" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="entire" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="title" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
-      <Column Name="message" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="pic" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.messages_by_terminal" Method="messages_by_terminal">
-    <ElementType Name="messages_by_terminalResult">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="template_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="terminal_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="stop" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="entire" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="title" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
-      <Column Name="message" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="pic" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="terminal_title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.messages_by_template" Method="messages_by_template">
-    <ElementType Name="messages_by_templateResult">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="template_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="terminal_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="stop" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="entire" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="title" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
-      <Column Name="message" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="pic" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="template_title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.messages_get_random" Method="messages_get_random">
-    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
-    <Parameter Name="template_id" Type="System.Int32" DbType="Int" />
-    <Parameter Name="terminal_id" Type="System.Int32" DbType="Int" />
-    <ElementType Name="messages_get_randomResult">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="template_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="terminal_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="stop" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="entire" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="title" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
-      <Column Name="message" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="pic" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.clean_design_summit" Method="clean_design_summit">
     <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.terminal_assignments_by_event" Method="terminal_assignments_by_event">
-    <Parameter Name="id" Type="System.Int32" DbType="Int" />
-    <ElementType Name="terminal_assignments_by_eventResult">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="location_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="template_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="online" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="last_online" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="deck" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="rotate" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="location_title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="template_title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.sessions_by_event_location_date" Method="sessions_by_event_location_date">
-    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
-    <Parameter Name="location" Type="System.String" DbType="VarChar(255)" />
-    <ElementType Name="sessions_by_event_location_dateResult">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="event_key" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="session_start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="session_end" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="type" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="seats" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="attendees" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="venue_id" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="venue" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="speakers" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="modified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </ElementType>
   </Function>
   <Function Name="dbo.sessions_remove" Method="sessions_remove">
     <Parameter Name="event_key" Type="System.String" DbType="VarChar(255)" />
@@ -516,5 +446,468 @@
       <Column Name="modified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
+  </Function>
+  <Function Name="dbo.sessions_by_event_location_date" Method="sessions_by_event_location_date">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="location" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="start" Type="System.DateTime" DbType="DateTime" />
+    <ElementType Name="sessions_by_event_location_dateResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_key" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="session_start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="session_end" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="type" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="seats" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="attendees" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="venue_id" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="venue" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="speakers" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="speaker_companies" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="speaker_images" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="[full]" Member="full" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.session_get_next" Method="session_get_next">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="location_id" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="prev_end" Type="System.DateTime" DbType="DateTime" />
+    <ElementType Name="session_get_nextResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_key" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="session_start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="session_end" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="type" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="seats" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="attendees" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="venue_id" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="venue" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="speakers" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="speaker_companies" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="speaker_images" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="[full]" Member="full" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.session_get_current" Method="session_get_current">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="location_id" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="start" Type="System.DateTime" DbType="DateTime" />
+    <ElementType Name="session_get_currentResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_key" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="session_start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="session_end" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="type" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="seats" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="attendees" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="venue_id" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="venue" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="speakers" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="speaker_companies" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="speaker_images" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="[full]" Member="full" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sublocations_by_location" Method="sublocations_by_location">
+    <Parameter Name="parent" Type="System.Int32" DbType="Int" />
+    <ElementType Name="sublocations_by_locationResult">
+      <Column Name="title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sessions_by_event_location_children_date" Method="sessions_by_event_location_children_date">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="location" Type="System.Int32" DbType="Int" />
+    <Parameter Name="start" Type="System.DateTime" DbType="DateTime" />
+    <ElementType Name="sessions_by_event_location_children_dateResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_key" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="session_start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="session_end" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="type" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="seats" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="attendees" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="venue_id" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="venue" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="speakers" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="speaker_companies" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="speaker_images" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="[full]" Member="full" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.messages_get_random_priority_test" Method="messages_get_random_priority_test">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="template_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="terminal_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="priority" Type="System.Boolean" DbType="Bit" />
+    <ElementType Name="messages_get_random_priority_testResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="template_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="terminal_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="stop" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="entire" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="message" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="pic" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="priority" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="openstackAPI" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="openstackID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="session_full" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="test" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.messages_get_random" Method="messages_get_random">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="template_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="terminal_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="messages_get_randomResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="template_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="terminal_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="stop" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="entire" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="message" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="pic" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="priority" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="openstackAPI" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="openstackID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="session_full" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="test" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.messages_by_event" Method="messages_by_event">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="messages_by_eventResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="template_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="terminal_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="stop" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="entire" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="message" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="pic" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="priority" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="openstackAPI" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="openstackID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="session_full" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="test" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.messages_by_template" Method="messages_by_template">
+    <ElementType Name="messages_by_templateResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="template_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="terminal_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="stop" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="entire" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="message" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="pic" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="priority" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="openstackAPI" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="openstackID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="session_full" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="test" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="template_title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.messages_by_terminal" Method="messages_by_terminal">
+    <ElementType Name="messages_by_terminalResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="template_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="terminal_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="stop" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="entire" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="message" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="pic" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="priority" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="openstackAPI" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="openstackID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="session_full" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="test" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="terminal_title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.session_full" Method="session_full">
+    <Parameter Name="terminal_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="session_fullResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="template_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="terminal_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="stop" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="entire" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="message" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="pic" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="priority" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="openstackAPI" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="openstackID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="session_full" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="test" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.events_notify_by_users" Method="events_notify_by_users">
+    <Parameter Name="user_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="events_notify_by_usersResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="event_start" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="event_end" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="api_key" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="url" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="interval" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="last_update" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="t_username" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="t_hashtag" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="openstack_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="offset" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="eod_title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="eod_category" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="eod_time" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="eod_description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="timezone" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="timewarp" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="overridetime" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="timerun" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="overridedisplay" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="last_timerun" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="full_session" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.users_notify_by_event" Method="users_notify_by_event">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="users_notify_by_eventResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="first_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="last_name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="company" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="notify_every_minutes" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="pic" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="pwd" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="security" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="carrier" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="mobile" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="mms" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="after" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.messages_by_event_test" Method="messages_by_event_test">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="messages_by_event_testResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="template_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="terminal_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="stop" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="entire" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="message" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="pic" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="priority" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="openstackAPI" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="openstackID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="session_full" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="test" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.barcelona_design_summit" Method="barcelona_design_summit">
+    <ElementType Name="barcelona_design_summitResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_key" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="session_start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="session_end" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="type" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="seats" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="attendees" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="venue_id" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="venue" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="speakers" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="speaker_companies" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="speaker_images" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="[full]" Member="full" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.barcelona_working_group" Method="barcelona_working_group">
+    <ElementType Name="barcelona_working_groupResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_key" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="session_start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="session_end" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="type" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="seats" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="attendees" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="venue_id" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="venue" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="speakers" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="speaker_companies" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="speaker_images" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="[full]" Member="full" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sessions_by_event_by_day_by_group" Method="sessions_by_event_by_day_by_group">
+    <Parameter Name="start" Type="System.DateTime" DbType="DateTime" />
+    <ElementType Name="sessions_by_event_by_day_by_groupResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_key" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="session_start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="session_end" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="type" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="seats" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="attendees" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="venue_id" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="venue" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="speakers" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="speaker_companies" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="speaker_images" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="[full]" Member="full" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.future_sessions_by_day" Method="future_sessions_by_day">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="start" Type="System.DateTime" DbType="DateTime" />
+    <ElementType Name="future_sessions_by_dayResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_key" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="session_start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="session_end" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="type" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="seats" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="attendees" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="venue_id" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="venue" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="speakers" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="created" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="speaker_companies" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="speaker_images" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="[full]" Member="full" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.messages_get_random_priority" Method="messages_get_random_priority">
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="template_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="terminal_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="priority" Type="System.Boolean" DbType="Bit" />
+    <ElementType Name="messages_get_random_priorityResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="template_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="terminal_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="start" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="stop" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="entire" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="message" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="pic" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="priority" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="openstackAPI" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="openstackID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="session_full" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="test" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.terminal_assignments_by_event" Method="terminal_assignments_by_event">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="terminal_assignments_by_eventResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="location_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="template_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="online" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="last_online" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="deck" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="rotate" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="notified" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="notified_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="all_sessions" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="group_by_start" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="group_by_location" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="template_id_announce" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="template_id_end" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="location_title" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="template_title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sessions_import" Method="sessions_import">
+    <Parameter Name="title" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="start" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="end" Type="System.DateTime" DbType="DateTime" />
+    <Parameter Name="type" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="venue_id" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="venue" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="event_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="event_key" Type="System.String" DbType="VarChar(255)" />
+    <Parameter Name="speakers" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="speaker_companies" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="speaker_images" Type="System.String" DbType="VarChar(MAX)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sessions_delete_by_event" Method="sessions_delete_by_event">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
   </Function>
 </Database>

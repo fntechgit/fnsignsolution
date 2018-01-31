@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Linq.Expressions;
 
 namespace schedInterface
 {
@@ -18,6 +19,11 @@ namespace schedInterface
             db.SubmitChanges();
 
             return true;
+        }
+
+        public User by_email(string email)
+        {
+            return this.get_by_id(this.db.users.Single<user>((Expression<Func<user, bool>>)(x => x.email == email)).id);
         }
 
         public User add(User u)
@@ -67,6 +73,7 @@ namespace schedInterface
                 u.password = item.pwd;
                 u.picture = item.pic;
                 u.security = item.security;
+                u.ddl_value = item.first_name + " " + item.last_name;
 
                 _users.Add(u);
             }
@@ -186,5 +193,10 @@ namespace schedInterface
         public Int32 notify_every_minutes { get; set; }
         public Int32 security { get; set; }
         public string security_desc { get; set; }
+
+        public Int32? carrier { get; set; }
+        public string mobile { get; set; }
+        public Boolean mms { get; set; }
+        public string ddl_value { get; set; }
     }
 }

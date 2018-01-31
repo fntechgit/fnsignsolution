@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web.Script.Serialization;
 using RestSharp;
+using System.Linq.Expressions;
 
 namespace schedInterface
 {
@@ -64,6 +65,13 @@ namespace schedInterface
             return l;
         }
 
+        public bool delete(int id)
+        {
+            this.db.locations.DeleteAllOnSubmit<location>((IEnumerable<location>)this.db.locations.Where<location>((Expression<Func<location, bool>>)(lcs => lcs.id == id)));
+            this.db.SubmitChanges();
+            return true;
+        }
+
         public List<Location> by_event(Int32 id)
         {
             List<Location> _locations = new List<Location>();
@@ -101,6 +109,37 @@ namespace schedInterface
             }
 
             return name;
+        }
+
+        public int location_id_by_sched_id(string sched, int event_id)
+        {
+            IQueryable<location> queryable = this.db.locations.Where<location>((Expression<Func<location, bool>>)(lc => lc.sched_id == sched && lc.event_id == (int?)event_id));
+            int num = 0;
+            foreach (location location in (IEnumerable<location>)queryable)
+                num = location.id;
+            return num;
+        }
+
+        public string find_venue_reference_id(string title, int event_id)
+        {
+            IQueryable<location> source = this.db.locations.Where<location>((Expression<Func<location, bool>>)(lcs => lcs.event_id == (int?)event_id && lcs.title == title));
+            string str = "";
+            if (source.Any<location>())
+            {
+                foreach (location location in (IEnumerable<location>)source)
+                    str = location.sched_id;
+            }
+            else
+            {
+                str = "IMPORT_" + Guid.NewGuid().ToString();
+                new locations().add(new Location()
+                {
+                    event_id = event_id,
+                    sched_id = str,
+                    title = title
+                });
+            }
+            return str;
         }
 
 

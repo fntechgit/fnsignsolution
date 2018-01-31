@@ -15,8 +15,8 @@ namespace schedInterface
             List<Overlay> _overlays = new List<Overlay>();
 
             var result = from ovr in db.overlays
-                orderby ovr.title
-                select ovr;
+                         orderby ovr.title
+                         select ovr;
 
             foreach (var item in result)
             {
@@ -29,6 +29,18 @@ namespace schedInterface
                 o.header = item.header;
                 o.footer = item.footer;
                 o.body = item.body;
+                o.width = item.width;
+                o.height = item.height;
+                o.guide = item.guide;
+                o.bottom_overlay = item.bottom_overlay;
+                o.layout = item.layout;
+                o.speed = item.speed;
+                o.group_by_start = item.group_by_start;
+                o.group_by_location = item.group_by_location;
+                o.all_sessions = item.all_sessions;
+                o.template_id_announce = item.template_id_announce;
+                o.template_id_end = item.template_id_end;
+                o.bottom_height = item.bottom_height;
 
                 _overlays.Add(o);
             }
@@ -51,6 +63,18 @@ namespace schedInterface
             ov.body = o.body;
             ov.preview = o.preview;
             ov.title = o.title;
+            ov.width = o.width;
+            ov.height = o.height;
+            ov.guide = o.guide;
+            ov.bottom_overlay = o.bottom_overlay;
+            ov.layout = o.layout;
+            ov.speed = o.speed;
+            ov.group_by_start = o.group_by_start;
+            ov.group_by_location = o.group_by_location;
+            ov.all_sessions = o.all_sessions;
+            ov.template_id_announce = o.template_id_announce;
+            ov.template_id_end = o.template_id_end;
+            ov.bottom_height = o.bottom_height;
 
             db.overlays.InsertOnSubmit(ov);
 
@@ -59,6 +83,17 @@ namespace schedInterface
             o.id = ov.id;
 
             return o;
+        }
+
+        public Boolean delete(Int32 id)
+        {
+            @overlay o = db.overlays.Single(x => x.id == id);
+
+            db.overlays.DeleteOnSubmit(o);
+
+            db.SubmitChanges();
+
+            return true;
         }
 
         public Overlay update(Overlay o)
@@ -71,9 +106,30 @@ namespace schedInterface
             ov.body = o.body;
             ov.preview = o.preview;
             ov.title = o.title;
+            ov.width = o.width;
+            ov.height = o.height;
+            ov.guide = o.guide;
+            ov.bottom_overlay = o.bottom_overlay;
+            ov.layout = o.layout;
+            ov.speed = o.speed;
+            ov.group_by_start = o.group_by_start;
+            ov.group_by_location = o.group_by_location;
+            ov.all_sessions = o.all_sessions;
+            ov.template_id_announce = o.template_id_announce;
+            ov.template_id_end = o.template_id_end;
+            ov.bottom_height = o.bottom_height;
 
             db.SubmitChanges();
 
+            return o;
+        }
+
+        public Overlay addUpdate(Overlay o)
+        {
+            if (o.id > 0)
+                this.update(o);
+            else
+                this.add(o);
             return o;
         }
 
@@ -90,6 +146,18 @@ namespace schedInterface
             o.id = id;
             o.preview = ov.preview;
             o.title = ov.title;
+            o.width = ov.width;
+            o.height = ov.height;
+            o.guide = ov.guide;
+            o.bottom_overlay = ov.bottom_overlay;
+            o.layout = ov.layout;
+            ov.speed = o.speed;
+            ov.group_by_start = o.group_by_start;
+            ov.group_by_location = o.group_by_location;
+            ov.all_sessions = o.all_sessions;
+            ov.template_id_announce = o.template_id_announce;
+            ov.template_id_end = o.template_id_end;
+            ov.bottom_height = o.bottom_height;
 
             return o;
         }
@@ -104,5 +172,27 @@ namespace schedInterface
         public string footer { get; set; }
         public string preview { get; set; }
         public Boolean active { get; set; }
+        public Int32 width { get; set; }
+        public Int32 height { get; set; }
+        public string guide { get; set; }
+        public string bottom_overlay { get; set; }
+        public string layout { get; set; }
+        public Int32 speed { get; set; }
+        public Boolean group_by_start { get; set; }
+        public Boolean group_by_location { get; set; }
+        public Boolean all_sessions { get; set; }
+        public Int32? template_id_announce { get; set; }
+        public Int32? template_id_end { get; set; }
+        public Int32 bottom_height { get; set; }
+    }
+
+    [Serializable]
+    public class OverlayJSON
+    {
+        public string pages { get; set; }
+
+        public bool delete { get; set; }
+
+        public string responsiveMode { get; set; }
     }
 }

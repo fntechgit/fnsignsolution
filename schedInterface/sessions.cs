@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Linq;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Text.RegularExpressions;
 using RestSharp;
 using System.Web.Script.Serialization;
+using System.Linq.Expressions;
 
 namespace schedInterface
 {
@@ -13,6 +15,20 @@ namespace schedInterface
     {
         private schedDataContext db = new schedDataContext();
         private locations _locations = new locations();
+
+        public bool clear_by_event(int id)
+        {
+            this.db.sessions_delete_by_event(new int?(id));
+            return true;
+        }
+
+        public bool toggle_full(int id)
+        {
+            session session = this.db.sessions.Single<session>((Expression<Func<session, bool>>)(x => x.id == id));
+            session.full = !session.full;
+            this.db.SubmitChanges();
+            return session.full;
+        }
 
         public List<Session> by_event(Int32 id)
         {
@@ -38,6 +54,9 @@ namespace schedInterface
                 s.speakers = item.speakers;
                 s.start = Convert.ToDateTime(item.session_start);
                 s.venue = item.venue;
+                s.speaker_companies = item.speaker_companies;
+                s.speaker_images = item.speaker_images;
+                s.full = item.full;
                 
                 _sessions.Add(s);
             }
@@ -45,33 +64,137 @@ namespace schedInterface
             return _sessions;
         }
 
-        public List<Session> by_event_by_location_by_day(Int32 event_id, string location)
+        public List<Session> future_by_event_by_location_by_day(int event_id, string location, DateTime start)
         {
-            List<Session> _sessions = new List<Session>();
+            return this.by_event_by_location_by_day(event_id, location, start).ToList<Session>();
+        }
 
-            foreach (var item in db.sessions_by_event_location_date(event_id, location))
+        public List<Session> skip_by_event_by_location_by_day(int event_id, string location, int skip, DateTime start)
+        {
+            return this.by_event_by_location_by_day(event_id, location, start).Skip<Session>(skip).ToList<Session>();
+        }
+
+        public List<Session> by_event_by_day(int id, DateTime startdate)
+        {
+            return this.by_event(id).Where<Session>((Func<Session, bool>)(x => x.start.Date == startdate)).ToList<Session>();
+        }
+
+        public List<Session> get_future_by_event_by_day(int id, DateTime startdate)
+        {
+            return this.by_event_by_day(id, startdate.Date).Where<Session>((Func<Session, bool>)(x => x.start >= startdate)).ToList<Session>();
+        }
+
+        public List<Session> future_by_event_by_day(int event_id, DateTime start)
+        {
+            List<Session> sessionList = new List<Session>();
+            foreach (future_sessions_by_dayResult sessionsByDayResult in (IEnumerable<future_sessions_by_dayResult>)this.db.future_sessions_by_day(new int?(event_id), new DateTime?(start)))
+                sessionList.Add(new Session()
+                {
+                    event_start = Convert.ToDateTime((object)sessionsByDayResult.session_start).ToShortTimeString(),
+                    name = sessionsByDayResult.title,
+                    venue = sessionsByDayResult.venue
+                });
+            return sessionList;
+        }
+
+        public List<Session> by_event_by_day_by_group(int id, DateTime start)
+        {
+            List<Session> sessionList = new List<Session>();
+            foreach (sessions_by_event_by_day_by_groupResult dayByGroupResult in (IEnumerable<sessions_by_event_by_day_by_groupResult>)this.db.sessions_by_event_by_day_by_group(new DateTime?(start)))
             {
-                Session s = new Session();
-
-                s.active = item.active.ToString();
-                s.description = item.description;
-                s.end = Convert.ToDateTime(item.session_end);
-                s.event_id = event_id;
-                s.event_type = item.type;
-                s.goers = item.attendees.ToString();
-                s.id = item.id.ToString();
-                s.event_key = item.event_key;
-                s.internal_id = item.id;
-                s.name = item.title;
-                s.speakers = item.speakers;
-                s.start = Convert.ToDateTime(item.session_start);
-                s.event_start = Convert.ToDateTime(s.start).ToShortTimeString();
-                s.venue = item.venue;
-
-                _sessions.Add(s);
+                Session session1 = new Session();
+                session1.end = Convert.ToDateTime((object)dayByGroupResult.session_end);
+                Session session2 = session1;
+                DateTime dateTime = session1.end;
+                string shortTimeString1 = dateTime.ToShortTimeString();
+                session2.event_end = shortTimeString1;
+                session1.start = Convert.ToDateTime((object)dayByGroupResult.session_start);
+                Session session3 = session1;
+                dateTime = session1.start;
+                string shortTimeString2 = dateTime.ToShortTimeString();
+                session3.event_start = shortTimeString2;
+                session1.name = dayByGroupResult.title;
+                session1.venue = dayByGroupResult.venue;
+                session1.venue_id = dayByGroupResult.venue_id;
+                session1.event_id = Convert.ToInt32((object)dayByGroupResult.event_id);
+                session1.full = dayByGroupResult.full;
+                sessionList.Add(session1);
             }
+            return sessionList;
+        }
 
-            return _sessions;
+        public List<Session> by_event_by_location_by_day(int event_id, string location, DateTime start)
+        {
+            sublocations sublocations = new sublocations();
+            List<Session> sessionList = new List<Session>();
+            int id = this._locations.location_id_by_sched_id(location, event_id);
+            if (sublocations.children(id).Count > 0)
+            {
+                foreach (sessions_by_event_location_children_dateResult childrenDateResult in (IEnumerable<sessions_by_event_location_children_dateResult>)this.db.sessions_by_event_location_children_date(new int?(event_id), new int?(id), new DateTime?(start)))
+                {
+                    Session session1 = new Session();
+                    session1.active = childrenDateResult.active.ToString();
+                    session1.description = childrenDateResult.description;
+                    session1.end = Convert.ToDateTime((object)childrenDateResult.session_end);
+                    session1.event_id = event_id;
+                    session1.event_type = childrenDateResult.type;
+                    Session session2 = session1;
+                    int num = childrenDateResult.attendees;
+                    string str1 = num.ToString();
+                    session2.goers = str1;
+                    Session session3 = session1;
+                    num = childrenDateResult.id;
+                    string str2 = num.ToString();
+                    session3.id = str2;
+                    session1.event_key = childrenDateResult.event_key;
+                    session1.internal_id = childrenDateResult.id;
+                    session1.name = childrenDateResult.title;
+                    session1.speakers = childrenDateResult.speakers;
+                    session1.start = Convert.ToDateTime((object)childrenDateResult.session_start);
+                    session1.event_start = Convert.ToDateTime(session1.start).ToShortTimeString();
+                    session1.event_end = Convert.ToDateTime(session1.end).ToShortTimeString();
+                    session1.venue = childrenDateResult.venue;
+                    session1.speaker_companies = childrenDateResult.speaker_companies;
+                    session1.speaker_images = childrenDateResult.speaker_images;
+                    session1.speakers = childrenDateResult.speakers;
+                    session1.full = childrenDateResult.full;
+                    sessionList.Add(session1);
+                }
+            }
+            else
+            {
+                foreach (sessions_by_event_location_dateResult locationDateResult in (IEnumerable<sessions_by_event_location_dateResult>)this.db.sessions_by_event_location_date(new int?(event_id), location, new DateTime?(start)))
+                {
+                    Session session1 = new Session();
+                    session1.active = locationDateResult.active.ToString();
+                    session1.description = locationDateResult.description;
+                    session1.end = Convert.ToDateTime((object)locationDateResult.session_end);
+                    session1.event_id = event_id;
+                    session1.event_type = locationDateResult.type;
+                    Session session2 = session1;
+                    int num = locationDateResult.attendees;
+                    string str1 = num.ToString();
+                    session2.goers = str1;
+                    Session session3 = session1;
+                    num = locationDateResult.id;
+                    string str2 = num.ToString();
+                    session3.id = str2;
+                    session1.event_key = locationDateResult.event_key;
+                    session1.internal_id = locationDateResult.id;
+                    session1.name = locationDateResult.title;
+                    session1.speakers = locationDateResult.speakers;
+                    session1.start = Convert.ToDateTime((object)locationDateResult.session_start);
+                    session1.event_start = Convert.ToDateTime(session1.start).ToShortTimeString();
+                    session1.event_end = Convert.ToDateTime(session1.end).ToShortTimeString();
+                    session1.venue = locationDateResult.venue;
+                    session1.speaker_companies = locationDateResult.speaker_companies;
+                    session1.speaker_images = locationDateResult.speaker_images;
+                    session1.speakers = locationDateResult.speakers;
+                    session1.full = locationDateResult.full;
+                    sessionList.Add(session1);
+                }
+            }
+            return sessionList;
         }
 
         public Boolean delete(Int32 id)
@@ -108,6 +231,9 @@ namespace schedInterface
                 s.speakers = item.speakers;
                 s.start = Convert.ToDateTime(item.session_start);
                 s.venue = item.venue;
+                s.speaker_companies = item.speaker_companies;
+                s.speaker_images = item.speaker_images;
+                s.full = item.full;
 
                 _sessions.Add(s);
             }
@@ -138,6 +264,9 @@ namespace schedInterface
                 s.speakers = item.speakers;
                 s.start = Convert.ToDateTime(item.session_start);
                 s.venue = item.venue;
+                s.speaker_companies = item.speaker_companies;
+                s.speaker_images = item.speaker_images;
+                s.full = item.full;
 
                 _sessions.Add(s);
             }
@@ -173,6 +302,62 @@ namespace schedInterface
             }
 
             return _sessions;
+        }
+
+        public List<Session> barcelona_design_summit()
+        {
+            List<Session> sessionList = new List<Session>();
+            foreach (barcelona_design_summitResult designSummitResult in (IEnumerable<barcelona_design_summitResult>)this.db.barcelona_design_summit())
+            {
+                Session session1 = new Session();
+                session1.description = designSummitResult.description;
+                session1.end = Convert.ToDateTime((object)designSummitResult.session_end);
+                session1.event_type = designSummitResult.type;
+                Session session2 = session1;
+                int num = designSummitResult.attendees;
+                string str1 = num.ToString();
+                session2.goers = str1;
+                Session session3 = session1;
+                num = designSummitResult.id;
+                string str2 = num.ToString();
+                session3.id = str2;
+                session1.internal_id = designSummitResult.id;
+                session1.name = designSummitResult.title;
+                session1.speakers = designSummitResult.speakers;
+                session1.start = Convert.ToDateTime((object)designSummitResult.session_start);
+                session1.venue = designSummitResult.venue;
+                session1.event_start = session1.start.ToShortTimeString();
+                sessionList.Add(session1);
+            }
+            return sessionList;
+        }
+
+        public List<Session> barcelona_working_group()
+        {
+            List<Session> sessionList = new List<Session>();
+            foreach (barcelona_working_groupResult workingGroupResult in (IEnumerable<barcelona_working_groupResult>)this.db.barcelona_working_group())
+            {
+                Session session1 = new Session();
+                session1.description = workingGroupResult.description;
+                session1.end = Convert.ToDateTime((object)workingGroupResult.session_end);
+                session1.event_type = workingGroupResult.type;
+                Session session2 = session1;
+                int num = workingGroupResult.attendees;
+                string str1 = num.ToString();
+                session2.goers = str1;
+                Session session3 = session1;
+                num = workingGroupResult.id;
+                string str2 = num.ToString();
+                session3.id = str2;
+                session1.internal_id = workingGroupResult.id;
+                session1.name = workingGroupResult.title;
+                session1.speakers = workingGroupResult.speakers;
+                session1.start = Convert.ToDateTime((object)workingGroupResult.session_start);
+                session1.venue = workingGroupResult.venue;
+                session1.event_start = session1.start.ToShortTimeString();
+                sessionList.Add(session1);
+            }
+            return sessionList;
         }
 
         public List<Session> summit()
@@ -228,6 +413,9 @@ namespace schedInterface
                 s.speakers = item.speakers;
                 s.start = Convert.ToDateTime(item.session_start);
                 s.venue = item.venue;
+                s.speaker_companies = item.speaker_companies;
+                s.speaker_images = item.speaker_images;
+                s.full = item.full;
 
                 _sessions.Add(s);
             }
@@ -393,6 +581,9 @@ namespace schedInterface
                 
                 se.venue = s.venue;
                 se.venue_id = s.venue_id;
+                se.speaker_companies = s.speaker_companies;
+                se.speaker_images = s.speaker_images;
+                se.full = s.full;
 
                 db.sessions.InsertOnSubmit(se);
 
@@ -413,25 +604,53 @@ namespace schedInterface
             return s;
         }
 
-        public Session current(Int32 event_id, string location)
+        public Session single(int id)
         {
-            Session s = new Session();
-
-            foreach (var item in db.session_get_current(event_id, location))
+            Session session1 = new Session();
+            Table<session> sessions = this.db.sessions;
+            Expression<Func<session, bool>> predicate = (Expression<Func<session, bool>>)(sess => sess.id == id);
+            foreach (session session2 in (IEnumerable<session>)sessions.Where<session>(predicate))
             {
-                s.description = item.description;
-                s.end = Convert.ToDateTime(item.session_end);
-                s.event_type = item.type;
-                s.goers = item.attendees.ToString();
-                s.internal_id = item.id;
-                s.name = item.title;
-                s.speakers = item.speakers;
-                s.start = Convert.ToDateTime(item.session_start);
-                s.venue = item.venue;
-                s.event_id = Convert.ToInt32(item.event_id);
+                session1.internal_id = session2.id;
+                session1.description = session2.description;
+                if (session2.session_end.HasValue)
+                    session1.end = Convert.ToDateTime((object)session2.session_end);
+                session1.event_id = Convert.ToInt32(session1.event_id);
+                session1.event_key = session2.event_key;
+                session1.event_type = session2.type;
+                session1.name = session2.title;
+                session1.speakers = session2.speakers;
+                session1.speaker_images = session2.speaker_images;
+                session1.speaker_companies = session2.speaker_companies;
+                session1.full = session2.full;
+                if (session2.session_start.HasValue)
+                    session1.start = Convert.ToDateTime((object)session2.session_start);
+                session1.venue = session2.venue;
+                session1.venue_id = session2.venue_id;
             }
+            return session1;
+        }
 
-            return s;
+        public Session current(int event_id, string location, DateTime start)
+        {
+            Session session = new Session();
+            foreach (session_get_currentResult getCurrentResult in (IEnumerable<session_get_currentResult>)this.db.session_get_current(new int?(event_id), location, new DateTime?(start)))
+            {
+                session.description = getCurrentResult.description;
+                session.end = Convert.ToDateTime((object)getCurrentResult.session_end);
+                session.event_type = getCurrentResult.type;
+                session.goers = getCurrentResult.attendees.ToString();
+                session.internal_id = getCurrentResult.id;
+                session.name = getCurrentResult.title;
+                session.speakers = getCurrentResult.speakers;
+                session.start = Convert.ToDateTime((object)getCurrentResult.session_start);
+                session.venue = getCurrentResult.venue;
+                session.event_id = Convert.ToInt32((object)getCurrentResult.event_id);
+                session.speaker_images = getCurrentResult.speaker_images;
+                session.speaker_companies = getCurrentResult.speaker_companies;
+                session.full = getCurrentResult.full;
+            }
+            return session;
         }
 
         public Session next(Int32 event_id, string location, DateTime prev_end)
@@ -450,6 +669,9 @@ namespace schedInterface
                 s.start = Convert.ToDateTime(item.session_start);
                 s.event_start = Convert.ToDateTime(s.start).ToShortTimeString();
                 s.venue = item.venue;
+                s.speaker_companies = item.speaker_companies;
+                s.speaker_images = item.speaker_images;
+                s.full = item.full;
             }
 
             if (s.internal_id == 0)
@@ -489,6 +711,10 @@ namespace schedInterface
         public string speakers { get; set; }
         public Int32 internal_id { get; set; }
         public Int32 event_id { get; set; }
+
+        public string speaker_companies { get; set; }
+        public string speaker_images { get; set; }
+        public bool full { get; set; }
     }
 
     #region openstackAPI

@@ -84,6 +84,18 @@ namespace schedInterface
     partial void Insertsetting(setting instance);
     partial void Updatesetting(setting instance);
     partial void Deletesetting(setting instance);
+    partial void Insertsublocation(sublocation instance);
+    partial void Updatesublocation(sublocation instance);
+    partial void Deletesublocation(sublocation instance);
+    partial void Insertevents_notify_user(events_notify_user instance);
+    partial void Updateevents_notify_user(events_notify_user instance);
+    partial void Deleteevents_notify_user(events_notify_user instance);
+    partial void Insertcarrier(carrier instance);
+    partial void Updatecarrier(carrier instance);
+    partial void Deletecarrier(carrier instance);
+    partial void Insertimport_history(import_history instance);
+    partial void Updateimport_history(import_history instance);
+    partial void Deleteimport_history(import_history instance);
     #endregion
 		
 		public schedDataContext() : 
@@ -260,6 +272,38 @@ namespace schedInterface
 			}
 		}
 		
+		public System.Data.Linq.Table<sublocation> sublocations
+		{
+			get
+			{
+				return this.GetTable<sublocation>();
+			}
+		}
+		
+		public System.Data.Linq.Table<events_notify_user> events_notify_users
+		{
+			get
+			{
+				return this.GetTable<events_notify_user>();
+			}
+		}
+		
+		public System.Data.Linq.Table<carrier> carriers
+		{
+			get
+			{
+				return this.GetTable<carrier>();
+			}
+		}
+		
+		public System.Data.Linq.Table<import_history> import_histories
+		{
+			get
+			{
+				return this.GetTable<import_history>();
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.permissions_get_by_user")]
 		public ISingleResult<permissions_get_by_userResult> permissions_get_by_user([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> user_id)
 		{
@@ -288,20 +332,6 @@ namespace schedInterface
 			return ((ISingleResult<templates_by_eventResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.session_get_current")]
-		public ISingleResult<session_get_currentResult> session_get_current([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> event_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string location_id)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), event_id, location_id);
-			return ((ISingleResult<session_get_currentResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.session_get_next")]
-		public ISingleResult<session_get_nextResult> session_get_next([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> event_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string location_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> prev_end)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), event_id, location_id, prev_end);
-			return ((ISingleResult<session_get_nextResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.media_random_by_event")]
 		public ISingleResult<media_random_by_eventResult> media_random_by_event([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> id)
 		{
@@ -309,53 +339,11 @@ namespace schedInterface
 			return ((ISingleResult<media_random_by_eventResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.messages_by_event")]
-		public ISingleResult<messages_by_eventResult> messages_by_event([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> event_id)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), event_id);
-			return ((ISingleResult<messages_by_eventResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.messages_by_terminal")]
-		public ISingleResult<messages_by_terminalResult> messages_by_terminal()
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-			return ((ISingleResult<messages_by_terminalResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.messages_by_template")]
-		public ISingleResult<messages_by_templateResult> messages_by_template()
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-			return ((ISingleResult<messages_by_templateResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.messages_get_random")]
-		public ISingleResult<messages_get_randomResult> messages_get_random([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> event_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> template_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> terminal_id)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), event_id, template_id, terminal_id);
-			return ((ISingleResult<messages_get_randomResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.clean_design_summit")]
 		public int clean_design_summit()
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
 			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.terminal_assignments_by_event")]
-		public ISingleResult<terminal_assignments_by_eventResult> terminal_assignments_by_event([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> id)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id);
-			return ((ISingleResult<terminal_assignments_by_eventResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sessions_by_event_location_date")]
-		public ISingleResult<sessions_by_event_location_dateResult> sessions_by_event_location_date([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> event_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string location)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), event_id, location);
-			return ((ISingleResult<sessions_by_event_location_dateResult>)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sessions_remove")]
@@ -384,6 +372,160 @@ namespace schedInterface
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
 			return ((ISingleResult<design_summit_austinResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sessions_by_event_location_date")]
+		public ISingleResult<sessions_by_event_location_dateResult> sessions_by_event_location_date([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> event_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string location, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> start)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), event_id, location, start);
+			return ((ISingleResult<sessions_by_event_location_dateResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.session_get_next")]
+		public ISingleResult<session_get_nextResult> session_get_next([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> event_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string location_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> prev_end)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), event_id, location_id, prev_end);
+			return ((ISingleResult<session_get_nextResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.session_get_current")]
+		public ISingleResult<session_get_currentResult> session_get_current([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> event_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string location_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> start)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), event_id, location_id, start);
+			return ((ISingleResult<session_get_currentResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sublocations_by_location")]
+		public ISingleResult<sublocations_by_locationResult> sublocations_by_location([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> parent)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), parent);
+			return ((ISingleResult<sublocations_by_locationResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sessions_by_event_location_children_date")]
+		public ISingleResult<sessions_by_event_location_children_dateResult> sessions_by_event_location_children_date([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> event_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> location, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> start)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), event_id, location, start);
+			return ((ISingleResult<sessions_by_event_location_children_dateResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.messages_get_random_priority_test")]
+		public ISingleResult<messages_get_random_priority_testResult> messages_get_random_priority_test([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> event_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> template_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> terminal_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] System.Nullable<bool> priority)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), event_id, template_id, terminal_id, priority);
+			return ((ISingleResult<messages_get_random_priority_testResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.messages_get_random")]
+		public ISingleResult<messages_get_randomResult> messages_get_random([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> event_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> template_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> terminal_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), event_id, template_id, terminal_id);
+			return ((ISingleResult<messages_get_randomResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.messages_by_event")]
+		public ISingleResult<messages_by_eventResult> messages_by_event([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> event_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), event_id);
+			return ((ISingleResult<messages_by_eventResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.messages_by_template")]
+		public ISingleResult<messages_by_templateResult> messages_by_template()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<messages_by_templateResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.messages_by_terminal")]
+		public ISingleResult<messages_by_terminalResult> messages_by_terminal()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<messages_by_terminalResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.session_full")]
+		public ISingleResult<session_fullResult> session_full([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> terminal_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), terminal_id);
+			return ((ISingleResult<session_fullResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.events_notify_by_users")]
+		public ISingleResult<events_notify_by_usersResult> events_notify_by_users([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> user_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), user_id);
+			return ((ISingleResult<events_notify_by_usersResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.users_notify_by_event")]
+		public ISingleResult<users_notify_by_eventResult> users_notify_by_event([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> event_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), event_id);
+			return ((ISingleResult<users_notify_by_eventResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.messages_by_event_test")]
+		public ISingleResult<messages_by_event_testResult> messages_by_event_test([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> event_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), event_id);
+			return ((ISingleResult<messages_by_event_testResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.barcelona_design_summit")]
+		public ISingleResult<barcelona_design_summitResult> barcelona_design_summit()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<barcelona_design_summitResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.barcelona_working_group")]
+		public ISingleResult<barcelona_working_groupResult> barcelona_working_group()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<barcelona_working_groupResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sessions_by_event_by_day_by_group")]
+		public ISingleResult<sessions_by_event_by_day_by_groupResult> sessions_by_event_by_day_by_group([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> start)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), start);
+			return ((ISingleResult<sessions_by_event_by_day_by_groupResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.future_sessions_by_day")]
+		public ISingleResult<future_sessions_by_dayResult> future_sessions_by_day([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> event_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> start)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), event_id, start);
+			return ((ISingleResult<future_sessions_by_dayResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.messages_get_random_priority")]
+		public ISingleResult<messages_get_random_priorityResult> messages_get_random_priority([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> event_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> template_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> terminal_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] System.Nullable<bool> priority)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), event_id, template_id, terminal_id, priority);
+			return ((ISingleResult<messages_get_random_priorityResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.terminal_assignments_by_event")]
+		public ISingleResult<terminal_assignments_by_eventResult> terminal_assignments_by_event([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id);
+			return ((ISingleResult<terminal_assignments_by_eventResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sessions_import")]
+		public int sessions_import([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(MAX)")] string title, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> start, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="DateTime")] System.Nullable<System.DateTime> end, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string type, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string venue_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string venue, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> event_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(255)")] string event_key, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(MAX)")] string speakers, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(MAX)")] string speaker_companies, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(MAX)")] string speaker_images)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), title, start, end, type, venue_id, venue, event_id, event_key, speakers, speaker_companies, speaker_images);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sessions_delete_by_event")]
+		public int sessions_delete_by_event([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id);
+			return ((int)(result.ReturnValue));
 		}
 	}
 	
@@ -425,6 +567,12 @@ namespace schedInterface
 		
 		private System.Nullable<int> _event_id;
 		
+		private string _speaker_companies;
+		
+		private string _speaker_images;
+		
+		private bool _full;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -461,6 +609,12 @@ namespace schedInterface
     partial void OnmodifiedChanged();
     partial void Onevent_idChanging(System.Nullable<int> value);
     partial void Onevent_idChanged();
+    partial void Onspeaker_companiesChanging(string value);
+    partial void Onspeaker_companiesChanged();
+    partial void Onspeaker_imagesChanging(string value);
+    partial void Onspeaker_imagesChanged();
+    partial void OnfullChanging(bool value);
+    partial void OnfullChanged();
     #endregion
 		
 		public session()
@@ -784,6 +938,66 @@ namespace schedInterface
 					this._event_id = value;
 					this.SendPropertyChanged("event_id");
 					this.Onevent_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_speaker_companies", DbType="VarChar(MAX)")]
+		public string speaker_companies
+		{
+			get
+			{
+				return this._speaker_companies;
+			}
+			set
+			{
+				if ((this._speaker_companies != value))
+				{
+					this.Onspeaker_companiesChanging(value);
+					this.SendPropertyChanging();
+					this._speaker_companies = value;
+					this.SendPropertyChanged("speaker_companies");
+					this.Onspeaker_companiesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_speaker_images", DbType="VarChar(MAX)")]
+		public string speaker_images
+		{
+			get
+			{
+				return this._speaker_images;
+			}
+			set
+			{
+				if ((this._speaker_images != value))
+				{
+					this.Onspeaker_imagesChanging(value);
+					this.SendPropertyChanging();
+					this._speaker_images = value;
+					this.SendPropertyChanged("speaker_images");
+					this.Onspeaker_imagesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_full", DbType="Bit NOT NULL")]
+		public bool full
+		{
+			get
+			{
+				return this._full;
+			}
+			set
+			{
+				if ((this._full != value))
+				{
+					this.OnfullChanging(value);
+					this.SendPropertyChanging();
+					this._full = value;
+					this.SendPropertyChanged("full");
+					this.OnfullChanged();
 				}
 			}
 		}
@@ -1603,6 +1817,12 @@ namespace schedInterface
 		
 		private int _security;
 		
+		private System.Nullable<int> _carrier;
+		
+		private string _mobile;
+		
+		private bool _mms;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1629,6 +1849,12 @@ namespace schedInterface
     partial void OnpwdChanged();
     partial void OnsecurityChanging(int value);
     partial void OnsecurityChanged();
+    partial void OncarrierChanging(System.Nullable<int> value);
+    partial void OncarrierChanged();
+    partial void OnmobileChanging(string value);
+    partial void OnmobileChanged();
+    partial void OnmmsChanging(bool value);
+    partial void OnmmsChanged();
     #endregion
 		
 		public user()
@@ -1852,6 +2078,66 @@ namespace schedInterface
 					this._security = value;
 					this.SendPropertyChanged("security");
 					this.OnsecurityChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_carrier", DbType="Int")]
+		public System.Nullable<int> carrier
+		{
+			get
+			{
+				return this._carrier;
+			}
+			set
+			{
+				if ((this._carrier != value))
+				{
+					this.OncarrierChanging(value);
+					this.SendPropertyChanging();
+					this._carrier = value;
+					this.SendPropertyChanged("carrier");
+					this.OncarrierChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mobile", DbType="VarChar(50)")]
+		public string mobile
+		{
+			get
+			{
+				return this._mobile;
+			}
+			set
+			{
+				if ((this._mobile != value))
+				{
+					this.OnmobileChanging(value);
+					this.SendPropertyChanging();
+					this._mobile = value;
+					this.SendPropertyChanged("mobile");
+					this.OnmobileChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mms", DbType="Bit NOT NULL")]
+		public bool mms
+		{
+			get
+			{
+				return this._mms;
+			}
+			set
+			{
+				if ((this._mms != value))
+				{
+					this.OnmmsChanging(value);
+					this.SendPropertyChanging();
+					this._mms = value;
+					this.SendPropertyChanged("mms");
+					this.OnmmsChanged();
 				}
 			}
 		}
@@ -2511,6 +2797,30 @@ namespace schedInterface
 		
 		private string _footer;
 		
+		private int _width;
+		
+		private int _height;
+		
+		private string _guide;
+		
+		private string _bottom_overlay;
+		
+		private string _layout;
+		
+		private int _speed;
+		
+		private bool _group_by_start;
+		
+		private bool _group_by_location;
+		
+		private bool _all_sessions;
+		
+		private System.Nullable<int> _template_id_announce;
+		
+		private System.Nullable<int> _template_id_end;
+		
+		private int _bottom_height;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -2529,6 +2839,30 @@ namespace schedInterface
     partial void OnbodyChanged();
     partial void OnfooterChanging(string value);
     partial void OnfooterChanged();
+    partial void OnwidthChanging(int value);
+    partial void OnwidthChanged();
+    partial void OnheightChanging(int value);
+    partial void OnheightChanged();
+    partial void OnguideChanging(string value);
+    partial void OnguideChanged();
+    partial void Onbottom_overlayChanging(string value);
+    partial void Onbottom_overlayChanged();
+    partial void OnlayoutChanging(string value);
+    partial void OnlayoutChanged();
+    partial void OnspeedChanging(int value);
+    partial void OnspeedChanged();
+    partial void Ongroup_by_startChanging(bool value);
+    partial void Ongroup_by_startChanged();
+    partial void Ongroup_by_locationChanging(bool value);
+    partial void Ongroup_by_locationChanged();
+    partial void Onall_sessionsChanging(bool value);
+    partial void Onall_sessionsChanged();
+    partial void Ontemplate_id_announceChanging(System.Nullable<int> value);
+    partial void Ontemplate_id_announceChanged();
+    partial void Ontemplate_id_endChanging(System.Nullable<int> value);
+    partial void Ontemplate_id_endChanged();
+    partial void Onbottom_heightChanging(int value);
+    partial void Onbottom_heightChanged();
     #endregion
 		
 		public overlay()
@@ -2676,6 +3010,246 @@ namespace schedInterface
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_width", DbType="Int NOT NULL")]
+		public int width
+		{
+			get
+			{
+				return this._width;
+			}
+			set
+			{
+				if ((this._width != value))
+				{
+					this.OnwidthChanging(value);
+					this.SendPropertyChanging();
+					this._width = value;
+					this.SendPropertyChanged("width");
+					this.OnwidthChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_height", DbType="Int NOT NULL")]
+		public int height
+		{
+			get
+			{
+				return this._height;
+			}
+			set
+			{
+				if ((this._height != value))
+				{
+					this.OnheightChanging(value);
+					this.SendPropertyChanging();
+					this._height = value;
+					this.SendPropertyChanged("height");
+					this.OnheightChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_guide", DbType="VarChar(MAX)")]
+		public string guide
+		{
+			get
+			{
+				return this._guide;
+			}
+			set
+			{
+				if ((this._guide != value))
+				{
+					this.OnguideChanging(value);
+					this.SendPropertyChanging();
+					this._guide = value;
+					this.SendPropertyChanged("guide");
+					this.OnguideChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bottom_overlay", DbType="VarChar(MAX)")]
+		public string bottom_overlay
+		{
+			get
+			{
+				return this._bottom_overlay;
+			}
+			set
+			{
+				if ((this._bottom_overlay != value))
+				{
+					this.Onbottom_overlayChanging(value);
+					this.SendPropertyChanging();
+					this._bottom_overlay = value;
+					this.SendPropertyChanged("bottom_overlay");
+					this.Onbottom_overlayChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_layout", DbType="VarChar(MAX)")]
+		public string layout
+		{
+			get
+			{
+				return this._layout;
+			}
+			set
+			{
+				if ((this._layout != value))
+				{
+					this.OnlayoutChanging(value);
+					this.SendPropertyChanging();
+					this._layout = value;
+					this.SendPropertyChanged("layout");
+					this.OnlayoutChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_speed", DbType="Int NOT NULL")]
+		public int speed
+		{
+			get
+			{
+				return this._speed;
+			}
+			set
+			{
+				if ((this._speed != value))
+				{
+					this.OnspeedChanging(value);
+					this.SendPropertyChanging();
+					this._speed = value;
+					this.SendPropertyChanged("speed");
+					this.OnspeedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="group_start", Storage="_group_by_start", DbType="Bit NOT NULL")]
+		public bool group_by_start
+		{
+			get
+			{
+				return this._group_by_start;
+			}
+			set
+			{
+				if ((this._group_by_start != value))
+				{
+					this.Ongroup_by_startChanging(value);
+					this.SendPropertyChanging();
+					this._group_by_start = value;
+					this.SendPropertyChanged("group_by_start");
+					this.Ongroup_by_startChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="group_location", Storage="_group_by_location", DbType="Bit NOT NULL")]
+		public bool group_by_location
+		{
+			get
+			{
+				return this._group_by_location;
+			}
+			set
+			{
+				if ((this._group_by_location != value))
+				{
+					this.Ongroup_by_locationChanging(value);
+					this.SendPropertyChanging();
+					this._group_by_location = value;
+					this.SendPropertyChanged("group_by_location");
+					this.Ongroup_by_locationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_all_sessions", DbType="Bit NOT NULL")]
+		public bool all_sessions
+		{
+			get
+			{
+				return this._all_sessions;
+			}
+			set
+			{
+				if ((this._all_sessions != value))
+				{
+					this.Onall_sessionsChanging(value);
+					this.SendPropertyChanging();
+					this._all_sessions = value;
+					this.SendPropertyChanged("all_sessions");
+					this.Onall_sessionsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_id_announce", DbType="Int")]
+		public System.Nullable<int> template_id_announce
+		{
+			get
+			{
+				return this._template_id_announce;
+			}
+			set
+			{
+				if ((this._template_id_announce != value))
+				{
+					this.Ontemplate_id_announceChanging(value);
+					this.SendPropertyChanging();
+					this._template_id_announce = value;
+					this.SendPropertyChanged("template_id_announce");
+					this.Ontemplate_id_announceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_id_end", DbType="Int")]
+		public System.Nullable<int> template_id_end
+		{
+			get
+			{
+				return this._template_id_end;
+			}
+			set
+			{
+				if ((this._template_id_end != value))
+				{
+					this.Ontemplate_id_endChanging(value);
+					this.SendPropertyChanging();
+					this._template_id_end = value;
+					this.SendPropertyChanged("template_id_end");
+					this.Ontemplate_id_endChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bottom_height", DbType="Int NOT NULL")]
+		public int bottom_height
+		{
+			get
+			{
+				return this._bottom_height;
+			}
+			set
+			{
+				if ((this._bottom_height != value))
+				{
+					this.Onbottom_heightChanging(value);
+					this.SendPropertyChanging();
+					this._bottom_height = value;
+					this.SendPropertyChanged("bottom_height");
+					this.Onbottom_heightChanged();
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -2723,6 +3297,12 @@ namespace schedInterface
 		
 		private string _pic;
 		
+		private bool _priority;
+		
+		private bool _session_full;
+		
+		private bool _test;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -2747,6 +3327,12 @@ namespace schedInterface
     partial void Onmessage1Changed();
     partial void OnpicChanging(string value);
     partial void OnpicChanged();
+    partial void OnpriorityChanging(bool value);
+    partial void OnpriorityChanged();
+    partial void Onsession_fullChanging(bool value);
+    partial void Onsession_fullChanged();
+    partial void OntestChanging(bool value);
+    partial void OntestChanged();
     #endregion
 		
 		public message()
@@ -2950,6 +3536,66 @@ namespace schedInterface
 					this._pic = value;
 					this.SendPropertyChanged("pic");
 					this.OnpicChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_priority", DbType="Bit NOT NULL")]
+		public bool priority
+		{
+			get
+			{
+				return this._priority;
+			}
+			set
+			{
+				if ((this._priority != value))
+				{
+					this.OnpriorityChanging(value);
+					this.SendPropertyChanging();
+					this._priority = value;
+					this.SendPropertyChanged("priority");
+					this.OnpriorityChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_session_full", DbType="Bit NOT NULL")]
+		public bool session_full
+		{
+			get
+			{
+				return this._session_full;
+			}
+			set
+			{
+				if ((this._session_full != value))
+				{
+					this.Onsession_fullChanging(value);
+					this.SendPropertyChanging();
+					this._session_full = value;
+					this.SendPropertyChanged("session_full");
+					this.Onsession_fullChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_test", DbType="Bit NOT NULL")]
+		public bool test
+		{
+			get
+			{
+				return this._test;
+			}
+			set
+			{
+				if ((this._test != value))
+				{
+					this.OntestChanging(value);
+					this.SendPropertyChanging();
+					this._test = value;
+					this.SendPropertyChanged("test");
+					this.OntestChanged();
 				}
 			}
 		}
@@ -3665,6 +4311,16 @@ namespace schedInterface
 		
 		private System.Nullable<int> _rotate;
 		
+		private System.Nullable<int> _template_id_announce;
+		
+		private System.Nullable<int> _template_id_end;
+		
+		private bool _all_sessions;
+		
+		private bool _group_by_location;
+		
+		private bool _group_by_start;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -3687,6 +4343,16 @@ namespace schedInterface
     partial void OndeckChanged();
     partial void OnrotateChanging(System.Nullable<int> value);
     partial void OnrotateChanged();
+    partial void Ontemplate_id_announceChanging(System.Nullable<int> value);
+    partial void Ontemplate_id_announceChanged();
+    partial void Ontemplate_id_endChanging(System.Nullable<int> value);
+    partial void Ontemplate_id_endChanged();
+    partial void Onall_sessionsChanging(bool value);
+    partial void Onall_sessionsChanged();
+    partial void Ongroup_by_locationChanging(bool value);
+    partial void Ongroup_by_locationChanged();
+    partial void Ongroup_by_startChanging(bool value);
+    partial void Ongroup_by_startChanged();
     #endregion
 		
 		public terminal()
@@ -3870,6 +4536,106 @@ namespace schedInterface
 					this._rotate = value;
 					this.SendPropertyChanged("rotate");
 					this.OnrotateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_id_announce", DbType="Int ")]
+		public System.Nullable<int> template_id_announce
+		{
+			get
+			{
+				return this._template_id_announce;
+			}
+			set
+			{
+				if ((this._template_id_announce != value))
+				{
+					this.Ontemplate_id_announceChanging(value);
+					this.SendPropertyChanging();
+					this._template_id_announce = value;
+					this.SendPropertyChanged("template_id_announce");
+					this.Ontemplate_id_announceChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_id_end", DbType="Int ")]
+		public System.Nullable<int> template_id_end
+		{
+			get
+			{
+				return this._template_id_end;
+			}
+			set
+			{
+				if ((this._template_id_end != value))
+				{
+					this.Ontemplate_id_endChanging(value);
+					this.SendPropertyChanging();
+					this._template_id_end = value;
+					this.SendPropertyChanged("template_id_end");
+					this.Ontemplate_id_endChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_all_sessions", DbType="Bit NOT NULL")]
+		public bool all_sessions
+		{
+			get
+			{
+				return this._all_sessions;
+			}
+			set
+			{
+				if ((this._all_sessions != value))
+				{
+					this.Onall_sessionsChanging(value);
+					this.SendPropertyChanging();
+					this._all_sessions = value;
+					this.SendPropertyChanged("all_sessions");
+					this.Onall_sessionsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_group_by_location", DbType="Bit NOT NULL")]
+		public bool group_by_location
+		{
+			get
+			{
+				return this._group_by_location;
+			}
+			set
+			{
+				if ((this._group_by_location != value))
+				{
+					this.Ongroup_by_locationChanging(value);
+					this.SendPropertyChanging();
+					this._group_by_location = value;
+					this.SendPropertyChanged("group_by_location");
+					this.Ongroup_by_locationChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_group_by_start", DbType="Bit NOT NULL")]
+		public bool group_by_start
+		{
+			get
+			{
+				return this._group_by_start;
+			}
+			set
+			{
+				if ((this._group_by_start != value))
+				{
+					this.Ongroup_by_startChanging(value);
+					this.SendPropertyChanging();
+					this._group_by_start = value;
+					this.SendPropertyChanged("group_by_start");
+					this.Ongroup_by_startChanged();
 				}
 			}
 		}
@@ -4227,6 +4993,28 @@ namespace schedInterface
 		
 		private int _offset;
 		
+		private System.Nullable<System.DateTime> _last_timerun;
+		
+		private bool _overridedisplay;
+		
+		private bool _overridetime;
+		
+		private bool _timerun;
+		
+		private System.Nullable<System.DateTime> _timewarp;
+		
+		private string _eod_category;
+		
+		private string _eod_description;
+		
+		private string _eod_time;
+		
+		private string _eod_title;
+		
+		private string _full_session;
+		
+		private System.Nullable<int> _timezone;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -4255,6 +5043,28 @@ namespace schedInterface
     partial void Onopenstack_idChanged();
     partial void OnoffsetChanging(int value);
     partial void OnoffsetChanged();
+    partial void Onlast_timerunChanging(System.Nullable<System.DateTime> value);
+    partial void Onlast_timerunChanged();
+    partial void OnoverridedisplayChanging(bool value);
+    partial void OnoverridedisplayChanged();
+    partial void OnoverridetimeChanging(bool value);
+    partial void OnoverridetimeChanged();
+    partial void OntimerunChanging(bool value);
+    partial void OntimerunChanged();
+    partial void OntimewarpChanging(System.Nullable<System.DateTime> value);
+    partial void OntimewarpChanged();
+    partial void Oneod_categoryChanging(string value);
+    partial void Oneod_categoryChanged();
+    partial void Oneod_descriptionChanging(string value);
+    partial void Oneod_descriptionChanged();
+    partial void Oneod_timeChanging(string value);
+    partial void Oneod_timeChanged();
+    partial void Oneod_titleChanging(string value);
+    partial void Oneod_titleChanged();
+    partial void Onfull_sessionChanging(string value);
+    partial void Onfull_sessionChanged();
+    partial void OntimezoneChanging(System.Nullable<int> value);
+    partial void OntimezoneChanged();
     #endregion
 		
 		public @event()
@@ -4502,6 +5312,226 @@ namespace schedInterface
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_last_timerun", DbType="DateTime")]
+		public System.Nullable<System.DateTime> last_timerun
+		{
+			get
+			{
+				return this._last_timerun;
+			}
+			set
+			{
+				if ((this._last_timerun != value))
+				{
+					this.Onlast_timerunChanging(value);
+					this.SendPropertyChanging();
+					this._last_timerun = value;
+					this.SendPropertyChanged("last_timerun");
+					this.Onlast_timerunChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_overridedisplay", DbType="Bit NOT NULL")]
+		public bool overridedisplay
+		{
+			get
+			{
+				return this._overridedisplay;
+			}
+			set
+			{
+				if ((this._overridedisplay != value))
+				{
+					this.OnoverridedisplayChanging(value);
+					this.SendPropertyChanging();
+					this._overridedisplay = value;
+					this.SendPropertyChanged("overridedisplay");
+					this.OnoverridedisplayChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_overridetime", DbType="Bit NOT NULL")]
+		public bool overridetime
+		{
+			get
+			{
+				return this._overridetime;
+			}
+			set
+			{
+				if ((this._overridetime != value))
+				{
+					this.OnoverridetimeChanging(value);
+					this.SendPropertyChanging();
+					this._overridetime = value;
+					this.SendPropertyChanged("overridetime");
+					this.OnoverridetimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_timerun", DbType="Bit NOT NULL")]
+		public bool timerun
+		{
+			get
+			{
+				return this._timerun;
+			}
+			set
+			{
+				if ((this._timerun != value))
+				{
+					this.OntimerunChanging(value);
+					this.SendPropertyChanging();
+					this._timerun = value;
+					this.SendPropertyChanged("timerun");
+					this.OntimerunChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_timewarp", DbType="DateTime")]
+		public System.Nullable<System.DateTime> timewarp
+		{
+			get
+			{
+				return this._timewarp;
+			}
+			set
+			{
+				if ((this._timewarp != value))
+				{
+					this.OntimewarpChanging(value);
+					this.SendPropertyChanging();
+					this._timewarp = value;
+					this.SendPropertyChanged("timewarp");
+					this.OntimewarpChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_eod_category", DbType="VarChar(255)")]
+		public string eod_category
+		{
+			get
+			{
+				return this._eod_category;
+			}
+			set
+			{
+				if ((this._eod_category != value))
+				{
+					this.Oneod_categoryChanging(value);
+					this.SendPropertyChanging();
+					this._eod_category = value;
+					this.SendPropertyChanged("eod_category");
+					this.Oneod_categoryChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_eod_description", DbType="VarChar(MAX)")]
+		public string eod_description
+		{
+			get
+			{
+				return this._eod_description;
+			}
+			set
+			{
+				if ((this._eod_description != value))
+				{
+					this.Oneod_descriptionChanging(value);
+					this.SendPropertyChanging();
+					this._eod_description = value;
+					this.SendPropertyChanged("eod_description");
+					this.Oneod_descriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_eod_time", DbType="VarChar(50)")]
+		public string eod_time
+		{
+			get
+			{
+				return this._eod_time;
+			}
+			set
+			{
+				if ((this._eod_time != value))
+				{
+					this.Oneod_timeChanging(value);
+					this.SendPropertyChanging();
+					this._eod_time = value;
+					this.SendPropertyChanged("eod_time");
+					this.Oneod_timeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_eod_title", DbType="VarChar(255)")]
+		public string eod_title
+		{
+			get
+			{
+				return this._eod_title;
+			}
+			set
+			{
+				if ((this._eod_title != value))
+				{
+					this.Oneod_titleChanging(value);
+					this.SendPropertyChanging();
+					this._eod_title = value;
+					this.SendPropertyChanged("eod_title");
+					this.Oneod_titleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_full_session", DbType="VarChar(MAX)")]
+		public string full_session
+		{
+			get
+			{
+				return this._full_session;
+			}
+			set
+			{
+				if ((this._full_session != value))
+				{
+					this.Onfull_sessionChanging(value);
+					this.SendPropertyChanging();
+					this._full_session = value;
+					this.SendPropertyChanged("full_session");
+					this.Onfull_sessionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_timezone", DbType="Int")]
+		public System.Nullable<int> timezone
+		{
+			get
+			{
+				return this._timezone;
+			}
+			set
+			{
+				if ((this._timezone != value))
+				{
+					this.OntimezoneChanging(value);
+					this.SendPropertyChanging();
+					this._timezone = value;
+					this.SendPropertyChanged("timezone");
+					this.OntimezoneChanged();
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -4742,6 +5772,686 @@ namespace schedInterface
 					this._value = value;
 					this.SendPropertyChanged("value");
 					this.OnvalueChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.sublocations")]
+	public partial class sublocation : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private int _parent;
+		
+		private int _child;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OnparentChanging(int value);
+    partial void OnparentChanged();
+    partial void OnchildChanging(int value);
+    partial void OnchildChanged();
+    #endregion
+		
+		public sublocation()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_parent", DbType="Int NOT NULL")]
+		public int parent
+		{
+			get
+			{
+				return this._parent;
+			}
+			set
+			{
+				if ((this._parent != value))
+				{
+					this.OnparentChanging(value);
+					this.SendPropertyChanging();
+					this._parent = value;
+					this.SendPropertyChanged("parent");
+					this.OnparentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_child", DbType="Int NOT NULL")]
+		public int child
+		{
+			get
+			{
+				return this._child;
+			}
+			set
+			{
+				if ((this._child != value))
+				{
+					this.OnchildChanging(value);
+					this.SendPropertyChanging();
+					this._child = value;
+					this.SendPropertyChanged("child");
+					this.OnchildChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.events_notify_users")]
+	public partial class events_notify_user : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private int _event_id;
+		
+		private int _user_id;
+		
+		private int _after;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void Onevent_idChanging(int value);
+    partial void Onevent_idChanged();
+    partial void Onuser_idChanging(int value);
+    partial void Onuser_idChanged();
+    partial void OnafterChanging(int value);
+    partial void OnafterChanged();
+    #endregion
+		
+		public events_notify_user()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int NOT NULL")]
+		public int event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this.Onevent_idChanging(value);
+					this.SendPropertyChanging();
+					this._event_id = value;
+					this.SendPropertyChanged("event_id");
+					this.Onevent_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_id", DbType="Int NOT NULL")]
+		public int user_id
+		{
+			get
+			{
+				return this._user_id;
+			}
+			set
+			{
+				if ((this._user_id != value))
+				{
+					this.Onuser_idChanging(value);
+					this.SendPropertyChanging();
+					this._user_id = value;
+					this.SendPropertyChanged("user_id");
+					this.Onuser_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_after", DbType="Int NOT NULL")]
+		public int after
+		{
+			get
+			{
+				return this._after;
+			}
+			set
+			{
+				if ((this._after != value))
+				{
+					this.OnafterChanging(value);
+					this.SendPropertyChanging();
+					this._after = value;
+					this.SendPropertyChanged("after");
+					this.OnafterChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.carriers")]
+	public partial class carrier : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private string _title;
+		
+		private string _sms;
+		
+		private string _mms;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void OntitleChanging(string value);
+    partial void OntitleChanged();
+    partial void OnsmsChanging(string value);
+    partial void OnsmsChanged();
+    partial void OnmmsChanging(string value);
+    partial void OnmmsChanged();
+    #endregion
+		
+		public carrier()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(100)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this.OntitleChanging(value);
+					this.SendPropertyChanging();
+					this._title = value;
+					this.SendPropertyChanged("title");
+					this.OntitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sms", DbType="VarChar(500)")]
+		public string sms
+		{
+			get
+			{
+				return this._sms;
+			}
+			set
+			{
+				if ((this._sms != value))
+				{
+					this.OnsmsChanging(value);
+					this.SendPropertyChanging();
+					this._sms = value;
+					this.SendPropertyChanged("sms");
+					this.OnsmsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mms", DbType="VarChar(500)")]
+		public string mms
+		{
+			get
+			{
+				return this._mms;
+			}
+			set
+			{
+				if ((this._mms != value))
+				{
+					this.OnmmsChanging(value);
+					this.SendPropertyChanging();
+					this._mms = value;
+					this.SendPropertyChanged("mms");
+					this.OnmmsChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.import_history")]
+	public partial class import_history : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id;
+		
+		private int _event_id;
+		
+		private System.DateTime _createdate;
+		
+		private string _status;
+		
+		private int _imported;
+		
+		private int _errored;
+		
+		private int _total;
+		
+		private string _comments;
+		
+		private string _type;
+		
+		private string _imported_by;
+		
+		private string _filename;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(int value);
+    partial void OnidChanged();
+    partial void Onevent_idChanging(int value);
+    partial void Onevent_idChanged();
+    partial void OncreatedateChanging(System.DateTime value);
+    partial void OncreatedateChanged();
+    partial void OnstatusChanging(string value);
+    partial void OnstatusChanged();
+    partial void OnimportedChanging(int value);
+    partial void OnimportedChanged();
+    partial void OnerroredChanging(int value);
+    partial void OnerroredChanged();
+    partial void OntotalChanging(int value);
+    partial void OntotalChanged();
+    partial void OncommentsChanging(string value);
+    partial void OncommentsChanged();
+    partial void OntypeChanging(string value);
+    partial void OntypeChanged();
+    partial void Onimported_byChanging(string value);
+    partial void Onimported_byChanged();
+    partial void OnfilenameChanging(string value);
+    partial void OnfilenameChanged();
+    #endregion
+		
+		public import_history()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int NOT NULL")]
+		public int event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this.Onevent_idChanging(value);
+					this.SendPropertyChanging();
+					this._event_id = value;
+					this.SendPropertyChanged("event_id");
+					this.Onevent_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_createdate", DbType="DateTime NOT NULL")]
+		public System.DateTime createdate
+		{
+			get
+			{
+				return this._createdate;
+			}
+			set
+			{
+				if ((this._createdate != value))
+				{
+					this.OncreatedateChanging(value);
+					this.SendPropertyChanging();
+					this._createdate = value;
+					this.SendPropertyChanged("createdate");
+					this.OncreatedateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="VarChar(50)")]
+		public string status
+		{
+			get
+			{
+				return this._status;
+			}
+			set
+			{
+				if ((this._status != value))
+				{
+					this.OnstatusChanging(value);
+					this.SendPropertyChanging();
+					this._status = value;
+					this.SendPropertyChanged("status");
+					this.OnstatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_imported", DbType="Int NOT NULL")]
+		public int imported
+		{
+			get
+			{
+				return this._imported;
+			}
+			set
+			{
+				if ((this._imported != value))
+				{
+					this.OnimportedChanging(value);
+					this.SendPropertyChanging();
+					this._imported = value;
+					this.SendPropertyChanged("imported");
+					this.OnimportedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_errored", DbType="Int NOT NULL")]
+		public int errored
+		{
+			get
+			{
+				return this._errored;
+			}
+			set
+			{
+				if ((this._errored != value))
+				{
+					this.OnerroredChanging(value);
+					this.SendPropertyChanging();
+					this._errored = value;
+					this.SendPropertyChanged("errored");
+					this.OnerroredChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_total", DbType="Int NOT NULL")]
+		public int total
+		{
+			get
+			{
+				return this._total;
+			}
+			set
+			{
+				if ((this._total != value))
+				{
+					this.OntotalChanging(value);
+					this.SendPropertyChanging();
+					this._total = value;
+					this.SendPropertyChanged("total");
+					this.OntotalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_comments", DbType="VarChar(MAX)")]
+		public string comments
+		{
+			get
+			{
+				return this._comments;
+			}
+			set
+			{
+				if ((this._comments != value))
+				{
+					this.OncommentsChanging(value);
+					this.SendPropertyChanging();
+					this._comments = value;
+					this.SendPropertyChanged("comments");
+					this.OncommentsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_type", DbType="VarChar(50)")]
+		public string type
+		{
+			get
+			{
+				return this._type;
+			}
+			set
+			{
+				if ((this._type != value))
+				{
+					this.OntypeChanging(value);
+					this.SendPropertyChanging();
+					this._type = value;
+					this.SendPropertyChanged("type");
+					this.OntypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_imported_by", DbType="VarChar(100)")]
+		public string imported_by
+		{
+			get
+			{
+				return this._imported_by;
+			}
+			set
+			{
+				if ((this._imported_by != value))
+				{
+					this.Onimported_byChanging(value);
+					this.SendPropertyChanging();
+					this._imported_by = value;
+					this.SendPropertyChanged("imported_by");
+					this.Onimported_byChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_filename", DbType="VarChar(MAX)")]
+		public string filename
+		{
+			get
+			{
+				return this._filename;
+			}
+			set
+			{
+				if ((this._filename != value))
+				{
+					this.OnfilenameChanging(value);
+					this.SendPropertyChanging();
+					this._filename = value;
+					this.SendPropertyChanged("filename");
+					this.OnfilenameChanged();
 				}
 			}
 		}
@@ -5555,598 +7265,6 @@ namespace schedInterface
 		}
 	}
 	
-	public partial class session_get_currentResult
-	{
-		
-		private int _id;
-		
-		private string _event_key;
-		
-		private bool _active;
-		
-		private string _title;
-		
-		private System.Nullable<System.DateTime> _session_start;
-		
-		private System.Nullable<System.DateTime> _session_end;
-		
-		private string _type;
-		
-		private string _description;
-		
-		private int _seats;
-		
-		private int _attendees;
-		
-		private string _venue_id;
-		
-		private string _venue;
-		
-		private string _speakers;
-		
-		private System.DateTime _created;
-		
-		private System.Nullable<System.DateTime> _modified;
-		
-		private System.Nullable<int> _event_id;
-		
-		public session_get_currentResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this._id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_key", DbType="VarChar(255)")]
-		public string event_key
-		{
-			get
-			{
-				return this._event_key;
-			}
-			set
-			{
-				if ((this._event_key != value))
-				{
-					this._event_key = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active", DbType="Bit NOT NULL")]
-		public bool active
-		{
-			get
-			{
-				return this._active;
-			}
-			set
-			{
-				if ((this._active != value))
-				{
-					this._active = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(MAX)")]
-		public string title
-		{
-			get
-			{
-				return this._title;
-			}
-			set
-			{
-				if ((this._title != value))
-				{
-					this._title = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_session_start", DbType="DateTime")]
-		public System.Nullable<System.DateTime> session_start
-		{
-			get
-			{
-				return this._session_start;
-			}
-			set
-			{
-				if ((this._session_start != value))
-				{
-					this._session_start = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_session_end", DbType="DateTime")]
-		public System.Nullable<System.DateTime> session_end
-		{
-			get
-			{
-				return this._session_end;
-			}
-			set
-			{
-				if ((this._session_end != value))
-				{
-					this._session_end = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_type", DbType="VarChar(255)")]
-		public string type
-		{
-			get
-			{
-				return this._type;
-			}
-			set
-			{
-				if ((this._type != value))
-				{
-					this._type = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="VarChar(MAX)")]
-		public string description
-		{
-			get
-			{
-				return this._description;
-			}
-			set
-			{
-				if ((this._description != value))
-				{
-					this._description = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seats", DbType="Int NOT NULL")]
-		public int seats
-		{
-			get
-			{
-				return this._seats;
-			}
-			set
-			{
-				if ((this._seats != value))
-				{
-					this._seats = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_attendees", DbType="Int NOT NULL")]
-		public int attendees
-		{
-			get
-			{
-				return this._attendees;
-			}
-			set
-			{
-				if ((this._attendees != value))
-				{
-					this._attendees = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_venue_id", DbType="VarChar(255)")]
-		public string venue_id
-		{
-			get
-			{
-				return this._venue_id;
-			}
-			set
-			{
-				if ((this._venue_id != value))
-				{
-					this._venue_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_venue", DbType="VarChar(255)")]
-		public string venue
-		{
-			get
-			{
-				return this._venue;
-			}
-			set
-			{
-				if ((this._venue != value))
-				{
-					this._venue = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_speakers", DbType="VarChar(MAX)")]
-		public string speakers
-		{
-			get
-			{
-				return this._speakers;
-			}
-			set
-			{
-				if ((this._speakers != value))
-				{
-					this._speakers = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created", DbType="DateTime NOT NULL")]
-		public System.DateTime created
-		{
-			get
-			{
-				return this._created;
-			}
-			set
-			{
-				if ((this._created != value))
-				{
-					this._created = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modified", DbType="DateTime")]
-		public System.Nullable<System.DateTime> modified
-		{
-			get
-			{
-				return this._modified;
-			}
-			set
-			{
-				if ((this._modified != value))
-				{
-					this._modified = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int")]
-		public System.Nullable<int> event_id
-		{
-			get
-			{
-				return this._event_id;
-			}
-			set
-			{
-				if ((this._event_id != value))
-				{
-					this._event_id = value;
-				}
-			}
-		}
-	}
-	
-	public partial class session_get_nextResult
-	{
-		
-		private int _id;
-		
-		private string _event_key;
-		
-		private bool _active;
-		
-		private string _title;
-		
-		private System.Nullable<System.DateTime> _session_start;
-		
-		private System.Nullable<System.DateTime> _session_end;
-		
-		private string _type;
-		
-		private string _description;
-		
-		private int _seats;
-		
-		private int _attendees;
-		
-		private string _venue_id;
-		
-		private string _venue;
-		
-		private string _speakers;
-		
-		private System.DateTime _created;
-		
-		private System.Nullable<System.DateTime> _modified;
-		
-		private System.Nullable<int> _event_id;
-		
-		public session_get_nextResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this._id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_key", DbType="VarChar(255)")]
-		public string event_key
-		{
-			get
-			{
-				return this._event_key;
-			}
-			set
-			{
-				if ((this._event_key != value))
-				{
-					this._event_key = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active", DbType="Bit NOT NULL")]
-		public bool active
-		{
-			get
-			{
-				return this._active;
-			}
-			set
-			{
-				if ((this._active != value))
-				{
-					this._active = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(MAX)")]
-		public string title
-		{
-			get
-			{
-				return this._title;
-			}
-			set
-			{
-				if ((this._title != value))
-				{
-					this._title = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_session_start", DbType="DateTime")]
-		public System.Nullable<System.DateTime> session_start
-		{
-			get
-			{
-				return this._session_start;
-			}
-			set
-			{
-				if ((this._session_start != value))
-				{
-					this._session_start = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_session_end", DbType="DateTime")]
-		public System.Nullable<System.DateTime> session_end
-		{
-			get
-			{
-				return this._session_end;
-			}
-			set
-			{
-				if ((this._session_end != value))
-				{
-					this._session_end = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_type", DbType="VarChar(255)")]
-		public string type
-		{
-			get
-			{
-				return this._type;
-			}
-			set
-			{
-				if ((this._type != value))
-				{
-					this._type = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="VarChar(MAX)")]
-		public string description
-		{
-			get
-			{
-				return this._description;
-			}
-			set
-			{
-				if ((this._description != value))
-				{
-					this._description = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seats", DbType="Int NOT NULL")]
-		public int seats
-		{
-			get
-			{
-				return this._seats;
-			}
-			set
-			{
-				if ((this._seats != value))
-				{
-					this._seats = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_attendees", DbType="Int NOT NULL")]
-		public int attendees
-		{
-			get
-			{
-				return this._attendees;
-			}
-			set
-			{
-				if ((this._attendees != value))
-				{
-					this._attendees = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_venue_id", DbType="VarChar(255)")]
-		public string venue_id
-		{
-			get
-			{
-				return this._venue_id;
-			}
-			set
-			{
-				if ((this._venue_id != value))
-				{
-					this._venue_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_venue", DbType="VarChar(255)")]
-		public string venue
-		{
-			get
-			{
-				return this._venue;
-			}
-			set
-			{
-				if ((this._venue != value))
-				{
-					this._venue = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_speakers", DbType="VarChar(MAX)")]
-		public string speakers
-		{
-			get
-			{
-				return this._speakers;
-			}
-			set
-			{
-				if ((this._speakers != value))
-				{
-					this._speakers = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created", DbType="DateTime NOT NULL")]
-		public System.DateTime created
-		{
-			get
-			{
-				return this._created;
-			}
-			set
-			{
-				if ((this._created != value))
-				{
-					this._created = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modified", DbType="DateTime")]
-		public System.Nullable<System.DateTime> modified
-		{
-			get
-			{
-				return this._modified;
-			}
-			set
-			{
-				if ((this._modified != value))
-				{
-					this._modified = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int")]
-		public System.Nullable<int> event_id
-		{
-			get
-			{
-				return this._event_id;
-			}
-			set
-			{
-				if ((this._event_id != value))
-				{
-					this._event_id = value;
-				}
-			}
-		}
-	}
-	
 	public partial class media_random_by_eventResult
 	{
 		
@@ -6587,1296 +7705,6 @@ namespace schedInterface
 		}
 	}
 	
-	public partial class messages_by_eventResult
-	{
-		
-		private int _id;
-		
-		private System.Nullable<int> _event_id;
-		
-		private System.Nullable<int> _template_id;
-		
-		private System.Nullable<int> _terminal_id;
-		
-		private System.Nullable<System.DateTime> _start;
-		
-		private System.Nullable<System.DateTime> _stop;
-		
-		private bool _entire;
-		
-		private string _title;
-		
-		private string _message;
-		
-		private string _pic;
-		
-		public messages_by_eventResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this._id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int")]
-		public System.Nullable<int> event_id
-		{
-			get
-			{
-				return this._event_id;
-			}
-			set
-			{
-				if ((this._event_id != value))
-				{
-					this._event_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_id", DbType="Int")]
-		public System.Nullable<int> template_id
-		{
-			get
-			{
-				return this._template_id;
-			}
-			set
-			{
-				if ((this._template_id != value))
-				{
-					this._template_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_terminal_id", DbType="Int")]
-		public System.Nullable<int> terminal_id
-		{
-			get
-			{
-				return this._terminal_id;
-			}
-			set
-			{
-				if ((this._terminal_id != value))
-				{
-					this._terminal_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_start", DbType="DateTime")]
-		public System.Nullable<System.DateTime> start
-		{
-			get
-			{
-				return this._start;
-			}
-			set
-			{
-				if ((this._start != value))
-				{
-					this._start = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_stop", DbType="DateTime")]
-		public System.Nullable<System.DateTime> stop
-		{
-			get
-			{
-				return this._stop;
-			}
-			set
-			{
-				if ((this._stop != value))
-				{
-					this._stop = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_entire", DbType="Bit NOT NULL")]
-		public bool entire
-		{
-			get
-			{
-				return this._entire;
-			}
-			set
-			{
-				if ((this._entire != value))
-				{
-					this._entire = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(500)")]
-		public string title
-		{
-			get
-			{
-				return this._title;
-			}
-			set
-			{
-				if ((this._title != value))
-				{
-					this._title = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_message", DbType="VarChar(MAX)")]
-		public string message
-		{
-			get
-			{
-				return this._message;
-			}
-			set
-			{
-				if ((this._message != value))
-				{
-					this._message = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pic", DbType="VarChar(MAX)")]
-		public string pic
-		{
-			get
-			{
-				return this._pic;
-			}
-			set
-			{
-				if ((this._pic != value))
-				{
-					this._pic = value;
-				}
-			}
-		}
-	}
-	
-	public partial class messages_by_terminalResult
-	{
-		
-		private int _id;
-		
-		private System.Nullable<int> _event_id;
-		
-		private System.Nullable<int> _template_id;
-		
-		private System.Nullable<int> _terminal_id;
-		
-		private System.Nullable<System.DateTime> _start;
-		
-		private System.Nullable<System.DateTime> _stop;
-		
-		private bool _entire;
-		
-		private string _title;
-		
-		private string _message;
-		
-		private string _pic;
-		
-		private string _terminal_title;
-		
-		public messages_by_terminalResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this._id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int")]
-		public System.Nullable<int> event_id
-		{
-			get
-			{
-				return this._event_id;
-			}
-			set
-			{
-				if ((this._event_id != value))
-				{
-					this._event_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_id", DbType="Int")]
-		public System.Nullable<int> template_id
-		{
-			get
-			{
-				return this._template_id;
-			}
-			set
-			{
-				if ((this._template_id != value))
-				{
-					this._template_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_terminal_id", DbType="Int")]
-		public System.Nullable<int> terminal_id
-		{
-			get
-			{
-				return this._terminal_id;
-			}
-			set
-			{
-				if ((this._terminal_id != value))
-				{
-					this._terminal_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_start", DbType="DateTime")]
-		public System.Nullable<System.DateTime> start
-		{
-			get
-			{
-				return this._start;
-			}
-			set
-			{
-				if ((this._start != value))
-				{
-					this._start = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_stop", DbType="DateTime")]
-		public System.Nullable<System.DateTime> stop
-		{
-			get
-			{
-				return this._stop;
-			}
-			set
-			{
-				if ((this._stop != value))
-				{
-					this._stop = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_entire", DbType="Bit NOT NULL")]
-		public bool entire
-		{
-			get
-			{
-				return this._entire;
-			}
-			set
-			{
-				if ((this._entire != value))
-				{
-					this._entire = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(500)")]
-		public string title
-		{
-			get
-			{
-				return this._title;
-			}
-			set
-			{
-				if ((this._title != value))
-				{
-					this._title = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_message", DbType="VarChar(MAX)")]
-		public string message
-		{
-			get
-			{
-				return this._message;
-			}
-			set
-			{
-				if ((this._message != value))
-				{
-					this._message = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pic", DbType="VarChar(MAX)")]
-		public string pic
-		{
-			get
-			{
-				return this._pic;
-			}
-			set
-			{
-				if ((this._pic != value))
-				{
-					this._pic = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_terminal_title", DbType="VarChar(255)")]
-		public string terminal_title
-		{
-			get
-			{
-				return this._terminal_title;
-			}
-			set
-			{
-				if ((this._terminal_title != value))
-				{
-					this._terminal_title = value;
-				}
-			}
-		}
-	}
-	
-	public partial class messages_by_templateResult
-	{
-		
-		private int _id;
-		
-		private System.Nullable<int> _event_id;
-		
-		private System.Nullable<int> _template_id;
-		
-		private System.Nullable<int> _terminal_id;
-		
-		private System.Nullable<System.DateTime> _start;
-		
-		private System.Nullable<System.DateTime> _stop;
-		
-		private bool _entire;
-		
-		private string _title;
-		
-		private string _message;
-		
-		private string _pic;
-		
-		private string _template_title;
-		
-		public messages_by_templateResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this._id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int")]
-		public System.Nullable<int> event_id
-		{
-			get
-			{
-				return this._event_id;
-			}
-			set
-			{
-				if ((this._event_id != value))
-				{
-					this._event_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_id", DbType="Int")]
-		public System.Nullable<int> template_id
-		{
-			get
-			{
-				return this._template_id;
-			}
-			set
-			{
-				if ((this._template_id != value))
-				{
-					this._template_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_terminal_id", DbType="Int")]
-		public System.Nullable<int> terminal_id
-		{
-			get
-			{
-				return this._terminal_id;
-			}
-			set
-			{
-				if ((this._terminal_id != value))
-				{
-					this._terminal_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_start", DbType="DateTime")]
-		public System.Nullable<System.DateTime> start
-		{
-			get
-			{
-				return this._start;
-			}
-			set
-			{
-				if ((this._start != value))
-				{
-					this._start = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_stop", DbType="DateTime")]
-		public System.Nullable<System.DateTime> stop
-		{
-			get
-			{
-				return this._stop;
-			}
-			set
-			{
-				if ((this._stop != value))
-				{
-					this._stop = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_entire", DbType="Bit NOT NULL")]
-		public bool entire
-		{
-			get
-			{
-				return this._entire;
-			}
-			set
-			{
-				if ((this._entire != value))
-				{
-					this._entire = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(500)")]
-		public string title
-		{
-			get
-			{
-				return this._title;
-			}
-			set
-			{
-				if ((this._title != value))
-				{
-					this._title = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_message", DbType="VarChar(MAX)")]
-		public string message
-		{
-			get
-			{
-				return this._message;
-			}
-			set
-			{
-				if ((this._message != value))
-				{
-					this._message = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pic", DbType="VarChar(MAX)")]
-		public string pic
-		{
-			get
-			{
-				return this._pic;
-			}
-			set
-			{
-				if ((this._pic != value))
-				{
-					this._pic = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_title", DbType="VarChar(255)")]
-		public string template_title
-		{
-			get
-			{
-				return this._template_title;
-			}
-			set
-			{
-				if ((this._template_title != value))
-				{
-					this._template_title = value;
-				}
-			}
-		}
-	}
-	
-	public partial class messages_get_randomResult
-	{
-		
-		private int _id;
-		
-		private System.Nullable<int> _event_id;
-		
-		private System.Nullable<int> _template_id;
-		
-		private System.Nullable<int> _terminal_id;
-		
-		private System.Nullable<System.DateTime> _start;
-		
-		private System.Nullable<System.DateTime> _stop;
-		
-		private bool _entire;
-		
-		private string _title;
-		
-		private string _message;
-		
-		private string _pic;
-		
-		public messages_get_randomResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this._id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int")]
-		public System.Nullable<int> event_id
-		{
-			get
-			{
-				return this._event_id;
-			}
-			set
-			{
-				if ((this._event_id != value))
-				{
-					this._event_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_id", DbType="Int")]
-		public System.Nullable<int> template_id
-		{
-			get
-			{
-				return this._template_id;
-			}
-			set
-			{
-				if ((this._template_id != value))
-				{
-					this._template_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_terminal_id", DbType="Int")]
-		public System.Nullable<int> terminal_id
-		{
-			get
-			{
-				return this._terminal_id;
-			}
-			set
-			{
-				if ((this._terminal_id != value))
-				{
-					this._terminal_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_start", DbType="DateTime")]
-		public System.Nullable<System.DateTime> start
-		{
-			get
-			{
-				return this._start;
-			}
-			set
-			{
-				if ((this._start != value))
-				{
-					this._start = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_stop", DbType="DateTime")]
-		public System.Nullable<System.DateTime> stop
-		{
-			get
-			{
-				return this._stop;
-			}
-			set
-			{
-				if ((this._stop != value))
-				{
-					this._stop = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_entire", DbType="Bit NOT NULL")]
-		public bool entire
-		{
-			get
-			{
-				return this._entire;
-			}
-			set
-			{
-				if ((this._entire != value))
-				{
-					this._entire = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(500)")]
-		public string title
-		{
-			get
-			{
-				return this._title;
-			}
-			set
-			{
-				if ((this._title != value))
-				{
-					this._title = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_message", DbType="VarChar(MAX)")]
-		public string message
-		{
-			get
-			{
-				return this._message;
-			}
-			set
-			{
-				if ((this._message != value))
-				{
-					this._message = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pic", DbType="VarChar(MAX)")]
-		public string pic
-		{
-			get
-			{
-				return this._pic;
-			}
-			set
-			{
-				if ((this._pic != value))
-				{
-					this._pic = value;
-				}
-			}
-		}
-	}
-	
-	public partial class terminal_assignments_by_eventResult
-	{
-		
-		private int _id;
-		
-		private string _title;
-		
-		private System.Nullable<int> _location_id;
-		
-		private System.Nullable<int> _template_id;
-		
-		private bool _online;
-		
-		private int _event_id;
-		
-		private System.DateTime _last_online;
-		
-		private System.Nullable<int> _deck;
-		
-		private System.Nullable<int> _rotate;
-		
-		private string _location_title;
-		
-		private string _template_title;
-		
-		public terminal_assignments_by_eventResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this._id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(255)")]
-		public string title
-		{
-			get
-			{
-				return this._title;
-			}
-			set
-			{
-				if ((this._title != value))
-				{
-					this._title = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_location_id", DbType="Int")]
-		public System.Nullable<int> location_id
-		{
-			get
-			{
-				return this._location_id;
-			}
-			set
-			{
-				if ((this._location_id != value))
-				{
-					this._location_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_id", DbType="Int")]
-		public System.Nullable<int> template_id
-		{
-			get
-			{
-				return this._template_id;
-			}
-			set
-			{
-				if ((this._template_id != value))
-				{
-					this._template_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_online", DbType="Bit NOT NULL")]
-		public bool online
-		{
-			get
-			{
-				return this._online;
-			}
-			set
-			{
-				if ((this._online != value))
-				{
-					this._online = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int NOT NULL")]
-		public int event_id
-		{
-			get
-			{
-				return this._event_id;
-			}
-			set
-			{
-				if ((this._event_id != value))
-				{
-					this._event_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_last_online", DbType="DateTime NOT NULL")]
-		public System.DateTime last_online
-		{
-			get
-			{
-				return this._last_online;
-			}
-			set
-			{
-				if ((this._last_online != value))
-				{
-					this._last_online = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_deck", DbType="Int")]
-		public System.Nullable<int> deck
-		{
-			get
-			{
-				return this._deck;
-			}
-			set
-			{
-				if ((this._deck != value))
-				{
-					this._deck = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rotate", DbType="Int")]
-		public System.Nullable<int> rotate
-		{
-			get
-			{
-				return this._rotate;
-			}
-			set
-			{
-				if ((this._rotate != value))
-				{
-					this._rotate = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_location_title", DbType="VarChar(MAX)")]
-		public string location_title
-		{
-			get
-			{
-				return this._location_title;
-			}
-			set
-			{
-				if ((this._location_title != value))
-				{
-					this._location_title = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_title", DbType="VarChar(255)")]
-		public string template_title
-		{
-			get
-			{
-				return this._template_title;
-			}
-			set
-			{
-				if ((this._template_title != value))
-				{
-					this._template_title = value;
-				}
-			}
-		}
-	}
-	
-	public partial class sessions_by_event_location_dateResult
-	{
-		
-		private int _id;
-		
-		private string _event_key;
-		
-		private bool _active;
-		
-		private string _title;
-		
-		private System.Nullable<System.DateTime> _session_start;
-		
-		private System.Nullable<System.DateTime> _session_end;
-		
-		private string _type;
-		
-		private string _description;
-		
-		private int _seats;
-		
-		private int _attendees;
-		
-		private string _venue_id;
-		
-		private string _venue;
-		
-		private string _speakers;
-		
-		private System.DateTime _created;
-		
-		private System.Nullable<System.DateTime> _modified;
-		
-		private System.Nullable<int> _event_id;
-		
-		public sessions_by_event_location_dateResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this._id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_key", DbType="VarChar(255)")]
-		public string event_key
-		{
-			get
-			{
-				return this._event_key;
-			}
-			set
-			{
-				if ((this._event_key != value))
-				{
-					this._event_key = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active", DbType="Bit NOT NULL")]
-		public bool active
-		{
-			get
-			{
-				return this._active;
-			}
-			set
-			{
-				if ((this._active != value))
-				{
-					this._active = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(MAX)")]
-		public string title
-		{
-			get
-			{
-				return this._title;
-			}
-			set
-			{
-				if ((this._title != value))
-				{
-					this._title = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_session_start", DbType="DateTime")]
-		public System.Nullable<System.DateTime> session_start
-		{
-			get
-			{
-				return this._session_start;
-			}
-			set
-			{
-				if ((this._session_start != value))
-				{
-					this._session_start = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_session_end", DbType="DateTime")]
-		public System.Nullable<System.DateTime> session_end
-		{
-			get
-			{
-				return this._session_end;
-			}
-			set
-			{
-				if ((this._session_end != value))
-				{
-					this._session_end = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_type", DbType="VarChar(255)")]
-		public string type
-		{
-			get
-			{
-				return this._type;
-			}
-			set
-			{
-				if ((this._type != value))
-				{
-					this._type = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="VarChar(MAX)")]
-		public string description
-		{
-			get
-			{
-				return this._description;
-			}
-			set
-			{
-				if ((this._description != value))
-				{
-					this._description = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seats", DbType="Int NOT NULL")]
-		public int seats
-		{
-			get
-			{
-				return this._seats;
-			}
-			set
-			{
-				if ((this._seats != value))
-				{
-					this._seats = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_attendees", DbType="Int NOT NULL")]
-		public int attendees
-		{
-			get
-			{
-				return this._attendees;
-			}
-			set
-			{
-				if ((this._attendees != value))
-				{
-					this._attendees = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_venue_id", DbType="VarChar(255)")]
-		public string venue_id
-		{
-			get
-			{
-				return this._venue_id;
-			}
-			set
-			{
-				if ((this._venue_id != value))
-				{
-					this._venue_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_venue", DbType="VarChar(255)")]
-		public string venue
-		{
-			get
-			{
-				return this._venue;
-			}
-			set
-			{
-				if ((this._venue != value))
-				{
-					this._venue = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_speakers", DbType="VarChar(MAX)")]
-		public string speakers
-		{
-			get
-			{
-				return this._speakers;
-			}
-			set
-			{
-				if ((this._speakers != value))
-				{
-					this._speakers = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created", DbType="DateTime NOT NULL")]
-		public System.DateTime created
-		{
-			get
-			{
-				return this._created;
-			}
-			set
-			{
-				if ((this._created != value))
-				{
-					this._created = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modified", DbType="DateTime")]
-		public System.Nullable<System.DateTime> modified
-		{
-			get
-			{
-				return this._modified;
-			}
-			set
-			{
-				if ((this._modified != value))
-				{
-					this._modified = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int")]
-		public System.Nullable<int> event_id
-		{
-			get
-			{
-				return this._event_id;
-			}
-			set
-			{
-				if ((this._event_id != value))
-				{
-					this._event_id = value;
-				}
-			}
-		}
-	}
-	
 	public partial class design_summit_austinResult
 	{
 		
@@ -8168,6 +7996,6142 @@ namespace schedInterface
 				if ((this._event_id != value))
 				{
 					this._event_id = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sessions_by_event_location_dateResult
+	{
+		
+		private int _id;
+		
+		private string _event_key;
+		
+		private bool _active;
+		
+		private string _title;
+		
+		private System.Nullable<System.DateTime> _session_start;
+		
+		private System.Nullable<System.DateTime> _session_end;
+		
+		private string _type;
+		
+		private string _description;
+		
+		private int _seats;
+		
+		private int _attendees;
+		
+		private string _venue_id;
+		
+		private string _venue;
+		
+		private string _speakers;
+		
+		private System.DateTime _created;
+		
+		private System.Nullable<System.DateTime> _modified;
+		
+		private System.Nullable<int> _event_id;
+		
+		private string _speaker_companies;
+		
+		private string _speaker_images;
+		
+		private bool _full;
+		
+		public sessions_by_event_location_dateResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_key", DbType="VarChar(255)")]
+		public string event_key
+		{
+			get
+			{
+				return this._event_key;
+			}
+			set
+			{
+				if ((this._event_key != value))
+				{
+					this._event_key = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active", DbType="Bit NOT NULL")]
+		public bool active
+		{
+			get
+			{
+				return this._active;
+			}
+			set
+			{
+				if ((this._active != value))
+				{
+					this._active = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(MAX)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_session_start", DbType="DateTime")]
+		public System.Nullable<System.DateTime> session_start
+		{
+			get
+			{
+				return this._session_start;
+			}
+			set
+			{
+				if ((this._session_start != value))
+				{
+					this._session_start = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_session_end", DbType="DateTime")]
+		public System.Nullable<System.DateTime> session_end
+		{
+			get
+			{
+				return this._session_end;
+			}
+			set
+			{
+				if ((this._session_end != value))
+				{
+					this._session_end = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_type", DbType="VarChar(255)")]
+		public string type
+		{
+			get
+			{
+				return this._type;
+			}
+			set
+			{
+				if ((this._type != value))
+				{
+					this._type = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="VarChar(MAX)")]
+		public string description
+		{
+			get
+			{
+				return this._description;
+			}
+			set
+			{
+				if ((this._description != value))
+				{
+					this._description = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seats", DbType="Int NOT NULL")]
+		public int seats
+		{
+			get
+			{
+				return this._seats;
+			}
+			set
+			{
+				if ((this._seats != value))
+				{
+					this._seats = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_attendees", DbType="Int NOT NULL")]
+		public int attendees
+		{
+			get
+			{
+				return this._attendees;
+			}
+			set
+			{
+				if ((this._attendees != value))
+				{
+					this._attendees = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_venue_id", DbType="VarChar(255)")]
+		public string venue_id
+		{
+			get
+			{
+				return this._venue_id;
+			}
+			set
+			{
+				if ((this._venue_id != value))
+				{
+					this._venue_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_venue", DbType="VarChar(255)")]
+		public string venue
+		{
+			get
+			{
+				return this._venue;
+			}
+			set
+			{
+				if ((this._venue != value))
+				{
+					this._venue = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_speakers", DbType="VarChar(MAX)")]
+		public string speakers
+		{
+			get
+			{
+				return this._speakers;
+			}
+			set
+			{
+				if ((this._speakers != value))
+				{
+					this._speakers = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created", DbType="DateTime NOT NULL")]
+		public System.DateTime created
+		{
+			get
+			{
+				return this._created;
+			}
+			set
+			{
+				if ((this._created != value))
+				{
+					this._created = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modified", DbType="DateTime")]
+		public System.Nullable<System.DateTime> modified
+		{
+			get
+			{
+				return this._modified;
+			}
+			set
+			{
+				if ((this._modified != value))
+				{
+					this._modified = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int")]
+		public System.Nullable<int> event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this._event_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_speaker_companies", DbType="VarChar(MAX)")]
+		public string speaker_companies
+		{
+			get
+			{
+				return this._speaker_companies;
+			}
+			set
+			{
+				if ((this._speaker_companies != value))
+				{
+					this._speaker_companies = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_speaker_images", DbType="VarChar(MAX)")]
+		public string speaker_images
+		{
+			get
+			{
+				return this._speaker_images;
+			}
+			set
+			{
+				if ((this._speaker_images != value))
+				{
+					this._speaker_images = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[full]", Storage="_full", DbType="Bit NOT NULL")]
+		public bool full
+		{
+			get
+			{
+				return this._full;
+			}
+			set
+			{
+				if ((this._full != value))
+				{
+					this._full = value;
+				}
+			}
+		}
+	}
+	
+	public partial class session_get_nextResult
+	{
+		
+		private int _id;
+		
+		private string _event_key;
+		
+		private bool _active;
+		
+		private string _title;
+		
+		private System.Nullable<System.DateTime> _session_start;
+		
+		private System.Nullable<System.DateTime> _session_end;
+		
+		private string _type;
+		
+		private string _description;
+		
+		private int _seats;
+		
+		private int _attendees;
+		
+		private string _venue_id;
+		
+		private string _venue;
+		
+		private string _speakers;
+		
+		private System.DateTime _created;
+		
+		private System.Nullable<System.DateTime> _modified;
+		
+		private System.Nullable<int> _event_id;
+		
+		private string _speaker_companies;
+		
+		private string _speaker_images;
+		
+		private bool _full;
+		
+		public session_get_nextResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_key", DbType="VarChar(255)")]
+		public string event_key
+		{
+			get
+			{
+				return this._event_key;
+			}
+			set
+			{
+				if ((this._event_key != value))
+				{
+					this._event_key = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active", DbType="Bit NOT NULL")]
+		public bool active
+		{
+			get
+			{
+				return this._active;
+			}
+			set
+			{
+				if ((this._active != value))
+				{
+					this._active = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(MAX)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_session_start", DbType="DateTime")]
+		public System.Nullable<System.DateTime> session_start
+		{
+			get
+			{
+				return this._session_start;
+			}
+			set
+			{
+				if ((this._session_start != value))
+				{
+					this._session_start = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_session_end", DbType="DateTime")]
+		public System.Nullable<System.DateTime> session_end
+		{
+			get
+			{
+				return this._session_end;
+			}
+			set
+			{
+				if ((this._session_end != value))
+				{
+					this._session_end = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_type", DbType="VarChar(255)")]
+		public string type
+		{
+			get
+			{
+				return this._type;
+			}
+			set
+			{
+				if ((this._type != value))
+				{
+					this._type = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="VarChar(MAX)")]
+		public string description
+		{
+			get
+			{
+				return this._description;
+			}
+			set
+			{
+				if ((this._description != value))
+				{
+					this._description = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seats", DbType="Int NOT NULL")]
+		public int seats
+		{
+			get
+			{
+				return this._seats;
+			}
+			set
+			{
+				if ((this._seats != value))
+				{
+					this._seats = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_attendees", DbType="Int NOT NULL")]
+		public int attendees
+		{
+			get
+			{
+				return this._attendees;
+			}
+			set
+			{
+				if ((this._attendees != value))
+				{
+					this._attendees = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_venue_id", DbType="VarChar(255)")]
+		public string venue_id
+		{
+			get
+			{
+				return this._venue_id;
+			}
+			set
+			{
+				if ((this._venue_id != value))
+				{
+					this._venue_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_venue", DbType="VarChar(255)")]
+		public string venue
+		{
+			get
+			{
+				return this._venue;
+			}
+			set
+			{
+				if ((this._venue != value))
+				{
+					this._venue = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_speakers", DbType="VarChar(MAX)")]
+		public string speakers
+		{
+			get
+			{
+				return this._speakers;
+			}
+			set
+			{
+				if ((this._speakers != value))
+				{
+					this._speakers = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created", DbType="DateTime NOT NULL")]
+		public System.DateTime created
+		{
+			get
+			{
+				return this._created;
+			}
+			set
+			{
+				if ((this._created != value))
+				{
+					this._created = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modified", DbType="DateTime")]
+		public System.Nullable<System.DateTime> modified
+		{
+			get
+			{
+				return this._modified;
+			}
+			set
+			{
+				if ((this._modified != value))
+				{
+					this._modified = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int")]
+		public System.Nullable<int> event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this._event_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_speaker_companies", DbType="VarChar(MAX)")]
+		public string speaker_companies
+		{
+			get
+			{
+				return this._speaker_companies;
+			}
+			set
+			{
+				if ((this._speaker_companies != value))
+				{
+					this._speaker_companies = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_speaker_images", DbType="VarChar(MAX)")]
+		public string speaker_images
+		{
+			get
+			{
+				return this._speaker_images;
+			}
+			set
+			{
+				if ((this._speaker_images != value))
+				{
+					this._speaker_images = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[full]", Storage="_full", DbType="Bit NOT NULL")]
+		public bool full
+		{
+			get
+			{
+				return this._full;
+			}
+			set
+			{
+				if ((this._full != value))
+				{
+					this._full = value;
+				}
+			}
+		}
+	}
+	
+	public partial class session_get_currentResult
+	{
+		
+		private int _id;
+		
+		private string _event_key;
+		
+		private bool _active;
+		
+		private string _title;
+		
+		private System.Nullable<System.DateTime> _session_start;
+		
+		private System.Nullable<System.DateTime> _session_end;
+		
+		private string _type;
+		
+		private string _description;
+		
+		private int _seats;
+		
+		private int _attendees;
+		
+		private string _venue_id;
+		
+		private string _venue;
+		
+		private string _speakers;
+		
+		private System.DateTime _created;
+		
+		private System.Nullable<System.DateTime> _modified;
+		
+		private System.Nullable<int> _event_id;
+		
+		private string _speaker_companies;
+		
+		private string _speaker_images;
+		
+		private bool _full;
+		
+		public session_get_currentResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_key", DbType="VarChar(255)")]
+		public string event_key
+		{
+			get
+			{
+				return this._event_key;
+			}
+			set
+			{
+				if ((this._event_key != value))
+				{
+					this._event_key = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active", DbType="Bit NOT NULL")]
+		public bool active
+		{
+			get
+			{
+				return this._active;
+			}
+			set
+			{
+				if ((this._active != value))
+				{
+					this._active = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(MAX)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_session_start", DbType="DateTime")]
+		public System.Nullable<System.DateTime> session_start
+		{
+			get
+			{
+				return this._session_start;
+			}
+			set
+			{
+				if ((this._session_start != value))
+				{
+					this._session_start = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_session_end", DbType="DateTime")]
+		public System.Nullable<System.DateTime> session_end
+		{
+			get
+			{
+				return this._session_end;
+			}
+			set
+			{
+				if ((this._session_end != value))
+				{
+					this._session_end = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_type", DbType="VarChar(255)")]
+		public string type
+		{
+			get
+			{
+				return this._type;
+			}
+			set
+			{
+				if ((this._type != value))
+				{
+					this._type = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="VarChar(MAX)")]
+		public string description
+		{
+			get
+			{
+				return this._description;
+			}
+			set
+			{
+				if ((this._description != value))
+				{
+					this._description = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seats", DbType="Int NOT NULL")]
+		public int seats
+		{
+			get
+			{
+				return this._seats;
+			}
+			set
+			{
+				if ((this._seats != value))
+				{
+					this._seats = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_attendees", DbType="Int NOT NULL")]
+		public int attendees
+		{
+			get
+			{
+				return this._attendees;
+			}
+			set
+			{
+				if ((this._attendees != value))
+				{
+					this._attendees = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_venue_id", DbType="VarChar(255)")]
+		public string venue_id
+		{
+			get
+			{
+				return this._venue_id;
+			}
+			set
+			{
+				if ((this._venue_id != value))
+				{
+					this._venue_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_venue", DbType="VarChar(255)")]
+		public string venue
+		{
+			get
+			{
+				return this._venue;
+			}
+			set
+			{
+				if ((this._venue != value))
+				{
+					this._venue = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_speakers", DbType="VarChar(MAX)")]
+		public string speakers
+		{
+			get
+			{
+				return this._speakers;
+			}
+			set
+			{
+				if ((this._speakers != value))
+				{
+					this._speakers = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created", DbType="DateTime NOT NULL")]
+		public System.DateTime created
+		{
+			get
+			{
+				return this._created;
+			}
+			set
+			{
+				if ((this._created != value))
+				{
+					this._created = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modified", DbType="DateTime")]
+		public System.Nullable<System.DateTime> modified
+		{
+			get
+			{
+				return this._modified;
+			}
+			set
+			{
+				if ((this._modified != value))
+				{
+					this._modified = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int")]
+		public System.Nullable<int> event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this._event_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_speaker_companies", DbType="VarChar(MAX)")]
+		public string speaker_companies
+		{
+			get
+			{
+				return this._speaker_companies;
+			}
+			set
+			{
+				if ((this._speaker_companies != value))
+				{
+					this._speaker_companies = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_speaker_images", DbType="VarChar(MAX)")]
+		public string speaker_images
+		{
+			get
+			{
+				return this._speaker_images;
+			}
+			set
+			{
+				if ((this._speaker_images != value))
+				{
+					this._speaker_images = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[full]", Storage="_full", DbType="Bit NOT NULL")]
+		public bool full
+		{
+			get
+			{
+				return this._full;
+			}
+			set
+			{
+				if ((this._full != value))
+				{
+					this._full = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sublocations_by_locationResult
+	{
+		
+		private string _title;
+		
+		private System.Nullable<int> _id;
+		
+		public sublocations_by_locationResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(MAX)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int")]
+		public System.Nullable<int> id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sessions_by_event_location_children_dateResult
+	{
+		
+		private int _id;
+		
+		private string _event_key;
+		
+		private bool _active;
+		
+		private string _title;
+		
+		private System.Nullable<System.DateTime> _session_start;
+		
+		private System.Nullable<System.DateTime> _session_end;
+		
+		private string _type;
+		
+		private string _description;
+		
+		private int _seats;
+		
+		private int _attendees;
+		
+		private string _venue_id;
+		
+		private string _venue;
+		
+		private string _speakers;
+		
+		private System.DateTime _created;
+		
+		private System.Nullable<System.DateTime> _modified;
+		
+		private System.Nullable<int> _event_id;
+		
+		private string _speaker_companies;
+		
+		private string _speaker_images;
+		
+		private bool _full;
+		
+		public sessions_by_event_location_children_dateResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_key", DbType="VarChar(255)")]
+		public string event_key
+		{
+			get
+			{
+				return this._event_key;
+			}
+			set
+			{
+				if ((this._event_key != value))
+				{
+					this._event_key = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active", DbType="Bit NOT NULL")]
+		public bool active
+		{
+			get
+			{
+				return this._active;
+			}
+			set
+			{
+				if ((this._active != value))
+				{
+					this._active = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(MAX)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_session_start", DbType="DateTime")]
+		public System.Nullable<System.DateTime> session_start
+		{
+			get
+			{
+				return this._session_start;
+			}
+			set
+			{
+				if ((this._session_start != value))
+				{
+					this._session_start = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_session_end", DbType="DateTime")]
+		public System.Nullable<System.DateTime> session_end
+		{
+			get
+			{
+				return this._session_end;
+			}
+			set
+			{
+				if ((this._session_end != value))
+				{
+					this._session_end = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_type", DbType="VarChar(255)")]
+		public string type
+		{
+			get
+			{
+				return this._type;
+			}
+			set
+			{
+				if ((this._type != value))
+				{
+					this._type = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="VarChar(MAX)")]
+		public string description
+		{
+			get
+			{
+				return this._description;
+			}
+			set
+			{
+				if ((this._description != value))
+				{
+					this._description = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seats", DbType="Int NOT NULL")]
+		public int seats
+		{
+			get
+			{
+				return this._seats;
+			}
+			set
+			{
+				if ((this._seats != value))
+				{
+					this._seats = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_attendees", DbType="Int NOT NULL")]
+		public int attendees
+		{
+			get
+			{
+				return this._attendees;
+			}
+			set
+			{
+				if ((this._attendees != value))
+				{
+					this._attendees = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_venue_id", DbType="VarChar(255)")]
+		public string venue_id
+		{
+			get
+			{
+				return this._venue_id;
+			}
+			set
+			{
+				if ((this._venue_id != value))
+				{
+					this._venue_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_venue", DbType="VarChar(255)")]
+		public string venue
+		{
+			get
+			{
+				return this._venue;
+			}
+			set
+			{
+				if ((this._venue != value))
+				{
+					this._venue = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_speakers", DbType="VarChar(MAX)")]
+		public string speakers
+		{
+			get
+			{
+				return this._speakers;
+			}
+			set
+			{
+				if ((this._speakers != value))
+				{
+					this._speakers = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created", DbType="DateTime NOT NULL")]
+		public System.DateTime created
+		{
+			get
+			{
+				return this._created;
+			}
+			set
+			{
+				if ((this._created != value))
+				{
+					this._created = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modified", DbType="DateTime")]
+		public System.Nullable<System.DateTime> modified
+		{
+			get
+			{
+				return this._modified;
+			}
+			set
+			{
+				if ((this._modified != value))
+				{
+					this._modified = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int")]
+		public System.Nullable<int> event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this._event_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_speaker_companies", DbType="VarChar(MAX)")]
+		public string speaker_companies
+		{
+			get
+			{
+				return this._speaker_companies;
+			}
+			set
+			{
+				if ((this._speaker_companies != value))
+				{
+					this._speaker_companies = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_speaker_images", DbType="VarChar(MAX)")]
+		public string speaker_images
+		{
+			get
+			{
+				return this._speaker_images;
+			}
+			set
+			{
+				if ((this._speaker_images != value))
+				{
+					this._speaker_images = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[full]", Storage="_full", DbType="Bit NOT NULL")]
+		public bool full
+		{
+			get
+			{
+				return this._full;
+			}
+			set
+			{
+				if ((this._full != value))
+				{
+					this._full = value;
+				}
+			}
+		}
+	}
+	
+	public partial class messages_get_random_priority_testResult
+	{
+		
+		private int _id;
+		
+		private System.Nullable<int> _event_id;
+		
+		private System.Nullable<int> _template_id;
+		
+		private System.Nullable<int> _terminal_id;
+		
+		private System.Nullable<System.DateTime> _start;
+		
+		private System.Nullable<System.DateTime> _stop;
+		
+		private bool _entire;
+		
+		private string _title;
+		
+		private string _message;
+		
+		private string _pic;
+		
+		private bool _priority;
+		
+		private bool _openstackAPI;
+		
+		private System.Nullable<int> _openstackID;
+		
+		private bool _session_full;
+		
+		private bool _test;
+		
+		public messages_get_random_priority_testResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int")]
+		public System.Nullable<int> event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this._event_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_id", DbType="Int")]
+		public System.Nullable<int> template_id
+		{
+			get
+			{
+				return this._template_id;
+			}
+			set
+			{
+				if ((this._template_id != value))
+				{
+					this._template_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_terminal_id", DbType="Int")]
+		public System.Nullable<int> terminal_id
+		{
+			get
+			{
+				return this._terminal_id;
+			}
+			set
+			{
+				if ((this._terminal_id != value))
+				{
+					this._terminal_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_start", DbType="DateTime")]
+		public System.Nullable<System.DateTime> start
+		{
+			get
+			{
+				return this._start;
+			}
+			set
+			{
+				if ((this._start != value))
+				{
+					this._start = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_stop", DbType="DateTime")]
+		public System.Nullable<System.DateTime> stop
+		{
+			get
+			{
+				return this._stop;
+			}
+			set
+			{
+				if ((this._stop != value))
+				{
+					this._stop = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_entire", DbType="Bit NOT NULL")]
+		public bool entire
+		{
+			get
+			{
+				return this._entire;
+			}
+			set
+			{
+				if ((this._entire != value))
+				{
+					this._entire = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(500)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_message", DbType="VarChar(MAX)")]
+		public string message
+		{
+			get
+			{
+				return this._message;
+			}
+			set
+			{
+				if ((this._message != value))
+				{
+					this._message = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pic", DbType="VarChar(MAX)")]
+		public string pic
+		{
+			get
+			{
+				return this._pic;
+			}
+			set
+			{
+				if ((this._pic != value))
+				{
+					this._pic = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_priority", DbType="Bit NOT NULL")]
+		public bool priority
+		{
+			get
+			{
+				return this._priority;
+			}
+			set
+			{
+				if ((this._priority != value))
+				{
+					this._priority = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_openstackAPI", DbType="Bit NOT NULL")]
+		public bool openstackAPI
+		{
+			get
+			{
+				return this._openstackAPI;
+			}
+			set
+			{
+				if ((this._openstackAPI != value))
+				{
+					this._openstackAPI = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_openstackID", DbType="Int")]
+		public System.Nullable<int> openstackID
+		{
+			get
+			{
+				return this._openstackID;
+			}
+			set
+			{
+				if ((this._openstackID != value))
+				{
+					this._openstackID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_session_full", DbType="Bit NOT NULL")]
+		public bool session_full
+		{
+			get
+			{
+				return this._session_full;
+			}
+			set
+			{
+				if ((this._session_full != value))
+				{
+					this._session_full = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_test", DbType="Bit NOT NULL")]
+		public bool test
+		{
+			get
+			{
+				return this._test;
+			}
+			set
+			{
+				if ((this._test != value))
+				{
+					this._test = value;
+				}
+			}
+		}
+	}
+	
+	public partial class messages_get_randomResult
+	{
+		
+		private int _id;
+		
+		private System.Nullable<int> _event_id;
+		
+		private System.Nullable<int> _template_id;
+		
+		private System.Nullable<int> _terminal_id;
+		
+		private System.Nullable<System.DateTime> _start;
+		
+		private System.Nullable<System.DateTime> _stop;
+		
+		private bool _entire;
+		
+		private string _title;
+		
+		private string _message;
+		
+		private string _pic;
+		
+		private bool _priority;
+		
+		private bool _openstackAPI;
+		
+		private System.Nullable<int> _openstackID;
+		
+		private bool _session_full;
+		
+		private bool _test;
+		
+		public messages_get_randomResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int")]
+		public System.Nullable<int> event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this._event_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_id", DbType="Int")]
+		public System.Nullable<int> template_id
+		{
+			get
+			{
+				return this._template_id;
+			}
+			set
+			{
+				if ((this._template_id != value))
+				{
+					this._template_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_terminal_id", DbType="Int")]
+		public System.Nullable<int> terminal_id
+		{
+			get
+			{
+				return this._terminal_id;
+			}
+			set
+			{
+				if ((this._terminal_id != value))
+				{
+					this._terminal_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_start", DbType="DateTime")]
+		public System.Nullable<System.DateTime> start
+		{
+			get
+			{
+				return this._start;
+			}
+			set
+			{
+				if ((this._start != value))
+				{
+					this._start = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_stop", DbType="DateTime")]
+		public System.Nullable<System.DateTime> stop
+		{
+			get
+			{
+				return this._stop;
+			}
+			set
+			{
+				if ((this._stop != value))
+				{
+					this._stop = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_entire", DbType="Bit NOT NULL")]
+		public bool entire
+		{
+			get
+			{
+				return this._entire;
+			}
+			set
+			{
+				if ((this._entire != value))
+				{
+					this._entire = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(500)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_message", DbType="VarChar(MAX)")]
+		public string message
+		{
+			get
+			{
+				return this._message;
+			}
+			set
+			{
+				if ((this._message != value))
+				{
+					this._message = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pic", DbType="VarChar(MAX)")]
+		public string pic
+		{
+			get
+			{
+				return this._pic;
+			}
+			set
+			{
+				if ((this._pic != value))
+				{
+					this._pic = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_priority", DbType="Bit NOT NULL")]
+		public bool priority
+		{
+			get
+			{
+				return this._priority;
+			}
+			set
+			{
+				if ((this._priority != value))
+				{
+					this._priority = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_openstackAPI", DbType="Bit NOT NULL")]
+		public bool openstackAPI
+		{
+			get
+			{
+				return this._openstackAPI;
+			}
+			set
+			{
+				if ((this._openstackAPI != value))
+				{
+					this._openstackAPI = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_openstackID", DbType="Int")]
+		public System.Nullable<int> openstackID
+		{
+			get
+			{
+				return this._openstackID;
+			}
+			set
+			{
+				if ((this._openstackID != value))
+				{
+					this._openstackID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_session_full", DbType="Bit NOT NULL")]
+		public bool session_full
+		{
+			get
+			{
+				return this._session_full;
+			}
+			set
+			{
+				if ((this._session_full != value))
+				{
+					this._session_full = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_test", DbType="Bit NOT NULL")]
+		public bool test
+		{
+			get
+			{
+				return this._test;
+			}
+			set
+			{
+				if ((this._test != value))
+				{
+					this._test = value;
+				}
+			}
+		}
+	}
+	
+	public partial class messages_by_eventResult
+	{
+		
+		private int _id;
+		
+		private System.Nullable<int> _event_id;
+		
+		private System.Nullable<int> _template_id;
+		
+		private System.Nullable<int> _terminal_id;
+		
+		private System.Nullable<System.DateTime> _start;
+		
+		private System.Nullable<System.DateTime> _stop;
+		
+		private bool _entire;
+		
+		private string _title;
+		
+		private string _message;
+		
+		private string _pic;
+		
+		private bool _priority;
+		
+		private bool _openstackAPI;
+		
+		private System.Nullable<int> _openstackID;
+		
+		private bool _session_full;
+		
+		private bool _test;
+		
+		public messages_by_eventResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int")]
+		public System.Nullable<int> event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this._event_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_id", DbType="Int")]
+		public System.Nullable<int> template_id
+		{
+			get
+			{
+				return this._template_id;
+			}
+			set
+			{
+				if ((this._template_id != value))
+				{
+					this._template_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_terminal_id", DbType="Int")]
+		public System.Nullable<int> terminal_id
+		{
+			get
+			{
+				return this._terminal_id;
+			}
+			set
+			{
+				if ((this._terminal_id != value))
+				{
+					this._terminal_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_start", DbType="DateTime")]
+		public System.Nullable<System.DateTime> start
+		{
+			get
+			{
+				return this._start;
+			}
+			set
+			{
+				if ((this._start != value))
+				{
+					this._start = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_stop", DbType="DateTime")]
+		public System.Nullable<System.DateTime> stop
+		{
+			get
+			{
+				return this._stop;
+			}
+			set
+			{
+				if ((this._stop != value))
+				{
+					this._stop = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_entire", DbType="Bit NOT NULL")]
+		public bool entire
+		{
+			get
+			{
+				return this._entire;
+			}
+			set
+			{
+				if ((this._entire != value))
+				{
+					this._entire = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(500)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_message", DbType="VarChar(MAX)")]
+		public string message
+		{
+			get
+			{
+				return this._message;
+			}
+			set
+			{
+				if ((this._message != value))
+				{
+					this._message = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pic", DbType="VarChar(MAX)")]
+		public string pic
+		{
+			get
+			{
+				return this._pic;
+			}
+			set
+			{
+				if ((this._pic != value))
+				{
+					this._pic = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_priority", DbType="Bit NOT NULL")]
+		public bool priority
+		{
+			get
+			{
+				return this._priority;
+			}
+			set
+			{
+				if ((this._priority != value))
+				{
+					this._priority = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_openstackAPI", DbType="Bit NOT NULL")]
+		public bool openstackAPI
+		{
+			get
+			{
+				return this._openstackAPI;
+			}
+			set
+			{
+				if ((this._openstackAPI != value))
+				{
+					this._openstackAPI = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_openstackID", DbType="Int")]
+		public System.Nullable<int> openstackID
+		{
+			get
+			{
+				return this._openstackID;
+			}
+			set
+			{
+				if ((this._openstackID != value))
+				{
+					this._openstackID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_session_full", DbType="Bit NOT NULL")]
+		public bool session_full
+		{
+			get
+			{
+				return this._session_full;
+			}
+			set
+			{
+				if ((this._session_full != value))
+				{
+					this._session_full = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_test", DbType="Bit NOT NULL")]
+		public bool test
+		{
+			get
+			{
+				return this._test;
+			}
+			set
+			{
+				if ((this._test != value))
+				{
+					this._test = value;
+				}
+			}
+		}
+	}
+	
+	public partial class messages_by_templateResult
+	{
+		
+		private int _id;
+		
+		private System.Nullable<int> _event_id;
+		
+		private System.Nullable<int> _template_id;
+		
+		private System.Nullable<int> _terminal_id;
+		
+		private System.Nullable<System.DateTime> _start;
+		
+		private System.Nullable<System.DateTime> _stop;
+		
+		private bool _entire;
+		
+		private string _title;
+		
+		private string _message;
+		
+		private string _pic;
+		
+		private bool _priority;
+		
+		private bool _openstackAPI;
+		
+		private System.Nullable<int> _openstackID;
+		
+		private bool _session_full;
+		
+		private bool _test;
+		
+		private string _template_title;
+		
+		public messages_by_templateResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int")]
+		public System.Nullable<int> event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this._event_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_id", DbType="Int")]
+		public System.Nullable<int> template_id
+		{
+			get
+			{
+				return this._template_id;
+			}
+			set
+			{
+				if ((this._template_id != value))
+				{
+					this._template_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_terminal_id", DbType="Int")]
+		public System.Nullable<int> terminal_id
+		{
+			get
+			{
+				return this._terminal_id;
+			}
+			set
+			{
+				if ((this._terminal_id != value))
+				{
+					this._terminal_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_start", DbType="DateTime")]
+		public System.Nullable<System.DateTime> start
+		{
+			get
+			{
+				return this._start;
+			}
+			set
+			{
+				if ((this._start != value))
+				{
+					this._start = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_stop", DbType="DateTime")]
+		public System.Nullable<System.DateTime> stop
+		{
+			get
+			{
+				return this._stop;
+			}
+			set
+			{
+				if ((this._stop != value))
+				{
+					this._stop = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_entire", DbType="Bit NOT NULL")]
+		public bool entire
+		{
+			get
+			{
+				return this._entire;
+			}
+			set
+			{
+				if ((this._entire != value))
+				{
+					this._entire = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(500)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_message", DbType="VarChar(MAX)")]
+		public string message
+		{
+			get
+			{
+				return this._message;
+			}
+			set
+			{
+				if ((this._message != value))
+				{
+					this._message = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pic", DbType="VarChar(MAX)")]
+		public string pic
+		{
+			get
+			{
+				return this._pic;
+			}
+			set
+			{
+				if ((this._pic != value))
+				{
+					this._pic = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_priority", DbType="Bit NOT NULL")]
+		public bool priority
+		{
+			get
+			{
+				return this._priority;
+			}
+			set
+			{
+				if ((this._priority != value))
+				{
+					this._priority = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_openstackAPI", DbType="Bit NOT NULL")]
+		public bool openstackAPI
+		{
+			get
+			{
+				return this._openstackAPI;
+			}
+			set
+			{
+				if ((this._openstackAPI != value))
+				{
+					this._openstackAPI = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_openstackID", DbType="Int")]
+		public System.Nullable<int> openstackID
+		{
+			get
+			{
+				return this._openstackID;
+			}
+			set
+			{
+				if ((this._openstackID != value))
+				{
+					this._openstackID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_session_full", DbType="Bit NOT NULL")]
+		public bool session_full
+		{
+			get
+			{
+				return this._session_full;
+			}
+			set
+			{
+				if ((this._session_full != value))
+				{
+					this._session_full = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_test", DbType="Bit NOT NULL")]
+		public bool test
+		{
+			get
+			{
+				return this._test;
+			}
+			set
+			{
+				if ((this._test != value))
+				{
+					this._test = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_title", DbType="VarChar(255)")]
+		public string template_title
+		{
+			get
+			{
+				return this._template_title;
+			}
+			set
+			{
+				if ((this._template_title != value))
+				{
+					this._template_title = value;
+				}
+			}
+		}
+	}
+	
+	public partial class messages_by_terminalResult
+	{
+		
+		private int _id;
+		
+		private System.Nullable<int> _event_id;
+		
+		private System.Nullable<int> _template_id;
+		
+		private System.Nullable<int> _terminal_id;
+		
+		private System.Nullable<System.DateTime> _start;
+		
+		private System.Nullable<System.DateTime> _stop;
+		
+		private bool _entire;
+		
+		private string _title;
+		
+		private string _message;
+		
+		private string _pic;
+		
+		private bool _priority;
+		
+		private bool _openstackAPI;
+		
+		private System.Nullable<int> _openstackID;
+		
+		private bool _session_full;
+		
+		private bool _test;
+		
+		private string _terminal_title;
+		
+		public messages_by_terminalResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int")]
+		public System.Nullable<int> event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this._event_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_id", DbType="Int")]
+		public System.Nullable<int> template_id
+		{
+			get
+			{
+				return this._template_id;
+			}
+			set
+			{
+				if ((this._template_id != value))
+				{
+					this._template_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_terminal_id", DbType="Int")]
+		public System.Nullable<int> terminal_id
+		{
+			get
+			{
+				return this._terminal_id;
+			}
+			set
+			{
+				if ((this._terminal_id != value))
+				{
+					this._terminal_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_start", DbType="DateTime")]
+		public System.Nullable<System.DateTime> start
+		{
+			get
+			{
+				return this._start;
+			}
+			set
+			{
+				if ((this._start != value))
+				{
+					this._start = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_stop", DbType="DateTime")]
+		public System.Nullable<System.DateTime> stop
+		{
+			get
+			{
+				return this._stop;
+			}
+			set
+			{
+				if ((this._stop != value))
+				{
+					this._stop = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_entire", DbType="Bit NOT NULL")]
+		public bool entire
+		{
+			get
+			{
+				return this._entire;
+			}
+			set
+			{
+				if ((this._entire != value))
+				{
+					this._entire = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(500)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_message", DbType="VarChar(MAX)")]
+		public string message
+		{
+			get
+			{
+				return this._message;
+			}
+			set
+			{
+				if ((this._message != value))
+				{
+					this._message = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pic", DbType="VarChar(MAX)")]
+		public string pic
+		{
+			get
+			{
+				return this._pic;
+			}
+			set
+			{
+				if ((this._pic != value))
+				{
+					this._pic = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_priority", DbType="Bit NOT NULL")]
+		public bool priority
+		{
+			get
+			{
+				return this._priority;
+			}
+			set
+			{
+				if ((this._priority != value))
+				{
+					this._priority = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_openstackAPI", DbType="Bit NOT NULL")]
+		public bool openstackAPI
+		{
+			get
+			{
+				return this._openstackAPI;
+			}
+			set
+			{
+				if ((this._openstackAPI != value))
+				{
+					this._openstackAPI = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_openstackID", DbType="Int")]
+		public System.Nullable<int> openstackID
+		{
+			get
+			{
+				return this._openstackID;
+			}
+			set
+			{
+				if ((this._openstackID != value))
+				{
+					this._openstackID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_session_full", DbType="Bit NOT NULL")]
+		public bool session_full
+		{
+			get
+			{
+				return this._session_full;
+			}
+			set
+			{
+				if ((this._session_full != value))
+				{
+					this._session_full = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_test", DbType="Bit NOT NULL")]
+		public bool test
+		{
+			get
+			{
+				return this._test;
+			}
+			set
+			{
+				if ((this._test != value))
+				{
+					this._test = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_terminal_title", DbType="VarChar(255)")]
+		public string terminal_title
+		{
+			get
+			{
+				return this._terminal_title;
+			}
+			set
+			{
+				if ((this._terminal_title != value))
+				{
+					this._terminal_title = value;
+				}
+			}
+		}
+	}
+	
+	public partial class session_fullResult
+	{
+		
+		private int _id;
+		
+		private System.Nullable<int> _event_id;
+		
+		private System.Nullable<int> _template_id;
+		
+		private System.Nullable<int> _terminal_id;
+		
+		private System.Nullable<System.DateTime> _start;
+		
+		private System.Nullable<System.DateTime> _stop;
+		
+		private bool _entire;
+		
+		private string _title;
+		
+		private string _message;
+		
+		private string _pic;
+		
+		private bool _priority;
+		
+		private bool _openstackAPI;
+		
+		private System.Nullable<int> _openstackID;
+		
+		private bool _session_full;
+		
+		private bool _test;
+		
+		public session_fullResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int")]
+		public System.Nullable<int> event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this._event_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_id", DbType="Int")]
+		public System.Nullable<int> template_id
+		{
+			get
+			{
+				return this._template_id;
+			}
+			set
+			{
+				if ((this._template_id != value))
+				{
+					this._template_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_terminal_id", DbType="Int")]
+		public System.Nullable<int> terminal_id
+		{
+			get
+			{
+				return this._terminal_id;
+			}
+			set
+			{
+				if ((this._terminal_id != value))
+				{
+					this._terminal_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_start", DbType="DateTime")]
+		public System.Nullable<System.DateTime> start
+		{
+			get
+			{
+				return this._start;
+			}
+			set
+			{
+				if ((this._start != value))
+				{
+					this._start = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_stop", DbType="DateTime")]
+		public System.Nullable<System.DateTime> stop
+		{
+			get
+			{
+				return this._stop;
+			}
+			set
+			{
+				if ((this._stop != value))
+				{
+					this._stop = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_entire", DbType="Bit NOT NULL")]
+		public bool entire
+		{
+			get
+			{
+				return this._entire;
+			}
+			set
+			{
+				if ((this._entire != value))
+				{
+					this._entire = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(500)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_message", DbType="VarChar(MAX)")]
+		public string message
+		{
+			get
+			{
+				return this._message;
+			}
+			set
+			{
+				if ((this._message != value))
+				{
+					this._message = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pic", DbType="VarChar(MAX)")]
+		public string pic
+		{
+			get
+			{
+				return this._pic;
+			}
+			set
+			{
+				if ((this._pic != value))
+				{
+					this._pic = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_priority", DbType="Bit NOT NULL")]
+		public bool priority
+		{
+			get
+			{
+				return this._priority;
+			}
+			set
+			{
+				if ((this._priority != value))
+				{
+					this._priority = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_openstackAPI", DbType="Bit NOT NULL")]
+		public bool openstackAPI
+		{
+			get
+			{
+				return this._openstackAPI;
+			}
+			set
+			{
+				if ((this._openstackAPI != value))
+				{
+					this._openstackAPI = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_openstackID", DbType="Int")]
+		public System.Nullable<int> openstackID
+		{
+			get
+			{
+				return this._openstackID;
+			}
+			set
+			{
+				if ((this._openstackID != value))
+				{
+					this._openstackID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_session_full", DbType="Bit NOT NULL")]
+		public bool session_full
+		{
+			get
+			{
+				return this._session_full;
+			}
+			set
+			{
+				if ((this._session_full != value))
+				{
+					this._session_full = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_test", DbType="Bit NOT NULL")]
+		public bool test
+		{
+			get
+			{
+				return this._test;
+			}
+			set
+			{
+				if ((this._test != value))
+				{
+					this._test = value;
+				}
+			}
+		}
+	}
+	
+	public partial class events_notify_by_usersResult
+	{
+		
+		private int _id;
+		
+		private string _title;
+		
+		private System.Nullable<System.DateTime> _event_start;
+		
+		private System.Nullable<System.DateTime> _event_end;
+		
+		private string _api_key;
+		
+		private string _url;
+		
+		private int _interval;
+		
+		private System.DateTime _last_update;
+		
+		private string _t_username;
+		
+		private string _t_hashtag;
+		
+		private System.Nullable<int> _openstack_id;
+		
+		private int _offset;
+		
+		private string _eod_title;
+		
+		private string _eod_category;
+		
+		private string _eod_time;
+		
+		private string _eod_description;
+		
+		private int _timezone;
+		
+		private System.Nullable<System.DateTime> _timewarp;
+		
+		private bool _overridetime;
+		
+		private bool _timerun;
+		
+		private bool _overridedisplay;
+		
+		private System.Nullable<System.DateTime> _last_timerun;
+		
+		private string _full_session;
+		
+		public events_notify_by_usersResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(255)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_start", DbType="Date")]
+		public System.Nullable<System.DateTime> event_start
+		{
+			get
+			{
+				return this._event_start;
+			}
+			set
+			{
+				if ((this._event_start != value))
+				{
+					this._event_start = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_end", DbType="Date")]
+		public System.Nullable<System.DateTime> event_end
+		{
+			get
+			{
+				return this._event_end;
+			}
+			set
+			{
+				if ((this._event_end != value))
+				{
+					this._event_end = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_api_key", DbType="VarChar(MAX)")]
+		public string api_key
+		{
+			get
+			{
+				return this._api_key;
+			}
+			set
+			{
+				if ((this._api_key != value))
+				{
+					this._api_key = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_url", DbType="VarChar(MAX)")]
+		public string url
+		{
+			get
+			{
+				return this._url;
+			}
+			set
+			{
+				if ((this._url != value))
+				{
+					this._url = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_interval", DbType="Int NOT NULL")]
+		public int interval
+		{
+			get
+			{
+				return this._interval;
+			}
+			set
+			{
+				if ((this._interval != value))
+				{
+					this._interval = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_last_update", DbType="DateTime NOT NULL")]
+		public System.DateTime last_update
+		{
+			get
+			{
+				return this._last_update;
+			}
+			set
+			{
+				if ((this._last_update != value))
+				{
+					this._last_update = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_t_username", DbType="VarChar(255)")]
+		public string t_username
+		{
+			get
+			{
+				return this._t_username;
+			}
+			set
+			{
+				if ((this._t_username != value))
+				{
+					this._t_username = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_t_hashtag", DbType="VarChar(MAX)")]
+		public string t_hashtag
+		{
+			get
+			{
+				return this._t_hashtag;
+			}
+			set
+			{
+				if ((this._t_hashtag != value))
+				{
+					this._t_hashtag = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_openstack_id", DbType="Int")]
+		public System.Nullable<int> openstack_id
+		{
+			get
+			{
+				return this._openstack_id;
+			}
+			set
+			{
+				if ((this._openstack_id != value))
+				{
+					this._openstack_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_offset", DbType="Int NOT NULL")]
+		public int offset
+		{
+			get
+			{
+				return this._offset;
+			}
+			set
+			{
+				if ((this._offset != value))
+				{
+					this._offset = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_eod_title", DbType="VarChar(255)")]
+		public string eod_title
+		{
+			get
+			{
+				return this._eod_title;
+			}
+			set
+			{
+				if ((this._eod_title != value))
+				{
+					this._eod_title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_eod_category", DbType="VarChar(255)")]
+		public string eod_category
+		{
+			get
+			{
+				return this._eod_category;
+			}
+			set
+			{
+				if ((this._eod_category != value))
+				{
+					this._eod_category = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_eod_time", DbType="VarChar(50)")]
+		public string eod_time
+		{
+			get
+			{
+				return this._eod_time;
+			}
+			set
+			{
+				if ((this._eod_time != value))
+				{
+					this._eod_time = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_eod_description", DbType="VarChar(MAX)")]
+		public string eod_description
+		{
+			get
+			{
+				return this._eod_description;
+			}
+			set
+			{
+				if ((this._eod_description != value))
+				{
+					this._eod_description = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_timezone", DbType="Int NOT NULL")]
+		public int timezone
+		{
+			get
+			{
+				return this._timezone;
+			}
+			set
+			{
+				if ((this._timezone != value))
+				{
+					this._timezone = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_timewarp", DbType="DateTime")]
+		public System.Nullable<System.DateTime> timewarp
+		{
+			get
+			{
+				return this._timewarp;
+			}
+			set
+			{
+				if ((this._timewarp != value))
+				{
+					this._timewarp = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_overridetime", DbType="Bit NOT NULL")]
+		public bool overridetime
+		{
+			get
+			{
+				return this._overridetime;
+			}
+			set
+			{
+				if ((this._overridetime != value))
+				{
+					this._overridetime = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_timerun", DbType="Bit NOT NULL")]
+		public bool timerun
+		{
+			get
+			{
+				return this._timerun;
+			}
+			set
+			{
+				if ((this._timerun != value))
+				{
+					this._timerun = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_overridedisplay", DbType="Bit NOT NULL")]
+		public bool overridedisplay
+		{
+			get
+			{
+				return this._overridedisplay;
+			}
+			set
+			{
+				if ((this._overridedisplay != value))
+				{
+					this._overridedisplay = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_last_timerun", DbType="DateTime")]
+		public System.Nullable<System.DateTime> last_timerun
+		{
+			get
+			{
+				return this._last_timerun;
+			}
+			set
+			{
+				if ((this._last_timerun != value))
+				{
+					this._last_timerun = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_full_session", DbType="VarChar(MAX)")]
+		public string full_session
+		{
+			get
+			{
+				return this._full_session;
+			}
+			set
+			{
+				if ((this._full_session != value))
+				{
+					this._full_session = value;
+				}
+			}
+		}
+	}
+	
+	public partial class users_notify_by_eventResult
+	{
+		
+		private int _id;
+		
+		private string _first_name;
+		
+		private string _last_name;
+		
+		private string _email;
+		
+		private string _company;
+		
+		private System.DateTime _created;
+		
+		private bool _active;
+		
+		private int _notify_every_minutes;
+		
+		private string _pic;
+		
+		private string _pwd;
+		
+		private int _security;
+		
+		private System.Nullable<int> _carrier;
+		
+		private string _mobile;
+		
+		private bool _mms;
+		
+		private System.Nullable<int> _after;
+		
+		public users_notify_by_eventResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_first_name", DbType="VarChar(50)")]
+		public string first_name
+		{
+			get
+			{
+				return this._first_name;
+			}
+			set
+			{
+				if ((this._first_name != value))
+				{
+					this._first_name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_last_name", DbType="VarChar(50)")]
+		public string last_name
+		{
+			get
+			{
+				return this._last_name;
+			}
+			set
+			{
+				if ((this._last_name != value))
+				{
+					this._last_name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="VarChar(MAX)")]
+		public string email
+		{
+			get
+			{
+				return this._email;
+			}
+			set
+			{
+				if ((this._email != value))
+				{
+					this._email = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_company", DbType="VarChar(50)")]
+		public string company
+		{
+			get
+			{
+				return this._company;
+			}
+			set
+			{
+				if ((this._company != value))
+				{
+					this._company = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created", DbType="DateTime NOT NULL")]
+		public System.DateTime created
+		{
+			get
+			{
+				return this._created;
+			}
+			set
+			{
+				if ((this._created != value))
+				{
+					this._created = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active", DbType="Bit NOT NULL")]
+		public bool active
+		{
+			get
+			{
+				return this._active;
+			}
+			set
+			{
+				if ((this._active != value))
+				{
+					this._active = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_notify_every_minutes", DbType="Int NOT NULL")]
+		public int notify_every_minutes
+		{
+			get
+			{
+				return this._notify_every_minutes;
+			}
+			set
+			{
+				if ((this._notify_every_minutes != value))
+				{
+					this._notify_every_minutes = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pic", DbType="VarChar(MAX)")]
+		public string pic
+		{
+			get
+			{
+				return this._pic;
+			}
+			set
+			{
+				if ((this._pic != value))
+				{
+					this._pic = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pwd", DbType="VarChar(MAX)")]
+		public string pwd
+		{
+			get
+			{
+				return this._pwd;
+			}
+			set
+			{
+				if ((this._pwd != value))
+				{
+					this._pwd = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_security", DbType="Int NOT NULL")]
+		public int security
+		{
+			get
+			{
+				return this._security;
+			}
+			set
+			{
+				if ((this._security != value))
+				{
+					this._security = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_carrier", DbType="Int")]
+		public System.Nullable<int> carrier
+		{
+			get
+			{
+				return this._carrier;
+			}
+			set
+			{
+				if ((this._carrier != value))
+				{
+					this._carrier = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mobile", DbType="VarChar(50)")]
+		public string mobile
+		{
+			get
+			{
+				return this._mobile;
+			}
+			set
+			{
+				if ((this._mobile != value))
+				{
+					this._mobile = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_mms", DbType="Bit NOT NULL")]
+		public bool mms
+		{
+			get
+			{
+				return this._mms;
+			}
+			set
+			{
+				if ((this._mms != value))
+				{
+					this._mms = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_after", DbType="Int")]
+		public System.Nullable<int> after
+		{
+			get
+			{
+				return this._after;
+			}
+			set
+			{
+				if ((this._after != value))
+				{
+					this._after = value;
+				}
+			}
+		}
+	}
+	
+	public partial class messages_by_event_testResult
+	{
+		
+		private int _id;
+		
+		private System.Nullable<int> _event_id;
+		
+		private System.Nullable<int> _template_id;
+		
+		private System.Nullable<int> _terminal_id;
+		
+		private System.Nullable<System.DateTime> _start;
+		
+		private System.Nullable<System.DateTime> _stop;
+		
+		private bool _entire;
+		
+		private string _title;
+		
+		private string _message;
+		
+		private string _pic;
+		
+		private bool _priority;
+		
+		private bool _openstackAPI;
+		
+		private System.Nullable<int> _openstackID;
+		
+		private bool _session_full;
+		
+		private bool _test;
+		
+		public messages_by_event_testResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int")]
+		public System.Nullable<int> event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this._event_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_id", DbType="Int")]
+		public System.Nullable<int> template_id
+		{
+			get
+			{
+				return this._template_id;
+			}
+			set
+			{
+				if ((this._template_id != value))
+				{
+					this._template_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_terminal_id", DbType="Int")]
+		public System.Nullable<int> terminal_id
+		{
+			get
+			{
+				return this._terminal_id;
+			}
+			set
+			{
+				if ((this._terminal_id != value))
+				{
+					this._terminal_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_start", DbType="DateTime")]
+		public System.Nullable<System.DateTime> start
+		{
+			get
+			{
+				return this._start;
+			}
+			set
+			{
+				if ((this._start != value))
+				{
+					this._start = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_stop", DbType="DateTime")]
+		public System.Nullable<System.DateTime> stop
+		{
+			get
+			{
+				return this._stop;
+			}
+			set
+			{
+				if ((this._stop != value))
+				{
+					this._stop = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_entire", DbType="Bit NOT NULL")]
+		public bool entire
+		{
+			get
+			{
+				return this._entire;
+			}
+			set
+			{
+				if ((this._entire != value))
+				{
+					this._entire = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(500)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_message", DbType="VarChar(MAX)")]
+		public string message
+		{
+			get
+			{
+				return this._message;
+			}
+			set
+			{
+				if ((this._message != value))
+				{
+					this._message = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pic", DbType="VarChar(MAX)")]
+		public string pic
+		{
+			get
+			{
+				return this._pic;
+			}
+			set
+			{
+				if ((this._pic != value))
+				{
+					this._pic = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_priority", DbType="Bit NOT NULL")]
+		public bool priority
+		{
+			get
+			{
+				return this._priority;
+			}
+			set
+			{
+				if ((this._priority != value))
+				{
+					this._priority = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_openstackAPI", DbType="Bit NOT NULL")]
+		public bool openstackAPI
+		{
+			get
+			{
+				return this._openstackAPI;
+			}
+			set
+			{
+				if ((this._openstackAPI != value))
+				{
+					this._openstackAPI = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_openstackID", DbType="Int")]
+		public System.Nullable<int> openstackID
+		{
+			get
+			{
+				return this._openstackID;
+			}
+			set
+			{
+				if ((this._openstackID != value))
+				{
+					this._openstackID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_session_full", DbType="Bit NOT NULL")]
+		public bool session_full
+		{
+			get
+			{
+				return this._session_full;
+			}
+			set
+			{
+				if ((this._session_full != value))
+				{
+					this._session_full = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_test", DbType="Bit NOT NULL")]
+		public bool test
+		{
+			get
+			{
+				return this._test;
+			}
+			set
+			{
+				if ((this._test != value))
+				{
+					this._test = value;
+				}
+			}
+		}
+	}
+	
+	public partial class barcelona_design_summitResult
+	{
+		
+		private int _id;
+		
+		private string _event_key;
+		
+		private bool _active;
+		
+		private string _title;
+		
+		private System.Nullable<System.DateTime> _session_start;
+		
+		private System.Nullable<System.DateTime> _session_end;
+		
+		private string _type;
+		
+		private string _description;
+		
+		private int _seats;
+		
+		private int _attendees;
+		
+		private string _venue_id;
+		
+		private string _venue;
+		
+		private string _speakers;
+		
+		private System.DateTime _created;
+		
+		private System.Nullable<System.DateTime> _modified;
+		
+		private System.Nullable<int> _event_id;
+		
+		private string _speaker_companies;
+		
+		private string _speaker_images;
+		
+		private bool _full;
+		
+		public barcelona_design_summitResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_key", DbType="VarChar(255)")]
+		public string event_key
+		{
+			get
+			{
+				return this._event_key;
+			}
+			set
+			{
+				if ((this._event_key != value))
+				{
+					this._event_key = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active", DbType="Bit NOT NULL")]
+		public bool active
+		{
+			get
+			{
+				return this._active;
+			}
+			set
+			{
+				if ((this._active != value))
+				{
+					this._active = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(MAX)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_session_start", DbType="DateTime")]
+		public System.Nullable<System.DateTime> session_start
+		{
+			get
+			{
+				return this._session_start;
+			}
+			set
+			{
+				if ((this._session_start != value))
+				{
+					this._session_start = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_session_end", DbType="DateTime")]
+		public System.Nullable<System.DateTime> session_end
+		{
+			get
+			{
+				return this._session_end;
+			}
+			set
+			{
+				if ((this._session_end != value))
+				{
+					this._session_end = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_type", DbType="VarChar(255)")]
+		public string type
+		{
+			get
+			{
+				return this._type;
+			}
+			set
+			{
+				if ((this._type != value))
+				{
+					this._type = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="VarChar(MAX)")]
+		public string description
+		{
+			get
+			{
+				return this._description;
+			}
+			set
+			{
+				if ((this._description != value))
+				{
+					this._description = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seats", DbType="Int NOT NULL")]
+		public int seats
+		{
+			get
+			{
+				return this._seats;
+			}
+			set
+			{
+				if ((this._seats != value))
+				{
+					this._seats = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_attendees", DbType="Int NOT NULL")]
+		public int attendees
+		{
+			get
+			{
+				return this._attendees;
+			}
+			set
+			{
+				if ((this._attendees != value))
+				{
+					this._attendees = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_venue_id", DbType="VarChar(255)")]
+		public string venue_id
+		{
+			get
+			{
+				return this._venue_id;
+			}
+			set
+			{
+				if ((this._venue_id != value))
+				{
+					this._venue_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_venue", DbType="VarChar(255)")]
+		public string venue
+		{
+			get
+			{
+				return this._venue;
+			}
+			set
+			{
+				if ((this._venue != value))
+				{
+					this._venue = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_speakers", DbType="VarChar(MAX)")]
+		public string speakers
+		{
+			get
+			{
+				return this._speakers;
+			}
+			set
+			{
+				if ((this._speakers != value))
+				{
+					this._speakers = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created", DbType="DateTime NOT NULL")]
+		public System.DateTime created
+		{
+			get
+			{
+				return this._created;
+			}
+			set
+			{
+				if ((this._created != value))
+				{
+					this._created = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modified", DbType="DateTime")]
+		public System.Nullable<System.DateTime> modified
+		{
+			get
+			{
+				return this._modified;
+			}
+			set
+			{
+				if ((this._modified != value))
+				{
+					this._modified = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int")]
+		public System.Nullable<int> event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this._event_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_speaker_companies", DbType="VarChar(MAX)")]
+		public string speaker_companies
+		{
+			get
+			{
+				return this._speaker_companies;
+			}
+			set
+			{
+				if ((this._speaker_companies != value))
+				{
+					this._speaker_companies = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_speaker_images", DbType="VarChar(MAX)")]
+		public string speaker_images
+		{
+			get
+			{
+				return this._speaker_images;
+			}
+			set
+			{
+				if ((this._speaker_images != value))
+				{
+					this._speaker_images = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[full]", Storage="_full", DbType="Bit NOT NULL")]
+		public bool full
+		{
+			get
+			{
+				return this._full;
+			}
+			set
+			{
+				if ((this._full != value))
+				{
+					this._full = value;
+				}
+			}
+		}
+	}
+	
+	public partial class barcelona_working_groupResult
+	{
+		
+		private int _id;
+		
+		private string _event_key;
+		
+		private bool _active;
+		
+		private string _title;
+		
+		private System.Nullable<System.DateTime> _session_start;
+		
+		private System.Nullable<System.DateTime> _session_end;
+		
+		private string _type;
+		
+		private string _description;
+		
+		private int _seats;
+		
+		private int _attendees;
+		
+		private string _venue_id;
+		
+		private string _venue;
+		
+		private string _speakers;
+		
+		private System.DateTime _created;
+		
+		private System.Nullable<System.DateTime> _modified;
+		
+		private System.Nullable<int> _event_id;
+		
+		private string _speaker_companies;
+		
+		private string _speaker_images;
+		
+		private bool _full;
+		
+		public barcelona_working_groupResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_key", DbType="VarChar(255)")]
+		public string event_key
+		{
+			get
+			{
+				return this._event_key;
+			}
+			set
+			{
+				if ((this._event_key != value))
+				{
+					this._event_key = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active", DbType="Bit NOT NULL")]
+		public bool active
+		{
+			get
+			{
+				return this._active;
+			}
+			set
+			{
+				if ((this._active != value))
+				{
+					this._active = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(MAX)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_session_start", DbType="DateTime")]
+		public System.Nullable<System.DateTime> session_start
+		{
+			get
+			{
+				return this._session_start;
+			}
+			set
+			{
+				if ((this._session_start != value))
+				{
+					this._session_start = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_session_end", DbType="DateTime")]
+		public System.Nullable<System.DateTime> session_end
+		{
+			get
+			{
+				return this._session_end;
+			}
+			set
+			{
+				if ((this._session_end != value))
+				{
+					this._session_end = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_type", DbType="VarChar(255)")]
+		public string type
+		{
+			get
+			{
+				return this._type;
+			}
+			set
+			{
+				if ((this._type != value))
+				{
+					this._type = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="VarChar(MAX)")]
+		public string description
+		{
+			get
+			{
+				return this._description;
+			}
+			set
+			{
+				if ((this._description != value))
+				{
+					this._description = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seats", DbType="Int NOT NULL")]
+		public int seats
+		{
+			get
+			{
+				return this._seats;
+			}
+			set
+			{
+				if ((this._seats != value))
+				{
+					this._seats = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_attendees", DbType="Int NOT NULL")]
+		public int attendees
+		{
+			get
+			{
+				return this._attendees;
+			}
+			set
+			{
+				if ((this._attendees != value))
+				{
+					this._attendees = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_venue_id", DbType="VarChar(255)")]
+		public string venue_id
+		{
+			get
+			{
+				return this._venue_id;
+			}
+			set
+			{
+				if ((this._venue_id != value))
+				{
+					this._venue_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_venue", DbType="VarChar(255)")]
+		public string venue
+		{
+			get
+			{
+				return this._venue;
+			}
+			set
+			{
+				if ((this._venue != value))
+				{
+					this._venue = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_speakers", DbType="VarChar(MAX)")]
+		public string speakers
+		{
+			get
+			{
+				return this._speakers;
+			}
+			set
+			{
+				if ((this._speakers != value))
+				{
+					this._speakers = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created", DbType="DateTime NOT NULL")]
+		public System.DateTime created
+		{
+			get
+			{
+				return this._created;
+			}
+			set
+			{
+				if ((this._created != value))
+				{
+					this._created = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modified", DbType="DateTime")]
+		public System.Nullable<System.DateTime> modified
+		{
+			get
+			{
+				return this._modified;
+			}
+			set
+			{
+				if ((this._modified != value))
+				{
+					this._modified = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int")]
+		public System.Nullable<int> event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this._event_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_speaker_companies", DbType="VarChar(MAX)")]
+		public string speaker_companies
+		{
+			get
+			{
+				return this._speaker_companies;
+			}
+			set
+			{
+				if ((this._speaker_companies != value))
+				{
+					this._speaker_companies = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_speaker_images", DbType="VarChar(MAX)")]
+		public string speaker_images
+		{
+			get
+			{
+				return this._speaker_images;
+			}
+			set
+			{
+				if ((this._speaker_images != value))
+				{
+					this._speaker_images = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[full]", Storage="_full", DbType="Bit NOT NULL")]
+		public bool full
+		{
+			get
+			{
+				return this._full;
+			}
+			set
+			{
+				if ((this._full != value))
+				{
+					this._full = value;
+				}
+			}
+		}
+	}
+	
+	public partial class sessions_by_event_by_day_by_groupResult
+	{
+		
+		private int _id;
+		
+		private string _event_key;
+		
+		private bool _active;
+		
+		private string _title;
+		
+		private System.Nullable<System.DateTime> _session_start;
+		
+		private System.Nullable<System.DateTime> _session_end;
+		
+		private string _type;
+		
+		private string _description;
+		
+		private int _seats;
+		
+		private int _attendees;
+		
+		private string _venue_id;
+		
+		private string _venue;
+		
+		private string _speakers;
+		
+		private System.DateTime _created;
+		
+		private System.Nullable<System.DateTime> _modified;
+		
+		private System.Nullable<int> _event_id;
+		
+		private string _speaker_companies;
+		
+		private string _speaker_images;
+		
+		private bool _full;
+		
+		public sessions_by_event_by_day_by_groupResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_key", DbType="VarChar(255)")]
+		public string event_key
+		{
+			get
+			{
+				return this._event_key;
+			}
+			set
+			{
+				if ((this._event_key != value))
+				{
+					this._event_key = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active", DbType="Bit NOT NULL")]
+		public bool active
+		{
+			get
+			{
+				return this._active;
+			}
+			set
+			{
+				if ((this._active != value))
+				{
+					this._active = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(MAX)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_session_start", DbType="DateTime")]
+		public System.Nullable<System.DateTime> session_start
+		{
+			get
+			{
+				return this._session_start;
+			}
+			set
+			{
+				if ((this._session_start != value))
+				{
+					this._session_start = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_session_end", DbType="DateTime")]
+		public System.Nullable<System.DateTime> session_end
+		{
+			get
+			{
+				return this._session_end;
+			}
+			set
+			{
+				if ((this._session_end != value))
+				{
+					this._session_end = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_type", DbType="VarChar(255)")]
+		public string type
+		{
+			get
+			{
+				return this._type;
+			}
+			set
+			{
+				if ((this._type != value))
+				{
+					this._type = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="VarChar(MAX)")]
+		public string description
+		{
+			get
+			{
+				return this._description;
+			}
+			set
+			{
+				if ((this._description != value))
+				{
+					this._description = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seats", DbType="Int NOT NULL")]
+		public int seats
+		{
+			get
+			{
+				return this._seats;
+			}
+			set
+			{
+				if ((this._seats != value))
+				{
+					this._seats = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_attendees", DbType="Int NOT NULL")]
+		public int attendees
+		{
+			get
+			{
+				return this._attendees;
+			}
+			set
+			{
+				if ((this._attendees != value))
+				{
+					this._attendees = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_venue_id", DbType="VarChar(255)")]
+		public string venue_id
+		{
+			get
+			{
+				return this._venue_id;
+			}
+			set
+			{
+				if ((this._venue_id != value))
+				{
+					this._venue_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_venue", DbType="VarChar(255)")]
+		public string venue
+		{
+			get
+			{
+				return this._venue;
+			}
+			set
+			{
+				if ((this._venue != value))
+				{
+					this._venue = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_speakers", DbType="VarChar(MAX)")]
+		public string speakers
+		{
+			get
+			{
+				return this._speakers;
+			}
+			set
+			{
+				if ((this._speakers != value))
+				{
+					this._speakers = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created", DbType="DateTime NOT NULL")]
+		public System.DateTime created
+		{
+			get
+			{
+				return this._created;
+			}
+			set
+			{
+				if ((this._created != value))
+				{
+					this._created = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modified", DbType="DateTime")]
+		public System.Nullable<System.DateTime> modified
+		{
+			get
+			{
+				return this._modified;
+			}
+			set
+			{
+				if ((this._modified != value))
+				{
+					this._modified = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int")]
+		public System.Nullable<int> event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this._event_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_speaker_companies", DbType="VarChar(MAX)")]
+		public string speaker_companies
+		{
+			get
+			{
+				return this._speaker_companies;
+			}
+			set
+			{
+				if ((this._speaker_companies != value))
+				{
+					this._speaker_companies = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_speaker_images", DbType="VarChar(MAX)")]
+		public string speaker_images
+		{
+			get
+			{
+				return this._speaker_images;
+			}
+			set
+			{
+				if ((this._speaker_images != value))
+				{
+					this._speaker_images = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[full]", Storage="_full", DbType="Bit NOT NULL")]
+		public bool full
+		{
+			get
+			{
+				return this._full;
+			}
+			set
+			{
+				if ((this._full != value))
+				{
+					this._full = value;
+				}
+			}
+		}
+	}
+	
+	public partial class future_sessions_by_dayResult
+	{
+		
+		private int _id;
+		
+		private string _event_key;
+		
+		private bool _active;
+		
+		private string _title;
+		
+		private System.Nullable<System.DateTime> _session_start;
+		
+		private System.Nullable<System.DateTime> _session_end;
+		
+		private string _type;
+		
+		private string _description;
+		
+		private int _seats;
+		
+		private int _attendees;
+		
+		private string _venue_id;
+		
+		private string _venue;
+		
+		private string _speakers;
+		
+		private System.DateTime _created;
+		
+		private System.Nullable<System.DateTime> _modified;
+		
+		private System.Nullable<int> _event_id;
+		
+		private string _speaker_companies;
+		
+		private string _speaker_images;
+		
+		private bool _full;
+		
+		public future_sessions_by_dayResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_key", DbType="VarChar(255)")]
+		public string event_key
+		{
+			get
+			{
+				return this._event_key;
+			}
+			set
+			{
+				if ((this._event_key != value))
+				{
+					this._event_key = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active", DbType="Bit NOT NULL")]
+		public bool active
+		{
+			get
+			{
+				return this._active;
+			}
+			set
+			{
+				if ((this._active != value))
+				{
+					this._active = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(MAX)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_session_start", DbType="DateTime")]
+		public System.Nullable<System.DateTime> session_start
+		{
+			get
+			{
+				return this._session_start;
+			}
+			set
+			{
+				if ((this._session_start != value))
+				{
+					this._session_start = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_session_end", DbType="DateTime")]
+		public System.Nullable<System.DateTime> session_end
+		{
+			get
+			{
+				return this._session_end;
+			}
+			set
+			{
+				if ((this._session_end != value))
+				{
+					this._session_end = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_type", DbType="VarChar(255)")]
+		public string type
+		{
+			get
+			{
+				return this._type;
+			}
+			set
+			{
+				if ((this._type != value))
+				{
+					this._type = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="VarChar(MAX)")]
+		public string description
+		{
+			get
+			{
+				return this._description;
+			}
+			set
+			{
+				if ((this._description != value))
+				{
+					this._description = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_seats", DbType="Int NOT NULL")]
+		public int seats
+		{
+			get
+			{
+				return this._seats;
+			}
+			set
+			{
+				if ((this._seats != value))
+				{
+					this._seats = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_attendees", DbType="Int NOT NULL")]
+		public int attendees
+		{
+			get
+			{
+				return this._attendees;
+			}
+			set
+			{
+				if ((this._attendees != value))
+				{
+					this._attendees = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_venue_id", DbType="VarChar(255)")]
+		public string venue_id
+		{
+			get
+			{
+				return this._venue_id;
+			}
+			set
+			{
+				if ((this._venue_id != value))
+				{
+					this._venue_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_venue", DbType="VarChar(255)")]
+		public string venue
+		{
+			get
+			{
+				return this._venue;
+			}
+			set
+			{
+				if ((this._venue != value))
+				{
+					this._venue = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_speakers", DbType="VarChar(MAX)")]
+		public string speakers
+		{
+			get
+			{
+				return this._speakers;
+			}
+			set
+			{
+				if ((this._speakers != value))
+				{
+					this._speakers = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_created", DbType="DateTime NOT NULL")]
+		public System.DateTime created
+		{
+			get
+			{
+				return this._created;
+			}
+			set
+			{
+				if ((this._created != value))
+				{
+					this._created = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modified", DbType="DateTime")]
+		public System.Nullable<System.DateTime> modified
+		{
+			get
+			{
+				return this._modified;
+			}
+			set
+			{
+				if ((this._modified != value))
+				{
+					this._modified = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int")]
+		public System.Nullable<int> event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this._event_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_speaker_companies", DbType="VarChar(MAX)")]
+		public string speaker_companies
+		{
+			get
+			{
+				return this._speaker_companies;
+			}
+			set
+			{
+				if ((this._speaker_companies != value))
+				{
+					this._speaker_companies = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_speaker_images", DbType="VarChar(MAX)")]
+		public string speaker_images
+		{
+			get
+			{
+				return this._speaker_images;
+			}
+			set
+			{
+				if ((this._speaker_images != value))
+				{
+					this._speaker_images = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[full]", Storage="_full", DbType="Bit NOT NULL")]
+		public bool full
+		{
+			get
+			{
+				return this._full;
+			}
+			set
+			{
+				if ((this._full != value))
+				{
+					this._full = value;
+				}
+			}
+		}
+	}
+	
+	public partial class messages_get_random_priorityResult
+	{
+		
+		private int _id;
+		
+		private System.Nullable<int> _event_id;
+		
+		private System.Nullable<int> _template_id;
+		
+		private System.Nullable<int> _terminal_id;
+		
+		private System.Nullable<System.DateTime> _start;
+		
+		private System.Nullable<System.DateTime> _stop;
+		
+		private bool _entire;
+		
+		private string _title;
+		
+		private string _message;
+		
+		private string _pic;
+		
+		private bool _priority;
+		
+		private bool _openstackAPI;
+		
+		private System.Nullable<int> _openstackID;
+		
+		private bool _session_full;
+		
+		private bool _test;
+		
+		public messages_get_random_priorityResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int")]
+		public System.Nullable<int> event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this._event_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_id", DbType="Int")]
+		public System.Nullable<int> template_id
+		{
+			get
+			{
+				return this._template_id;
+			}
+			set
+			{
+				if ((this._template_id != value))
+				{
+					this._template_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_terminal_id", DbType="Int")]
+		public System.Nullable<int> terminal_id
+		{
+			get
+			{
+				return this._terminal_id;
+			}
+			set
+			{
+				if ((this._terminal_id != value))
+				{
+					this._terminal_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_start", DbType="DateTime")]
+		public System.Nullable<System.DateTime> start
+		{
+			get
+			{
+				return this._start;
+			}
+			set
+			{
+				if ((this._start != value))
+				{
+					this._start = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_stop", DbType="DateTime")]
+		public System.Nullable<System.DateTime> stop
+		{
+			get
+			{
+				return this._stop;
+			}
+			set
+			{
+				if ((this._stop != value))
+				{
+					this._stop = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_entire", DbType="Bit NOT NULL")]
+		public bool entire
+		{
+			get
+			{
+				return this._entire;
+			}
+			set
+			{
+				if ((this._entire != value))
+				{
+					this._entire = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(500)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_message", DbType="VarChar(MAX)")]
+		public string message
+		{
+			get
+			{
+				return this._message;
+			}
+			set
+			{
+				if ((this._message != value))
+				{
+					this._message = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pic", DbType="VarChar(MAX)")]
+		public string pic
+		{
+			get
+			{
+				return this._pic;
+			}
+			set
+			{
+				if ((this._pic != value))
+				{
+					this._pic = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_priority", DbType="Bit NOT NULL")]
+		public bool priority
+		{
+			get
+			{
+				return this._priority;
+			}
+			set
+			{
+				if ((this._priority != value))
+				{
+					this._priority = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_openstackAPI", DbType="Bit NOT NULL")]
+		public bool openstackAPI
+		{
+			get
+			{
+				return this._openstackAPI;
+			}
+			set
+			{
+				if ((this._openstackAPI != value))
+				{
+					this._openstackAPI = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_openstackID", DbType="Int")]
+		public System.Nullable<int> openstackID
+		{
+			get
+			{
+				return this._openstackID;
+			}
+			set
+			{
+				if ((this._openstackID != value))
+				{
+					this._openstackID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_session_full", DbType="Bit NOT NULL")]
+		public bool session_full
+		{
+			get
+			{
+				return this._session_full;
+			}
+			set
+			{
+				if ((this._session_full != value))
+				{
+					this._session_full = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_test", DbType="Bit NOT NULL")]
+		public bool test
+		{
+			get
+			{
+				return this._test;
+			}
+			set
+			{
+				if ((this._test != value))
+				{
+					this._test = value;
+				}
+			}
+		}
+	}
+	
+	public partial class terminal_assignments_by_eventResult
+	{
+		
+		private int _id;
+		
+		private string _title;
+		
+		private System.Nullable<int> _location_id;
+		
+		private System.Nullable<int> _template_id;
+		
+		private bool _online;
+		
+		private int _event_id;
+		
+		private System.DateTime _last_online;
+		
+		private System.Nullable<int> _deck;
+		
+		private System.Nullable<int> _rotate;
+		
+		private bool _notified;
+		
+		private System.Nullable<System.DateTime> _notified_date;
+		
+		private bool _all_sessions;
+		
+		private bool _group_by_start;
+		
+		private bool _group_by_location;
+		
+		private System.Nullable<int> _template_id_announce;
+		
+		private System.Nullable<int> _template_id_end;
+		
+		private string _location_title;
+		
+		private string _template_title;
+		
+		public terminal_assignments_by_eventResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(255)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_location_id", DbType="Int")]
+		public System.Nullable<int> location_id
+		{
+			get
+			{
+				return this._location_id;
+			}
+			set
+			{
+				if ((this._location_id != value))
+				{
+					this._location_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_id", DbType="Int")]
+		public System.Nullable<int> template_id
+		{
+			get
+			{
+				return this._template_id;
+			}
+			set
+			{
+				if ((this._template_id != value))
+				{
+					this._template_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_online", DbType="Bit NOT NULL")]
+		public bool online
+		{
+			get
+			{
+				return this._online;
+			}
+			set
+			{
+				if ((this._online != value))
+				{
+					this._online = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_id", DbType="Int NOT NULL")]
+		public int event_id
+		{
+			get
+			{
+				return this._event_id;
+			}
+			set
+			{
+				if ((this._event_id != value))
+				{
+					this._event_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_last_online", DbType="DateTime NOT NULL")]
+		public System.DateTime last_online
+		{
+			get
+			{
+				return this._last_online;
+			}
+			set
+			{
+				if ((this._last_online != value))
+				{
+					this._last_online = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_deck", DbType="Int")]
+		public System.Nullable<int> deck
+		{
+			get
+			{
+				return this._deck;
+			}
+			set
+			{
+				if ((this._deck != value))
+				{
+					this._deck = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rotate", DbType="Int")]
+		public System.Nullable<int> rotate
+		{
+			get
+			{
+				return this._rotate;
+			}
+			set
+			{
+				if ((this._rotate != value))
+				{
+					this._rotate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_notified", DbType="Bit NOT NULL")]
+		public bool notified
+		{
+			get
+			{
+				return this._notified;
+			}
+			set
+			{
+				if ((this._notified != value))
+				{
+					this._notified = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_notified_date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> notified_date
+		{
+			get
+			{
+				return this._notified_date;
+			}
+			set
+			{
+				if ((this._notified_date != value))
+				{
+					this._notified_date = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_all_sessions", DbType="Bit NOT NULL")]
+		public bool all_sessions
+		{
+			get
+			{
+				return this._all_sessions;
+			}
+			set
+			{
+				if ((this._all_sessions != value))
+				{
+					this._all_sessions = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_group_by_start", DbType="Bit NOT NULL")]
+		public bool group_by_start
+		{
+			get
+			{
+				return this._group_by_start;
+			}
+			set
+			{
+				if ((this._group_by_start != value))
+				{
+					this._group_by_start = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_group_by_location", DbType="Bit NOT NULL")]
+		public bool group_by_location
+		{
+			get
+			{
+				return this._group_by_location;
+			}
+			set
+			{
+				if ((this._group_by_location != value))
+				{
+					this._group_by_location = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_id_announce", DbType="Int")]
+		public System.Nullable<int> template_id_announce
+		{
+			get
+			{
+				return this._template_id_announce;
+			}
+			set
+			{
+				if ((this._template_id_announce != value))
+				{
+					this._template_id_announce = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_id_end", DbType="Int")]
+		public System.Nullable<int> template_id_end
+		{
+			get
+			{
+				return this._template_id_end;
+			}
+			set
+			{
+				if ((this._template_id_end != value))
+				{
+					this._template_id_end = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_location_title", DbType="VarChar(MAX)")]
+		public string location_title
+		{
+			get
+			{
+				return this._location_title;
+			}
+			set
+			{
+				if ((this._location_title != value))
+				{
+					this._location_title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_template_title", DbType="VarChar(255)")]
+		public string template_title
+		{
+			get
+			{
+				return this._template_title;
+			}
+			set
+			{
+				if ((this._template_title != value))
+				{
+					this._template_title = value;
 				}
 			}
 		}

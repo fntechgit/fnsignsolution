@@ -34,6 +34,9 @@
     <Reference Include="Hammock.ClientProfile">
       <HintPath>..\packages\TweetSharp.2.3.1\lib\4.0\Hammock.ClientProfile.dll</HintPath>
     </Reference>
+    <Reference Include="hostoverride">
+      <HintPath>..\packages\hostoverride.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\TweetSharp.2.3.1\lib\4.0\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -55,13 +58,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="auth.cs" />
+    <Compile Include="carriers.cs" />
+    <Compile Include="database.cs" />
     <Compile Include="decks.cs" />
+    <Compile Include="email.cs" />
     <Compile Include="events.cs" />
     <Compile Include="functions.cs" />
+    <Compile Include="imports.cs" />
     <Compile Include="locations.cs" />
     <Compile Include="log.cs" />
     <Compile Include="media.cs" />
     <Compile Include="messages.cs" />
+    <Compile Include="notify.cs" />
     <Compile Include="overlays.cs" />
     <Compile Include="permissions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,8 +88,10 @@
     <Compile Include="settings.cs" />
     <Compile Include="slides.cs" />
     <Compile Include="speakers.cs" />
+    <Compile Include="sublocations.cs" />
     <Compile Include="templates.cs" />
     <Compile Include="terminals.cs" />
+    <Compile Include="timewarp.cs" />
     <Compile Include="twitter.cs" />
     <Compile Include="users.cs" />
   </ItemGroup>
