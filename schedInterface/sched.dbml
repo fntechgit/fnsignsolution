@@ -204,6 +204,8 @@
       <Column Name="all_sessions" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="group_by_location" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="group_by_start" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="notified" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="notified_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.speakers" Member="speakers">

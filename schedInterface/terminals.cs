@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Linq.Expressions;
 
 namespace schedInterface
 {
@@ -34,6 +35,8 @@ namespace schedInterface
                 t.group_by_start = item.group_by_start;
                 t.template_id_announce = item.template_id_announce;
                 t.template_id_end = item.template_id_end;
+                t.notified = item.notified;
+                t.notified_date = item.notified_date;
 
                 _terminals.Add(t);
             }
@@ -64,6 +67,8 @@ namespace schedInterface
                 t.group_by_location = item.group_by_location;
                 t.group_by_start = item.group_by_start;
                 t.all_sessions = item.all_sessions;
+                t.notified = item.notified;
+                t.notified_date = item.notified_date;
 
                 _terminals.Add(t);
             }
@@ -93,6 +98,8 @@ namespace schedInterface
             te.all_sessions = t.all_sessions;
             te.template_id_announce = t.template_id_announce;
             te.template_id_end = t.template_id_end;
+            te.notified = false;
+            te.notified_date = new DateTime?();
             
             db.terminals.InsertOnSubmit(te);
 
@@ -119,6 +126,8 @@ namespace schedInterface
             te.group_by_location = t.group_by_location;
             te.group_by_start = t.group_by_start;
             te.all_sessions = t.all_sessions;
+            te.notified = t.notified;
+            te.notified_date = t.notified_date;
 
             db.SubmitChanges();
 
@@ -155,11 +164,22 @@ namespace schedInterface
                 t.online = item.online;
                 t.template_id = item.template_id;
                 t.title = item.title;
+                t.notified = item.notified;
+                t.notified_date = item.notified_date;
 
                 _terminals.Add(t);
             }
 
             return _terminals;
+        }
+
+        public bool notify(int id)
+        {
+            terminal terminal = this.db.terminals.Single<terminal>((Expression<Func<terminal, bool>>)(x => x.id == id));
+            terminal.notified = true;
+            terminal.notified_date = new DateTime?(DateTime.Now);
+            this.db.SubmitChanges();
+            return true;
         }
 
         public Boolean offline(Int32 id)
@@ -173,15 +193,19 @@ namespace schedInterface
             return true;
         }
 
-        public Boolean online(Int32 id)
+        public List<Terminal> offline_to_notify()
         {
-            terminal t = db.terminals.Single(x => x.id == id);
+            return this.offline_terminals().Where<Terminal>((Func<Terminal, bool>)(x => !x.notified)).ToList<Terminal>();
+        }
 
-            t.online = true;
-            t.last_online = DateTime.Now;
-
-            db.SubmitChanges();
-
+        public bool online(int id)
+        {
+            terminal terminal = this.db.terminals.Single<terminal>((Expression<Func<terminal, bool>>)(x => x.id == id));
+            terminal.online = true;
+            terminal.last_online = DateTime.Now;
+            terminal.notified = false;
+            terminal.notified_date = new DateTime?();
+            this.db.SubmitChanges();
             return true;
         }
     }
@@ -204,5 +228,7 @@ namespace schedInterface
         public bool all_sessions { get; set; }
         public bool group_by_location { get; set; }
         public bool group_by_start { get; set; }
+        public bool notified { get; set; }
+        public DateTime? notified_date { get; set; }
     }
 }

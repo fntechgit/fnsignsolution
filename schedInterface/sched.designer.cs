@@ -4321,6 +4321,10 @@ namespace schedInterface
 		
 		private bool _group_by_start;
 		
+		private bool _notified;
+		
+		private System.Nullable<System.DateTime> _notified_date;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -4353,6 +4357,10 @@ namespace schedInterface
     partial void Ongroup_by_locationChanged();
     partial void Ongroup_by_startChanging(bool value);
     partial void Ongroup_by_startChanged();
+    partial void OnnotifiedChanging(bool value);
+    partial void OnnotifiedChanged();
+    partial void Onnotified_dateChanging(System.Nullable<System.DateTime> value);
+    partial void Onnotified_dateChanged();
     #endregion
 		
 		public terminal()
@@ -4636,6 +4644,46 @@ namespace schedInterface
 					this._group_by_start = value;
 					this.SendPropertyChanged("group_by_start");
 					this.Ongroup_by_startChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_notified", DbType="Bit NOT NULL")]
+		public bool notified
+		{
+			get
+			{
+				return this._notified;
+			}
+			set
+			{
+				if ((this._notified != value))
+				{
+					this.OnnotifiedChanging(value);
+					this.SendPropertyChanging();
+					this._notified = value;
+					this.SendPropertyChanged("notified");
+					this.OnnotifiedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_notified_date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> notified_date
+		{
+			get
+			{
+				return this._notified_date;
+			}
+			set
+			{
+				if ((this._notified_date != value))
+				{
+					this.Onnotified_dateChanging(value);
+					this.SendPropertyChanging();
+					this._notified_date = value;
+					this.SendPropertyChanged("notified_date");
+					this.Onnotified_dateChanged();
 				}
 			}
 		}

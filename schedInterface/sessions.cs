@@ -16,6 +16,11 @@ namespace schedInterface
         private schedDataContext db = new schedDataContext();
         private locations _locations = new locations();
 
+        public List<Session> by_event_for_current_day(int id)
+        {
+            return this.by_event(id).Where<Session>((Func<Session, bool>)(x => x.start.Date == DateTime.Today)).ToList<Session>();
+        }
+
         public bool clear_by_event(int id)
         {
             this.db.sessions_delete_by_event(new int?(id));
@@ -156,6 +161,9 @@ namespace schedInterface
                     session1.venue = childrenDateResult.venue;
                     session1.speaker_companies = childrenDateResult.speaker_companies;
                     session1.speaker_images = childrenDateResult.speaker_images;
+                    session1.speakersList = ((IEnumerable<string>)session1.speakers.Split(':')).ToList<string>();
+                    session1.speakerImagesList = ((IEnumerable<string>)session1.speaker_images.Split(':')).ToList<string>();
+                    session1.speakerCompaniesList = ((IEnumerable<string>)session1.speaker_companies.Split(':')).ToList<string>();
                     session1.speakers = childrenDateResult.speakers;
                     session1.full = childrenDateResult.full;
                     sessionList.Add(session1);
@@ -711,7 +719,9 @@ namespace schedInterface
         public string speakers { get; set; }
         public Int32 internal_id { get; set; }
         public Int32 event_id { get; set; }
-
+        public List<string> speakersList { get; set; }
+        public List<string> speakerCompaniesList { get; set; }
+        public List<string> speakerImagesList { get; set; }
         public string speaker_companies { get; set; }
         public string speaker_images { get; set; }
         public bool full { get; set; }
