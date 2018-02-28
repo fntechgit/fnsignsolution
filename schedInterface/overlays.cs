@@ -151,13 +151,13 @@ namespace schedInterface
             o.guide = ov.guide;
             o.bottom_overlay = ov.bottom_overlay;
             o.layout = ov.layout;
-            ov.speed = o.speed;
-            ov.group_by_start = o.group_by_start;
-            ov.group_by_location = o.group_by_location;
-            ov.all_sessions = o.all_sessions;
-            ov.template_id_announce = o.template_id_announce;
-            ov.template_id_end = o.template_id_end;
-            ov.bottom_height = o.bottom_height;
+            o.speed = ov.speed;
+            o.group_by_start = ov.group_by_start;
+            o.group_by_location = ov.group_by_location;
+            o.all_sessions = ov.all_sessions;
+            o.template_id_announce = ov.template_id_announce;
+            o.template_id_end = ov.template_id_end;
+            o.bottom_height = ov.bottom_height;
 
             return o;
         }

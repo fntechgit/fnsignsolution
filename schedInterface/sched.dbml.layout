@@ -2,10 +2,10 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 12, 28" name="sched">
   <DataContextMoniker Name="/schedDataContext" />
   <nestedChildShapes>
-    <classShape Id="6f5439ab-48c0-4870-b36b-49618776ebab" absoluteBounds="5.125, 1.625, 2, 4.4631168619791666">
+    <classShape Id="6f5439ab-48c0-4870-b36b-49618776ebab" absoluteBounds="5.125, 1.625, 2, 4.6554182942708326">
       <DataClassMoniker Name="/schedDataContext/session" />
       <nestedChildShapes>
-        <elementListCompartment Id="59ccc33e-6197-449f-ac6b-849f56221417" absoluteBounds="5.14, 2.085, 1.9700000000000002, 3.9031168619791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="59ccc33e-6197-449f-ac6b-849f56221417" absoluteBounds="5.14, 2.085, 1.9700000000000002, 4.095418294270833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="520a3746-e424-4f9d-be48-f7aa4ca822ff" absoluteBounds="8.375, 5.75, 2, 1.5785953776041666">

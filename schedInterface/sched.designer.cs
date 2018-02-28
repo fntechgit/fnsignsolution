@@ -573,6 +573,8 @@ namespace schedInterface
 		
 		private bool _full;
 		
+		private string _sub_type;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -615,6 +617,8 @@ namespace schedInterface
     partial void Onspeaker_imagesChanged();
     partial void OnfullChanging(bool value);
     partial void OnfullChanged();
+    partial void Onsub_typeChanging(string value);
+    partial void Onsub_typeChanged();
     #endregion
 		
 		public session()
@@ -998,6 +1002,26 @@ namespace schedInterface
 					this._full = value;
 					this.SendPropertyChanged("full");
 					this.OnfullChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_sub_type", DbType="VarChar(255)")]
+		public string sub_type
+		{
+			get
+			{
+				return this._sub_type;
+			}
+			set
+			{
+				if ((this._sub_type != value))
+				{
+					this.Onsub_typeChanging(value);
+					this.SendPropertyChanging();
+					this._sub_type = value;
+					this.SendPropertyChanged("sub_type");
+					this.Onsub_typeChanged();
 				}
 			}
 		}

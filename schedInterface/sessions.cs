@@ -51,6 +51,7 @@ namespace schedInterface
                 s.description = item.description;
                 s.end = Convert.ToDateTime(item.session_end);
                 s.event_type = item.type;
+                s.event_subtype = item.sub_type;
                 s.goers = item.attendees.ToString();
                 s.id = item.id.ToString();
                 s.event_key = item.event_key;
@@ -232,6 +233,7 @@ namespace schedInterface
                 s.description = item.description;
                 s.end = Convert.ToDateTime(item.session_end);
                 s.event_type = item.type;
+                s.event_subtype = item.sub_type;
                 s.goers = item.attendees.ToString();
                 s.id = item.id.ToString();
                 s.internal_id = item.id;
@@ -265,6 +267,7 @@ namespace schedInterface
                 s.description = item.description;
                 s.end = Convert.ToDateTime(item.session_end);
                 s.event_type = item.type;
+                s.event_subtype = item.sub_type;
                 s.goers = item.attendees.ToString();
                 s.id = item.id.ToString();
                 s.internal_id = item.id;
@@ -298,6 +301,7 @@ namespace schedInterface
                 s.description = item.description;
                 s.end = Convert.ToDateTime(item.session_end);
                 s.event_type = item.type;
+                s.event_subtype = item.sub_type;
                 s.goers = item.attendees.ToString();
                 s.id = item.id.ToString();
                 s.internal_id = item.id;
@@ -414,6 +418,7 @@ namespace schedInterface
                 s.description = item.description;
                 s.end = Convert.ToDateTime(item.session_end);
                 s.event_type = item.type;
+                s.event_subtype = item.sub_type;
                 s.goers = item.attendees.ToString();
                 s.id = item.id.ToString();
                 s.internal_id = item.id;
@@ -536,6 +541,7 @@ namespace schedInterface
                     se.speakers = s.speakers;
                     se.title = s.name;
                     se.type = !string.IsNullOrEmpty(s.event_type) ? s.event_type.Replace("[", "").Replace("]", "") : string.Empty;
+                    se.sub_type = !string.IsNullOrEmpty(s.event_subtype) ? s.event_subtype.Replace("[", "").Replace("]", "") : string.Empty;
                     se.venue = s.venue;
                     se.venue_id = s.venue_id;
 
@@ -585,6 +591,7 @@ namespace schedInterface
                 se.title = s.name;
 
                 se.type = !string.IsNullOrEmpty(s.event_type) ? s.event_type.Replace("[", "").Replace("]", "") : string.Empty;
+                se.sub_type = !string.IsNullOrEmpty(s.event_subtype) ? s.event_subtype.Replace("[", "").Replace("]", "") : string.Empty;
 
                 
                 se.venue = s.venue;
@@ -626,6 +633,7 @@ namespace schedInterface
                 session1.event_id = Convert.ToInt32(session1.event_id);
                 session1.event_key = session2.event_key;
                 session1.event_type = session2.type;
+                session1.event_subtype = session2.sub_type;
                 session1.name = session2.title;
                 session1.speakers = session2.speakers;
                 session1.speaker_images = session2.speaker_images;
@@ -709,6 +717,7 @@ namespace schedInterface
         public DateTime end { get; set; }
         public string event_end { get; set; }
         public string event_type { get; set; }
+        public string event_subtype { get; set; }
         public string description { get; set; }
         public string seats { get; set; }
         public string goers { get; set; }
