@@ -144,6 +144,7 @@ namespace schedInterface
                     session1.end = Convert.ToDateTime((object)childrenDateResult.session_end);
                     session1.event_id = event_id;
                     session1.event_type = childrenDateResult.type;
+                    session1.event_subtype = childrenDateResult.sub_type;
                     Session session2 = session1;
                     int num = childrenDateResult.attendees;
                     string str1 = num.ToString();
@@ -180,6 +181,7 @@ namespace schedInterface
                     session1.end = Convert.ToDateTime((object)locationDateResult.session_end);
                     session1.event_id = event_id;
                     session1.event_type = locationDateResult.type;
+                    session1.event_subtype = locationDateResult.sub_type;
                     Session session2 = session1;
                     int num = locationDateResult.attendees;
                     string str1 = num.ToString();

@@ -140,7 +140,7 @@ namespace schedInterface
 
             var tweets = service.ListTweetsOnUserTimeline(options);
 
-            foreach (TwitterStatus item in tweets)
+            foreach (TwitterStatus item in (tweets ?? Enumerable.Empty<TwitterStatus>() ))
             {
                 Media m = new Media();
 
