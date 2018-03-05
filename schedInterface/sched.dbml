@@ -257,6 +257,7 @@
       <Column Name="event_type_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="title" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="event_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="bg_color" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.settings" Member="settings">

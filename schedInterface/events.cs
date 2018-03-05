@@ -425,6 +425,7 @@ namespace schedInterface
                 t.event_id = id;
                 t.title = item.title;
                 t.id = item.id;
+                t.bgcolor = item.bg_color;
 
                 _types.Add(t);
             }
@@ -448,6 +449,7 @@ namespace schedInterface
         public Int32 id { get; set; }
         public Int32 event_type_id { get; set; }
         public string title { get; set; }
+        public string bgcolor { get; set; }
         public Int32 event_id { get; set; }
     }
 

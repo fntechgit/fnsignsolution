@@ -15,6 +15,7 @@ namespace schedInterface
     {
         private schedDataContext db = new schedDataContext();
         private locations _locations = new locations();
+        private event_types _types = new event_types();
 
         public List<Session> by_event_for_current_day(int id)
         {
@@ -38,6 +39,7 @@ namespace schedInterface
         public List<Session> by_event(Int32 id)
         {
             List<Session> _sessions = new List<Session>();
+            List<EventType> _etypes = _types.by_event(id);
 
             var result = from sess in db.sessions
                 where sess.event_id == id
@@ -51,7 +53,7 @@ namespace schedInterface
                 s.description = item.description;
                 s.end = Convert.ToDateTime(item.session_end);
                 s.event_type = item.type;
-                s.event_subtype = item.sub_type;
+                s.event_bgcolor = _etypes.Any() ? _etypes.Single(x => x.title == s.event_type).bgcolor : string.Empty;
                 s.goers = item.attendees.ToString();
                 s.id = item.id.ToString();
                 s.event_key = item.event_key;
@@ -133,6 +135,8 @@ namespace schedInterface
         {
             sublocations sublocations = new sublocations();
             List<Session> sessionList = new List<Session>();
+            List<EventType> etypes = _types.by_event(event_id);
+
             int id = this._locations.location_id_by_sched_id(location, event_id);
             if (sublocations.children(id).Count > 0)
             {
@@ -144,7 +148,7 @@ namespace schedInterface
                     session1.end = Convert.ToDateTime((object)childrenDateResult.session_end);
                     session1.event_id = event_id;
                     session1.event_type = childrenDateResult.type;
-                    session1.event_subtype = childrenDateResult.sub_type;
+                    session1.event_bgcolor = etypes.Any() ? etypes.Single(x => x.title == session1.event_type).bgcolor  : string.Empty;
                     Session session2 = session1;
                     int num = childrenDateResult.attendees;
                     string str1 = num.ToString();
@@ -181,7 +185,7 @@ namespace schedInterface
                     session1.end = Convert.ToDateTime((object)locationDateResult.session_end);
                     session1.event_id = event_id;
                     session1.event_type = locationDateResult.type;
-                    session1.event_subtype = locationDateResult.sub_type;
+                    session1.event_bgcolor = etypes.Any() ? etypes.Single(x => x.title == session1.event_type).bgcolor : string.Empty;
                     Session session2 = session1;
                     int num = locationDateResult.attendees;
                     string str1 = num.ToString();
@@ -235,7 +239,6 @@ namespace schedInterface
                 s.description = item.description;
                 s.end = Convert.ToDateTime(item.session_end);
                 s.event_type = item.type;
-                s.event_subtype = item.sub_type;
                 s.goers = item.attendees.ToString();
                 s.id = item.id.ToString();
                 s.internal_id = item.id;
@@ -269,7 +272,6 @@ namespace schedInterface
                 s.description = item.description;
                 s.end = Convert.ToDateTime(item.session_end);
                 s.event_type = item.type;
-                s.event_subtype = item.sub_type;
                 s.goers = item.attendees.ToString();
                 s.id = item.id.ToString();
                 s.internal_id = item.id;
@@ -303,7 +305,6 @@ namespace schedInterface
                 s.description = item.description;
                 s.end = Convert.ToDateTime(item.session_end);
                 s.event_type = item.type;
-                s.event_subtype = item.sub_type;
                 s.goers = item.attendees.ToString();
                 s.id = item.id.ToString();
                 s.internal_id = item.id;
@@ -420,7 +421,6 @@ namespace schedInterface
                 s.description = item.description;
                 s.end = Convert.ToDateTime(item.session_end);
                 s.event_type = item.type;
-                s.event_subtype = item.sub_type;
                 s.goers = item.attendees.ToString();
                 s.id = item.id.ToString();
                 s.internal_id = item.id;
@@ -543,7 +543,6 @@ namespace schedInterface
                     se.speakers = s.speakers;
                     se.title = s.name;
                     se.type = !string.IsNullOrEmpty(s.event_type) ? s.event_type.Replace("[", "").Replace("]", "") : string.Empty;
-                    se.sub_type = !string.IsNullOrEmpty(s.event_subtype) ? s.event_subtype.Replace("[", "").Replace("]", "") : string.Empty;
                     se.venue = s.venue;
                     se.venue_id = s.venue_id;
 
@@ -593,8 +592,6 @@ namespace schedInterface
                 se.title = s.name;
 
                 se.type = !string.IsNullOrEmpty(s.event_type) ? s.event_type.Replace("[", "").Replace("]", "") : string.Empty;
-                se.sub_type = !string.IsNullOrEmpty(s.event_subtype) ? s.event_subtype.Replace("[", "").Replace("]", "") : string.Empty;
-
                 
                 se.venue = s.venue;
                 se.venue_id = s.venue_id;
@@ -635,7 +632,6 @@ namespace schedInterface
                 session1.event_id = Convert.ToInt32(session1.event_id);
                 session1.event_key = session2.event_key;
                 session1.event_type = session2.type;
-                session1.event_subtype = session2.sub_type;
                 session1.name = session2.title;
                 session1.speakers = session2.speakers;
                 session1.speaker_images = session2.speaker_images;
@@ -719,7 +715,7 @@ namespace schedInterface
         public DateTime end { get; set; }
         public string event_end { get; set; }
         public string event_type { get; set; }
-        public string event_subtype { get; set; }
+        public string event_bgcolor { get; set; }
         public string description { get; set; }
         public string seats { get; set; }
         public string goers { get; set; }

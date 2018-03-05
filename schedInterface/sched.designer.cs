@@ -5639,6 +5639,8 @@ namespace schedInterface
 		
 		private int _event_id;
 		
+		private string _bg_color;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -5651,6 +5653,8 @@ namespace schedInterface
     partial void OntitleChanged();
     partial void Onevent_idChanging(int value);
     partial void Onevent_idChanged();
+    partial void Onbg_colorChanging(string value);
+    partial void Onbg_colorChanged();
     #endregion
 		
 		public event_type()
@@ -5734,6 +5738,26 @@ namespace schedInterface
 					this._event_id = value;
 					this.SendPropertyChanged("event_id");
 					this.Onevent_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_bg_color", DbType="VarChar(20)")]
+		public string bg_color
+		{
+			get
+			{
+				return this._bg_color;
+			}
+			set
+			{
+				if ((this._bg_color != value))
+				{
+					this.Onbg_colorChanging(value);
+					this.SendPropertyChanging();
+					this._bg_color = value;
+					this.SendPropertyChanged("bg_color");
+					this.Onbg_colorChanged();
 				}
 			}
 		}
