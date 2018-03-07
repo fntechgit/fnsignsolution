@@ -376,6 +376,40 @@ namespace schedInterface
     {
         private readonly schedDataContext db = new schedDataContext();
 
+        public Boolean add(EventType t)
+        {
+            // need to add
+            event_type et = new event_type();
+
+            et.event_type_id = t.event_type_id;
+            et.title = t.title;
+            et.bg_color = t.bgcolor;
+            et.event_id = t.event_id;
+
+            db.event_types.InsertOnSubmit(et);
+
+            db.SubmitChanges();
+
+            return true;
+        }
+
+        public Boolean update(EventType t)
+        {
+
+            // need to update
+            event_type et = db.event_types.Single(x => x.id == t.id);
+
+            et.event_type_id = t.event_type_id;
+            et.title = t.title;
+            et.bg_color = t.bgcolor;
+
+            db.SubmitChanges();
+
+            return true;
+        }
+
+
+
         public Boolean addUpdate(EventType t)
         {
             var result = from ets in db.event_types
@@ -431,6 +465,37 @@ namespace schedInterface
             }
 
             return _types;
+        }
+
+        public EventType single(Int32 id)
+        {
+            var result = from evts in db.event_types
+                         where evts.id == id
+                         select evts;
+
+            EventType t = new EventType();
+
+            foreach (var item in result)
+            {
+                t.id = item.id;
+                t.title = item.title;
+                t.event_type_id = item.event_type_id;
+                t.event_id = item.event_id;
+                t.bgcolor = item.bg_color;
+            }
+
+            return t;
+        }
+
+        public Boolean delete(Int32 id)
+        {
+            event_type ev = db.event_types.Single(x => x.id == id);
+
+            db.event_types.DeleteOnSubmit(ev);
+
+            db.SubmitChanges();
+
+            return true;
         }
     }
 

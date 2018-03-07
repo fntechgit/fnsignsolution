@@ -39,7 +39,7 @@ namespace schedInterface
         public List<Session> by_event(Int32 id)
         {
             List<Session> _sessions = new List<Session>();
-            List<EventType> _etypes = _types.by_event(id);
+            List<EventType> _eventtypes = _types.by_event(id);
 
             var result = from sess in db.sessions
                 where sess.event_id == id
@@ -53,7 +53,13 @@ namespace schedInterface
                 s.description = item.description;
                 s.end = Convert.ToDateTime(item.session_end);
                 s.event_type = item.type;
-                s.event_bgcolor = _etypes.Any() ? _etypes.Single(x => x.title == s.event_type).bgcolor : string.Empty;
+
+                var evt_type = new EventType();
+                if (_eventtypes.Any())
+                    evt_type = _eventtypes.FirstOrDefault<EventType>(x => x.title == s.event_type);
+
+                s.event_bgcolor = (evt_type != null) ? evt_type.bgcolor : string.Empty;
+
                 s.goers = item.attendees.ToString();
                 s.id = item.id.ToString();
                 s.event_key = item.event_key;
@@ -135,7 +141,7 @@ namespace schedInterface
         {
             sublocations sublocations = new sublocations();
             List<Session> sessionList = new List<Session>();
-            List<EventType> etypes = _types.by_event(event_id);
+            List<EventType> _eventtypes = _types.by_event(event_id);
 
             int id = this._locations.location_id_by_sched_id(location, event_id);
             if (sublocations.children(id).Count > 0)
@@ -148,7 +154,13 @@ namespace schedInterface
                     session1.end = Convert.ToDateTime((object)childrenDateResult.session_end);
                     session1.event_id = event_id;
                     session1.event_type = childrenDateResult.type;
-                    session1.event_bgcolor = etypes.Any() ? etypes.Single(x => x.title == session1.event_type).bgcolor  : string.Empty;
+
+                    var evt_type = new EventType();
+                    if (_eventtypes.Any())
+                        evt_type = _eventtypes.FirstOrDefault<EventType>(x => x.title == session1.event_type);
+
+                    session1.event_bgcolor = (evt_type != null) ? evt_type.bgcolor : string.Empty;
+
                     Session session2 = session1;
                     int num = childrenDateResult.attendees;
                     string str1 = num.ToString();
@@ -185,7 +197,13 @@ namespace schedInterface
                     session1.end = Convert.ToDateTime((object)locationDateResult.session_end);
                     session1.event_id = event_id;
                     session1.event_type = locationDateResult.type;
-                    session1.event_bgcolor = etypes.Any() ? etypes.Single(x => x.title == session1.event_type).bgcolor : string.Empty;
+
+                    var evt_type = new EventType();
+                    if (_eventtypes.Any())
+                        evt_type = _eventtypes.FirstOrDefault<EventType>(x => x.title == session1.event_type);
+
+                    session1.event_bgcolor = (evt_type != null) ? evt_type.bgcolor : string.Empty;
+
                     Session session2 = session1;
                     int num = locationDateResult.attendees;
                     string str1 = num.ToString();
