@@ -31,12 +31,17 @@ namespace schedInterface
 
         public string site_url()
         {
-            return @"http://fnsign.fntech.com";
+            return @"https://fnsign.fntech.com";
         }
 
         public string display_url()
         {
-            return @"http://fndisplay.fntech.com";
+            return @"https://fndisplay.fntech.com";
+        }
+
+        public string hostoverride_api_key()
+        {
+            return "9433156e-fa39-42ff-91e3-b56791d66158";
         }
 
         #endregion

@@ -7,6 +7,7 @@ using System.Timers;
 using System.Web.Script.Serialization;
 using RestSharp;
 using System.Linq.Expressions;
+using System.Text.RegularExpressions;
 
 namespace schedInterface
 {
@@ -497,6 +498,49 @@ namespace schedInterface
 
             return true;
         }
+
+        public Boolean delete_by_event(Int32 id)
+        {
+            List<EventType> _types = new List<EventType>();
+
+            var result = from tps in db.event_types
+                         where tps.event_id == id
+                         select tps;
+
+            foreach (var item in result)
+            {
+                db.event_types.DeleteOnSubmit(item);
+            }
+
+            db.SubmitChanges();
+
+            return true;
+        }
+
+        public List<EventType> import(string conference_url, string api_key, int event_id)
+        {
+            RestClient restClient = new RestClient(conference_url + "/api");
+            RestRequest restRequest = new RestRequest("site/sync", Method.POST);
+            restRequest.AddParameter("api_key", (object)api_key);
+            restRequest.AddParameter("format", (object)"json");
+            restRequest.AddHeader("User-Agent", "schedInterface");
+
+            JavaScriptSerializer jsdes = new JavaScriptSerializer();
+            IRestResponse response = restClient.Execute((IRestRequest)restRequest);
+            var data = jsdes.Deserialize<OCPEventType>(response.Content);
+
+            var result = new List<EventType>();
+            var bgcolor = "";
+            var rg = @"(?<=\.ev_TYPENUMBER \{ border-color: ).*?(?= \})";
+            foreach (var item in data.types)
+            {
+                bgcolor = Regex.Match(data.style, rg.Replace("TYPENUMBER", item.Key)).Value;
+                result.Add(new EventType() { event_id = event_id , event_type_id = int.Parse(item.Key), bgcolor = bgcolor, title = item.Value.name });
+            }
+
+            return result;
+        }
+
     }
 
     public class TimeZone
@@ -516,12 +560,19 @@ namespace schedInterface
         public string title { get; set; }
         public string bgcolor { get; set; }
         public Int32 event_id { get; set; }
+        public string name { get; set; }
     }
 
     public class OpenStackEventType
     {
         public Int32 id { get; set; }
         public string name { get; set; }
+    }
+
+    public class OCPEventType
+    {
+        public string style { get; set; }
+        public Dictionary<string, EventType> types { get; set; }
     }
 
     #endregion

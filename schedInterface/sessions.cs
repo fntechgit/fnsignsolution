@@ -665,6 +665,7 @@ namespace schedInterface
 
         public Session current(int event_id, string location, DateTime start)
         {
+            List<EventType> _eventtypes = _types.by_event(event_id);
             Session session = new Session();
             foreach (session_get_currentResult getCurrentResult in (IEnumerable<session_get_currentResult>)this.db.session_get_current(new int?(event_id), location, new DateTime?(start)))
             {
@@ -681,6 +682,13 @@ namespace schedInterface
                 session.speaker_images = getCurrentResult.speaker_images;
                 session.speaker_companies = getCurrentResult.speaker_companies;
                 session.full = getCurrentResult.full;
+                session.event_type = getCurrentResult.type;
+
+                var evt_type = new EventType();
+                if (_eventtypes.Any())
+                    evt_type = _eventtypes.FirstOrDefault<EventType>(x => x.title == session.event_type);
+
+                session.event_bgcolor = (evt_type != null) ? evt_type.bgcolor : string.Empty;
             }
             return session;
         }
