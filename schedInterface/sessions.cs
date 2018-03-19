@@ -71,6 +71,7 @@ namespace schedInterface
                 s.speaker_companies = item.speaker_companies;
                 s.speaker_images = item.speaker_images;
                 s.full = item.full;
+                s.event_start = Convert.ToDateTime(item.session_start).ToShortTimeString();
                 
                 _sessions.Add(s);
             }
