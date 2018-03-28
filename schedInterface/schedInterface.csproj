@@ -69,6 +69,7 @@
     <Compile Include="log.cs" />
     <Compile Include="media.cs" />
     <Compile Include="messages.cs" />
+    <Compile Include="messaging.cs" />
     <Compile Include="notify.cs" />
     <Compile Include="overlays.cs" />
     <Compile Include="permissions.cs" />
