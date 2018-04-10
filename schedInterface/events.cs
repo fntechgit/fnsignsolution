@@ -74,6 +74,7 @@ namespace schedInterface
                 Event e = new Event();
 
                 e.api_key = item.api_key;
+                e.api_type = item.api_type;
                 e.event_end = item.event_end;
                 e.event_start = item.event_start;
                 e.id = item.id;
@@ -295,6 +296,7 @@ namespace schedInterface
         public DateTime? event_start { get; set; }
         public DateTime? event_end { get; set; }
         public string api_key { get; set; }
+        public Int32 api_type { get; set; }
         public string url { get; set; }
         public Int32 interval { get; set; }
         public DateTime last_update { get; set; }

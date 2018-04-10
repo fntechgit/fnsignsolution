@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using RestSharp;
 using System.Web.Script.Serialization;
 using System.Linq.Expressions;
+using System.Net;
 
 namespace schedInterface
 {
@@ -457,6 +458,17 @@ namespace schedInterface
             return _sessions;
         }
 
+        public List<Session> getSessionsFromAPI(string conference_url, string api_key, int api_type)
+        {
+            switch (api_type)
+            {
+                case 1:
+                    return f8APIAll(conference_url, api_key);
+                default:
+                    return all(conference_url, api_key);
+            }
+        }
+
         public List<Session> all(string conference_url, string api_key)
         {
             var client = new RestClient(conference_url + "/api");
@@ -473,6 +485,42 @@ namespace schedInterface
             var mySessions = new JavaScriptSerializer().Deserialize<List<Session>>(response.Content);
 
             return mySessions;
+        }
+
+        public List<Session> f8APIAll(string conference_url, string api_key)
+        {
+            //TO-DO: Move to 4.5. Refactor to manage the right api according to the event.
+            //ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072; //TLS 1.2
+            //ServicePointManager.SecurityProtocol = (SecurityProtocolType)768; //TLS 1.1
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)768 | (SecurityProtocolType)3072 | SecurityProtocolType.Tls;
+            var client = new RestClient(conference_url);
+
+            var request = new RestRequest(string.Format("api/external/f8-2018/sessions/{0}",api_key));
+
+            IRestResponse response = client.Execute(request);
+
+            var mySessions = new JavaScriptSerializer().Deserialize<List<f8APISession>>(response.Content);
+
+            List<Session> sessions = new List<Session>();
+            foreach (var item in mySessions)
+            {
+                Session se = new Session();
+                se.description = item.@abstract;
+                se.event_key = item.id;
+                se.event_type = item.type;
+                se.internal_id = int.Parse(item.id);
+                se.name = item.title;
+                se.venue = item.room == null ? "TBD" : item.room;
+                se.venue_id = se.venue.ToLower();
+                se.speakers = string.Join(",", item.speakers.Select(s => string.Format(" {0} {1}", s.first_name, s.last_name))).Trim();
+                se.start = DateTime.ParseExact(string.Format("{0} {1}", item.date, item.start_time), "yyyy-MM-dd HH:mm", System.Globalization.CultureInfo.InvariantCulture);
+                se.end = DateTime.ParseExact(string.Format("{0} {1}", item.date, item.end_time), "yyyy-MM-dd HH:mm", System.Globalization.CultureInfo.InvariantCulture);
+                se.active = item.status == "approved" ? "Y" : "N";
+
+                sessions.Add(se);
+            }
+
+            return sessions;
         }
 
         public Boolean clean_summit()
@@ -863,5 +911,37 @@ namespace schedInterface
         public Int32 type_id { get; set; }
     }
 
+    #endregion
+
+
+    #region f8API   
+    public class f8APISpeaker
+    {
+        public string uuid { get; set; }
+        public string first_name { get; set; }
+        public string last_name { get; set; }
+    }
+    public class f8APISession
+    {
+        public string uuid { get; set; }
+        public string id { get; set; }
+        public string title { get; set; }
+        public string @abstract { get; set; }
+
+        public string type { get; set; }
+        public string objective { get; set; }
+        public string status { get; set; }
+        public string track { get; set; }
+        public string code { get; set; }
+        public string date { get; set; }
+        public string start_time { get; set; }
+        public double start_timestamp { get; set; }
+        public string end_time { get; set; }
+        public double end_timestamp { get; set; }
+        public string publication_schedule { get; set; }
+        public string room { get; set; }
+        public List<f8APISpeaker> speakers { get; set; }
+        
+    }
     #endregion
 }

@@ -249,6 +249,7 @@
       <Column Name="eod_title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
       <Column Name="full_session" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="timezone" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="api_type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.event_types" Member="event_types">
@@ -330,20 +331,6 @@
       <Column Name="url" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="interval" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="last_update" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.events_to_update" Method="events_to_update">
-    <ElementType Name="events_to_updateResult">
-      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="event_start" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="event_end" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="api_key" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="url" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="interval" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="last_update" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="t_username" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="t_hashtag" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
     </ElementType>
   </Function>
   <Function Name="dbo.templates_by_event" Method="templates_by_event">
@@ -914,6 +901,34 @@
       <Column Name="speaker_images" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="[full]" Member="full" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="sub_type" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.events_to_update" Method="events_to_update">
+    <ElementType Name="events_to_updateResult">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="event_start" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="event_end" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="api_key" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="url" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="interval" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="last_update" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="t_username" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="t_hashtag" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="openstack_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="offset" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="eod_title" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="eod_category" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="eod_time" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="eod_description" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="timezone" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="timewarp" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="overridetime" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="timerun" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="overridedisplay" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="last_timerun" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="full_session" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="api_type" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
 </Database>

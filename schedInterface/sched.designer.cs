@@ -318,13 +318,6 @@ namespace schedInterface
 			return ((ISingleResult<events_get_authorizedResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.events_to_update")]
-		public ISingleResult<events_to_updateResult> events_to_update()
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-			return ((ISingleResult<events_to_updateResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.templates_by_event")]
 		public ISingleResult<templates_by_eventResult> templates_by_event([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> id)
 		{
@@ -526,6 +519,13 @@ namespace schedInterface
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), event_id, location, start);
 			return ((ISingleResult<sessions_by_event_location_dateResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.events_to_update")]
+		public ISingleResult<events_to_updateResult> events_to_update()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<events_to_updateResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -5087,6 +5087,8 @@ namespace schedInterface
 		
 		private System.Nullable<int> _timezone;
 		
+		private int _api_type;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -5137,6 +5139,8 @@ namespace schedInterface
     partial void Onfull_sessionChanged();
     partial void OntimezoneChanging(System.Nullable<int> value);
     partial void OntimezoneChanged();
+    partial void Onapi_typeChanging(int value);
+    partial void Onapi_typeChanged();
     #endregion
 		
 		public @event()
@@ -5600,6 +5604,26 @@ namespace schedInterface
 					this._timezone = value;
 					this.SendPropertyChanged("timezone");
 					this.OntimezoneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_api_type", DbType="Int NOT NULL")]
+		public int api_type
+		{
+			get
+			{
+				return this._api_type;
+			}
+			set
+			{
+				if ((this._api_type != value))
+				{
+					this.Onapi_typeChanging(value);
+					this.SendPropertyChanging();
+					this._api_type = value;
+					this.SendPropertyChanged("api_type");
+					this.Onapi_typeChanged();
 				}
 			}
 		}
@@ -6890,194 +6914,6 @@ namespace schedInterface
 				if ((this._last_update != value))
 				{
 					this._last_update = value;
-				}
-			}
-		}
-	}
-	
-	public partial class events_to_updateResult
-	{
-		
-		private int _id;
-		
-		private string _title;
-		
-		private System.Nullable<System.DateTime> _event_start;
-		
-		private System.Nullable<System.DateTime> _event_end;
-		
-		private string _api_key;
-		
-		private string _url;
-		
-		private int _interval;
-		
-		private System.DateTime _last_update;
-		
-		private string _t_username;
-		
-		private string _t_hashtag;
-		
-		public events_to_updateResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
-		public int id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this._id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(255)")]
-		public string title
-		{
-			get
-			{
-				return this._title;
-			}
-			set
-			{
-				if ((this._title != value))
-				{
-					this._title = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_start", DbType="Date")]
-		public System.Nullable<System.DateTime> event_start
-		{
-			get
-			{
-				return this._event_start;
-			}
-			set
-			{
-				if ((this._event_start != value))
-				{
-					this._event_start = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_end", DbType="Date")]
-		public System.Nullable<System.DateTime> event_end
-		{
-			get
-			{
-				return this._event_end;
-			}
-			set
-			{
-				if ((this._event_end != value))
-				{
-					this._event_end = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_api_key", DbType="VarChar(MAX)")]
-		public string api_key
-		{
-			get
-			{
-				return this._api_key;
-			}
-			set
-			{
-				if ((this._api_key != value))
-				{
-					this._api_key = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_url", DbType="VarChar(MAX)")]
-		public string url
-		{
-			get
-			{
-				return this._url;
-			}
-			set
-			{
-				if ((this._url != value))
-				{
-					this._url = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_interval", DbType="Int NOT NULL")]
-		public int interval
-		{
-			get
-			{
-				return this._interval;
-			}
-			set
-			{
-				if ((this._interval != value))
-				{
-					this._interval = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_last_update", DbType="DateTime NOT NULL")]
-		public System.DateTime last_update
-		{
-			get
-			{
-				return this._last_update;
-			}
-			set
-			{
-				if ((this._last_update != value))
-				{
-					this._last_update = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_t_username", DbType="VarChar(255)")]
-		public string t_username
-		{
-			get
-			{
-				return this._t_username;
-			}
-			set
-			{
-				if ((this._t_username != value))
-				{
-					this._t_username = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_t_hashtag", DbType="VarChar(MAX)")]
-		public string t_hashtag
-		{
-			get
-			{
-				return this._t_hashtag;
-			}
-			set
-			{
-				if ((this._t_hashtag != value))
-				{
-					this._t_hashtag = value;
 				}
 			}
 		}
@@ -14264,6 +14100,446 @@ namespace schedInterface
 				if ((this._sub_type != value))
 				{
 					this._sub_type = value;
+				}
+			}
+		}
+	}
+	
+	public partial class events_to_updateResult
+	{
+		
+		private int _id;
+		
+		private string _title;
+		
+		private System.Nullable<System.DateTime> _event_start;
+		
+		private System.Nullable<System.DateTime> _event_end;
+		
+		private string _api_key;
+		
+		private string _url;
+		
+		private int _interval;
+		
+		private System.DateTime _last_update;
+		
+		private string _t_username;
+		
+		private string _t_hashtag;
+		
+		private System.Nullable<int> _openstack_id;
+		
+		private int _offset;
+		
+		private string _eod_title;
+		
+		private string _eod_category;
+		
+		private string _eod_time;
+		
+		private string _eod_description;
+		
+		private int _timezone;
+		
+		private System.Nullable<System.DateTime> _timewarp;
+		
+		private bool _overridetime;
+		
+		private bool _timerun;
+		
+		private bool _overridedisplay;
+		
+		private System.Nullable<System.DateTime> _last_timerun;
+		
+		private string _full_session;
+		
+		private int _api_type;
+		
+		public events_to_updateResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="Int NOT NULL")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="VarChar(255)")]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_start", DbType="Date")]
+		public System.Nullable<System.DateTime> event_start
+		{
+			get
+			{
+				return this._event_start;
+			}
+			set
+			{
+				if ((this._event_start != value))
+				{
+					this._event_start = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_event_end", DbType="Date")]
+		public System.Nullable<System.DateTime> event_end
+		{
+			get
+			{
+				return this._event_end;
+			}
+			set
+			{
+				if ((this._event_end != value))
+				{
+					this._event_end = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_api_key", DbType="VarChar(MAX)")]
+		public string api_key
+		{
+			get
+			{
+				return this._api_key;
+			}
+			set
+			{
+				if ((this._api_key != value))
+				{
+					this._api_key = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_url", DbType="VarChar(MAX)")]
+		public string url
+		{
+			get
+			{
+				return this._url;
+			}
+			set
+			{
+				if ((this._url != value))
+				{
+					this._url = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_interval", DbType="Int NOT NULL")]
+		public int interval
+		{
+			get
+			{
+				return this._interval;
+			}
+			set
+			{
+				if ((this._interval != value))
+				{
+					this._interval = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_last_update", DbType="DateTime NOT NULL")]
+		public System.DateTime last_update
+		{
+			get
+			{
+				return this._last_update;
+			}
+			set
+			{
+				if ((this._last_update != value))
+				{
+					this._last_update = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_t_username", DbType="VarChar(255)")]
+		public string t_username
+		{
+			get
+			{
+				return this._t_username;
+			}
+			set
+			{
+				if ((this._t_username != value))
+				{
+					this._t_username = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_t_hashtag", DbType="VarChar(MAX)")]
+		public string t_hashtag
+		{
+			get
+			{
+				return this._t_hashtag;
+			}
+			set
+			{
+				if ((this._t_hashtag != value))
+				{
+					this._t_hashtag = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_openstack_id", DbType="Int")]
+		public System.Nullable<int> openstack_id
+		{
+			get
+			{
+				return this._openstack_id;
+			}
+			set
+			{
+				if ((this._openstack_id != value))
+				{
+					this._openstack_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_offset", DbType="Int NOT NULL")]
+		public int offset
+		{
+			get
+			{
+				return this._offset;
+			}
+			set
+			{
+				if ((this._offset != value))
+				{
+					this._offset = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_eod_title", DbType="VarChar(255)")]
+		public string eod_title
+		{
+			get
+			{
+				return this._eod_title;
+			}
+			set
+			{
+				if ((this._eod_title != value))
+				{
+					this._eod_title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_eod_category", DbType="VarChar(255)")]
+		public string eod_category
+		{
+			get
+			{
+				return this._eod_category;
+			}
+			set
+			{
+				if ((this._eod_category != value))
+				{
+					this._eod_category = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_eod_time", DbType="VarChar(50)")]
+		public string eod_time
+		{
+			get
+			{
+				return this._eod_time;
+			}
+			set
+			{
+				if ((this._eod_time != value))
+				{
+					this._eod_time = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_eod_description", DbType="VarChar(MAX)")]
+		public string eod_description
+		{
+			get
+			{
+				return this._eod_description;
+			}
+			set
+			{
+				if ((this._eod_description != value))
+				{
+					this._eod_description = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_timezone", DbType="Int NOT NULL")]
+		public int timezone
+		{
+			get
+			{
+				return this._timezone;
+			}
+			set
+			{
+				if ((this._timezone != value))
+				{
+					this._timezone = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_timewarp", DbType="DateTime")]
+		public System.Nullable<System.DateTime> timewarp
+		{
+			get
+			{
+				return this._timewarp;
+			}
+			set
+			{
+				if ((this._timewarp != value))
+				{
+					this._timewarp = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_overridetime", DbType="Bit NOT NULL")]
+		public bool overridetime
+		{
+			get
+			{
+				return this._overridetime;
+			}
+			set
+			{
+				if ((this._overridetime != value))
+				{
+					this._overridetime = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_timerun", DbType="Bit NOT NULL")]
+		public bool timerun
+		{
+			get
+			{
+				return this._timerun;
+			}
+			set
+			{
+				if ((this._timerun != value))
+				{
+					this._timerun = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_overridedisplay", DbType="Bit NOT NULL")]
+		public bool overridedisplay
+		{
+			get
+			{
+				return this._overridedisplay;
+			}
+			set
+			{
+				if ((this._overridedisplay != value))
+				{
+					this._overridedisplay = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_last_timerun", DbType="DateTime")]
+		public System.Nullable<System.DateTime> last_timerun
+		{
+			get
+			{
+				return this._last_timerun;
+			}
+			set
+			{
+				if ((this._last_timerun != value))
+				{
+					this._last_timerun = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_full_session", DbType="VarChar(MAX)")]
+		public string full_session
+		{
+			get
+			{
+				return this._full_session;
+			}
+			set
+			{
+				if ((this._full_session != value))
+				{
+					this._full_session = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_api_type", DbType="Int NOT NULL")]
+		public int api_type
+		{
+			get
+			{
+				return this._api_type;
+			}
+			set
+			{
+				if ((this._api_type != value))
+				{
+					this._api_type = value;
 				}
 			}
 		}
