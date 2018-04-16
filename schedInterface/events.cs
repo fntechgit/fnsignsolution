@@ -139,6 +139,7 @@ namespace schedInterface
         {
             @event @event = this.db.events.Single<@event>((Expression<Func<@event, bool>>)(x => x.id == ev.id));
             @event.api_key = ev.api_key;
+            @event.api_type = ev.api_type;
             @event.event_end = ev.event_end;
             @event.event_start = ev.event_start;
             @event.interval = ev.interval;
@@ -169,6 +170,7 @@ namespace schedInterface
             @event e = new @event();
 
             e.api_key = ev.api_key;
+            e.api_type = ev.api_type;
             e.event_end = ev.event_end;
             e.event_start = ev.event_start;
             e.interval = ev.interval;
@@ -210,6 +212,7 @@ namespace schedInterface
             foreach (var item in result)
             {
                 ev.api_key = item.api_key;
+                ev.api_type = item.api_type;
                 ev.event_end = item.event_end;
                 ev.event_start = item.event_start;
                 ev.id = item.id;
