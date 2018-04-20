@@ -513,6 +513,7 @@ namespace schedInterface
                 se.venue = item.room == null ? "TBD" : item.room;
                 se.venue_id = se.venue.ToLower();
                 se.speakers = string.Join(",", item.speakers.Select(s => string.Format(" {0} {1}", s.first_name, s.last_name))).Trim();
+                se.speaker_companies = string.Join(",", item.speakers.Select(s => s.company)).Trim();
                 se.start = DateTime.ParseExact(string.Format("{0} {1}", item.date, item.start_time), "yyyy-MM-dd HH:mm", System.Globalization.CultureInfo.InvariantCulture);
                 se.end = DateTime.ParseExact(string.Format("{0} {1}", item.date, item.end_time), "yyyy-MM-dd HH:mm", System.Globalization.CultureInfo.InvariantCulture);
                 se.active = item.status == "approved" ? "Y" : "N";
@@ -608,6 +609,8 @@ namespace schedInterface
                     }
 
                     se.speakers = s.speakers;
+                    se.speaker_companies = s.speaker_companies;
+                    se.speaker_images = s.speaker_images;
                     se.title = s.name;
                     se.type = !string.IsNullOrEmpty(s.event_type) ? s.event_type.Replace("[", "").Replace("]", "") : string.Empty;
                     se.venue = s.venue;
@@ -920,6 +923,8 @@ namespace schedInterface
         public string uuid { get; set; }
         public string first_name { get; set; }
         public string last_name { get; set; }
+        public string job_title { get; set; }
+        public string company { get; set; }
     }
     public class f8APISession
     {
