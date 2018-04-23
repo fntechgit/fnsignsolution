@@ -733,6 +733,7 @@ namespace schedInterface
                 session.event_id = Convert.ToInt32((object)getCurrentResult.event_id);
                 session.speaker_images = getCurrentResult.speaker_images;
                 session.speaker_companies = getCurrentResult.speaker_companies;
+                session.speaker_job_titles = getCurrentResult.speaker_job_titles;
                 session.full = getCurrentResult.full;
                 session.event_type = getCurrentResult.type;
 
@@ -809,6 +810,7 @@ namespace schedInterface
         public List<string> speakerImagesList { get; set; }
         public string speaker_companies { get; set; }
         public string speaker_images { get; set; }
+        public string speaker_job_titles { get; set; }
         public bool full { get; set; }
     }
 
