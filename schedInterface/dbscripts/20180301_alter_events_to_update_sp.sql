@@ -21,7 +21,7 @@ BEGIN
 
     select * from events
     --where last_update<DATEADD(minute, interval, GETDATE())
-	where GETDATE() > DATEADD(minute, interval, last_update)
-	and GETDATE() < event_end
+	--where GETDATE() > DATEADD(minute, interval, last_update)
+	where GETDATE() < event_end
     
 END
